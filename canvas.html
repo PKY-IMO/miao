@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>画图</title>
+  <style>
+    canvas {
+      border: 2px solid #f0f;
+      display: block;
+      margin: auto;
+    }
+  </style>
+</head>
+
+<body>
+  <canvas width="500" height="500"> </canvas>
+</body>
+<script>
+  var canvas = document.querySelector('canvas')
+  canvas.style.imageRendering = 'pixelated'
+  var ctx = canvas.getContext('2d')
+
+  function dot(x, y, color = 'black') {
+    x = Math.round(x)
+    y = Math.round(y)
+    ctx.fillStyle = color
+    ctx.fillRect(x, y, 1, 1)
+  }
+</script>
+<script>
+  dot(42, 42, 'red')
+
+  for (var i = 50; i < 160; i++) {
+    dot(10, i, 'blue')
+  }
+  for (var i = 70; i < 200; i++) {
+    if (i % 2 == 0) dot(i, 80, 'black')
+  }
+  for (var i = 100; i < 500; i++) {
+    if (i % 4 == 0 || i % 4 == 1) dot(i, 240, 'green')
+  }
+  for (var i = 100; i < 500; i++) {
+    if (i % 5 < 3) dot(i, 300, 'orange')
+  }
+  for (var i = 10; i < 400; i++) {
+    dot(i, i + 100, 'blue')
+  }
+  for (var i = 80; i < 300; i++) {
+    dot(i, i / 2, 'red')
+  }
+
+  // //浮点斜率
+  // var dx = 100
+  // var dy = 32
+  // var x1 = 0
+  // var y1 = 0
+  // var y = 0
+  // for (var x = 0; x < 100;) {
+  //   dot(x + 300, y + 400, 'black')
+  //   x++
+  //   x1 += dx
+  //   y1 += dy
+  //   if (y1 > dx) {
+  //     y++
+  //     y1 = y1 - dx
+  //   }
+  // }
+
+
+  for (var i = 0; i < 500; i++) {
+    dot(i, i, 'black')
+  }
+
+  //长方形空心
+  for (var i = 50; i < 200; i++) {
+    dot(i, 50, 'green')
+    dot(i, 150, 'green')
+    if (i <= 150) {
+      dot(50, i, 'green')
+      dot(200, i, 'green')
+    }
+  }
+
+  //长方形实心
+  for (var i = 200; i < 400; i++) {
+    for (var j = 350; j < 400; j++) {
+      dot(i, j, 'pink')
+    }
+  }
+
+  //空心圆
+  for (var angle = 0; angle < 360; angle++) {
+    dot(Math.cos(angle * Math.PI / 180) * 200 + 250,
+      Math.sin(angle * Math.PI / 180) * 200 + 250,
+      'red')
+  }
+  for (var angle = 0; angle < 360; angle++) {
+    dot(Math.cos(angle * Math.PI / 180) * 50 + 250,
+      Math.sin(angle * Math.PI / 180) * 50 + 250,
+      'red')
+  }
+
+
+  //空心圆
+  var y = 100
+  var x = 0
+  var r = y
+  var rs = r * r
+  while (y >= x) {
+    dot(x + 250, y + 250, 'black')
+    dot(-x + 250, y + 250, 'black')
+    dot(x + 250, -y + 250, 'black')
+    dot(-x + 250, -y + 250, 'black')
+    dot(y + 250, x + 250, 'black')
+    dot(-y + 250, x + 250, 'black')
+    dot(y + 250, -x + 250, 'black')
+    dot(-y + 250, -x + 250, 'black')
+    x++
+    var y1 = Math.abs(Math.sqrt(x * x + y * y) - r)
+    var y2 = Math.abs(Math.sqrt(x * x + (y - 1) * (y - 1)) - r)
+    if (y1 > y2) {
+      y = y - 1
+    }
+  }
+
+  // 实心圆
+  var y = 100
+  var x = 0
+  var r = y
+  var rs = r * r
+  while (y >= x) {
+    line(x, y, 'red', 100, 200)
+    line(x, -y, 'red', 100, 200)
+    line(y, -x, 'red', 100, 200)
+    line(y, x, 'red', 100, 200)
+    x++
+    var y1 = Math.abs(Math.sqrt(x * x + y * y) - r)
+    var y2 = Math.abs(Math.sqrt(x * x + (y - 1) * (y - 1)) - r)
+    if (y1 > y2) {
+      y--
+    }
+  }
+
+  function line(x, y, color, dx, dy) {
+    for (let i = -x; i <= x; i++) {
+      dot(i + dx, y + dy, color)
+    }
+  }
+
+  //sinx
+  for (var i = 0; i < 500; i++) {
+    dot(i + 100, Math.sin(0.3 * i) * 9 + 200, 'red')
+  }
+
+  //实心圆
+  for (var i = -100; i <= 100; i++) {
+    for (var j = -100; j <= 100; j++) {
+      if ((i ** 2 + j ** 2) <= 10000) {
+        dot(i + 100, j + 400, 'yellow')
+      }
+    }
+  }
+
+  //rgb
+  for (let i = 0; i <= 100; i++) {
+    for (let j = 0; j <= 100; j++) {
+      dot(i + 300, j, 'rgb(' + i * 2.55 + ', ' + j * 2.55 + ', 255)')
+    }
+  }
+
+  for (let i = 0; i <= 100; i++) {
+    for (let j = 0; j <= 100; j++) {
+      dot(2 * i + 300, 2 * j + 150, 'rgb(' + i * 2.55 + ', ' + j * 2.55 + ', 255)')
+      dot(2 * i + 301, 2 * j + 150, 'rgb(' + i * 2.55 + ', ' + j * 2.55 + ', 255)')
+      dot(2 * i + 300, 2 * j + 151, 'rgb(' + i * 2.55 + ', ' + j * 2.55 + ', 255)')
+      dot(2 * i + 301, 2 * j + 151, 'rgb(' + i * 2.55 + ', ' + j * 2.55 + ', 255)')
+    }
+  }
+
+  for (let i = 0; i <= 255; i++) {
+    for (let j = 0; j <= 255; j++) {
+      dot(0.5 * i - 0.87 * j + 200, 0.87 * i + 0.5 * j, 'rgb(' + i + ', ' + j + ', 255)')
+    }
+  }
+</script>
+
+</html>
