@@ -16,3 +16,7 @@ function groupBy(collection, iteratee) {
   return map
 }
 console.log(groupBy(a, Math.floor))
+
+for (let i in a) {
+  console.log(i)
+}
