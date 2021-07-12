@@ -58,6 +58,10 @@ var pky_imo = function () {
     return map
   }
 
+  function keyBy(collection, iteratee) {
+
+  }
+
 
 
   return {
@@ -69,6 +73,6 @@ var pky_imo = function () {
     flattenDepth: flattenDepth,
 
     groupBy: groupBy
-  }
+  }()
 
 }
