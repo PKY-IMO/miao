@@ -838,7 +838,16 @@
     return x
   }
 
-
+  function f() {
+    let arr = new Array()
+    for (let i = 0; i < 5; i++) {
+      let n = prompt()
+      arr.push(n)
+    }
+    for (let i = 4; i >= 0; i--) {
+      console.log(arr[i])
+    }
+  }
 
   // let n = Number(prompt())
   // let r = Number(prompt())

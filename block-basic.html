@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      margin: 0;
+    }
+    .top {
+      background-color: red;
+      min-width: 500px;
+      margin: 20px;
+    }
+    .center {
+      xbackground-color: red;
+      width: 500px;
+      margin: 0 auto;
+    }
+    .main {
+      width: 500px;
+      margin: 0 auto;
+    }
+    .container {
+      border: 2px black solid;
+      margin-top: 20px;
+      padding: 20px 10px;
+    }
+    .container p {
+      height: 60px;
+      overflow-y: scroll;
+    }
+    .grow {
+      xwidth: 100%;
+      height: 60px;
+      background-color: green;
+    }
+    .grow:hover {
+      margin-left: -10px;
+      margin-right: -10px;
+      xwidth: auto;
+    }
+    /* .triangle {
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 50px ;
+      border-color: transparent transparent red transparent;
+      margin: 0 auto;
+    } */
+    .triangle {
+      width: 0;
+      height: 0;
+      border-bottom: 50px solid red;
+      border-left: 50px solid transparent;
+      border-right: 50px solid transparent;
+      margin: 50px auto 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="top">
+    <div class="center">aaa</div>
+  </div>
+  <div class="main">
+    <div class="container">
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero rerum sapiente magni quas, cumque sequi ipsum ratione. Odit aut sapiente saepe eum fugit, consequuntur excepturi esse pariatur commodi vitae quidem.</p>
+      <div class="grow"></div>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam quo deserunt assumenda. Nisi voluptates, quia nobis quidem praesentium alias eum, minus ducimus aliquid dolorum harum quo totam quam. Quos, omnis?</p>
+    </div>
+    <div class="triangle"></div>
+  </div>
+
+</body>
+</html>

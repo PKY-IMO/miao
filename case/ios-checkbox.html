@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<!-- saved from url=(0052)https://freyja-wion.github.io/miao/ios-checkbox.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ios-checkbox</title>
+    <style>
+      .button {
+        position: relative;
+        width: 204px;
+        height: 124px;
+        background-color: rgba(224, 223, 223, 0.301);
+        border-radius: 62px;
+        box-shadow: 0 0 2px rgba(128, 128, 128, 0.301);
+        transition: all 0.3s ease-in-out;
+      }
+      input {
+        display: none;
+      }
+      .button::after {
+        content: "";
+        position: absolute;
+        top: 6px;
+        left: 6px;
+        width: 112px;
+        height: 112px;
+        display: inline-block;
+        background-color: white;
+        border-radius: 56px;
+        box-shadow: 0 0 4px rgba(128, 128, 128, 0.301);
+        transition: all 0.3s ease-in-out;
+      }
+      input:checked + label .button {
+        background-color: #29f15b;
+      }
+      input:checked + label .button::after {
+        left: 86px;
+      }
+      input:active + label .button::after {
+        width: 142px;
+      }
+      input:checked:active + label .button::after {
+        left: 56px;
+      }
+    </style>
+  </head>
+  <body class="vsc-initialized">
+    <input type="checkbox" name="" id="checkbox">
+    <label for="checkbox">
+      <div class="button"></div>
+    </label>
+  
+
+</body></html>

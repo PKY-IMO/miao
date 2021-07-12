@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    .left {
+      background-color: yellow;
+      width: 200px;
+      height: 100vh;
+    }
+    .right2,.right1 {
+      box-sizing: border-box;
+      background-color: green;
+      width: 200px;
+      height: 100vh;
+      border: 1px solid black;
+    }
+    .right1 {
+      position: absolute;
+      right: 200px;
+      top: 0px;
+    }
+    .right2 {
+      position: absolute;
+      right: 0px;
+      top: 0px;
+    }
+    .mid {
+      position: absolute;
+      height: 100vh;
+      background-color: red;
+      width: calc(100% - 600px);
+      top: 0px;
+      left: 200px;
+    }
+    .top {
+      background-color: blue;
+      height: 200px;
+    }
+    p {
+      padding: 20px;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="left"></div>
+  <div class="mid"><div class="top"></div><div class="bottom"><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa, eligendi reprehenderit dicta quasi debitis sint voluptate excepturi officiis maxime quisquam laborum corporis tenetur expedita esse dolore repellat quod id possimus?</p></div></div>
+  <div class="right1"></div>
+  <div class="right2"></div>
+
+</body>
+</html>

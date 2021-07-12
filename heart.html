@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    div {
+      overflow: hidden;
+    }
+    span {
+      border: 3px solid red;
+      display: block;
+      width: 100px;
+      height: 100px;
+      background-image: url(/resource/web_heart_animation.png);
+      transition: all 0s linear;
+      background-repeat: no-repeat;
+      float: left;
+      margin: 8px;
+    }
+    div:hover span {
+      background-position: -2800px;
+      transition: 1s steps(28);
+    }
+    .click {
+      margin-top: 100px;
+      overflow: hidden;
+    }
+    label {
+      border: 3px solid red;
+      display: block;
+      width: 100px;
+      height: 100px;
+      background-image: url(/resource/web_heart_animation.png);
+      display: block;
+    }
+    input {
+      display: none;
+    }
+    input:checked + label{
+      background-position: -2800px;
+      transition: 1s steps(28);
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+  <div class="click">
+    <input type="checkbox" name="" id="heart">
+    <label for="heart"></label>
+  </div>
+
+
+
+</body>
+</html>
