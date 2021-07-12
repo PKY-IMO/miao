@@ -45,23 +45,19 @@ var pky_imo = function () {
     return flattenDepth(flatten(arr), depth - 1)
   }
 
-  function gruopBy(collection, iteratee) {
-    let type = typeof collection
-    if (type == 'array') {
-      key = uniqueBy(collection, iteratee)
-    }else if (type == 'object') {
-      key = uniqueBy(Object.values, iteratee)
-    }
+  function groupBy(collection, iteratee) {
     let map = {}
     for (let item of collection) {
+      let key = iteratee(item)
       if(!map[key]) {
-        map[key] = item
+        map[key] = [item]
       }else {
         map[key].push(item)
       }
     }
     return map
   }
+
 
 
   return {
