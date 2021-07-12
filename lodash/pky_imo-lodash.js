@@ -29,7 +29,16 @@ var pky_imo = function () {
   }
 
   function uniqBy(arr, iteratee) {
-    return arr.map((item) => iteratee(item)).filter((item, idx, arr) => arr.indexOf(item) == idx)
+    var it = iterator(iteratee)
+    let map = {}, res = []
+    arr.forEach(( item) => {
+      let key = it(item)
+      if (!(key in map)) {
+        map[key] = item
+        res.push(item)
+      }
+    })
+    return res
   }
 
   function flattenDeep(arr) {
@@ -71,6 +80,7 @@ var pky_imo = function () {
     for (key in collection) {
       iteratee(collection[key], key, collection)
     }
+    return collection
   }
 
   function map(collection, iteratee) {
@@ -119,8 +129,16 @@ var pky_imo = function () {
     return res
   }
 
-  function unzip(...arr) {
-    return zip(...arr)
+  function unzip(arr) {
+    let num = arr.length
+    let size = arr[0].length
+    let res = Array.from(new Array(size), () => new Array(num))
+    for(let i = 0; i < size; i++) {
+      for (let j = 0; j < num; j++) {
+        res[i][j] = arr[j][i]
+      }
+    }
+    return res
   }
 
   function keys(obj) {
@@ -143,7 +161,19 @@ var pky_imo = function () {
   }
 
   function every(collection, predicate) {
+    var it = iterator(predicate)
+    for (let key in collection) {
+      if (!it(collection[key], key, collection)) return false
+    }
+    return true
+  }
 
+  function some(array, predicate) {
+    var it = iterator(predicate)
+    for (let key in array) {
+      if (it(array[key], key, array)) return true
+    }
+    return false
   }
 
 
@@ -183,13 +213,13 @@ var pky_imo = function () {
     keyBy: keyBy,
     forEach: forEach,
     map: map,
-    filter: filter,
     reduce: reduce,
     zip: zip,
     unzip: unzip,
     keys: keys,
     values: values,
-
+    every: every,
+    some: some
   }
 
 }()
