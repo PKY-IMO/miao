@@ -73,6 +73,6 @@ var pky_imo = function () {
     flattenDepth: flattenDepth,
 
     groupBy: groupBy
-  }()
+  }
 
-}
+}()
