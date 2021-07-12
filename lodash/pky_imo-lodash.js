@@ -88,9 +88,9 @@ var pky_imo = function () {
   
 
 
-  function filter(collection, predicate) {
+  function filter(collection, it) {
     let res = [], 
-    predicate = iterator(predicate)
+    predicate = iterator(it)
     for (let key in collection) {
       if (predicate(collection[key], key, collection)) {
         res.push(collection[key])
@@ -99,7 +99,7 @@ var pky_imo = function () {
   }
 
   function reduce(collection, it, accumulator) {
-    let t = Array.isArray(collection) ? [] : {}
+    let t = Array.isArray(collection) ? collection[0] : collection[keys(collection)[0]]
     let init = accumulator || t
     for (let key in collection) {
       init = it(init, collection[key], key)
@@ -142,6 +142,11 @@ var pky_imo = function () {
     return res
   }
 
+  function every(collection, predicate) {
+
+  }
+
+
 
   /**
    * utils
@@ -183,7 +188,8 @@ var pky_imo = function () {
     zip: zip,
     unzip: unzip,
     keys: keys,
-    values: values
+    values: values,
+
   }
 
 }()
