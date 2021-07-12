@@ -89,8 +89,8 @@ var pky_imo = function () {
 
 
   function filter(collection, it) {
-    let res = [], 
-    predicate = iterator(it)
+    let res = []
+    var predicate = iterator(it)
     for (let key in collection) {
       if (predicate(collection[key], key, collection)) {
         res.push(collection[key])
