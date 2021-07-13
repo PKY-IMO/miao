@@ -371,10 +371,35 @@ function dropWhile(arr, f) {
   return res
 }
 
+
+function findLastIndex(arr, f, idx = arr.length - 1) {
+  let it = iterator(f)
+  for (let i = idx; i >= 0; i--) {
+    if(it(arr[i])) return i
+  }
+  return -1
+}
+
+function fromPairs(arr) {
+  return arr.reduce((res,item) => (res[item[0]] = item[1],res),{})
+}
+
+
 var users = [
-  { 'user': 'barney',  'active': false },
+  { 'user': 'barney',  'active': true },
   { 'user': 'fred',    'active': false },
-  { 'user': 'pebbles', 'active': true }
+  { 'user': 'pebbles', 'active': false }
 ];
-test = dropWhile(users, 'active')
+ 
+function head(arr) {
+  return arr[0]
+}
+
+function indexOf(arr, val, idx = 0) {
+  for (let i = idx; i < arr.length; i++) {
+    if(arr[i] == val) return i
+  }
+}
+
+test = indexOf([1, 2, 1, 2], 2)
 console.log(test)

@@ -103,7 +103,7 @@ var pky_imo = function () {
     let it = iterator(f)
     console.log(it)
     for (let i = 0; i < arr.length; i++) {
-      if (!it(arr[i])) {
+      if (!it(arr[i], i, arr)) {
         res.push(arr[i])
       }else continue
     }
@@ -115,15 +115,27 @@ var pky_imo = function () {
     let it = iterator(f)
     console.log(it)
     for (let i = arr.length -1; i >= 0; i--) {
-      if (!it(arr[i])) {
+      if (!it(arr[i], i, arr)) {
         res.push(arr[i])
       }else continue
     }
     return res
   }
 
-  function findIndex() {
-    
+  function findIndex(arr, f, idx = 0) {
+    let it = iterator(f)
+    for (let i = idx; i < arr.length; i++) {
+      if(it(arr[i])) return i
+    }
+    return -1
+  }
+
+  function findLastIndex(arr, f, idx = arr.length - 1) {
+    let it = iterator(f)
+    for (let i = idx; i >= 0; i--) {
+      if(it(arr[i])) return i
+    }
+    return -1
   }
 
 
@@ -170,6 +182,32 @@ var pky_imo = function () {
     if (depth == 0) return arr
     let flatten = arr => [].concat(...arr) //去一层的函数
     return flattenDepth(flatten(arr), depth - 1)
+  }
+
+  function fromPairs(arr) {
+    return arr.reduce((res,item) => (res[item[0]] = item[1],res),{})
+  }
+
+  function head(arr) {
+    return arr[0]
+  }
+
+  function indexOf(arr, val, idx = 0) {
+    for (let i = idx; i < arr.length; i++) {
+      if(arr[i] == val) return i
+    }
+  }
+
+  function initial(arr) {
+    let res = []
+    for (let i = 0; i < arr.length - 1; i++) {
+      res.push(arr[i])
+    }
+    return res
+  }
+
+  function intersection(...arr) {
+
   }
 
   function groupBy(collection, iteratee) {
@@ -461,9 +499,15 @@ var pky_imo = function () {
     
     uniq: uniq,
     uniqBy: uniqBy,
+
     flatten: flatten,
     flattenDeep: flattenDeep,
     flattenDepth: flattenDepth,
+
+    fromPairs: fromPairs,
+    head: head,
+    indexOf: indexOf,
+    initial: initial,
 
     groupBy: groupBy,
     keyBy: keyBy,
@@ -478,6 +522,8 @@ var pky_imo = function () {
     every: every,
     some: some,
     fill: fill,
+    findIndex: findIndex,
+    findLastIndex: findLastIndex,
     reverse: reverse,
     isEqual: isEqual,
     countBy: countBy,
