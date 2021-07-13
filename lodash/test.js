@@ -105,4 +105,126 @@ var users = [
   { 'user': 'fred',   'age': 40, 'active': false }
 ];
 
-console.log(every(users, ['active', false]))
+function fill(arr, value, start = 0, end = arr.length) {
+  for (let i = start; i < end; i++) {
+    arr[i] = value
+  }
+  return arr
+}
+
+// var array = [1, 2, 3];
+
+// console.log(fill([4, 6, 8, 10], '*', 1, 3))
+
+function isEqual(a, b) {
+  if (a === b) return true
+  let type1 = getType(a)
+  let type2 = getType(b)
+  if (type1 != type2) {
+    return false
+  }
+  if (type1 == 'object' || type1 == 'array') {
+    let keys1 = keys(a)
+    let keys2 = keys(b)
+    if (keys1.length != keys2.length) return false
+    for (let key of keys1) {
+      if (!isEqual(a[key],b[key])) return false
+    }
+    return true
+  }else return a == b
+}
+function getType(data) {
+  return Object.prototype.toString
+    .call(data)
+    .split(" ")[1]
+    .slice(0, -1)
+    .toLowerCase();
+}
+
+
+function keys(obj) {
+  let res = []
+  for (let key in obj) {
+    if (obj.hasOwnProperty(key)) {
+      res.push(key)
+    }
+  }
+  return res
+}
+
+// var object = { 'a': 1 };
+// var other = { 'a': 1 };
+// console.log(isEqual(object,other))
+
+function reverse(arr) {
+  if (arr.length <= 1) return arr
+  let i = 0, j = arr.length - 1
+  while(i<j) {
+    [arr[i],arr[j]] = [arr[j],arr[i]]
+    i++
+    j--
+  }
+  return arr
+}
+
+// a = [1,2,3]
+// reverse(a)
+// console.log(a)
+// console.log(reverse(a))
+
+
+function countBy(obj, f) {
+  var it = iterator(f)
+  let res = {}
+  for (let item of obj) {
+    let key = it(item)
+    if (key in res) {
+      res[key]++
+    }else {
+      res[key] = 1
+    }  
+  }
+  return res
+}
+
+console.log(countBy(['one', 'two', 'three'], 'length'))
+
+function reduce(collection, it, accumulator) {
+  let t = Array.isArray(collection) ? 0 : collection[keys(collection)[0]]
+  let init = accumulator || t
+  for (let key in collection) {
+    init = it(init, collection[key], key)
+  }
+  return init
+} 
+
+console.log(reduce([1,2,3,4,5,6,7],function(a,b){return a+b}))
+
+function reduceRight(collection, it, accumulator) {
+  let keyArr = keys(collection)
+  let t = Array.isArray(collection) ? 0 : collection[keyArr[keyArr.length - 1]]
+  let init = accumulator || t
+  collection = reverse(collection)
+  for (let key in collection) {
+    init = it(init, collection[key], key)
+  }
+  return init
+}
+
+var array = [[0, 1], [2, 3], [4, 5]];
+
+console.log(reduceRight(array, function(flattened, other) {
+  return flattened.concat(other);
+}, []))
+
+function sum(arr) {
+  return reduce(arr, (a,b)=> a+b)
+}
+console.log(sum([4, 2, 8, 6]))
+
+function sumBy(arr, f) {
+  var it = iterator(f)
+  return sum(arr.map((item)=>it(item)))
+}
+var objects = [{ 'n': 4 }, { 'n': 2 }, { 'n': 8 }, { 'n': 6 }];
+console.log(sumBy(objects, 'n'))

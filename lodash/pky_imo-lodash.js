@@ -83,17 +83,19 @@ var pky_imo = function () {
     return collection
   }
 
-  function map(collection, iteratee) {
+  function map(collection, it) {
     let type = typeof iteratee
+    let res = []
     if (type == 'function') {
       for (let key in collection) {
-        return [].concat(iteratee(collection[key], key, collection))
+        res.push(iteratee(collection[key], key, collection))
       }
     }else if (type == 'string') {
       for (let item of collection) {
-        return [].concat(item[iteratee])
+        res.push(item[iteratee])
       }
     }
+    return res
   }
   
 
@@ -106,16 +108,28 @@ var pky_imo = function () {
         res.push(collection[key])
       }
     }
+    return res
   }
 
   function reduce(collection, it, accumulator) {
-    let t = Array.isArray(collection) ? collection[0] : collection[keys(collection)[0]]
+    let t = Array.isArray(collection) ? 0 : collection[keys(collection)[0]]
     let init = accumulator || t
     for (let key in collection) {
       init = it(init, collection[key], key)
     }
     return init
   } 
+
+  function reduceRight(collection, it, accumulator) {
+    let keyArr = keys(collection)
+    let t = Array.isArray(collection) ? 0 : collection[keyArr[keyArr.length - 1]]
+    let init = accumulator || t
+    collection = reverse(collection)
+    for (let key in collection) {
+      init = it(init, collection[key], key)
+    }
+    return init
+  }
 
   function zip(...arr) {
     let num = arguments.length
@@ -176,18 +190,96 @@ var pky_imo = function () {
     return false
   }
 
+  function fill(arr, value, start = 0, end = arr.length) {
+    for (let i = start; i < end; i++) {
+      arr[i] = value
+    }
+    return arr
+  }
 
+  function isEqual(a, b) {
+    if (a === b) return true
+    let type1 = getType(a)
+    let type2 = getType(b)
+    if (type1 != type2) {
+      return false
+    }
+    if (type1 == 'object' || type1 == 'array') {
+      let keys1 = keys(a)
+      let keys2 = keys(b)
+      if (keys1.length != keys2.length) return false
+      for (let key of keys1) {
+        if (!isEqual(a[key],b[key])) return false
+      }
+      return true
+    }else return a == b
+  }
+
+
+  function reverse(arr) {
+    if (arr.length <= 1) return arr
+    let i = 0, j = arr.length - 1
+    while(i<j) {
+      [arr[i],arr[j]] = [arr[j],arr[i]]
+      i++
+      j--
+    }
+    return arr
+  }
+
+  function countBy(obj, f) {
+    var it = iterator(f)
+    let res = {}
+    for (let item of obj) {
+      let key = it(item)
+      if (key in res) {
+        res[key]++
+      }else {
+        res[key] = 1
+      }  
+    }
+    return res
+  }
+
+  function shuffle(arr) {
+    return arr.sort(()=>Math.random()-0.5)
+  }
+
+  function toArray(arr) {
+    let type = getType(arr)
+    if (type == 'string') {
+      return arr.split('')
+    } 
+    if (type == 'object') {
+      let res = []
+      for( let item of arr) {
+        res.push(item)
+      }
+      return res
+    }
+    if (type == 'array') return arr
+    return []
+  }
+
+  function sum(arr) {
+    return reduce(arr, (a,b)=> a+b)
+  }
+
+  function sumBy(arr, f) {
+    var it = iterator(f)
+    return sum(arr.map((item)=>it(item)))
+  }
 
   /**
    * utils
    */
   function iterator(it) {
-    let type = typeof it
+    let type = getType(it)
     if (type == 'function') {
       return it
     }else if (type == 'string') {
       return obj => obj[it]
-    }else if (Array.isArray(it)) {
+    }else if (type == 'array') {
       return obj => obj[it[0]] === it[1]
     }else {
       return obj => {
@@ -200,6 +292,34 @@ var pky_imo = function () {
       }
     }
   }
+
+  function getType(data) {
+    return Object.prototype.toString
+      .call(data)
+      .split(" ")[1]
+      .slice(0, -1)
+      .toLowerCase();
+  }
+
+  function isNaN(n) {
+    //isNaN方法首先转换类型，而Number.isNaN方法不用；
+    //isNaN不能用来判断是否严格等于NaN，Number.isNaN方法可用
+    return Number.isNaN(n)
+  }
+
+  function isNull(n) {
+    return n === null
+  }
+
+  function isNil(n) {
+    return n === null || n === undefined
+  }
+
+  function isUndefined(n) {
+    return n === undefined
+  }
+
+
 
   return {
     chunk: chunk,
@@ -214,12 +334,27 @@ var pky_imo = function () {
     forEach: forEach,
     map: map,
     reduce: reduce,
+    reduceRight: reduceRight,
     zip: zip,
     unzip: unzip,
     keys: keys,
     values: values,
     every: every,
-    some: some
+    some: some,
+    fill: fill,
+    reverse: reverse,
+    isEqual: isEqual,
+    countBy: countBy,
+
+    shuffle: shuffle,
+    isNaN: isNaN,
+    isNull: isNull,
+    isNil: isNil,
+    isUndefined: isUndefined,
+    toArray: toArray,
+    sum: sum,
+    sumBy: sum
+
   }
 
 }()
