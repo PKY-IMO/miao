@@ -15,7 +15,7 @@ function groupBy(collection, iteratee) {
   }
   return map
 }
-console.log(groupBy(a, Math.floor))
+// console.log(groupBy(a, Math.floor))
 
 for (let i in a) {
   console.log(i)
@@ -187,7 +187,7 @@ function countBy(obj, f) {
   return res
 }
 
-console.log(countBy(['one', 'two', 'three'], 'length'))
+// console.log(countBy(['one', 'two', 'three'], 'length'))
 
 function reduce(collection, it, accumulator) {
   let t = Array.isArray(collection) ? 0 : collection[keys(collection)[0]]
@@ -198,7 +198,7 @@ function reduce(collection, it, accumulator) {
   return init
 } 
 
-console.log(reduce([1,2,3,4,5,6,7],function(a,b){return a+b}))
+// console.log(reduce([1,2,3,4,5,6,7],function(a,b){return a+b}))
 
 function reduceRight(collection, it, accumulator) {
   let keyArr = keys(collection)
@@ -220,7 +220,7 @@ function reduceRight(collection, it, accumulator) {
 function sum(arr) {
   return reduce(arr, (a,b)=> a+b)
 }
-console.log(sum([4, 2, 8, 6]))
+// console.log(sum([4, 2, 8, 6]))
 
 function sumBy(arr, f) {
   var it = iterator(f)
@@ -272,7 +272,7 @@ function isNaN(n) {
   }
   return Number.isNaN(n)
 }
-console.log( isNaN(NaN))
+// console.log( isNaN(NaN))
 
 function difference(arr, ...args) {
   let val = []
@@ -317,7 +317,6 @@ function differenceBy(arr, value, f) {
     var it = (i) =>i
   }
   val = val.map(item=>it(item))
-  console.log(val)
   return arr.filter(item => !val.includes(it(item)))
 }
 
@@ -362,7 +361,6 @@ function dropRight(arr, n = 1) {
 function dropWhile(arr, f) {
   let res = []
   let it = iterator(f)
-  console.log(it)
   for (let i = 0; i < arr.length; i++) {
     if (!it(arr[i], i, arr)) {
       res.push(arr[i])
@@ -401,5 +399,73 @@ function indexOf(arr, val, idx = 0) {
   }
 }
 
-test = indexOf([1, 2, 1, 2], 2)
-console.log(test)
+
+function map(collection, f) {
+  let it = iterator(f)
+  let res = []
+  if(getType(collection) == 'object') {
+    for (let key in collection) {
+      res.push(it(collection[key], key, collection))
+    }
+  } else {
+    collection.forEach((item,idx,arr)=>res.push(it(item,idx,arr)))
+  }
+
+  return res
+}
+
+function intersection(...arr) {
+  let pre = arguments[0]
+  return pre.reduce((prev,item)=>{
+    let flag = true
+    for(let j = 1; j < arguments.length - 1; j++) {
+      if(!arguments[j].includes(item)) {
+        flag = false
+        break
+      }
+    }
+    if(flag) prev.push(item)
+    return prev
+  },[])
+}
+
+
+function filter(collection, it) {
+  let res = []
+  var predicate = iterator(it)
+  if(getType(collection) == 'object') {
+    for (let key in collection) {
+      if (predicate(collection[key], key, collection)) {
+        res.push(collection[key])
+      }
+    }
+  }else collection.forEach((item,idx,arr)=>{
+    if(predicate(item,idx,arr)) res.push(item)
+  })
+  return res
+}
+
+var users = [
+  { 'user': 'barney', 'age': 36, 'active': true },
+  { 'user': 'fred',   'age': 40, 'active': false }
+];
+
+
+//map,reduce,filter 需要return
+//forEach 不需要
+
+function join(arr, separator=',') {
+  let res = ''
+  for(let item of arr) {
+    res += item + separator
+  }
+  return res.slice(0,-1)
+}
+
+function nth(arr , n = 0) {
+  return arr[n >= 0 ? n : arr.length + n]
+}
+
+array = ['a', 'b', 'c', 'd']
+let t = nth(array, -5)
+console.log(t)

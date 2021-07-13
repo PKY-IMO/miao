@@ -196,6 +196,14 @@ var pky_imo = function () {
     for (let i = idx; i < arr.length; i++) {
       if(arr[i] == val) return i
     }
+    return -1
+  }
+
+  function lastIndexOf(arr, val, idx = arr.length - 1) {
+    for (let i = idx; i >= 0; i--) {
+      if(arr[i] == val) return i
+    }
+    return -1
   }
 
   function initial(arr) {
@@ -207,8 +215,40 @@ var pky_imo = function () {
   }
 
   function intersection(...arr) {
+    let pre = arguments[0]
+    return pre.reduce((prev,item)=>{
+      let flag = true
+      for(let j = 1; j < arguments.length - 1; j++) {
+        if(!arguments[j].includes(item)) {
+          flag = false
+          break
+        }
+      }
+      if(flag) prev.push(item)
+      return prev
+    },[])
+  }
+
+  function intersectionBy(...args) {
 
   }
+
+  function join(arr, separator=',') {
+    let res = ''
+    for(let item of arr) {
+      res += item + separator
+    }
+    return res.slice(0,-1)
+  }
+
+  function last(arr) {
+    return arr[arr.length -1]
+  }
+
+  function nth(arr , n = 0) {
+    return arr[n >= 0 ? n : arr.length + n]
+  }
+
 
   function groupBy(collection, iteratee) {
     let map = {}
@@ -248,9 +288,14 @@ var pky_imo = function () {
   function map(collection, f) {
     let it = iterator(f)
     let res = []
-    for (let key in collection) {
-      res.push(it(collection[key], key, collection))
+    if(getType(collection) == 'object') {
+      for (let key in collection) {
+        res.push(it(collection[key], key, collection))
+      }
+    } else {
+      collection.forEach((item,idx,arr)=>res.push(it(item,idx,arr)))
     }
+
     return res
   }
   
@@ -259,11 +304,15 @@ var pky_imo = function () {
   function filter(collection, it) {
     let res = []
     var predicate = iterator(it)
-    for (let key in collection) {
-      if (predicate(collection[key], key, collection)) {
-        res.push(collection[key])
+    if(getType(collection) == 'object') {
+      for (let key in collection) {
+        if (predicate(collection[key], key, collection)) {
+          res.push(collection[key])
+        }
       }
-    }
+    }else collection.forEach((item,idx,arr)=>{
+      if(predicate(item,idx,arr)) res.push(item)
+    })
     return res
   }
 
@@ -409,7 +458,7 @@ var pky_imo = function () {
     if (type == 'object') {
       let res = []
       for( let key in arr) {
-        res.push(item[key])
+        res.push(arr[key])
       }
       return res
     }
@@ -507,7 +556,14 @@ var pky_imo = function () {
     fromPairs: fromPairs,
     head: head,
     indexOf: indexOf,
+    lastIndexOf: lastIndexOf,
     initial: initial,
+    intersection: intersection,
+
+    join: join,
+    last: last,
+    nth: nth,
+
 
     groupBy: groupBy,
     keyBy: keyBy,
