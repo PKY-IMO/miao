@@ -21,6 +21,113 @@ var pky_imo = function () {
     return arr.filter(item => Boolean(item))
   }
 
+  function concat(arr, ...args) {
+    let res = arr
+    for (let i = 1; i < arguments.length; i++) {
+      let t = arguments[i]
+      if (typeof t == 'number') {
+        res.push(t)
+      }else {
+        for(let key in t) {
+          res.push(t[key])
+        }
+      }
+    }
+    return res
+  }
+
+  function difference(arr, ...args) {
+    let val = []
+    for(let i = 1; i < arguments.length; i++) {
+      val = val.concat(arguments[i])
+    }
+    return arr.filter(item => !val.includes(item))
+  }
+
+  function differenceBy(arr, value, f) {
+    if (arguments.length == 2) return difference(arr,value)
+    let val = []
+    for(let i = 1; i < arguments.length; i++) {
+      let type = getType(arguments[i])
+      if( type == 'array') {
+        val = val.concat(arguments[i])
+      } else {
+        var it = iterator(arguments[i])
+      }
+    }
+    if(!it) {
+      var it = (i) => i
+    }
+    val = val.map(item=>it(item))
+    return arr.filter(item => !val.includes(it(item)))
+  }
+
+  function differenceWith(arr, value, f) {
+    let val = []
+    for(let i = 1; i < arguments.length; i++) {
+      let type = getType(arguments[i])
+      if( type == 'array') {
+        val = val.concat(arguments[i])
+      } else {
+        var compare = arguments[i]
+      }
+    }
+    return arr.filter(item => {
+      for(let v of val) {
+        if(compare(item, v)) return false
+      }
+      return true
+    })
+  }
+
+  function drop(arr, n = 1) {
+    if (n >= arr.length) return []
+    let res = []
+    for (let i = n; i < arr.length; i++) {
+      res.push(arr[i])
+    }
+    return res
+  }
+
+  function dropRight(arr, n = 1) {
+    if (n >= arr.length) return []
+    let res = []
+    for (let i = 0; i < arr.length - n; i++) {
+      res.push(arr[i])
+    }
+    return res
+  }
+
+  function dropWhile(arr, f) {
+    let res = []
+    let it = iterator(f)
+    console.log(it)
+    for (let i = 0; i < arr.length; i++) {
+      if (!it(arr[i])) {
+        res.push(arr[i])
+      }else continue
+    }
+    return res
+  }
+
+  function dropRightWhile(arr, f) {
+    let res = []
+    let it = iterator(f)
+    console.log(it)
+    for (let i = arr.length -1; i >= 0; i--) {
+      if (!it(arr[i])) {
+        res.push(arr[i])
+      }else continue
+    }
+    return res
+  }
+
+  function findIndex() {
+    
+  }
+
+
+
   function uniq(arr) {
     // return arr.filter((item,idx, arr) => arr.indexOf(item) == idx)
     // return [...new Set(arr)]
@@ -39,6 +146,17 @@ var pky_imo = function () {
       }
     })
     return res
+  }
+
+  function flatten(arr) {
+    return arr.reduce((prev,item) => {
+      if (Array.isArray(item)) {
+        for (let it of item) {
+          prev.push(it)
+        }
+      }else prev.push(item)
+      return prev
+    }, [])
   }
 
   function flattenDeep(arr) {
@@ -72,8 +190,14 @@ var pky_imo = function () {
     return map
   }
 
-  function keyBy(collection, iteratee) {
-    
+  function keyBy(collection, f) {
+    let it = iterator(f)
+    let res = {}
+    for(let i in collection) {
+      let key = it(collection[i])
+      res[key] = collection[i]
+    }
+    return res
   }
 
   function forEach(collection, iteratee) {
@@ -83,17 +207,11 @@ var pky_imo = function () {
     return collection
   }
 
-  function map(collection, it) {
-    let type = typeof iteratee
+  function map(collection, f) {
+    let it = iterator(f)
     let res = []
-    if (type == 'function') {
-      for (let key in collection) {
-        res.push(iteratee(collection[key], key, collection))
-      }
-    }else if (type == 'string') {
-      for (let item of collection) {
-        res.push(item[iteratee])
-      }
+    for (let key in collection) {
+      res.push(it(collection[key], key, collection))
     }
     return res
   }
@@ -208,8 +326,8 @@ var pky_imo = function () {
       let keys1 = keys(a)
       let keys2 = keys(b)
       if (keys1.length != keys2.length) return false
-      for (let key of keys1) {
-        if (!isEqual(a[key],b[key])) return false
+      for (let key in a) {
+        if (!(key in b) || !isEqual(a[key],b[key])) return false
       }
       return true
     }else return a == b
@@ -252,8 +370,8 @@ var pky_imo = function () {
     } 
     if (type == 'object') {
       let res = []
-      for( let item of arr) {
-        res.push(item)
+      for( let key in arr) {
+        res.push(item[key])
       }
       return res
     }
@@ -277,11 +395,14 @@ var pky_imo = function () {
     let type = getType(it)
     if (type == 'function') {
       return it
-    }else if (type == 'string') {
+    }
+    if (type == 'string') {
       return obj => obj[it]
-    }else if (type == 'array') {
+    }
+    if (type == 'array') {
       return obj => obj[it[0]] === it[1]
-    }else {
+    }
+    if (type == 'object') {
       return obj => {
         for (let key in it) {
           if (obj[key] != it[key]) {
@@ -304,6 +425,9 @@ var pky_imo = function () {
   function isNaN(n) {
     //isNaN方法首先转换类型，而Number.isNaN方法不用；
     //isNaN不能用来判断是否严格等于NaN，Number.isNaN方法可用
+    if (typeof n == 'object') {
+      return n.valueOf() !== n.valueOf()
+    }
     return Number.isNaN(n)
   }
 
@@ -324,8 +448,20 @@ var pky_imo = function () {
   return {
     chunk: chunk,
     compact: compact,
+    concat: concat,
+    difference: difference,
+    differenceBy: differenceBy,
+    differenceWith: differenceWith,
+
+    drop: drop,
+    dropRight: dropRight,
+    dropWhile: dropWhile,
+    dropRightWhile: dropRightWhile,
+
+    
     uniq: uniq,
     uniqBy: uniqBy,
+    flatten: flatten,
     flattenDeep: flattenDeep,
     flattenDepth: flattenDepth,
 
@@ -353,7 +489,7 @@ var pky_imo = function () {
     isUndefined: isUndefined,
     toArray: toArray,
     sum: sum,
-    sumBy: sum
+    sumBy: sumBy
 
   }
 

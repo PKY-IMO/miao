@@ -211,11 +211,11 @@ function reduceRight(collection, it, accumulator) {
   return init
 }
 
-var array = [[0, 1], [2, 3], [4, 5]];
+// var array = [[0, 1], [2, 3], [4, 5]];
 
-console.log(reduceRight(array, function(flattened, other) {
-  return flattened.concat(other);
-}, []))
+// console.log(reduceRight(array, function(flattened, other) {
+//   return flattened.concat(other);
+// }, []))
 
 function sum(arr) {
   return reduce(arr, (a,b)=> a+b)
@@ -226,5 +226,155 @@ function sumBy(arr, f) {
   var it = iterator(f)
   return sum(arr.map((item)=>it(item)))
 }
-var objects = [{ 'n': 4 }, { 'n': 2 }, { 'n': 8 }, { 'n': 6 }];
-console.log(sumBy(objects, 'n'))
+// var objects = [{ 'n': 4 }, { 'n': 2 }, { 'n': 8 }, { 'n': 6 }];
+// console.log(sumBy(objects, 'n'))
+
+
+function flatten(arr) {
+  return arr.reduce((prev,item) => {
+    if (Array.isArray(item)) {
+      for (let it of item) {
+        prev.push(it)
+      }
+    }else prev.push(item)
+    return prev
+  }, [])
+}
+
+// a = [[1,2,3],4,5,[[6]]]
+// console.log(flatten(a))
+
+function isEqual(a, b) {
+  if (a === b) return true
+  let type1 = getType(a)
+  let type2 = getType(b)
+  if (type1 != type2) {
+    return false
+  }
+  if (type1 == 'object' || type1 == 'array') {
+    let keys1 = keys(a)
+    let keys2 = keys(b)
+    if (keys1.length != keys2.length) return false
+    for (let key of keys1) {
+      if (!isEqual(a[key],b[key])) return false
+    }
+    return true
+  }else return a == b
+}
+
+
+n = new Number(NaN)
+function isNaN(n) {
+  //isNaN方法首先转换类型，而Number.isNaN方法不用；
+  //isNaN不能用来判断是否严格等于NaN，Number.isNaN方法可用
+  if (typeof n == 'object') {
+    return n.valueOf() !== n.valueOf()
+  }
+  return Number.isNaN(n)
+}
+console.log( isNaN(NaN))
+
+function difference(arr, ...args) {
+  let val = []
+  for(let i = 1; i < arguments.length; i++) {
+    val = val.concat(arguments[i])
+  }
+  return arr.filter(item => !val.includes(item))
+}
+
+// console.log(difference([3, 2, 1, 0], [4, 2],[1]))
+
+function concat(arr, ...args) {
+  let res = arr
+  for (let i = 1; i < arguments.length; i++) {
+    let t = arguments[i]
+    if (typeof t == 'number') {
+      res.push(t)
+    }else {
+      for(let key in t) {
+        res.push(t[key])
+      }
+    }
+  }
+  return res
+}
+
+// var array = [1];
+// console.log(concat(array, 2, [3], [[4]]))
+
+function differenceBy(arr, value, f) {
+  if (arguments.length == 2) return (difference(arr,value))
+  let val = []
+  for(let i = 1; i < arguments.length; i++) {
+    let type = getType(arguments[i])
+    if( type == 'array') {
+      val = val.concat(arguments[i])
+    } else {
+      var it = iterator(arguments[i])
+    }
+  }
+  if(!it) {
+    var it = (i) =>i
+  }
+  val = val.map(item=>it(item))
+  console.log(val)
+  return arr.filter(item => !val.includes(it(item)))
+}
+
+function differenceWith(arr, value, f) {
+  if (arguments.length == 2) return difference(arr,value)
+  let val = []
+  for(let i = 1; i < arguments.length; i++) {
+    let type = getType(arguments[i])
+    if( type == 'array') {
+      val = val.concat(arguments[i])
+    } else {
+      var compare = arguments[i]
+    }
+  }
+  return arr.filter(item => {
+    for(let v of val) {
+      if(compare(item, v)) return false
+    }
+    return true
+  })
+}
+
+
+function drop(arr, n = 1) {
+  if (n >= arr.length) return []
+  let res = []
+  for (let i = n; i < arr.length; i++) {
+    res.push(arr[i])
+  }
+  return res
+}
+
+function dropRight(arr, n = 1) {
+  if (n >= arr.length) return []
+  let res = []
+  for (let i = 0; i < arr.length - n; i++) {
+    res.push(arr[i])
+  }
+  return res
+}
+
+function dropWhile(arr, f) {
+  let res = []
+  let it = iterator(f)
+  console.log(it)
+  for (let i = 0; i < arr.length; i++) {
+    if (!it(arr[i], i, arr)) {
+      res.push(arr[i])
+    }else continue
+  }
+  return res
+}
+
+var users = [
+  { 'user': 'barney',  'active': false },
+  { 'user': 'fred',    'active': false },
+  { 'user': 'pebbles', 'active': true }
+];
+test = dropWhile(users, 'active')
+console.log(test)
