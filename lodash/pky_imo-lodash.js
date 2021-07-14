@@ -101,7 +101,6 @@ var pky_imo = function () {
   function dropWhile(arr, f) {
     let res = []
     let it = iterator(f)
-    console.log(it)
     for (let i = 0; i < arr.length; i++) {
       if (!it(arr[i], i, arr)) {
         res.push(arr[i])
@@ -113,8 +112,7 @@ var pky_imo = function () {
   function dropRightWhile(arr, f) {
     let res = []
     let it = iterator(f)
-    console.log(it)
-    for (let i = arr.length -1; i >= 0; i--) {
+    for (let i = 0; i < arr.length; i++) {
       if (!it(arr[i], i, arr)) {
         res.push(arr[i])
       }else continue
@@ -218,7 +216,7 @@ var pky_imo = function () {
     let pre = arguments[0]
     return pre.reduce((prev,item)=>{
       let flag = true
-      for(let j = 1; j < arguments.length - 1; j++) {
+      for(let j = 1; j < arguments.length; j++) {
         if(!arguments[j].includes(item)) {
           flag = false
           break
@@ -236,7 +234,7 @@ var pky_imo = function () {
   function join(arr, separator=',') {
     let res = ''
     for(let item of arr) {
-      res += item + separator
+      res += '' + item + separator
     }
     return res.slice(0,-1)
   }
@@ -484,7 +482,17 @@ var pky_imo = function () {
       return it
     }
     if (type == 'string') {
-      return obj => obj[it]
+      if (!it.includes('.')) {
+        return obj => obj[it]
+      } else {
+        let itArr = it.split('.')
+        return (obj) => {
+          for (let item of itArr) {
+            obj = obj[item]
+          }
+          return obj
+        }
+      }
     }
     if (type == 'array') {
       return obj => obj[it[0]] === it[1]

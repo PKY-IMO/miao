@@ -45,25 +45,7 @@ function unzip(arr) {
   return res
 }
 
-function iterator(it) {
-  let type = typeof it
-  if (type == 'function') {
-    return it
-  }else if (type == 'string') {
-    return obj => obj[it]
-  }else if (Array.isArray(it)) {
-    return obj => obj[it[0]] === it[1]
-  }else {
-    return obj => {
-      for (let key in it) {
-        if (obj[key] != it[key]) {
-          return false
-        }
-      }
-      return true
-    }
-  }
-}
+
 
 function uniq(arr) {
   // return arr.filter((item,idx, arr) => arr.indexOf(item) == idx)
@@ -418,7 +400,7 @@ function intersection(...arr) {
   let pre = arguments[0]
   return pre.reduce((prev,item)=>{
     let flag = true
-    for(let j = 1; j < arguments.length - 1; j++) {
+    for(let j = 1; j < arguments.length; j++) {
       if(!arguments[j].includes(item)) {
         flag = false
         break
@@ -428,6 +410,7 @@ function intersection(...arr) {
     return prev
   },[])
 }
+
 
 
 function filter(collection, it) {
@@ -466,6 +449,49 @@ function nth(arr , n = 0) {
   return arr[n >= 0 ? n : arr.length + n]
 }
 
+function iterator(it) {
+  let type = getType(it)
+  if (type == 'function') {
+    return it
+  }
+  if (type == 'string') {
+    if (!it.includes('.')) {
+      return obj => obj[it]
+    } else {
+      let itArr = it.split('.')
+      console.log(itArr)
+      return (obj) => {
+        for (let item of itArr) {
+          obj = obj[item]
+        }
+        return obj
+      }
+    }
+  }
+  if (type == 'array') {
+    return obj => obj[it[0]] === it[1]
+  }
+  if (type == 'object') {
+    return obj => {
+      for (let key in it) {
+        if (obj[key] != it[key]) {
+          return false
+        }
+      }
+      return true
+    }
+  }
+}
+
+
+function join(arr, separator=',') {
+  let res = ''
+  for(let item of arr) {
+    res += '' + item + separator
+  }
+  return res.slice(0,-1)
+}
+
 array = ['a', 'b', 'c', 'd']
-let t = nth(array, -5)
+let t = map([{"a":{"b":1}},{"a":{"b":2}}],"a.b")
 console.log(t)
