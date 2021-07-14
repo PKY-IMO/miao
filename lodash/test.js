@@ -411,6 +411,51 @@ function intersection(...arr) {
   },[])
 }
 
+function intersectionWith(...arr) {
+  let pre = arguments[0]
+  let f = arguments[arguments.length -1]
+  return pre.reduce((prev,item)=>{
+    let flag = false
+    for(let j = 1; j < arguments.length - 1; j++) {
+      arguments[j].forEach(value => {
+        if(f(value,item)) flag = true
+      })
+    }
+    return flag ? [...prev, item] : prev
+  },[])
+}
+
+function intersectionBy(...arr) {
+  let pre = arguments[0]
+  let it = iterator(arguments[arguments.length -1])
+  return pre.reduce((prev,item)=>{
+    let flag = false
+    for(let j = 1; j < arguments.length - 1; j++) {
+      arguments[j].forEach(value => {
+        if (it(value) == it(item))
+        flag = true
+      })
+    }
+    return flag ? [...prev, item] : prev
+  },[])
+}
+
+function intersectionWith(...arr) {
+  let pre = arguments[0]
+  let f = arguments[arguments.length -1]
+  let len = arguments.length - 2
+  return pre.reduce((prev,item)=>{
+    let sum = 0
+    for(let j = 1; j < arguments.length - 1; j++) {
+      let tmp = false
+      arguments[j].forEach(value => {
+        if(f(value,item)) tmp = true
+      })
+      if (tmp) sum++
+    }
+    return sum == len ? [...prev, item] : prev
+  },[])
+}
 
 
 function filter(collection, it) {
@@ -492,6 +537,9 @@ function join(arr, separator=',') {
   return res.slice(0,-1)
 }
 
-array = ['a', 'b', 'c', 'd']
-let t = map([{"a":{"b":1}},{"a":{"b":2}}],"a.b")
+var objects = [{ 'x': 1, 'y': 2 }, { 'x': 2, 'y': 1 }];
+var others = [{ 'x': 1, 'y': 1 }, { 'x': 1, 'y': 2 }];
+var other2 = [{ 'x': 1, 'y': 1 }, { 'x': 1, 'y': 2 },{ 'x': 2, 'y': 1 }];
+ 
+var t = intersectionWith(objects, others,other2, isEqual)
 console.log(t)

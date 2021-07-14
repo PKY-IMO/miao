@@ -227,8 +227,37 @@ var pky_imo = function () {
     },[])
   }
 
-  function intersectionBy(...args) {
+  function intersectionBy(...arr) {
+    let pre = arguments[0]
+    let it = iterator(arguments[arguments.length -1])
+    return pre.reduce((prev,item)=>{
+      let flag = true
+      for(let j = 1; j < arguments.length - 1; j++) {
+        let arr = arguments[j].map(item => it(item))
+        if(!arr.includes(it(item))) {
+          flag = false
+          break
+        }
+      }
+      return flag ? [...prev, item] : prev
+    },[])
+  }
 
+  function intersectionWith(...arr) {
+    let pre = arguments[0]
+    let len = arguments.length - 2
+    let f = arguments[len + 1]
+    return pre.reduce((prev,item)=>{
+      let sum = 0
+      for(let j = 1; j < arguments.length - 1; j++) {
+        let tmp = false
+        arguments[j].forEach(value => {
+          if(f(value,item)) tmp = true
+        })
+        if(tmp) sum++
+      }
+      return sum == len ? [...prev, item] : prev
+    },[])
   }
 
   function join(arr, separator=',') {
@@ -318,7 +347,7 @@ var pky_imo = function () {
     let t = Array.isArray(collection) ? 0 : collection[keys(collection)[0]]
     let init = accumulator || t
     for (let key in collection) {
-      init = it(init, collection[key], key)
+      init = it(init, collection[key], key, collection)
     }
     return init
   } 
@@ -567,6 +596,8 @@ var pky_imo = function () {
     lastIndexOf: lastIndexOf,
     initial: initial,
     intersection: intersection,
+    intersectionBy: intersectionBy,
+    intersectionWith: intersectionWith,
 
     join: join,
     last: last,
