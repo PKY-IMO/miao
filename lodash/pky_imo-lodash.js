@@ -276,7 +276,6 @@ var pky_imo = function () {
     return arr[n >= 0 ? n : arr.length + n]
   }
 
-
   function groupBy(collection, iteratee) {
     let map = {}
     let key
@@ -328,20 +327,54 @@ var pky_imo = function () {
   
 
 
-  function filter(collection, it) {
-    let res = []
-    var predicate = iterator(it)
-    if(getType(collection) == 'object') {
-      for (let key in collection) {
-        if (predicate(collection[key], key, collection)) {
-          res.push(collection[key])
+  function pull(array, ...args) {
+    // 1.The Abstract Equality Comparison Algorithm ( ==）
+    // 2.The Strict Equality Comparison Algorithm ( === ) 
+    //    (1) NaN===NaN          // false      (2) 0 === -0         // true
+    // 3.SameValue (Object.is()) 
+    //    (1)Object.is(NaN, NaN) // true       (2) Object.is(0, -0) // false
+    // *4.SameValueZero (has includes) const a = [0, NaN]
+    //    (1) a.includes(NaN)    // true       (2) a.includes(-0)   // true 
+    return array.filter((item) => {
+      let flag = true
+      for (let i = 1; i < arguments.length; i++) {
+        if(SameValueZero(arguments[i], item)) {
+          flag = false
+          break
         }
       }
-    }else collection.forEach((item,idx,arr)=>{
-      if(predicate(item,idx,arr)) res.push(item)
+      return flag
     })
-    return res
   }
+
+  function pullAll(arr, value) {
+    return arr.filter(item => !value.includes(item))
+  }
+  
+  function pullAllBy(arr, value, it) {
+    let f = iterator(it)
+    return arr.filter(i => !value.some(v => SameValueZero(f(i),f(v)) ))
+  }
+
+  function pullAllWith(arr, value, it) {
+    let f = iterator(it)
+    return arr.filter(i => !value.some(v => f(i,v) ))
+  } 
+
+  function sortedIndex(arr, value) {
+    // arr是已排序的数组
+    if (arr.length == 0) return 0
+    if (arr[arr.length-1] < value) return arr.length
+    // 在[left, right]中找到大于等于value的第一个元素的位置
+    let l = 0, r = arr.length - 1
+    while(l < r) {
+      let mid = (l + r) >> 1
+      if (arr[mid] < value) l = mid + 1
+      else r = mid
+    }
+    return l
+  }
+
 
   function reduce(collection, it, accumulator) {
     let t = Array.isArray(collection) ? 0 : collection[keys(collection)[0]]
@@ -546,6 +579,11 @@ var pky_imo = function () {
       .toLowerCase();
   }
 
+  function SameValueZero(a, b) {
+    if (a !== a && b !== b) return true
+    return a === b
+  }
+
   function isNaN(n) {
     //isNaN方法首先转换类型，而Number.isNaN方法不用；
     //isNaN不能用来判断是否严格等于NaN，Number.isNaN方法可用
@@ -602,6 +640,12 @@ var pky_imo = function () {
     join: join,
     last: last,
     nth: nth,
+    pull: pull,
+    pullAll: pullAll,
+    pullAllBy: pullAllBy,
+    pullAllWith: pullAllWith,
+
+    sortedIndex: sortedIndex,
 
 
     groupBy: groupBy,

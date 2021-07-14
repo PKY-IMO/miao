@@ -442,8 +442,8 @@ function intersectionBy(...arr) {
 
 function intersectionWith(...arr) {
   let pre = arguments[0]
-  let f = arguments[arguments.length -1]
   let len = arguments.length - 2
+  let f = arguments[len + 1]
   return pre.reduce((prev,item)=>{
     let sum = 0
     for(let j = 1; j < arguments.length - 1; j++) {
@@ -540,6 +540,62 @@ function join(arr, separator=',') {
 var objects = [{ 'x': 1, 'y': 2 }, { 'x': 2, 'y': 1 }];
 var others = [{ 'x': 1, 'y': 1 }, { 'x': 1, 'y': 2 }];
 var other2 = [{ 'x': 1, 'y': 1 }, { 'x': 1, 'y': 2 },{ 'x': 2, 'y': 1 }];
+
+
+function pull(array, ...args) {
+  // 1.The Abstract Equality Comparison Algorithm ( ==）
+  // 2.The Strict Equality Comparison Algorithm ( === ) 
+  //    (1) NaN===NaN          // false      (2) 0 === -0         // true
+  // 3.SameValue (Object.is()) 
+  //    (1)Object.is(NaN, NaN) // true       (2) Object.is(0, -0) // false
+  // *4.SameValueZero (has includes) const a = [0, NaN]
+  //    (1) a.includes(NaN)    // true       (2) a.includes(-0)   // true 
+  return array.filter((item) => {
+    let flag = true
+    for (let i = 1; i < arguments.length; i++) {
+      if(SameValueZero(arguments[i], item)) {
+        flag = false
+      }
+    }
+    return flag
+  })
+}
+
+function SameValueZero(a, b) {
+  if (a !== a && b !== b) return true
+  return a === b
+}
+
+function pullAll(arr, value) {
+  return arr.filter(item => !value.includes(item))
+}
+
+function pullAllBy(arr, value, it) {
+  let f = iterator(it)
+  return arr.filter(i => !value.some(v => SameValueZero(f(i),f(v)) ))
+}
+
+function pullAllWith(arr, value, it) {
+  let f = iterator(it)
+  return arr.filter(i => !value.some(v => f(i,v) ))
+} 
+
+
+function sortedIndex(arr, value) {
+  // arr是已排序的数组
+  if (arr.length == 0) return 0
+  if (arr[arr.length-1] < value) return arr.length
+  // 在[left, right]中找到大于等于value的第一个元素的位置
+  let l = 0, r = arr.length - 1
+  while(l < r) {
+    let mid = (l + r) >> 1
+    if (arr[mid] < value) l = mid + 1
+    else r = mid
+  }
+  return l
+}
+
+var array = [{ 'x': 1, 'y': 2 }, { 'x': 3, 'y': 4 }, { 'x': 5, 'y': 6 }];
  
-var t = intersectionWith(objects, others,other2, isEqual)
+t = sortedIndex([30, 50], 40)
 console.log(t)
