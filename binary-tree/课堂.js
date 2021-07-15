@@ -142,3 +142,39 @@ function postOrderTraverse(root, action) {
 }
 
 
+function maxDepth(root) {
+  if(!root) return 0
+  let left = maxDepth(root.left)
+  let right = maxDepth(root.right)
+  return Math.max(left,right) + 1 
+}
+
+function Oreder(root) {
+  if (root == null) return null
+  let stack = []
+  let cur = root
+  while(stack.length || cur) {
+    while(cur) {
+      //do 先序
+      stack.push(cur)
+      cur = cur.left
+    }
+    cur = stack.pop()
+    //do 中序
+    cur = cur.right
+  }
+}
+
+function fromPreOrderInOrder(preOrder, inOrder) {
+  if (preOrder.length == 0 || inOrder.length == 0) return null
+  let rootVal = preOrder[0]
+  let rootIdx = inOrder.indexOf(rootVal)
+  let leftInorder = inOrder.slice(0, rootIdx)
+  let rightInorder = inOrder.slice(rootIdx + 1)
+  let leftPreorder = preOrder.slice(1, leftInorder.length + 1)
+  let rightPreorder = preOrder.slice(leftInorder.length + 1)
+  let node = createTreeNode(rootVal)
+  node.left = fromPreOrderInOrder(leftPreorder, leftInorder)
+  node.right = fromPreOrderInOrder(rightPreorder, rightInorder)
+  return node
+}

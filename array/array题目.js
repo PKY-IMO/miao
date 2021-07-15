@@ -228,3 +228,10 @@ function unique(arr){
        })
    }
 
+//对数组成员个数进行统计
+const arr = [0, 1, 1, 2, 2, 2];
+// { 0: 1, 1: 2, 2: 3 }
+
+function Count(arr = []) {
+  return arr.reduce((t, v) => (t[v] = (t[v] || 0) + 1, t), {});
+}

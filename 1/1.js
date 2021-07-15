@@ -1,5 +1,22 @@
-//1. 快排
-
+//1. 快排,初始值
+function quickSort(arr, start=0, end=arr.length-1) {
+  if(start >= end) return 
+  let pivotIdx = Math.floor(Math.random()*(end - start + 1)) + start
+  let pivot = arr[pivotIdx]
+  let l = start, r = end
+  while(l <= r) {
+    while(l <= r && arr[l] < pivot) l++
+    while(l <= r && arr[r] >= pivot) r--
+    if (l <= r) {
+      [arr[l],arr[r]] = [arr[r],arr[l]]
+      l++
+      r--
+    }
+  }
+  quickSort(arr, start, r)
+  quickSort(arr, l, end)
+  return arr
+}
 //2.数组去重
 arr = [1,2,2,3,4,5,5]
 arr.reduce((prev, it) =>  prev.includes(it) ? prev : [...prev, it], [])
@@ -57,3 +74,24 @@ const arr2 = [
     return newArr
   }
   console.log('uniqueKey',uniqueKey2(arr2))
+
+  // 字符串相加，字符串相乘
+
+
+
+  a.map2 = function(mapper) {
+    let result =[]
+    for(let i = 0; i < this.length; i++) {
+      result.push(mapper(this[i]))
+    }
+    return result
+  }
+
+  a.map2(it => it*2)
+
+  //获取原型  a.__proto__  Object.getPrototypeOf(a)
+  //设置原型  a.__proto__  Object.setPrototypeOf(a)
+  //原型链是反向的树状结构，子节点指向父节点
+  // obj.prototype
+
+  

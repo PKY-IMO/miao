@@ -376,11 +376,14 @@ var pky_imo = function () {
   }
 
 
-  function reduce(collection, it, accumulator) {
-    let t = Array.isArray(collection) ? 0 : collection[keys(collection)[0]]
-    let init = accumulator || t
-    for (let key in collection) {
-      init = it(init, collection[key], key, collection)
+  function reduce(collection, it, init) {
+    let keyArr = keys(collection), start = 0
+    if (arguments.length == 2) {
+      start = 1
+      init = collection[keyArr[0]]
+    }
+    for (let i = start; i < keyArr.length; i++) {
+      init = it(init, collection[keyArr[i]], keyArr[i],collection)
     }
     return init
   } 

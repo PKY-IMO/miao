@@ -599,3 +599,65 @@ var array = [{ 'x': 1, 'y': 2 }, { 'x': 3, 'y': 4 }, { 'x': 5, 'y': 6 }];
  
 t = sortedIndex([30, 50], 40)
 console.log(t)
+
+function quickSort(arr, start = 0, end = arr.length - 1) {
+  if (start >= end) return
+  let pivotIdx = Math.floor(Math.random()*(end - start + 1)) + start
+  let pivot = arr[pivotIdx]
+  let l = start, r = end
+  while(l <= r) {
+    while(l <= r && arr[l] < pivot) l++
+    while(l <= r && arr[r] > pivot) r--
+    if (l <= r) {
+      [arr[l],arr[r]] = [arr[r],arr[l]]
+      l++
+      r--
+    }
+  }
+  quickSort(arr, start, r)
+  quickSort(arr, l, end)
+  return arr
+}
+
+
+t = [1,23,6,7,9,10,6,7,2,5,7,88]
+console.log(quickSort(t))
+
+var str = 'hello world'
+str.a = 8
+console.log(str.a)      //undefined
+str.length = 5
+console.log(str) //hello world
+var num = 8
+num.value = 9
+console.log(num)  //8
+var arr = [1,2,3,4,5]
+arr.length = 3
+console.log(arr) //[ 1, 2, 3 ]
+
+
+
+function reduce(collection, it, init) {
+  let keyArr = keys(collection), start = 0
+  if (arguments.length == 2) {
+    start = 1
+    init = collection[keyArr[0]]
+  }
+  for (let i = start; i < keyArr.length; i++) {
+    init = it(init, collection[keyArr[i]], keyArr[i],collection)
+  }
+  return init
+} 
+
+t = reduce([1, 2], function(sum, n) {
+  return sum + n;
+})
+console.log(t)
+arr = [2,2,3,4]
+t = arr.reduce((total,p,i) => {
+	console.log(total,p,i)
+	return (total + i)} ); console.log(t); // 输出多少 
+console.log('11111111')
+const res1 = [1,2,3,4].reduce((total,p,i) => {
+  console.log(total,i) 
+  return(total + i)}, 0); console.log(res1); // 输出多少
