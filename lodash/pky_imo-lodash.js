@@ -1005,7 +1005,7 @@ var pky_imo = function () {
     uniqWith: uniqWith,
 
     unzip: unzip,
-    unzipWith: unionWith,
+    unzipWith: unzipWith,
 
 
     groupBy: groupBy,
