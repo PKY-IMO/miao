@@ -1,3 +1,4 @@
+<script>
 
 /**
  * 时间复杂度：O(n * n)
@@ -62,32 +63,6 @@ function insertSort(array) {
   }
   return array
 }
-
-/**
- * 希尔排序：将数组一分为二分别排序，再将两个有序数组合并
- * 时间复杂度：n*log(n)
- * 空间复杂度：n
- */
- function shellSort(array) {
-  for (var step = array.length >> 1; step > 0; step = step >> 1) {
-    for (var i = step; i < array.length; i++) {
-      var t = array[i]
-      for (var j = i - step; j >= 0; j -= step) {
-        if (array[j] > t) {
-          array[j + step] = array[j]
-        } else {
-          break
-        }
-      }
-      array[j + step] = t
-    }
-  }
-
-  return array
-}
-
-
-
 
 /**
  * 归并排序：将数组一分为二分别排序，再将两个有序数组合并
@@ -208,32 +183,4 @@ function isSorted(array) {
   }
   return true
 }
-
-//不稳定的排序算法 ： 选择，快速
-
-function countSort(array) {
-  let max = array.reduce((prev,item) => item > prev ? item : prev)
-  let res = []
-  let count = new Array(max + 1).fill(0)
-  for (item of array) {
-    count[item]++
-  }
-  for (let i = 0; i < count.length; i++) {
-    while(count[i]) {
-      res.push(i)
-      count[i]--
-    }
-  }
-  return res
-}
-arr = [2,9,5,7,1,1,6,3,3,4]
-let sortArr = countSort(arr)
-
-function isSorted(arr) {
-  for (let i = 0; i < arr.length; i++) {
-    if (arr[i + 1] < arr[i]) return false
-  }
-  return true
-}
-
-console.log(isSorted(sortArr))
+</script>

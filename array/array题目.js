@@ -20,7 +20,7 @@ function flattenArr() {
     return result
   }
 }
-flattenArr()(ary)
+// flattenArr()(ary)
 
 //无闭包 
 function flattenArr(arr) {
@@ -47,7 +47,7 @@ function flattenArr(arr) {
 }
 
 //4.reduce + concat
-var t = function flattenArr(arr) {
+ function flattenArr(arr) {
   return arr.reduce((prev,item) => prev.concat(Array.isArray(item) ? flattenArr(item) : item),[])
 }
 
@@ -235,3 +235,18 @@ const arr = [0, 1, 1, 2, 2, 2];
 function Count(arr = []) {
   return arr.reduce((t, v) => (t[v] = (t[v] || 0) + 1, t), {});
 }
+
+
+// 二维数组行转列
+rows = [[1,2,3,5,2,34,5,6],
+        [1,2,3,5,9,4,5,6],
+        [1,2,3,5,9,4,5,6]]
+
+function col(rows) {
+  return rows[0].map((_,idx) => {
+    return rows.map(row => row[idx])
+  })
+}
+
+m = col(rows)
+console.log(m)

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    table{
+      width: 100%;
+      border: 1;
+      border-collapse: collapse;
+    }
+    table th {
+      text-align: left;
+    }
+    table th,
+    table td {
+      padding: 8px;
+    }
+    table thead {
+      border-bottom: 1px solid #212529;
+    }
+    table thead tr:last-child {
+      border-bottom: none;
+    }
+    table tr {
+      border-bottom: 1px solid #dee2e6;
+    }
+    div {
+      width: 400px;
+    }
+  </style>
+</head>
+<body>
+  <input id="arr">
+  <button onclick="printInputValue()">更新</button>
+  <div id="container" class="container">
+    
+  </div>
+  
+</body>
+<script>
+  function arryString(str) {
+    let objArr = str.replace(/\[|\]/g,'').split('},{')
+    let res = []
+    objArr.forEach(str => {
+      //{a:1,b:2,c:3} 
+      strArr = str.replace(/\{|\}/g,'').split(',')
+      let obj = {}
+      strArr.forEach(i => {
+        let [key,value] = i.split(':')
+        obj[key] = value
+      })
+      res.push(obj)
+    })
+    return res
+  }
+  let arr = [{a:1,b:2,c:3},{a:1,c:4}]
+  function printInputValue() { 
+    let str = document.getElementById("arr").value
+    arr = arryString(str)
+    htmlStr = tableToHtml(arr)
+    document.getElementById("container").innerHTML = htmlStr
+  }
+  let htmlStr = ""
+  function getKeys(arr) {
+    let key = []
+    for (let i = 0; i < arr.length; i++) {
+      let item = arr[i]
+      let oneKey = Object.getOwnPropertyNames(item)
+      oneKey.forEach(k => {
+        if (!key.includes(k)) {
+          key.push(k)
+        }
+      })
+    }
+    return key
+  }
+  function tableToHtml(arr) {
+    let keys = getKeys(arr)
+    var html = "";
+    if (keys) {
+      html += '<table>'
+          html += '<thead>'
+            html += '<tr>'
+              html += '<th>' + 'index' + '</th>'
+              for (let i = 0; i < keys.length; i++) {
+                html += '<th>' + keys[i] + '</th>'
+              }
+            html += '</tr>'
+          html += '</thead>'
+          html += '<tbody>'
+          for(let i = 0; i < arr.length; i++) {
+            let item = arr[i]
+            html += '<tr>'
+              html += '<td>' + i + '</td>'
+              keys.forEach(k => {
+                html += '<td>' + (item[k]||'') + '</td>'
+              })
+            html += '</tr>'
+          }
+          html += '</tbody>'   
+      html += '</table>'
+    }
+    return html
+  }
+  htmlStr = tableToHtml(arr)
+  document.getElementById("container").innerHTML = htmlStr
+</script>
+</html>

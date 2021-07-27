@@ -79,19 +79,166 @@ const arr2 = [
 
 
 
-  a.map2 = function(mapper) {
-    let result =[]
-    for(let i = 0; i < this.length; i++) {
-      result.push(mapper(this[i]))
-    }
-    return result
-  }
+  // a.map2 = function(mapper) {
+  //   let result =[]
+  //   for(let i = 0; i < this.length; i++) {
+  //     result.push(mapper(this[i]))
+  //   }
+  //   return result
+  // }
 
-  a.map2(it => it*2)
+  // a.map2(it => it*2)
 
   //获取原型  a.__proto__  Object.getPrototypeOf(a)
   //设置原型  a.__proto__  Object.setPrototypeOf(a)
   //原型链是反向的树状结构，子节点指向父节点
   // obj.prototype
 
+  //1. 数组：reduce实现map 
+  Array.prototype.myMap = function(fn, ctx) {
+    return this.reduce((pre, item, idx, ary)=>{
+      return [...pre,fn.call(ctx, item, idx, ary)]
+    },[])
+  }
+  //2. 数组：reduce
+  Array.prototype.myReduce = function(fn, init) {
+    //调用是否为数组
+    if(Object.prototype.toString.call(this) !== '[object Array]') {
+      throw new TypeError('not a array')
+    }
+    //fn校验是否为function
+    if(typeof fn !== 'function') {
+      throw new TypeError('not a function')
+    }
+    let arr = this
+    let initIdx
+    let acc
+    // arr 是否为空
+    if(arr.length === 0) {
+      if (arguments.length === 1) {
+        throw new TypeError('empty array')
+      }else return init
+    }
+    initIdx = arguments.length === 1 ? 1 : 0
+    acc = arguments.length === 1 ? arr[0] : init
+    for (let i = initIdx; i < arr.length; i++) {
+      acc = fn(acc, arr[i], i, arr)
+    }
+    return acc
+  }
+  //3. 深拷贝
+
+  function deepCopy(obj, copyobj) {
+    copyobj = copyobj || {}
+    if (typeof obj !== 'object') {
+      copyobj = obj
+      return copyobj
+    }else {
+      for (let key in obj ) {
+        if (obj.hasOwnproperty(key)) {
+          if (obj[key] && typeof obj[key] === 'object') {
+            if(obj[key] instanceof Array) {
+              copyobj[key] = []
+            }else {
+              copyobj[key] = {}
+            }
+            deepCopy(obj[key], copyobj[key])
+          } else{
+            copyobj[key] = obj[key]
+          }
+        }
+      }
+    }
+    return copyobj
+  }
+
+  //4. 实现new
+  function myNew(Constructor, ...args) {
+    let obj = {}
+    obj.__proto__ = Constructor.prototype
+    let result = Constructor.call(obj, ...args)
+    if (result && typeof result === 'object') {
+      return result
+    } else {
+      return obj
+    }
+  }
+  //实现 Object.create
+  function createObj(o) { //返回实例的__proto__ = o
+    function F(){}
+    F.prototype = o
+    return new F()
+  }
+
+  //实现call、 apply、bind
+  function bind(f, thisObj, ...fixedArgs) {
+    return function(...args) {
+      return f.call(thisObj, ...fixedArgs, ...args)
+    }
+  }
+
+  Function.prototype.myBind = function(ctx = window, ...fixedArgs) {
+    let self = this //保留这一层的f
+    return function(...args) {
+      return self.call(ctx, ...fixedArgs, ...args)
+    }
+  }
   
+  Function.prototype.myBind2 = function(ctx = window, ...fixedArgs) {
+    let fn = Symbol()
+    ctx[fn] = this
+    return function(...args) {
+      let res = ctx[fn](...fixedArgs, ...args)
+      delete ctx[fn]
+      return res
+    }
+  }
+
+  Function.prototype.myCall = function(ctx = window, ...args) {
+    //1. 将方法this 挂载到传入的ctx
+    //2. 将挂载后的方法调用
+    //3. 删除挂在的属性
+    ctx.fn = this
+    let res = ctx.fn(...args)
+    delete ctx.fn
+    return res
+  }
+  Function.prototype.myApply = function(ctx = window, args = []) {
+    if (args && !(args instanceof Array)) {
+      throw new TypeError('not a array')
+    }
+    ctx.fn = this
+    let res = ctx.fn(...args)
+    delete ctx.fn
+    return res
+  }
+
+
+  //测试用例
+  function f1(a, b, c) {
+    return this + a +b + c
+  }
+  f2 = f1.myBind(1, 0, 0)
+  f2.call(2, 0) // 1 f2不会把自己的this传进去，bind的this值不变
+
+  function myNew(Constructor, ...args) {
+    let obj = Object.create(Constructor.prototype)
+    let res = Constructor.call(obj, ...args)
+    if (res && typeof res === 'object') {
+      return res
+    }else return obj
+  }
+
+  function create(proto) {
+    function F(){}
+    F.prototype = proto
+    return new F()
+  }
+
+  function len(a){
+    return a*2
+  }
+  ww = [[1,2,3,5,2,34,5,6],[1,2,3,5,9,4,5,6]]
+  console.log(ww.map(i=>{
+    return Math.max(...i.map(i=>len(i)))
+  }))

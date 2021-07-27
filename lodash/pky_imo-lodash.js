@@ -138,25 +138,7 @@ var pky_imo = function () {
 
 
 
-  function uniq(arr) {
-    // return arr.filter((item,idx, arr) => arr.indexOf(item) == idx)
-    // return [...new Set(arr)]
-    // return Array.from(new Set(arr))
-    return arr.reduce(((prev, item) => prev.includes(item) ? prev : [...prev,item]),[])
-  }
 
-  function uniqBy(arr, iteratee) {
-    var it = iterator(iteratee)
-    let map = {}, res = []
-    arr.forEach(( item) => {
-      let key = it(item)
-      if (!(key in map)) {
-        map[key] = item
-        res.push(item)
-      }
-    })
-    return res
-  }
 
   function flatten(arr) {
     return arr.reduce((prev,item) => {
@@ -375,6 +357,243 @@ var pky_imo = function () {
     return l
   }
 
+  function sortedIndexBy(arr, value, f) {
+    let iter = iteratee(f)
+    return sortedIndex(arr.map(i => iter(i)), iter(value))
+  }
+
+  function sortedIndexOf(arr, value) {
+    // arr是已排序的数组
+    if (arr.length == 0) return 0
+    if (arr[arr.length-1] < value) return arr.length// 不存在大于等于value的值
+    // 在[left, right]中找到大于等于value的第一个元素的位置
+    let l = 0, r = arr.length - 1
+    while(l < r) {
+      let mid = (l + r) >> 1
+      if (arr[mid] < value) l = mid + 1
+      else r = mid
+    }
+    return arr[l] == value ? l : -1
+  }
+
+  function sortedLastIndex(arr, value) {
+    // arr是已排序的数组
+    if (arr.length == 0) return 0
+    if (arr[0] > value) return 0 //不存在小于等于value的值
+    // 在[left, right]中找到小于等于value的最后元素的位置
+    let l = 0, r = arr.length - 1
+    while(l < r) {
+      let mid = (l + r + 1) >> 1 //需要加1
+      if (arr[mid] > value) r = mid - 1
+      else l = mid
+    }
+    return l + 1
+  }
+
+  function sortedLastIndexBy(arr, value, f) {
+    let iter = iteratee(f)
+    return sortedLastIndex(arr.map(i => iter(i)), iter(value))
+  }
+
+  function sortedLastIndexOf(arr, value) {
+    // arr是已排序的数组
+    if (arr.length == 0) return 0
+    if (arr[0] > value) return 0
+    // 在[left, right]中找到小于等于value的最后元素的位置
+    let l = 0, r = arr.length - 1
+    while(l < r) {
+      let mid = (l + r + 1) >> 1 //需要加1
+      if (arr[mid] > value) r = mid - 1
+      else l = mid
+    }
+    return arr[l] == value ? l : -1
+  }
+
+  function sortedUniq(ary) {
+    var result = []
+    for (var i = 0; i < ary.length; i++) {
+      if (!result.includes(ary[i])) {
+        result.push(ary[i])
+      }
+    }
+    return result
+  }
+
+  function sortedUniqBy(ary, predicate) {
+    let set = new Set()
+    let res = []
+    for (let i = 0; i < ary.length; i++) {
+      let computed = predicate(ary[i], i, ary)
+      if (!set.has(computed)) {
+        res.push(ary[i])
+        set.add(computed)
+      }
+    }
+    return res
+  }
+
+  function tail(ary) {
+    if(ary && ary.length <= 1) return []
+    return ary.splice(1)
+  }
+
+  function take(ary, n = 1) {
+    if(ary && ary.length <= 1) return []
+    // return ary.splice(0, n)
+    let res = []
+    if (n >= ary.length) n = ary.length
+    for (let i = 0; i < n; i++) {
+      res.push(ary[i])
+    }
+    return res
+  }
+
+  function takeRight(ary, n = 1) {
+    if(ary && ary.length <= 1) return []
+    // return ary.splice(0, n)
+    let res = []
+    if (n >= ary.length) n = ary.length
+    let start = ary.length - n
+    for (let i = start; i < ary.length; i++) {
+      res.push(ary[i])
+    }
+    return res
+  }
+
+  function takeRightWhile(ary, predicate = identity) {
+    let res = []
+    predicate = iteratee(predicate)
+    for (let i = ary.length - 1; i >= 0; i--) {
+      if(predicate(ary[i],i,ary)) {
+        res.unshift(ary[i])
+      }else {
+        break
+      }
+    }
+    return res
+  }
+
+  function takeWhile(ary, predicate = identity) {
+    let res = []
+    predicate = iteratee(predicate)
+    for (let i = 0; i < ary.length; i++) {
+      if(predicate(ary[i],i,ary)) {
+        res.push(ary[i])
+      }else {
+        break
+      }
+    }
+    return res
+  }
+
+  function union(...args) {
+    let res = []
+    let set = new Set()
+    for (let ary of args) {
+      for (let item of ary) {
+        if (!set.has(item)) {
+          res.push(item)
+          set.add(item)
+        }
+      }
+    }
+    return res
+  }
+
+  function unionBy(...args) { 
+    let predicate = args[args.length - 1]
+    predicate = iteratee(predicate)
+    let len = args.length -1
+    let arys = args.slice(0, len)
+    let res = []
+    let set = new Set()
+    for (let ary of arys) {
+      for (let item of ary) {
+        let computed = predicate(item)
+        if (!set.has(computed)) {
+          res.push(item)
+          set.add(computed)
+        }
+      }
+    }
+    return res
+  }
+  
+  function unionWith(...args) {
+    let comparator = args[args.length - 1]
+    let len = args.length -1
+    let arys = [].concat(...args.slice(0, len))
+    var result = []
+    for (var i = 0; i < arys.length; i++) {
+      if ( !result.some(item => comparator(item, arys[i])) ) {
+        result.push(arys[i])
+      }
+    }
+    return result
+  }
+
+  function uniq(arr) {
+    // return arr.filter((item,idx, arr) => arr.indexOf(item) == idx)
+    // return [...new Set(arr)]
+    // return Array.from(new Set(arr))
+    return arr.reduce(((prev, item) => prev.includes(item) ? prev : [...prev,item]),[])
+  }
+
+  function uniqBy(arr, iteratee) {
+    var it = iterator(iteratee)
+    let map = {}, res = []
+    arr.forEach(( item) => {
+      let key = it(item)
+      if (!(key in map)) {
+        map[key] = item
+        res.push(item)
+      }
+    })
+    return res
+  }
+
+  function uniqWith(ary, predicate) {
+    var res = []
+    for (var i = 0; i < ary.length; i++) {
+      if ( !res.some(it => predicate(it, ary[i]))) {
+        res.push(ary[i])
+      }
+    }
+    return res
+  }
+
+  function unzip(arr) {
+    let num = arr.length
+    let size = arr[0].length
+    let res = Array.from(new Array(size), () => new Array(num))
+    for(let i = 0; i < size; i++) {
+      for (let j = 0; j < num; j++) {
+        res[i][j] = arr[j][i]
+      }
+    }
+    return res
+  }
+
+  function unzipWith(arr, comparetor) {
+    let num = arr.length
+    let size = arr[0].length
+    let res = []
+    for(let i = 0; i < size; i++) {
+      let tmp = []
+      for (let j = 0; j < num; j++) {
+        tmp.push(arr[j][i])
+      }
+      tmp = reduce(tmp, comparetor)
+      res.push(tmp)
+    }
+    return res
+  }
+
+  
+
+
+
+
 
   function reduce(collection, it, init) {
     let keyArr = keys(collection), start = 0
@@ -411,17 +630,9 @@ var pky_imo = function () {
     return res
   }
 
-  function unzip(arr) {
-    let num = arr.length
-    let size = arr[0].length
-    let res = Array.from(new Array(size), () => new Array(num))
-    for(let i = 0; i < size; i++) {
-      for (let j = 0; j < num; j++) {
-        res[i][j] = arr[j][i]
-      }
-    }
-    return res
-  }
+
+
+
 
   function keys(obj) {
     let res = []
@@ -483,6 +694,27 @@ var pky_imo = function () {
     }else return a == b
   }
 
+  function isMatch(object, source) {
+    if (object == source) {
+      return true
+    }
+    if (typeof source !== 'object' || typeof object !== 'object') {
+      return false
+    }
+    for (var key in source) {
+      if (source[key] && typeof source[key] !== 'object') {
+        if (object[key] !== source[key]) {
+          return false
+        } else {
+          if (!isMatch(bject[key], source[key])) {
+            return false
+          }
+        }
+      }
+    }
+    return true
+  }
+
 
   function reverse(arr) {
     if (arr.length <= 1) return arr
@@ -510,7 +742,11 @@ var pky_imo = function () {
   }
 
   function shuffle(arr) {
-    return arr.sort(()=>Math.random()-0.5)
+    for (let i = arr.length - 1; i > 0; i--) {
+      var randIdx = Math.floor(Math.random() * (i + 1))
+      [arr[i], arr[randIdx]] = [arr[randIdx], arr[i]]
+    }
+    return arr[i]
   }
 
   function toArray(arr) {
@@ -574,12 +810,115 @@ var pky_imo = function () {
     }
   }
 
-  function getType(data) {
+  function iteratee(predicate) {
+    if (typeof predicate == 'function') {
+      return predicate
+    }
+    if (typeof predicate == 'string') {
+      return property(predicate)
+    }
+    if (Array.isArray(predicate)) {
+      return matchesProperty(...predicate)
+    }
+    if (typeof predicate == 'object') {
+      return matches(predicate)
+    }
+  }
+  function matches(src) {
+    // return bind(isMatch, null, window, src)
+    return function(obj) {
+      return isMatch(obj, src)
+    }
+  }
+
+  function matchesProperty(path, val) {
+    return function(obj) {
+      return isEqual(get(obj, path), val)
+    }
+  }
+
+  function isMatch(object, source) {
+    if (object == source) {
+      return true
+    }
+    if (typeof object !== 'object' || typeof source !== 'object') {
+      return false
+    }
+    for (var key in source) {
+      if (source[key] && typeof source[key] !== 'object') {
+        if (object[key] !== source[key]) {
+          return false
+        }
+      } else {
+        if (!isMatch(object[key], source[key])) {
+          return false
+        }
+      }
+    }
+    return true
+  }
+
+  // 传入什么属性名，它返回的函数就用来获取对象的什么属性名
+  function property(prop) {// a.b
+    return function(obj) {
+      return get(obj, prop)
+    }
+  }
+
+  function get(object, path, defaultVal = undefined) {
+    path = toPath(path)
+    // return path.reduce((obj, curPath) => {
+    //   return obj[curPath]
+    // }, object)
+
+    for (var i = 0; i < path.length; i++) {
+      if (object == undefined) {
+        return defaultVal
+      } else {
+        object = object[path[i]]
+      }
+    }
+    return object
+  }
+
+  function has(object, path) {
+    path = toPath(path)
+  
+    for (var i = 0; i < path.length; i++) {
+      if (object == undefined) {
+        return false
+      } else {
+        object = object[path[i]]
+      }
+    }
+    return true
+  }
+
+  function toPath(val) {
+    if (Array.isArray(val)) {
+      return val
+    } else {
+      return val.split('][')
+        .reduce((ary,it) => ary.concat(it.split('].')), [])
+        .reduce((ary,it) => ary.concat(it.split('[')), [])
+        .reduce((ary,it) => ary.concat(it.split('.')), [])
+    }
+  }
+
+
+
+  
+
+  function getType(obj) {
     return Object.prototype.toString
-      .call(data)
+      .call(obj)
       .split(" ")[1]
       .slice(0, -1)
       .toLowerCase();
+  }
+
+  function identity(val) {
+    return val
   }
 
   function SameValueZero(a, b) {
@@ -623,10 +962,6 @@ var pky_imo = function () {
     dropWhile: dropWhile,
     dropRightWhile: dropRightWhile,
 
-    
-    uniq: uniq,
-    uniqBy: uniqBy,
-
     flatten: flatten,
     flattenDeep: flattenDeep,
     flattenDepth: flattenDepth,
@@ -649,6 +984,28 @@ var pky_imo = function () {
     pullAllWith: pullAllWith,
 
     sortedIndex: sortedIndex,
+    sortedIndexBy: sortedIndexBy,
+    sortedIndexOf: sortedIndexOf,
+    sortedLastIndex: sortedLastIndex,
+    sortedLastIndexBy: sortedLastIndexBy,
+    sortedLastIndexOf: sortedLastIndexOf,
+    sortedUniq: sortedUniq,
+    sortedUniqBy: sortedUniqBy,
+    tail: tail,
+    take: take,
+    takeRight: takeRight,
+    takeRightWhile: takeRightWhile,
+    takeWhile: takeWhile,
+    union: union,
+    unionBy: unionBy,
+    unionWith: unionWith,
+
+    uniq: uniq,
+    uniqBy: uniqBy,
+    uniqWith: uniqWith,
+
+    unzip: unzip,
+    unzipWith: unionWith,
 
 
     groupBy: groupBy,
@@ -658,7 +1015,7 @@ var pky_imo = function () {
     reduce: reduce,
     reduceRight: reduceRight,
     zip: zip,
-    unzip: unzip,
+
     keys: keys,
     values: values,
     every: every,
@@ -671,13 +1028,17 @@ var pky_imo = function () {
     countBy: countBy,
 
     shuffle: shuffle,
+    isMatch: isMatch,
     isNaN: isNaN,
     isNull: isNull,
     isNil: isNil,
     isUndefined: isUndefined,
     toArray: toArray,
     sum: sum,
-    sumBy: sumBy
+    sumBy: sumBy,
+
+    get: get,
+    has: has,
 
   }
 

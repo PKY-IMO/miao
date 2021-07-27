@@ -104,7 +104,7 @@ function isEqual(a, b) {
     if (typea == 'object') {
 
       // 一个是数组一个是对象
-      if ((Array.isArray(a) && !Array.isArray(a)) || (Array.isArray(b) && !Array.isArray(b))) {
+      if ((Array.isArray(a) && !Array.isArray(b)) || (Array.isArray(b) && !Array.isArray(a))) {
         return false
       }
 
@@ -153,3 +153,4 @@ function key(obj) {
 
   return ary
 }
+

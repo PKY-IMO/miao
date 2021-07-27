@@ -1,9 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div class="list-container" id="list-container">
+ 
+  </div>
+</body>
 <script>
-  debugger
-  var xa = Number(prompt())
-  var xb = Number(prompt())
-  var ya = Number(prompt())
-  var yb = Number(prompt())
-  var l = xa + xb + ya + yb;
-  console.log(l)
+   
+ //"list-container" 这个是div中的id对应的值
+ 
+ let htmllet = "";
+  for (var i = 0; i < 10; i++) {
+    htmllet += '<p>' + i + '</p>';
+  }
+  document.getElementById("list-container").innerHTML = htmllet;
 </script>
+</html>

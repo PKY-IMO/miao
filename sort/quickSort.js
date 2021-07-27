@@ -24,6 +24,11 @@ function qSort(ary) {
     quickSort(ary, 0, ary.length-1)
     return ary
 }
+
+
+// 1、先从数列中取出一个数作为基准数
+// 2、分区过程，将比这个数大的数全放到它的右边，小于或等于它的数全放到它的左边
+// 3、再对左右区间重复第二步，直到各区间只有一个数
 function quickSort(ary, start, end) {
     if (start >= end) {
         return

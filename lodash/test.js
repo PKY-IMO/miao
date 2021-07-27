@@ -661,3 +661,410 @@ console.log('11111111')
 const res1 = [1,2,3,4].reduce((total,p,i) => {
   console.log(total,i) 
   return(total + i)}, 0); console.log(res1); // 输出多少
+
+  function deepCopy(obj, copyobj) {
+    copyobj = copyobj || {}
+    if (typeof obj !== 'object') {
+      copyobj = obj
+      return copyobj
+    }else {
+      for (let key in obj ) {
+        if (obj.hasOwnProperty(key)) {
+          if (obj[key] && typeof obj[key] === 'object') {
+            if(obj[key] instanceof Array) {
+              copyobj[key] = []
+            }else {
+              copyobj[key] = {}
+            }
+            deepCopy(obj[key], copyobj[key])
+          } else{
+            copyobj[key] = obj[key]
+          }
+        }
+      }
+    }
+    return copyobj
+  }
+
+let Obj={a:"hello",b:1,c:true,d:[1,2],e:{x:1,y:2}}
+
+console.log(deepCopy(1,a))
+
+const lottery = () => {
+
+  const randomNum = Math.round(Math.random() * 100)
+  console.log(randomNum);
+
+  if (randomNum >= 0 && randomNum < 10) {
+    return console.log('First Prize')
+  } else if (randomNum >= 10 && randomNum < 25) {
+    return console.log('Second Prize')
+  } else if (randomNum >= 25 && randomNum < 50) {
+    return console.log('Third Prize')
+  } else {
+    return console.log('Forth Prize')
+  }
+
+}
+
+function get(object, path, defaultVal = undefined) {
+  path = toPath(path)
+  // return path.reduce((obj, curPath) => {
+  //   return obj[curPath]
+  // }, object)
+
+  for (var i = 0; i < path.length; i++) {
+    if (object == undefined) {
+      return defaultVal
+    } else {
+      object = object[path[i]]
+    }
+  }
+  return object
+}
+
+function has(object, path) {
+  path = toPath(path)
+
+  for (var i = 0; i < path.length; i++) {
+    if (object == undefined) {
+      return false
+    } else {
+      object = object[path[i]]
+    }
+  }
+  return true
+}
+var object = { 'a': { 'b': 2 } };
+console.log(has(object, 'a.b'));
+
+
+function toPath(val) {
+  if (Array.isArray(val)) {
+    return val
+  } else {
+    return val.split('][')
+      .reduce((ary,it) => ary.concat(it.split('].')), [])
+      .reduce((ary,it) => ary.concat(it.split('[')), [])
+      .reduce((ary,it) => ary.concat(it.split('.')), [])
+  }
+}
+function iteratee(predicate) {
+  if (typeof predicate == 'function') {
+    return predicate
+  }
+  if (typeof predicate == 'string') {
+    return property(predicate)
+  }
+  if (Array.isArray(predicate)) {
+    return matchesProperty(...predicate)
+  }
+  if (typeof predicate == 'object') {
+    return matches(predicate)
+  }
+}
+function matches(src) {
+  // return bind(isMatch, null, window, src)
+  return function(obj) {
+    return isMatch(obj, src)
+  }
+}
+
+function matchesProperty(path, val) {
+  return function(obj) {
+    return isEqual(get(obj, path), val)
+  }
+}
+
+function isMatch(object, source) {
+  if (object == source) {
+    return true
+  }
+  if (typeof object !== 'object' || typeof source !== 'object') {
+    return false
+  }
+  for (var key in source) {
+    if (source[key] && typeof source[key] !== 'object') {
+      if (object[key] !== source[key]) {
+        return false
+      }
+    } else {
+      if (!isMatch(object[key], source[key])) {
+        return false
+      }
+    }
+  }
+  return true
+}
+
+// 传入什么属性名，它返回的函数就用来获取对象的什么属性名
+function property(prop) {// a.b
+  return function(obj) {
+    return get(obj, prop)
+  }
+}
+
+function get(object, path, defaultVal = undefined) {
+  path = toPath(path)
+  // return path.reduce((obj, curPath) => {
+  //   return obj[curPath]
+  // }, object)
+
+  for (var i = 0; i < path.length; i++) {
+    if (object == undefined) {
+      return defaultVal
+    } else {
+      object = object[path[i]]
+    }
+  }
+  return object
+}
+
+function has(object, path) {
+  path = toPath(path)
+
+  for (var i = 0; i < path.length; i++) {
+    if (object == undefined) {
+      return false
+    } else {
+      object = object[path[i]]
+    }
+  }
+  return true
+}
+
+function toPath(val) {
+  if (Array.isArray(val)) {
+    return val
+  } else {
+    return val.split('][')
+      .reduce((ary,it) => ary.concat(it.split('].')), [])
+      .reduce((ary,it) => ary.concat(it.split('[')), [])
+      .reduce((ary,it) => ary.concat(it.split('.')), [])
+  }
+}
+
+
+
+
+
+function getType(obj) {
+  return Object.prototype.toString
+    .call(obj)
+    .split(" ")[1]
+    .slice(0, -1)
+    .toLowerCase();
+}
+
+function identity(val) {
+  return val
+}
+
+
+function sortedIndex(arr, value) {
+  // arr是已排序的数组
+  if (arr.length == 0) return 0
+  if (arr[arr.length-1] < value) return arr.length
+  // 在[left, right]中找到大于等于value的第一个元素的位置
+  let l = 0, r = arr.length - 1
+  while(l < r) {
+    let mid = (l + r) >> 1
+    if (arr[mid] < value) l = mid + 1
+    else r = mid
+  }
+  return l
+}
+
+var objects = [{ 'x': 4 }, { 'x': 5 }];
+
+function sortedIndexBy(arr, value, f) {
+  let iter = iteratee(f)
+  return sortedIndex(arr.map(i => iter(i)), iter(value))
+}
+
+function sortedIndexOf(arr, value) {
+    // arr是已排序的数组
+    if (arr.length == 0) return 0
+    if (arr[arr.length-1] < value) return arr.length
+    // 在[left, right]中找到大于等于value的第一个元素的位置
+    let l = 0, r = arr.length - 1
+    while(l < r) {
+      let mid = (l + r) >> 1
+      if (arr[mid] < value) l = mid + 1
+      else r = mid
+    }
+    return arr[l] == value ? l : -1
+}
+
+function sortedLastIndex(arr, value) {
+    // arr是已排序的数组
+    if (arr.length == 0) return 0
+    if (arr[0] > value) return 0
+    // 在[left, right]中找到小于等于value的最后元素的位置
+    let l = 0, r = arr.length - 1
+    while(l < r) {
+      let mid = (l + r + 1) >> 1 //需要加1
+      if (arr[mid] > value) r = mid - 1
+      else l = mid
+    }
+    return l + 1
+}
+
+function sortedLastIndexBy(arr, value, f) {
+  let iter = iteratee(f)
+  return sortedLastIndex(arr.map(i => iter(i)), iter(value))
+}
+
+function sortedLastIndexOf(arr, value) {
+  // arr是已排序的数组
+  if (arr.length == 0) return 0
+  if (arr[0] > value) return 0
+  // 在[left, right]中找到小于等于value的最后元素的位置
+  let l = 0, r = arr.length - 1
+  while(l < r) {
+    let mid = (l + r + 1) >> 1 //需要加1
+    if (arr[mid] > value) r = mid - 1
+    else l = mid
+  }
+  return arr[l] == value ? l : -1
+}
+
+function sortedUniq(ary) {
+  var result = []
+  for (var i = 0; i < ary.length; i++) {
+    if (!result.includes(ary[i])) {
+      result.push(ary[i])
+    }
+  }
+  return result
+}
+
+function sortedUniqBy(ary, predicate) {
+  let set = new Set()
+  let res = []
+  for (let i = 0; i < ary.length; i++) {
+    let computed = predicate(ary[i], i, ary)
+    if (!set.has(computed)) {
+      res.push(ary[i])
+      set.add(computed)
+    }
+  }
+  return res
+}
+
+function take(ary, n = 1) {
+  if(ary && ary.length <= 1) return []
+  // return ary.splice(0, n)
+  let res = []
+  if (n >= ary.length) n = ary.length
+  for (let i = 0; i < n; i++) {
+    res.push(ary[i])
+  }
+  return res
+}
+
+function takeRight(ary, n = 1) {
+  if(ary && ary.length <= 1) return []
+  // return ary.splice(0, n)
+  let res = []
+  if (n >= ary.length) n = ary.length
+  let start = ary.length - n
+  for (let i = start; i < ary.length; i++) {
+    res.push(ary[i])
+  }
+  return res
+}
+
+function takeWhile(ary, predicate = identity) {
+  let res = []
+  predicate = iteratee(predicate)
+  for (let i = 0; i < ary.length; i++) {
+    if(predicate(ary[i],i,ary)) {
+      res.push(ary[i])
+    }else {
+      break
+    }
+  }
+  return res
+}
+
+function union(...args) {
+  let res = []
+  let set = new Set()
+  for (let ary of args) {
+    for (let item of ary) {
+      if (!set.has(item)) {
+        res.push(item)
+        set.add(item)
+      }
+    }
+  }
+  return res
+}
+function unionBy(...args) { 
+  let predicate = args[args.length - 1]
+  predicate = iteratee(predicate)
+  let len = args.length -1
+  let arys = args.slice(0, len)
+  let res = []
+  let set = new Set()
+  for (let ary of arys) {
+    for (let item of ary) {
+      let computed = predicate(item)
+      if (!set.has(computed)) {
+        res.push(item)
+        set.add(computed)
+      }
+    }
+  }
+  return res
+}
+
+function unionWith(...args) {
+  let comparator = args[args.length - 1]
+  let len = args.length -1
+  let arys = [].concat(...args.slice(0, len))
+  var result = []
+  for (var i = 0; i < arys.length; i++) {
+    if ( !result.some(item => comparator(item, arys[i])) ) {
+      result.push(arys[i])
+    }
+  }
+  return result
+}
+
+function unzip(arr) {
+  let num = arr.length
+  let size = arr[0].length
+  let res = Array.from(new Array(size), () => new Array(num))
+  for(let i = 0; i < size; i++) {
+    for (let j = 0; j < num; j++) {
+      res[i][j] = arr[j][i]
+    }
+  }
+  return res
+}
+
+function unzipWith(arr, comparetor) {
+  let num = arr.length
+  let size = arr[0].length
+  let res = []
+  for(let i = 0; i < size; i++) {
+    let tmp = []
+    for (let j = 0; j < num; j++) {
+      tmp.push(arr[j][i])
+    }
+    tmp = reduce(tmp, comparetor)
+    res.push(tmp)
+  }
+  return res
+}
+function add(a,b) {
+  return a+b
+}
+
+
+var objects = [{ 'x': 1, 'y': 2 }, { 'x': 2, 'y': 1 }];
+var others = [{ 'x': 1, 'y': 1 }, { 'x': 1, 'y': 2 }];
+
+console.log(unzipWith([[1, 10, 100], [2, 20, 200]],add))
