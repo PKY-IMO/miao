@@ -213,14 +213,7 @@ function sumBy(arr, f) {
 
 
 function flatten(arr) {
-  return arr.reduce((prev,item) => {
-    if (Array.isArray(item)) {
-      for (let it of item) {
-        prev.push(it)
-      }
-    }else prev.push(item)
-    return prev
-  }, [])
+  return arr.reduce((prev,item) => prev.concat(Array.isArray(item) ? flatten(item) : item),[])
 }
 
 // a = [[1,2,3],4,5,[[6]]]
@@ -1206,15 +1199,57 @@ function zipWith(...args) {
   return res
 }
 
+function find(collection, predicate = identity, fromIndex = 0) {
+  predicate = iteratee(predicate)
+  for (let i = fromIndex; i < collection.length; i++) {
+    if (predicate(collection[i], i, collection)) return collection[i]
+  }
+}
+
+function findLast(collection, predicate = identity, fromIndex = collection.length-1) {
+  predicate = iteratee(predicate)
+  for (let i = fromIndex; i >= 0; i--) {
+    if (predicate(collection[i], i, collection)) return collection[i]
+  }
+}
+
+function flatMap(collection, iteratee = identity) {
+  let res = []
+  for (let i = 0; i < collection.length; i++) {
+    let item = iteratee(collection[i], i, collection)
+    res.push(...item)
+  }
+  return res
+}
+
+
+function flatMapDeep(collection, iteratee = identity) {
+  let res = []
+  for (let i = 0; i < collection.length; i++) {
+    let item = iteratee(collection[i], i, collection)
+    res.push(...flattenDeep(item))
+  }
+  return res
+}
+
+
+function flatMapDepth(collection, iteratee = identity, depth=1) {
+  let res = []
+  for (let i = 0; i < collection.length; i++) {
+    let item = iteratee(collection[i], i, collection)
+    res.push(flattenDepth(item, depth))
+  }
+  return res
+}
 
 
 
 
-var objects = [{ 'x': 1, 'y': 2 }, { 'x': 2, 'y': 1 }];
-var others = [{ 'x': 1, 'y': 1 }, { 'x': 1, 'y': 2 }];
 
-console.log(zipWith([1, 2], [10, 20], [100, 200], function(a, b, c) {
-  return a + b +c;
-}))
 
-console.log(unzipWith([[1, 10, 100], [2, 20, 200]],add))
+
+function duplicate(n) {
+  return [[[n, n]]];
+}
+
+console.log(flatMapDepth([1, 2], duplicate, 2))

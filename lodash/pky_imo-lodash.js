@@ -713,6 +713,49 @@ var pky_imo = function () {
   }
 
 
+  function find(collection, predicate = identity, fromIndex = 0) {
+    predicate = iteratee(predicate)
+    for (let i = fromIndex; i < collection.length; i++) {
+      if (predicate(collection[i], i, collection)) return collection[i]
+    }
+  }
+  
+  function findLast(collection, predicate = identity, fromIndex = collection.length-1) {
+    predicate = iteratee(predicate)
+    for (let i = fromIndex; i >= 0; i--) {
+      if (predicate(collection[i], i, collection)) return collection[i]
+    }
+  }
+  
+  function flatMap(collection, iteratee = identity) {
+    let res = []
+    for (let i = 0; i < collection.length; i++) {
+      let item = iteratee(collection[i], i, collection)
+      res.push(...item)
+    }
+    return res
+  }
+  
+  
+  function flatMapDeep(collection, iteratee = identity) {
+    let res = []
+    for (let i = 0; i < collection.length; i++) {
+      let item = iteratee(collection[i], i, collection)
+      res.push(...flattenDeep(item))
+    }
+    return res
+  }
+  
+  
+  function flatMapDepth(collection, iteratee = identity, depth=1) {
+    let res = []
+    for (let i = 0; i < collection.length; i++) {
+      let item = iteratee(collection[i], i, collection)
+      res.push(flattenDepth(item, depth))
+    }
+    return res
+  }
+  
   
 
 
@@ -1141,13 +1184,19 @@ var pky_imo = function () {
     zipObjectDeep: zipObjectDeep,
     zipWith: zipWith,
 
+    find: find,
+    findLast: findLast,
+    flatMap: flatMap,
+    flatMapDeep: flatMapDeep,
+    flatMapDepth: flatMapDepth,
+
     groupBy: groupBy,
     keyBy: keyBy,
     forEach: forEach,
     map: map,
     reduce: reduce,
     reduceRight: reduceRight,
-    zip: zip,
+
 
     keys: keys,
     values: values,
