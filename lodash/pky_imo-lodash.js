@@ -1011,7 +1011,7 @@ var pky_imo = function () {
     path = toPath(path)
   
     for (var i = 0; i < path.length; i++) {
-      if (object == undefined) {
+      if (!object.hasOwnProperty(path[i])) {
         return false
       } else {
         object = object[path[i]]
