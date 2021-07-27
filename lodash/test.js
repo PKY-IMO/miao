@@ -1045,7 +1045,7 @@ function unzip(arr) {
   return res
 }
 
-function unzipWith(arr, comparetor) {
+function unzipWith(arr, iter) {
   let num = arr.length
   let size = arr[0].length
   let res = []
@@ -1054,7 +1054,7 @@ function unzipWith(arr, comparetor) {
     for (let j = 0; j < num; j++) {
       tmp.push(arr[j][i])
     }
-    tmp = reduce(tmp, comparetor)
+    tmp = iter(...tmp)
     res.push(tmp)
   }
   return res
@@ -1062,9 +1062,159 @@ function unzipWith(arr, comparetor) {
 function add(a,b) {
   return a+b
 }
+function filter(collection, predicate) {
+  predicate = iteratee(predicate)
+
+  var result = []
+  for (var i in collection) {
+    if (predicate(collection[i], i, collection) === true) {
+      result.push(collection[i])
+    }
+  }
+  return result
+}
+
+
+function without(ary, ...vals) {
+  return ary.filter( it => !vals.includes(it))
+}
+
+function xor(...arys) {
+  let ary = [].concat(...arys)
+  let map = ary.reduce( (prev,i)=> {
+    if (prev.has(i)) {
+      prev.set(i, prev.get(i)+1)
+    }else {
+      prev.set(i, 1)
+    }
+    return prev}, new Map())
+  let res = []
+  for (let key of map.keys()) {
+    if(map.get(key) == 1) {
+      res.push(key)
+    }
+  }
+  return res
+}
+
+function findIndex(arr, f, idx = 0) {
+  let it = iterator(f)
+  for (let i = idx; i < arr.length; i++) {
+    if(it(arr[i])) return i
+  }
+  return -1
+}
+
+function xorBy(...args) {
+  let predicate = iteratee(args[args.length - 1])
+  let ary = [].concat(...args.slice(0, args.length - 1))
+  let res = [], map = new Map()
+  for (let item of ary) {
+    let i = predicate(item)
+    if (map.has(i)) {
+      map.set(i, map.get(i)+1)
+      let idx = findIndex(res, it => predicate(it) == i)
+      res.splice(idx,1)
+    }else {
+      map.set(i, 1)
+      res.push(item)
+    }
+  }
+  return res
+}
+
+function xorWith(...args) {
+  let compare = args[args.length - 1]
+  let ary = [].concat(...args.slice(0, args.length - 1))
+  let res = []
+  for (let item of ary) {
+    if (res.some(it => compare(it, item))) {
+      let idx = findIndex(res, it => compare(it, item))
+      res.splice(idx,1)
+    }else {
+      res.push(item)
+    }
+  }
+  return res
+}
+
+function zip(...arr) {
+  let num = arr.length
+  let size = arr[0].length
+  let res = []
+  for(let i = 0; i < size; i++) {
+    let tmp = []
+    for (let j = 0; j < num; j++) {
+      tmp.push(arr[j][i]) 
+    }
+    res.push(tmp)
+  }
+  return res
+}
+
+function zipObject(prop, value) {
+  let res = {}
+  for (let i = 0; i < prop.length; i++) {
+    let key = prop[i]
+    for (let j = 0; j < value.length; j++) {
+      if(j == i) {
+        res[key] = value[j]
+      }
+    }
+  }
+  return res
+}
+
+function zipObjectDeep(prop, value) {
+  let res = {}
+  for (let i = 0; i < prop.length; i++) {
+    let path = toPath(prop[i])
+    for (let j = 0; j < value.length; j++) {
+      if(j == i) {
+        let cur = res
+        for(var k = 0; k < path.length - 1; k++) {
+          let prop = path[k]
+          let type = path[k+1]
+          if (!cur.hasOwnProperty(prop)) {
+            let t = (type >= '0' && type <= '9') ? [] : {}
+            cur[prop] = t
+          }
+          cur = cur[prop]
+        }
+        cur[path[k]] = value[j]
+      }
+    }
+  }
+  return res
+}
+
+
+function zipWith(...args) {
+  let arr = args.slice(0, args.length - 1)
+  let iter = args[args.length - 1]
+  let num = arr.length
+  let size = arr[0].length
+  let res = []
+  for(let i = 0; i < size; i++) {
+    let tmp = []
+    for (let j = 0; j < num; j++) {
+      tmp.push(arr[j][i]) 
+    }
+    let ans = iter(...tmp)
+    res.push(ans)
+  }
+  return res
+}
+
+
+
 
 
 var objects = [{ 'x': 1, 'y': 2 }, { 'x': 2, 'y': 1 }];
 var others = [{ 'x': 1, 'y': 1 }, { 'x': 1, 'y': 2 }];
+
+console.log(zipWith([1, 2], [10, 20], [100, 200], function(a, b, c) {
+  return a + b +c;
+}))
 
 console.log(unzipWith([[1, 10, 100], [2, 20, 200]],add))

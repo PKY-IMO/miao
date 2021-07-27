@@ -574,7 +574,7 @@ var pky_imo = function () {
     return res
   }
 
-  function unzipWith(arr, comparetor) {
+  function unzipWith(arr, iter) {
     let num = arr.length
     let size = arr[0].length
     let res = []
@@ -583,11 +583,135 @@ var pky_imo = function () {
       for (let j = 0; j < num; j++) {
         tmp.push(arr[j][i])
       }
-      tmp = reduce(tmp, comparetor)
+      let ans = iter(...tmp)
+      res.push(ans)
+    }
+    return res
+  }
+
+  function without(ary, ...vals) {
+    return ary.filter( it => !vals.includes(it))
+  }
+
+  function xor(...arys) {
+    let ary = [].concat(...arys)
+    let map = ary.reduce( (prev,i)=> {
+      if (prev.has(i)) {
+        prev.set(i, prev.get(i)+1)
+      }else {
+        prev.set(i, 1)
+      }
+      return prev}, new Map())
+    let res = []
+    for (let key of map.keys()) {
+      if(map.get(key) == 1) {
+        res.push(key)
+      }
+    }
+    return res
+  }
+  
+  function xorBy(...args) {
+    let predicate = iteratee(args[args.length - 1])
+    let ary = [].concat(...args.slice(0, args.length - 1))
+    let res = [], map = new Map()
+    for (let item of ary) {
+      let i = predicate(item)
+      if (map.has(i)) {
+        map.set(i, map.get(i)+1)
+        let idx = findIndex(res, it => predicate(it) == i)
+        res.splice(idx,1)
+      }else {
+        map.set(i, 1)
+        res.push(item)
+      }
+    }
+    return res
+  }
+  
+  function xorWith(...args) {
+    let compare = args[args.length - 1]
+    let ary = [].concat(...args.slice(0, args.length - 1))
+    let res = []
+    for (let item of ary) {
+      if (res.some(it => compare(it, item))) {
+        let idx = findIndex(res, it => compare(it, item))
+        res.splice(idx,1)
+      }else {
+        res.push(item)
+      }
+    }
+    return res
+  }
+
+  function zip(...arr) {
+    let num = arr.length
+    let size = arr[0].length
+    let res = []
+    for(let i = 0; i < size; i++) {
+      let tmp = []
+      for (let j = 0; j < num; j++) {
+        tmp.push(arr[j][i]) 
+      }
       res.push(tmp)
     }
     return res
   }
+
+  function zipObject(prop, value) {
+    let res = {}
+    for (let i = 0; i < prop.length; i++) {
+      let key = prop[i]
+      for (let j = 0; j < value.length; j++) {
+        if(j == i) {
+          res[key] = value[j]
+        }
+      }
+    }
+    return res
+  }
+  
+  function zipObjectDeep(prop, value) {
+    let res = {}
+    for (let i = 0; i < prop.length; i++) {
+      let path = toPath(prop[i])
+      for (let j = 0; j < value.length; j++) {
+        if(j == i) {
+          let cur = res
+          for(var k = 0; k < path.length - 1; k++) {
+            let prop = path[k]
+            let type = path[k+1]
+            if (!cur.hasOwnProperty(prop)) {
+              let t = (type >= '0' && type <= '9') ? [] : {}
+              cur[prop] = t
+            }
+            cur = cur[prop]
+          }
+          cur[path[k]] = value[j]
+        }
+      }
+    }
+    return res
+  }
+  
+  
+  function zipWith(...args) {
+    let arr = args.slice(0, args.length - 1)
+    let iter = args[args.length - 1]
+    let num = arr.length
+    let size = arr[0].length
+    let res = []
+    for(let i = 0; i < size; i++) {
+      let tmp = []
+      for (let j = 0; j < num; j++) {
+        tmp.push(arr[j][i]) 
+      }
+      let ans = iter(...tmp)
+      res.push(ans)
+    }
+    return res
+  }
+
 
   
 
@@ -618,17 +742,6 @@ var pky_imo = function () {
     return init
   }
 
-  function zip(...arr) {
-    let num = arguments.length
-    let size = arguments[0].length
-    let res = Array.from(new Array(size), () => new Array(num))
-    for(let i = 0; i < size; i++) {
-      for (let j = 0; j < num; j++) {
-        res[i][j] = arguments[j][i]
-      }
-    }
-    return res
-  }
 
 
 
@@ -773,6 +886,19 @@ var pky_imo = function () {
     var it = iterator(f)
     return sum(arr.map((item)=>it(item)))
   }
+
+  function filter(collection, predicate) {
+    predicate = iteratee(predicate)
+
+    var result = []
+    for (var i in collection) {
+      if (predicate(collection[i], i, collection) === true) {
+        result.push(collection[i])
+      }
+    }
+    return result
+  }
+
 
   /**
    * utils
@@ -1006,7 +1132,14 @@ var pky_imo = function () {
 
     unzip: unzip,
     unzipWith: unzipWith,
-
+    without: without,
+    xor: xor,
+    xorBy: xorBy,
+    xorWith: xorWith,
+    zip: zip,
+    zipObject: zipObject,
+    zipObjectDeep: zipObjectDeep,
+    zipWith: zipWith,
 
     groupBy: groupBy,
     keyBy: keyBy,
@@ -1021,6 +1154,7 @@ var pky_imo = function () {
     every: every,
     some: some,
     fill: fill,
+    filter: filter,
     findIndex: findIndex,
     findLastIndex: findLastIndex,
     reverse: reverse,
