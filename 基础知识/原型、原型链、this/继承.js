@@ -26,7 +26,7 @@ function Dog(born, name, master) {
 //而ES6先将父类实例对象的属性和方法，加到this上面（所以必须先调用super方法），
 //然后再用子类的构造函数修改this。
 
-//MySet.__proto__ = Father           ==>父类的静态方法也可以访问到
+//MySet2.__proto__ = Father           ==>父类的静态方法也可以访问到
 //MySet2.prototype.__proto__ === Father.prototype
 
 //Object.setPrototypeOf(MySet2.prototype, Father.prototype)
@@ -66,7 +66,7 @@ function Student() {
 // 缺点：无法传参;引用类型的属性被所有实例共享
 Student.prototype = new Person();
 //2. 构造继承:可以传参、实例化对象独立
-//缺点：无法调用父级构造函数原型对象的方法（prototype）
+//缺点：无法调用父级构造函数原型对象的方法（prototype） 父类的静态方法
 //      方法都在构造函数中定义，每次创建实例都会创建一遍方法
 function student() {
   person.call(this);
@@ -111,9 +111,9 @@ function createAnother(original){
 //6. 寄生组合继承 ：组合继承会两次调用父类的构造函数造成浪费，寄生组合继承就可以解决这个问题
 /*核心：因为是对父类原型的复制，所以不包含父类的构造函数，也就不会调用两次父类的构造函数造成浪费 */
 function inheritPrototype(subType, superType) {
-  var prototype = object(superType.prototype) // 创建了父类原型的浅复制
-  prototype.constructor = subType             // 修正原型的构造函数
-  subType.prototype = prototype               // 将子类的原型替换为这个原型
+  var tmp = object(superType.prototype) // 创建了父类原型的浅复制
+  tmp.constructor = subType             // 修正原型的构造函数
+  subType.prototype = tmp              // 将子类的原型替换为这个原型
 }
 //SubType.prototype.__proto__= object.prototype
 //(1) 既能具有组合继承的优点，又可以不必两次调用超类型的构造函数

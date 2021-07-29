@@ -52,4 +52,5 @@ function quickSort(ary, start, end) {
     }
     quickSort(ary, start, r)
     quickSort(ary, l, end)
+    return arr
 } 

@@ -11,6 +11,7 @@ try里面的代码报错的时候,catch里面的代码才会执行,finally里面
 catch和finally里面,正常的代码会从上到下顺序执行
 如果只是catch里面代码出错,则报catch里面的错误
 如果catch和finally都出错则会报finally里面的错误
+try{return XX2} finally {XX1}:finally 在return之前执行
 
 
 标记对象为不可扩展：Object.isExtensible都为false
@@ -68,31 +69,6 @@ obj.foo(a).call(obj2, 1);
 obj.foo.call(obj2)(1);
 
 
-///////////////////////////////////////////////
-var name = 'window';
-function Person (name) {
-    this.name = name;
-    this.obj = {
-        name: 'obj',
-        foo1: function () {
-            return function () {
-            	console.log(this.name);
-            }
-        },
-        foo2: function () {
-            return () => {
-            	console.log(this.name);
-            }
-        }
-    }
-}
-var person1 = new Person('person1');
-var person2 = new Person('person2');
 
-person1.obj.foo1()(); 
-person1.obj.foo1.call(person2)(); 
-person1.obj.foo1().call(person2); 
 
-person1.obj.foo2()(); 
-person1.obj.foo2.call(person2)(); 
-person1.obj.foo2().call(person2); 
+

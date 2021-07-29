@@ -1,33 +1,62 @@
-arr = [1,2,3,4,6,6,4,3]
-function mergeSort(arr) {
-  if (arr.length < 2) return arr
-  let mid = arr.length >> 1
-  let leftArr = arr.slice(0, mid)
-  let rightArr = arr.slice(mid)
-  mergeSort(leftArr)
-  mergeSort(rightArr)
-  let i = 0;
-  let j = 0;
-  let k = 0;
-  while(i < leftArr.length && j < rightArr.length) {
-    if(leftArr[i] < rightArr[i]) {
-      arr[k++] = leftArr[i++]
-    } else { 
-      arr[k++] = rightArr[j++]
-    }
-  }
-  while(i < leftArr.length) {
-    arr[k++] = leftArr[i++]
-  }
-  while(j < leftArr.length) {
-    arr[k++] = rightArr[j++]
-  }
-  return arr
-  
-}
-console.log(mergeSort(arr))
 
-let a = new MinPriorityQueue()
-a.enqueue(1,1)
-a.enqueue(2,2)
-console.log(a.dequeue().element)
+function lastSurvivors(str) {
+  let reg = /([a-z])[^\\1]*\1/g
+  while (reg.test(str)) {
+    str = str.replace(reg, ($0,$1) => {
+      let code = $1.charCodeAt() + 1
+      if( code == 123) code = 97
+      return String.fromCharCode(code) + $0.slice(1,$0.length-1)
+    })
+  }
+  return str
+}
+str = "zzzab"
+
+
+reg = /(^\*([^\*]+) matches .+\2$)|(^(.+) matches \4$)|(^([^\*]+)\* matches \6(.+)$)|(.*\*([^*])([^*]+)([^*]*)\*.* matches [^\\8]+\8\9\10[^\\10]+$)/
+str = '*hormog matches hormogonium'
+
+
+ret = /(^\*([^\*]+) matches (.+)(\2)$)/
+
+console.log(str.match(ret))
+
+function maskify(cc) {
+  if (cc.length <= 4) return cc
+  let reg = /^(\w+)(\w{4})$/
+  return cc.replace(reg, (_,$1,$2)=> { console.log($1,$2); return'#'.repeat($1.length)+$2})
+}
+
+console.log(maskify('4556364607935616'))
+
+function decipherThis(str) {
+  //have fun!
+    let reg = /\d+/g
+    let reg2 = /\b(\w+)\b/g
+    let arr
+    return str.replace(reg, x=>String.fromCharCode(x|0)).replace(reg2, (match)=>{
+      let len = match.length
+      if (len<=2) return match
+      arr = match.split('')
+
+      let t = arr[len-1]
+      arr[len - 1] =arr[1]
+      arr[1] = t 
+      return arr.join('')
+    })
+  
+  }; 
+  console.log(decipherThis('72eva 97 103o 97t 116sih 97dn 115ee 104wo 121uo 100o'))
+
+  function incrementString (string) {
+    // return incrementedString
+    let reg = /^([^0-9]*)(\d*)$/
+    return string.replace(reg, (_,x,y)=>{
+      let zero = y.match(/^0+/g)[0].length
+      console.log(zero)
+      if (y == undefined) y = '1'
+      else y = ('0'.repeat(zero)+ Number(y) + 1).slice(-zero)
+      return x+y
+    })
+  }
+  incrementString('foobar000')

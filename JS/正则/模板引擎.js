@@ -17,3 +17,10 @@ function render(template, data) {
   }
   return template
 }
+
+
+function render2(template, data) {
+  let reg = /\{\{(\w+)\}\}/g
+  template = template.replace(reg, (_, key) => data[key])
+  return template
+}

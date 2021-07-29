@@ -329,7 +329,7 @@ class MySet { // typeof Myset  'function' // Myset是构造函数，只能new �
   }
 }
 
-//MySet.__proto__ = Father           ==>父类的静态方法也可以访问到
+//MySet2.__proto__ = Father           ==>父类的静态方法也可以访问到
 //MySet2.prototype.__proto__ === Father.prototype
 class MySet2 extends Father{
   constructor(inits) {

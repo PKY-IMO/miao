@@ -3,10 +3,10 @@ function uniqueBy(arr, iteratee) {
   return arr.map((item) => iteratee(item)).filter((item, idx, arr) => arr.indexOf(item) == idx)
 }
 
-function groupBy(collection, iteratee) {
+function groupBy(collection, iter) {
   let map = {}
   for (let item of collection) {
-    let key = iteratee(item)
+    let key = iter(item)
     if(!(key in map)) {
       map[key] = [item]
     }else {
@@ -22,12 +22,12 @@ for (let i in a) {
 }
 
 function zip(...arr) {
-  let num = arguments.length
-  let size = arguments[0].length
+  let num = arr.length
+  let size = arr[0].length
   let res = Array.from(new Array(size), () => new Array(num))
   for(let i = 0; i < size; i++) {
     for (let j = 0; j < num; j++) {
-      res[i][j] = arguments[j][i]
+      res[i][j] = arr[j][i]
     }
   }
   return res
@@ -1131,19 +1131,7 @@ function xorWith(...args) {
   return res
 }
 
-function zip(...arr) {
-  let num = arr.length
-  let size = arr[0].length
-  let res = []
-  for(let i = 0; i < size; i++) {
-    let tmp = []
-    for (let j = 0; j < num; j++) {
-      tmp.push(arr[j][i]) 
-    }
-    res.push(tmp)
-  }
-  return res
-}
+
 
 function zipObject(prop, value) {
   let res = {}
@@ -1243,13 +1231,223 @@ function flatMapDepth(collection, iteratee = identity, depth=1) {
 }
 
 
-
-
-
-
-
-function duplicate(n) {
-  return [[[n, n]]];
+function forEach(collection, iteratee) {
+  for (key in collection) {
+    iteratee(collection[key], key, collection)
+  }
+  return collection
 }
 
-console.log(flatMapDepth([1, 2], duplicate, 2))
+function forEachRight(collection, iteratee) {
+  for (let i = collection.length - 1; i >= 0; i--) {
+    iteratee(collection[i], i, collection)
+  }
+  return collection
+}
+
+
+function groupBy(collection, iter) {
+  let map = {}
+  iter = iteratee(iter)
+  for (let item of collection) {
+    let key = iter(item)
+    if(!(key in map)) {
+      map[key] = [item]
+    }else {
+      map[key].push(item)
+    }
+  }
+  return map
+}
+
+function includes(collection, value, fromIndex = 0) {
+  let type = getType(collection)
+  if (type == 'array') {
+    for(let i = fromIndex; i < collection.length; i++) {
+      if(SameValueZero(collection[i], value)) {
+        return true
+      }
+    }
+    return false
+  }
+  if (type == 'object') {
+    for (let k in collection) {
+      if(SameValueZero(collection[k], value)) {
+        return true
+      }
+    }
+    return fale
+  }
+  if (type == 'string') {
+    let reg = new RegExp(value)
+    return reg.test(collection)
+  }
+}
+
+function invokeMap(collection, path, ...args) {
+  let res = []
+  for(let i = 0; i < collection.length; i++) {
+    if(typeof path == 'function') {
+      res.push(path.call(collection[i],...args))
+    }else {
+      path = toPath(path)
+      path = get(collection[i], path)
+      res.push(path.call(collection[i],...args))
+    }
+  }
+  return res
+}
+
+function insertSort(array) {
+  for (var i = 1; i < array.length; i++) {
+    var t = array[i]
+    for (var j = i - 1; j >= 0; j--) {
+      if (array[j] > t) {
+        array[j + 1] = array[j]
+      } else {
+        break
+      }
+    }
+    array[j + 1] = t
+  }
+  return array
+}
+
+function orderBy(arr, iter = [identity], orders) {
+  for (var i = 1; i < arr.length; i++) {
+    var t = arr[i]
+    for (var j = i - 1; j >= 0; j--) {
+      // if (arr[j] > t)
+      if (comparetor2(arr[j], t, iter, orders) > 0) {
+        arr[j + 1] = arr[j]
+      } else {
+        break
+      }
+    }
+    arr[j + 1] = t
+  }
+  return arr
+}
+
+function zip(...arr) {
+  let num = arr.length
+  let size = arr[0].length
+  let res = []
+  for(let i = 0; i < size; i++) {
+    let tmp = []
+    for (let j = 0; j < num; j++) {
+      tmp.push(arr[j][i]) 
+    }
+    res.push(tmp)
+  }
+  return res
+}
+
+function comparetor2(a, b, iter, orders) {
+  let iterArr = zip(iter, orders)
+  for (let it of iterArr) {
+    let f = iteratee(it[0])
+    let flag = it[1] == 'asc' ? 1 : -1
+    if ( f(a) > f(b)) {
+      return 1*flag
+    }else if ( f(a) < f(b)){
+      return -1*flag
+    }else continue
+  }
+  return 0
+}
+
+function comparetor(a, b, iterator) {
+  for (let it of iterator) {
+    let f = iteratee(it)
+    if ( f(a) > f(b)) {
+      return 1
+    }else if ( f(a) < f(b)){
+      return -1
+    }else continue
+  }
+  return 0
+}
+
+function sortBy(arr, iteratees = [identity]) {
+  for (var i = 1; i < arr.length; i++) {
+    var t = arr[i]
+    for (var j = i - 1; j >= 0; j--) {
+      // if (arr[j] > t)
+      if (comparetor(arr[j], t, iteratees) > 0) {
+        arr[j + 1] = arr[j]
+      } else {
+        break
+      }
+    }
+    arr[j + 1] = t
+  }
+  return arr
+}
+
+function partition(collection, predicate = identity) {
+  predicate = iteratee(predicate)
+  let res = [[],[]]
+  for (let item of collection) {
+    if(predicate(item)) res[0].push(item)
+    else res[1].push(item)
+  }
+  return res
+}
+
+
+function reject(collection, predicate) {
+  predicate = iteratee(predicate)
+
+  var result = []
+  for (var i in collection) {
+    if (!predicate(collection[i], i, collection)) {
+      result.push(collection[i])
+    }
+  }
+  return result
+}
+
+function sample(collection) {
+  let keys = Object.keys(collection)
+  let len = keys.length
+  let random = Math.floor(Math.random()*len)
+  for (var item of collection) {
+    if(random == 0) return item
+    random--
+  }
+}
+
+function sampleSize(collection, n = 1) {
+  let len = keys(collection).length
+  if (n > len) n = len
+  let res = []
+  while(n) {
+    let t = sample(collection)
+    if(!res.includes(t)) {
+      res.push(t)
+      n--
+    }
+  }
+  return res
+}
+
+function size(collection) {  
+  return  keys(collection).length
+}
+
+function some(collection, predicate = identity) {
+  predicate = iteratee(predicate)
+  for (let i = 0; i < collection.length; i++) {
+    if(predicate(collection[i], i, collection)) {
+      return true
+    }
+  }
+  return false
+}
+
+var users = [
+  { 'user': 'barney', 'active': true },
+  { 'user': 'fred',   'active': false }
+];
+console.log(some([null, 0, 'yes', false], Boolean))

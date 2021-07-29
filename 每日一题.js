@@ -34,7 +34,7 @@
 //   setTimeout(fn,0) fn中的this指向window
 
 /**
- * 对空位处理: forEach,filter,reduce,every,some 跳过空位
+ * 对空位处理: forEach,filter,reduce,every,some 跳过空位 ,后可接参数this
  * map跳过空位，保留值
  * ES6统一将空值是为undefined
  * join,toStirng 视为undefined 最后转换成空字符串‘’

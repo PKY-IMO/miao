@@ -258,24 +258,6 @@ var pky_imo = function () {
     return arr[n >= 0 ? n : arr.length + n]
   }
 
-  function groupBy(collection, iteratee) {
-    let map = {}
-    let key
-    for (let item of collection) {
-      if (typeof iteratee == 'function') {
-        key = iteratee(item)
-      } else if (typeof iteratee == 'string') {
-        key = item[iteratee]
-      }
-      if(!map[key]) {
-        map[key] = [item]
-      }else {
-        map[key].push(item)
-      }
-    }
-    return map
-  }
-
   function keyBy(collection, f) {
     let it = iterator(f)
     let res = {}
@@ -286,12 +268,7 @@ var pky_imo = function () {
     return res
   }
 
-  function forEach(collection, iteratee) {
-    for (key in collection) {
-      iteratee(collection[key], key, collection)
-    }
-    return collection
-  }
+
 
   function map(collection, f) {
     let it = iterator(f)
@@ -755,11 +732,117 @@ var pky_imo = function () {
     }
     return res
   }
+
+  function forEach(collection, iteratee) {
+    for (key in collection) {
+      iteratee(collection[key], key, collection)
+    }
+    return collection
+  }
+
+  function forEachRight(collection, iteratee) {
+    for (let i = collection.length - 1; i >= 0; i--) {
+      iteratee(collection[i], i, collection)
+    }
+    return collection
+  }
+
+  function groupBy(collection, iter) {
+    let map = {}
+    iter = iteratee(iter)
+    for (let item of collection) {
+      let key = iter(item)
+      if(!(key in map)) {
+        map[key] = [item]
+      }else {
+        map[key].push(item)
+      }
+    }
+    return map
+  }
+
+  function includes(collection, value, fromIndex = 0) {
+    let type = getType(collection)
+    if (type == 'array') {
+      for(let i = fromIndex; i < collection.length; i++) {
+        if(SameValueZero(collection[i], value)) {
+          return true
+        }
+      }
+      return false
+    }
+    if (type == 'object') {
+      for (let k in collection) {
+        if(SameValueZero(collection[k], value)) {
+          return true
+        }
+      }
+      return fale
+    }
+    if (type == 'string') {
+      let reg = new RegExp(value)
+      return reg.test(collection)
+    }
+  }
+
+  function invokeMap(collection, path, ...args) {
+    let res = []
+    for(let i = 0; i < collection.length; i++) {
+      if(typeof path == 'function') {
+        res.push(path.call(collection[i],...args))
+      }else {
+        path = toPath(path)
+        path = get(collection[i], path)
+        res.push(path.call(collection[i],...args))
+      }
+    }
+    return res
+  }
+
+  function orderBy(arr, iter = [identity], orders) {
+    for (var i = 1; i < arr.length; i++) {
+      var t = arr[i]
+      for (var j = i - 1; j >= 0; j--) {
+        // if (arr[j] > t)
+        if (comparetor2(arr[j], t, iter, orders) > 0) {
+          arr[j + 1] = arr[j]
+        } else {
+          break
+        }
+      }
+      arr[j + 1] = t
+    }
+    return arr
+  }
   
+
   
+  function sortBy(arr, iteratees = [identity]) {
+    for (var i = 1; i < arr.length; i++) {
+      var t = arr[i]
+      for (var j = i - 1; j >= 0; j--) {
+        // if (arr[j] > t)
+        if (comparetor(arr[j], t, iteratees) > 0) {
+          arr[j + 1] = arr[j]
+        } else {
+          break
+        }
+      }
+      arr[j + 1] = t
+    }
+    return arr
+  }
 
-
-
+  function partition(collection, predicate = identity) {
+    predicate = iteratee(predicate)
+    let res = [[],[]]
+    for (let item of collection) {
+      if(predicate(item)) res[0].push(item)
+      else res[1].push(item)
+    }
+    return res
+  }
+  
 
 
   function reduce(collection, it, init) {
@@ -784,6 +867,46 @@ var pky_imo = function () {
     }
     return init
   }
+
+  function reject(collection, predicate) {
+    predicate = iteratee(predicate)
+  
+    var result = []
+    for (var i in collection) {
+      if (!predicate(collection[i], i, collection)) {
+        result.push(collection[i])
+      }
+    }
+    return result
+  }
+
+  function sample(collection) {
+    let len = size(collection)
+    let random = Math.floor(Math.random()*len)
+    for (var item of collection) {
+      if(random == 0) return item
+      random--
+    }
+  }
+
+  function sampleSize(collection, n = 1) {
+    let len = size(collection)
+    if (n > len) n = len
+    let res = []
+    while(n) {
+      let t = sample(collection)
+      if(!res.includes(t)) {
+        res.push(t)
+        n--
+      }
+    }
+    return res
+  }
+
+  function size(collection) {  
+    return  keys(collection).length
+  }
+
 
 
 
@@ -817,10 +940,10 @@ var pky_imo = function () {
     return true
   }
 
-  function some(array, predicate) {
-    var it = iterator(predicate)
-    for (let key in array) {
-      if (it(array[key], key, array)) return true
+  function some(collection, predicate) {
+    predicate = iteratee(predicate)
+    for (let key in collection) {
+      if (predicate(collection[key], key, collection)) return true
     }
     return false
   }
@@ -935,7 +1058,7 @@ var pky_imo = function () {
 
     var result = []
     for (var i in collection) {
-      if (predicate(collection[i], i, collection) === true) {
+      if (predicate(collection[i], i, collection)) {
         result.push(collection[i])
       }
     }
@@ -1075,8 +1198,31 @@ var pky_imo = function () {
   }
 
 
-
+  function comparetor2(a, b, iter, orders) {
+    let iterArr = zip(iter, orders)
+    for (let it of iterArr) {
+      let f = iteratee(it[0])
+      let flag = it[1] == 'asc' ? 1 : -1
+      if ( f(a) > f(b)) {
+        return 1 * flag
+      }else if ( f(a) < f(b)){
+        return -1 * flag
+      }else continue
+    }
+    return 0
+  }
   
+  function comparetor(a, b, iterator) {
+    for (let it of iterator) {
+      let f = iteratee(it)
+      if ( f(a) > f(b)) {
+        return 1
+      }else if ( f(a) < f(b)){
+        return -1
+      }else continue
+    }
+    return 0
+  }
 
   function getType(obj) {
     return Object.prototype.toString
@@ -1135,6 +1281,7 @@ var pky_imo = function () {
     flattenDeep: flattenDeep,
     flattenDepth: flattenDepth,
 
+
     fromPairs: fromPairs,
     head: head,
     indexOf: indexOf,
@@ -1190,18 +1337,29 @@ var pky_imo = function () {
     flatMapDeep: flatMapDeep,
     flatMapDepth: flatMapDepth,
 
-    groupBy: groupBy,
-    keyBy: keyBy,
     forEach: forEach,
+    forEachRight: forEachRight,   
+
+    groupBy: groupBy,
+    includes: includes,
+    invokeMap: invokeMap,
+    keyBy: keyBy,
     map: map,
+    orderBy: orderBy,
+    sortBy: sortBy,
+    partition: partition,
+    
     reduce: reduce,
     reduceRight: reduceRight,
-
+    reject: reject,
+    sample: sample,
+    sampleSize: sampleSize,
+    size: size,
+    some: some,
 
     keys: keys,
     values: values,
     every: every,
-    some: some,
     fill: fill,
     filter: filter,
     findIndex: findIndex,
