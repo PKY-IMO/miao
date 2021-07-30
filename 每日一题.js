@@ -563,3 +563,36 @@ obj.method(fn,1);
 所以 fn 中的 this 指向属性访问主体的对象 arguments
 ```
 
+function switchCase(value) {
+	switch(value) {
+		case '0': console.log('case 0');
+		case '1': console.log('case 1');break;
+		case undefined: console.log('undefined');break;
+		default: console.log('default')
+	}
+}
+
+switchCase(0); //default
+switchCase('0'); //case 0 case 1
+switchCase() //undefined
+
+
+
+var s = {
+    s: 'student',
+    getS: function(){
+    console.log(this.s);
+}
+};
+var t = {
+    s: 'teaher'
+};
+  
+var getS = s.getS;
+var getS1 = getS.bind(s);
+  
+// 写出以下输出结果
+s.getS();
+s.getS.apply(t);    
+getS();
+getS1.call(t);

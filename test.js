@@ -61,4 +61,21 @@ function decipherThis(str) {
   }
   incrementString('foobar000')
 
-  a = /.*\*([^\*])([^\*]+)([^\*])\*.* matches [^\\1]+\1\2\3[^\\3]+$|^\*([^\*]+) matches [^\\4]+\4$|^(.+) matches \5$|^([^\*]+)\* matches \6[^\\6]+$/
+  var s = {
+    s: 'student',
+    getS: function(){
+    console.log(this.s);
+}
+};
+var t = {
+    s: 'teaher'
+};
+  
+var getS = s.getS;
+var getS1 = getS.bind(s);
+  
+// 写出以下输出结果
+s.getS();
+s.getS.apply(t);    
+getS();
+getS1.call(t);

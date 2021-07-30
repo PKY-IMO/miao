@@ -988,7 +988,7 @@ var pky_imo = function () {
   }
   
   function isBoolean(value) {
-    return typeof value === 'boolean'
+    return getType(value) === 'boolean'
   }
   
   function isDate(value) {
@@ -1601,6 +1601,7 @@ var pky_imo = function () {
     isArray: isArray,
     isArrayBuffer: isArrayBuffer,
     isArrayLike: isArrayLike,
+    isArrayLikeObject: isArrayLikeObject,
     isBoolean: isBoolean,
     isDate: isDate,
     isElement: isElement,

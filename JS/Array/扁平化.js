@@ -20,15 +20,15 @@ function flat3(arr) {
  * 
  */
 
- ary = [1, [2, [3, [4, 5]]], 6]
+ ary = [1, [2, [3, [4, 5]]],[8,[5],9],[8,9], 6]
  ary1 = [[[[]]]]
- let depth = 0
- function flattenArr(arr) {
+ let depth = 1
+ function flattenArr6(arr) {
   let result = []
   arr.forEach(i => {
     if(Array.isArray(i)) {
       depth++
-      result.push(...flattenArr(i))
+      result.push(...flattenArr6(i))
     } else {
       result.push(i)
     }
@@ -50,6 +50,6 @@ function flattendepth(arr, depth) {
 
 }
 
-b = flattenArr(ary1)
-console.log(b)
-console.log(depth)
+//b = flattenArr(ary1)
+//console.log(b)
+console.log(flattenArr6(ary),depth)
