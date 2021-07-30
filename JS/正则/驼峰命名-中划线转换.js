@@ -6,7 +6,7 @@ console.log(fn(s1));
 
 function fn(str) {
   // 正则带g全局替换， -e -b -i
-  return str.replace(/-\w/g, x => x.slice(1).toUpperCase())
+  return str.replace(/-(\w)/g, (_,e)=>e.toUpperCase())
 }
 
 

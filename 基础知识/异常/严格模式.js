@@ -12,6 +12,7 @@ catch和finally里面,正常的代码会从上到下顺序执行
 如果只是catch里面代码出错,则报catch里面的错误
 如果catch和finally都出错则会报finally里面的错误
 try{return XX2} finally {XX1}:finally 在return之前执行
+浏览器网页报错打印，其他环境进程结束
 
 
 标记对象为不可扩展：Object.isExtensible都为false

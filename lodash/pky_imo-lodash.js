@@ -104,7 +104,7 @@ var pky_imo = function () {
     for (let i = 0; i < arr.length; i++) {
       if (!it(arr[i], i, arr)) {
         res.push(arr[i])
-      }else continue
+      }
     }
     return res
   }
@@ -115,7 +115,7 @@ var pky_imo = function () {
     for (let i = 0; i < arr.length; i++) {
       if (!it(arr[i], i, arr)) {
         res.push(arr[i])
-      }else continue
+      }
     }
     return res
   }
@@ -907,11 +907,241 @@ var pky_imo = function () {
     return  keys(collection).length
   }
 
+  function castArray(value){
+    if (arguments.length == 0) return []
+    if (value instanceof Array) return value
+    return [value]
+  }
 
+  function conformsTo(object, source) {
+    for(let key in source) {
+      let predicate = iteratee(source[key]) 
+      if(!predicate(object[key])) return false
+    }
+    return true
+  }
 
+  function eq(object, other) {
+    return SameValueZero(object, other)
+  }
 
+  function gt(value, other) {
+    return value > other ? true : false
+  }
+  
+  function gte(value, other) {
+    return value >= other ? true : false
+  }
 
+  function lt(value, other) {
+    return value < other ? true : false
+  }
+  
+  function lte(value, other) {
+    return value <= other ? true : false
+  }
 
+  function isObject(value) {
+    let type = typeof value
+    return value !== null && (type === 'object' || type === 'function')
+  }
+  
+  function isObjectLike(value) {
+    return value !== null && typeof value === 'object'
+  }
+  
+  function isPlainObject(value) {
+    if (!isObjectLike(value)) return false
+    return value.__proto__ == Object.prototype || value.__proto__ == null
+  }
+  
+  
+  function isArguments(value) {
+    return isObjectLike(value) && getType(value) === 'arguments'
+  }
+  
+  function isArray(value) {
+    return getType(value) === 'array'
+  }
+  
+  function isArrayBuffer(value) {
+    return getType(value) === 'arraybuffer'
+  }
+  
+  function isArrayLike(value) {
+    if (typeof value === 'string') return true
+    if (typeof value === 'function') return false
+    let key = 'length'
+    if (!(key in value)) return false
+    return value.length >= 0 && value.length <= Number.MAX_SAFE_INTEGER
+  }
+  
+  function isArrayLike(value) {
+    return isArrayLikeObject(value) || typeof value === 'string'
+  }
+  
+  function isArrayLikeObject(value) {
+    if (typeof value !== 'object') return false
+    let key = 'length'
+    if (!(key in value)) return false
+    return value.length >= 0 && value.length <= Number.MAX_SAFE_INTEGER
+  }
+  
+  function isBoolean(value) {
+    return typeof value === 'boolean'
+  }
+  
+  function isDate(value) {
+    return getType(value) === 'date'
+  }
+  
+  function isElement(value) {
+    return getType(value) === 'htmlbodyelement' // HTMLBodyElement
+  }
+  
+  function isEmpty(value) {
+    // 不是 object、string
+    if (!isObjectLike(value) && typeof value !== 'string') return true 
+    // map set
+    if (getType(value) === 'map' || getType(value) === 'set') return value.size === 0 
+    // 类数组对象 string 之类
+    if (isArrayLike(value)) return value.length === 0
+    // object对象
+    return keys(value).length === 0
+  }
+  
+  function isEqual(a, b) {
+    if (a === b) return true
+    let type1 = getType(a)
+    let type2 = getType(b)
+    if (type1 != type2) {
+      return false
+    }
+    if (type1 == 'object' || type1 == 'array') {
+      let keys1 = keys(a)
+      let keys2 = keys(b)
+      if (keys1.length != keys2.length) return false
+      for (let key of keys1) {
+        if(!(key in b)) return false
+        // if (a[key] === b[key]) continue
+        if (!isEqual(a[key],b[key])) return false
+      }
+      return true
+    }else return a == b
+  }
+  
+  
+  function isEqualWith(a, b, customizer) {
+    if (a === b || customizer(a,b)) return true
+    let type1 = getType(a)
+    let type2 = getType(b)
+    if (type1 != type2) {
+      return false
+    }
+    if (type1 == 'object' || type1 == 'array') {
+      let keys1 = keys(a)
+      let keys2 = keys(b)
+      if (keys1.length != keys2.length) return false
+      for (let key of keys1) {
+        if (!(key in b)) return false
+        if (a[key] === b[key]) continue
+        if (!customizer(a[key],b[key],key,a,b,this.stack)) return false
+      }
+      return true
+    }else return a === b || customizer(a,b)
+  }
+  
+  function isError(value) {
+    return getType(value) === 'error'
+  }
+  
+  function isFinite(value) {
+    return Number.isFinite(value)
+  }
+  
+  function isFunction(value) {
+    return typeof value === 'function'
+  }
+  
+  function isInteger(value) {
+    return Number.isInteger(value)
+  }
+  
+  function isMap(value) {
+    return getType(value) === 'map'
+  }
+  
+  function isMatchWith(object, source, customizer) {
+    if (object === source) {
+      return true
+    }
+    if (typeof object !== 'object' || typeof source !== 'object') {
+      return false
+    }
+    for (var key in source) {
+      if (source[key] && typeof source[key] !== 'object') {//基本数据类型
+        if (!customizer(object[key],source[key],key,object,source)) {
+          return false
+        }
+      } else {//引用数据类型
+        if (!isMatch(object[key], source[key])) {
+          return false
+        }
+      }
+    }
+    return true
+  }
+  
+  function isNumber(value) {
+    if(!value) return false
+    if(value === Infinity || value === -Infinity || isNaN(value)) return true
+    return isFinite(value)
+  }
+  
+  
+  function isLength(value) {
+    if (!value || isNaN(value)) return false
+    let target = toLength(value)
+    return value === target
+  }
+  
+  function toLength(value) {
+    // Let len be ? ToInteger(argument).
+    // If len ≤ +0, return +0.
+    // If len is +∞, return 232-1.
+    // Return min(len, 232-1).
+    if (!value || isNaN(value)) return +0
+    value = toInteger(value)
+    value = value <= +0 ? +0 : value
+    return Math.min(value, 2**32-1)
+  }
+  function toInteger(value) {
+    if (!value || isNaN(value)) return 0
+    value = toFinite(value)  // Infinity | 0 ==> 0
+    let decimal = value % 1
+    return decimal ? value - decimal : value
+  }
+  
+  function toNumber(value) {
+    if (!value) return 0
+    return Number(value)
+  }
+  
+  function toFinite(value) {
+    //有限数字
+   if (!value || isNaN(value)) return 0
+   value = Number(value)
+   if (value === Infinity || value === -Infinity) {
+     var sign = value > 0 ? 1 : -1
+     return sign * Number.MAX_VALUE
+   }
+   return value
+  }
+
+  function toSafeInteger(value) {
+    value = toInteger(value)
+    return Math.min(value, 2**53-1)
+  }
 
   function keys(obj) {
     let res = []
@@ -1022,10 +1252,10 @@ var pky_imo = function () {
 
   function shuffle(arr) {
     for (let i = arr.length - 1; i > 0; i--) {
-      var randIdx = Math.floor(Math.random() * (i + 1))
+      var randIdx = Math.floor(Math.random() * (i + 1));//解构赋值上一行得加分号
       [arr[i], arr[randIdx]] = [arr[randIdx], arr[i]]
     }
-    return arr[i]
+    return arr
   }
 
   function toArray(arr) {
@@ -1241,9 +1471,12 @@ var pky_imo = function () {
     return a === b
   }
 
+  //判断
+
+
   function isNaN(n) {
     //isNaN方法首先转换类型，而Number.isNaN方法不用；
-    //isNaN不能用来判断是否严格等于NaN，Number.isNaN方法可用
+    //isNaN不能用来判断是否严格等于NaN，Number.isNaN【严格】
     if (typeof n == 'object') {
       return n.valueOf() !== n.valueOf()
     }
@@ -1356,6 +1589,45 @@ var pky_imo = function () {
     sampleSize: sampleSize,
     size: size,
     some: some,
+    castArray: castArray,
+    conformsTo: conformsTo,
+    eq: eq,
+    gt: gt,
+    gte: gte,
+    lt: lt,
+    lte: lte,
+
+    isArguments: isArguments,
+    isArray: isArray,
+    isArrayBuffer: isArrayBuffer,
+    isArrayLike: isArrayLike,
+    isBoolean: isBoolean,
+    isDate: isDate,
+    isElement: isElement,
+    isEmpty: isEmpty,
+    isEqual: isEqual,
+    isEqualWith: isEqualWith,
+    isError: isError,
+    isFinite: isFinite,
+    isFunction: isFunction,
+    isInteger: isInteger,
+    isLength: isLength,
+    isMap: isMap,
+    isMatch: isMatch,
+    isMatchWith: isMatchWith,
+    isNaN: isNaN,
+    isNull: isNull,
+    isNil: isNil,
+    isNumber: isNumber,
+    isObject: isObject,
+    isObjectLike: isObjectLike,
+    isPlainObject: isPlainObject,
+    toArray: toArray,
+    toFinite: toFinite,
+    toInteger: toInteger,
+    toLength: toLength,
+    toNumber: toNumber,
+    toSafeInteger: toSafeInteger,  
 
     keys: keys,
     values: values,
@@ -1365,14 +1637,13 @@ var pky_imo = function () {
     findIndex: findIndex,
     findLastIndex: findLastIndex,
     reverse: reverse,
-    isEqual: isEqual,
+
     countBy: countBy,
 
     shuffle: shuffle,
-    isMatch: isMatch,
-    isNaN: isNaN,
-    isNull: isNull,
-    isNil: isNil,
+
+ 
+
     isUndefined: isUndefined,
     toArray: toArray,
     sum: sum,

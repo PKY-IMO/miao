@@ -60,3 +60,5 @@ function decipherThis(str) {
     })
   }
   incrementString('foobar000')
+
+  a = /.*\*([^\*])([^\*]+)([^\*])\*.* matches [^\\1]+\1\2\3[^\\3]+$|^\*([^\*]+) matches [^\\4]+\4$|^(.+) matches \5$|^([^\*]+)\* matches \6[^\\6]+$/

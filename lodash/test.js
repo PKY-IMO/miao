@@ -17,9 +17,7 @@ function groupBy(collection, iter) {
 }
 // console.log(groupBy(a, Math.floor))
 
-for (let i in a) {
-  console.log(i)
-}
+
 
 function zip(...arr) {
   let num = arr.length
@@ -497,7 +495,6 @@ function iterator(it) {
       return obj => obj[it]
     } else {
       let itArr = it.split('.')
-      console.log(itArr)
       return (obj) => {
         for (let item of itArr) {
           obj = obj[item]
@@ -591,7 +588,7 @@ function sortedIndex(arr, value) {
 var array = [{ 'x': 1, 'y': 2 }, { 'x': 3, 'y': 4 }, { 'x': 5, 'y': 6 }];
  
 t = sortedIndex([30, 50], 40)
-console.log(t)
+// console.log(t)
 
 function quickSort(arr, start = 0, end = arr.length - 1) {
   if (start >= end) return
@@ -614,19 +611,9 @@ function quickSort(arr, start = 0, end = arr.length - 1) {
 
 
 t = [1,23,6,7,9,10,6,7,2,5,7,88]
-console.log(quickSort(t))
+// console.log(quickSort(t))
 
-var str = 'hello world'
-str.a = 8
-console.log(str.a)      //undefined
-str.length = 5
-console.log(str) //hello world
-var num = 8
-num.value = 9
-console.log(num)  //8
-var arr = [1,2,3,4,5]
-arr.length = 3
-console.log(arr) //[ 1, 2, 3 ]
+
 
 
 
@@ -645,15 +632,7 @@ function reduce(collection, it, init) {
 t = reduce([1, 2], function(sum, n) {
   return sum + n;
 })
-console.log(t)
-arr = [2,2,3,4]
-t = arr.reduce((total,p,i) => {
-	console.log(total,p,i)
-	return (total + i)} ); console.log(t); // 输出多少 
-console.log('11111111')
-const res1 = [1,2,3,4].reduce((total,p,i) => {
-  console.log(total,i) 
-  return(total + i)}, 0); console.log(res1); // 输出多少
+
 
   function deepCopy(obj, copyobj) {
     copyobj = copyobj || {}
@@ -681,24 +660,24 @@ const res1 = [1,2,3,4].reduce((total,p,i) => {
 
 let Obj={a:"hello",b:1,c:true,d:[1,2],e:{x:1,y:2}}
 
-console.log(deepCopy(1,a))
+// console.log(deepCopy(1,a))
 
-const lottery = () => {
+// const lottery = () => {
 
-  const randomNum = Math.round(Math.random() * 100)
-  console.log(randomNum);
+//   const randomNum = Math.round(Math.random() * 100)
+//   console.log(randomNum);
 
-  if (randomNum >= 0 && randomNum < 10) {
-    return console.log('First Prize')
-  } else if (randomNum >= 10 && randomNum < 25) {
-    return console.log('Second Prize')
-  } else if (randomNum >= 25 && randomNum < 50) {
-    return console.log('Third Prize')
-  } else {
-    return console.log('Forth Prize')
-  }
+//   if (randomNum >= 0 && randomNum < 10) {
+//     return console.log('First Prize')
+//   } else if (randomNum >= 10 && randomNum < 25) {
+//     return console.log('Second Prize')
+//   } else if (randomNum >= 25 && randomNum < 50) {
+//     return console.log('Third Prize')
+//   } else {
+//     return console.log('Forth Prize')
+//   }
 
-}
+// }
 
 function get(object, path, defaultVal = undefined) {
   path = toPath(path)
@@ -729,7 +708,7 @@ function has(object, path) {
   return true
 }
 var object = { 'a': { 'b': 2 } };
-console.log(has(object, 'a.b'));
+
 
 
 function toPath(val) {
@@ -1446,8 +1425,240 @@ function some(collection, predicate = identity) {
   return false
 }
 
-var users = [
-  { 'user': 'barney', 'active': true },
-  { 'user': 'fred',   'active': false }
-];
-console.log(some([null, 0, 'yes', false], Boolean))
+function shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    var randIdx = Math.floor(Math.random() * (i + 1));
+
+    [arr[i], arr[randIdx]] = [arr[randIdx], arr[i]]
+  }
+  return arr
+}
+
+function castArray(value){
+  if (arguments.length == 0) return []
+  if (value instanceof Array) return value
+  return [value]
+}
+
+function conformsTo(object, source) {
+  for(let key in source) {
+    let predicate = iteratee(source[key]) 
+    if(!predicate(object[key])) return false
+  }
+  return true
+}
+
+function eq(object, other) {
+  return SameValueZero(object, other)
+}
+
+function gt(value, other) {
+  return value > other ? true : false
+}
+
+function gt(value, other) {
+  return value >= other ? true : false
+}
+
+function isObject(value) {
+  let type = typeof value
+  return value !== null && (type === 'object' || type === 'function')
+}
+
+function isObjectLike(value) {
+  return value !== null && typeof value === 'object'
+}
+
+function isPlainObject(value) {
+  if (!isObjectLike(value)) return false
+  return value.__proto__ == Object.prototype || value.__proto__ == null
+}
+
+
+function isArguments(value) {
+  return isObjectLike(value) && getType(value) === 'arguments'
+}
+
+function isArray(value) {
+  return getType(value) === 'array'
+}
+
+function isArrayBuffer(value) {
+  return getType(value) === 'arraybuffer'
+}
+
+function isArrayLike(value) {
+  if (typeof value === 'string') return true
+  if (typeof value === 'function') return false
+  let key = 'length'
+  if (!(key in value)) return false
+  return value.length >= 0 && value.length <= Number.MAX_SAFE_INTEGER
+}
+
+function isArrayLike(value) {
+  return isArrayLikeObject(value) || typeof value === 'string'
+}
+
+function isArrayLikeObject(value) {
+  if (typeof value !== 'object') return false
+  let key = 'length'
+  if (!(key in value)) return false
+  return value.length >= 0 && value.length <= Number.MAX_SAFE_INTEGER
+}
+
+function isBoolean(value) {
+  return typeof value === 'boolean'
+}
+
+function isDate(value) {
+  return getType(value) === 'date'
+}
+
+function isElement(value) {
+  return getType(value) === 'htmlbodyelement' // HTMLBodyElement
+}
+
+function isEmpty(value) {
+  // 不是 object、string
+  if (!isObjectLike(value) && typeof value !== 'string') return true 
+  // map set
+  if (getType(value) === 'map' || getType(value) === 'set') return value.size === 0 
+  // 类数组对象 string 之类
+  if (isArrayLike(value)) return value.length === 0
+  // object对象
+  return keys(value).length === 0
+}
+
+function isEqual(a, b) {
+  if (a === b) return true
+  let type1 = getType(a)
+  let type2 = getType(b)
+  if (type1 != type2) {
+    return false
+  }
+  if (type1 == 'object' || type1 == 'array') {
+    let keys1 = keys(a)
+    let keys2 = keys(b)
+    if (keys1.length != keys2.length) return false
+    for (let key of keys1) {
+      if(!(key in b)) return false
+      // if (a[key] === b[key]) continue
+      if (!isEqual(a[key],b[key])) return false
+    }
+    return true
+  }else return a == b
+}
+
+
+function isEqualWith(a, b, customizer) {
+  if (a === b || customizer(a,b)) return true
+  let type1 = getType(a)
+  let type2 = getType(b)
+  if (type1 != type2) {
+    return false
+  }
+  if (type1 == 'object' || type1 == 'array') {
+    let keys1 = keys(a)
+    let keys2 = keys(b)
+    if (keys1.length != keys2.length) return false
+    for (let key of keys1) {
+      if (!(key in b)) return false
+      if (a[key] === b[key]) continue
+      if (!customizer(a[key],b[key],key,a,b,this.stack)) return false
+    }
+    return true
+  }else return a === b || customizer(a,b)
+}
+
+function isError(value) {
+  return getType(value) === 'error'
+}
+
+function isFinite(value) {
+  return Number.isFinite(value)
+}
+
+function isFunction(value) {
+  return typeof value === 'function'
+}
+
+function isInteger(value) {
+  return Number.isInteger(value)
+}
+
+function isMap(value) {
+  return getType(value) === 'map'
+}
+
+function isMatchWith(object, source, customizer) {
+  if (object === source) {
+    return true
+  }
+  if (typeof object !== 'object' || typeof source !== 'object') {
+    return false
+  }
+  for (var key in source) {
+    if (source[key] && typeof source[key] !== 'object') {//基本数据类型
+      if (!customizer(object[key],source[key],key,object,source)) {
+        return false
+      }
+    } else {//引用数据类型
+      if (!isMatch(object[key], source[key])) {
+        return false
+      }
+    }
+  }
+  return true
+}
+
+function isNumber(value) {
+  if(!value) return false
+  if(value === Infinity || value === -Infinity || isNaN(value)) return true
+  return isFinite(value)
+}
+
+
+function isLength(value) {
+  if (!value || isNaN(value)) return false
+  let target = toLength(value)
+  return value === target
+}
+
+function toLength(value) {
+  // Let len be ? ToInteger(argument).
+  // If len ≤ +0, return +0.
+  // If len is +∞, return 232-1.
+  // Return min(len, 232-1).
+  if (!value || isNaN(value)) return +0
+  value = toInteger(value)
+  value = value <= +0 ? +0 : value
+  return Math.min(value, 2**32-1)
+}
+function toInteger(value) {
+  if (!value || isNaN(value)) return 0
+  value = toFinite(value)  // Infinity | 0 ==> 0
+  let decimal = value % 1
+  return decimal ? value - decimal : value
+}
+
+function toNumber(value) {
+  if (!value) return 0
+  return Number(value)
+}
+
+function toFinite(value) {
+  //有限数字
+ if (!value || isNaN(value)) return 0
+ value = Number(value)
+ if (value === Infinity || value === -Infinity) {
+   var sign = value < 0 ? -1 : 1
+   return sign * Number.MAX_VALUE
+ }
+ return value
+}
+
+function toSafeInteger(value) {
+  value = toInteger(value)
+  return Math.min(value, 2**53-1)
+}
+console.log(toSafeInteger('3.2'))
