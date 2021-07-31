@@ -244,7 +244,7 @@ new fn().getValue();//3   (new fn()).getValue() 这里的this指向实例对象
 	console.log(total,p,i)
 	return (total + i)} ); console.log(res); // 输出多少 
 const res1 = [1,2,3,4].reduce((total,p,i) => total + i, 0); console.log(res1); // 输出多少
-// reduce 不传初始值，从index = 1 开始执行， 传初始值，从index = 0 开始执行，执行次数不同
+// reduce 不传初始值，从index = 1 开始执行,初始值是数组的第一项值; 传初始值，从index = 0 开始执行，执行次数不同
 
 4.//= 从右向左执行 
 let a = {n:1};
@@ -578,21 +578,4 @@ switchCase() //undefined
 
 
 
-var s = {
-    s: 'student',
-    getS: function(){
-    console.log(this.s);
-}
-};
-var t = {
-    s: 'teaher'
-};
-  
-var getS = s.getS;
-var getS1 = getS.bind(s);
-  
-// 写出以下输出结果
-s.getS();
-s.getS.apply(t);    
-getS();
-getS1.call(t);
+

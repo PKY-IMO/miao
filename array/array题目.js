@@ -182,6 +182,8 @@ function flattendepth(arr, depth) {
 //  [{a:1,b:2,c:3},{b:2,c:3,a:1},{d:2,c:2}]
 //  输出:
 //  [{a:1,b:2,c:3},{d:2,c:2}]
+// 把内容转json.stringify存入set，set转数组，
+//再map，json.parse
 function objSort(obj){
   let newObj = {}
   //遍历对象，并将key进行排序
@@ -205,8 +207,28 @@ function unique(arr){
   return arr
 }
 
+function uniqWith(arr, isEqual) {
+  let res = []
+  for (let i = 0; i < arr.length;i++ ) {
+    if (!res.some(it=>isEqual(arr[i], it))){
+      res.push(arr[i])
+    }
+  }
+  return res
+}
+function isEqual(obj1, obj2) {
+  if (typeof obj1 !== 'object' && typeof obj2 != 'object') {
+    return obj1 === obj2
+  }
+  for (let key in obj1) {
+    if (!(key in obj2)) return false
+    if (!isEqual(obj1[key], obj2[key])) return false
+  }
+  return true
+}
 
-
+arruniq = [{a:1,b:2,c:3},{b:2,c:3,a:1},{d:2,c:2}]
+console.log(uniqWith(arruniq,isEqual))
 
 
 
@@ -250,3 +272,21 @@ function col(rows) {
 
 m = col(rows)
 console.log(m)
+
+
+function chunk(array, size = 1) {
+  if (!Array.isArray(array)) {
+      return []
+  }
+  const result = []
+  let len = size
+  for (let i = 0; i < array.length;) {
+      let temp = []
+      while (i < array.length && len--) {
+          temp.push(array[i++])
+      }
+      result.push(temp)
+      len = size
+  }
+  return result
+}

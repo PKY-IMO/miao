@@ -47,35 +47,23 @@ function decipherThis(str) {
   
   }; 
   console.log(decipherThis('72eva 97 103o 97t 116sih 97dn 115ee 104wo 121uo 100o'))
-
-  function incrementString (string) {
-    // return incrementedString
-    let reg = /^([^0-9]*)(\d*)$/
-    return string.replace(reg, (_,x,y)=>{
-      let zero = y.match(/^0+/g)[0].length
-      console.log(zero)
-      if (y == undefined) y = '1'
-      else y = ('0'.repeat(zero)+ Number(y) + 1).slice(-zero)
-      return x+y
+  
+  function uniqBy(arr, iteratee) {
+    var it = compare(iteratee)
+    let map = {}, res = []
+    arr.forEach((item) => {
+      let key = it(item)
+      if (!(key in map)) {
+        map[key] = item
+        res.push(item)
+      }
     })
+    return res
   }
-  incrementString('foobar000')
 
-  var s = {
-    s: 'student',
-    getS: function(){
-    console.log(this.s);
-}
-};
-var t = {
-    s: 'teaher'
-};
+
+  let  kua = 0
+  if(kua = 5) 
+    console.log(kua)
   
-var getS = s.getS;
-var getS1 = getS.bind(s);
   
-// 写出以下输出结果
-s.getS();
-s.getS.apply(t);    
-getS();
-getS1.call(t);

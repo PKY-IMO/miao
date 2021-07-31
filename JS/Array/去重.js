@@ -7,7 +7,7 @@ function unique2(arr) { //过滤掉所有NaN
 }
 
 function unique3(arr) {
-  return arr.reduce((prev,item) => prev.includes(item) ? prev : [...prev, item], [])
+  return arr.reduce((prev,item) => prev.includes(item) ? prev : prev.concat(item), [])
 }
 
 function unique4(arr) {//对象去重

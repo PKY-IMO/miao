@@ -1143,6 +1143,19 @@ var pky_imo = function () {
     return Math.min(value, 2**53-1)
   }
 
+  function assign(...objs) {
+    let target = objs[0]
+    for (let i = 1; i < objs.length; i++) {
+      let source = objs[i]
+      for (let key in source) {
+        if (source.hasOwnProperty(key)) {
+          target[key] = source[key]
+        }
+      }
+    }
+    return target
+  }
+
   function keys(obj) {
     let res = []
     for (let key in obj) {
@@ -1495,6 +1508,37 @@ var pky_imo = function () {
     return n === undefined
   }
 
+  function isRegExp(value) {
+    return getType(value) === 'regexp'
+  }
+  
+  function isSafeInteger(value) {
+    return value === toSafeInteger(value)
+  }
+  
+  function isSet(value) {
+    return getType(value) === 'set'
+  }
+  
+  function isString(value) {
+    return getType(value) === 'string'
+  }
+  
+  function isSymbol(value) {
+    return getType(value) === 'symbol'
+  }
+  
+  function isTypedArray(value) {
+    return getType(value) === 'typedarray'
+  }
+  
+  function isWeakMap(value) {
+    return getType(value) === 'weakmap'
+  }
+  
+  function isWeakSet(value) {
+    return getType(value) === 'weakset'
+  }
 
 
   return {
@@ -1623,12 +1667,22 @@ var pky_imo = function () {
     isObject: isObject,
     isObjectLike: isObjectLike,
     isPlainObject: isPlainObject,
+    isRegExp: isRegExp,
+    isSafeInteger: isSafeInteger,
+    isSet: isSet,
+    isString: isString,
+    isSymbol: isSymbol,
+    isTypedArray: isTypedArray,
+    isWeakMap: isWeakMap,
+    isWeakSet: isWeakSet,
     toArray: toArray,
     toFinite: toFinite,
     toInteger: toInteger,
     toLength: toLength,
     toNumber: toNumber,
     toSafeInteger: toSafeInteger,  
+    
+    assign: assign,
 
     keys: keys,
     values: values,

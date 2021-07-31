@@ -1662,3 +1662,63 @@ function toSafeInteger(value) {
   return Math.min(value, 2**53-1)
 }
 console.log(toSafeInteger('3.2'))
+
+function uniqBy(arr, iteratee) {
+  var it = iterator(iteratee)
+  let map = {}, res = []
+  arr.forEach(( item) => {
+    let key = it(item)
+    if (!(key in map)) {
+      map[key] = item
+      res.push(item)
+    }
+  })
+  return res
+}
+
+function assign(...objs) {
+  let target = objs[0]
+  for (let i = 1; i < objs.length; i++) {
+    let source = objs[i]
+    for (let key in source) {
+      if (source.hasOwnProperty(key)) {
+        target[key] = source[key]
+      }
+    }
+  }
+  return target
+}
+
+function isRegExp(value) {
+  return getType(value) === 'regexp'
+}
+
+function isSafeInteger(value) {
+  return value === toSafeInteger(value)
+}
+
+function isSet(value) {
+  return getType(value) === 'set'
+}
+
+function isString(value) {
+  return getType(value) === 'string'
+}
+
+function isSymbol(value) {
+  return getType(value) === 'symbol'
+}
+
+function isTypedArray(value) {
+  return getType(value) === 'typedarray'
+}
+
+function isWeakMap(value) {
+  return getType(value) === 'weakmap'
+}
+
+function iseakSap(value) {
+  return getType(value) === 'weaksap'
+}
+
+console.log(isSet(new WeakSet))
