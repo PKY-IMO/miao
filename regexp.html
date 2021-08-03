@@ -82,7 +82,6 @@
        <label for="globalBox"><input type="checkbox" name="" id="globalBox" onclick="run()" checked>g</label> 
        <label for="multiLineBox"><input type="checkbox" name="" id="multiLineBox" onclick="run()">m</label> 
        <label for="multiLineBox"><input type="checkbox" name="" id="extendedBox" onclick="run()">x</label> 
-       <label for="multiLineBox"><input type="checkbox" name="" id="singleLineBox" onclick="run()">s</label> 
        <label for="multiLineBox"><input type="checkbox" name="" id="unicodeBox" onclick="run()">u</label> 
       <br>
       <!-- onkeydown |onkeypress onkeyup -->
@@ -148,6 +147,9 @@
           resOutput.innerHTML = resHTML 
         }
       }
+      //打开即运行，不然初始不显示
+      run()
+
       function getFlags() {
         let flags = ''
         if (ignoreBox.checked) {
@@ -161,9 +163,6 @@
         }
         if (extendedBox.checked) {
           flags += 'x'
-        }
-        if (singleLineBox.checked) {
-          flags += 's'
         }
         if (unicodeBox.checked) {
           flags += 'u'

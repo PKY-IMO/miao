@@ -1640,7 +1640,7 @@ var pky_imo = function () {
   
   function stringifyJson(obj) {
     let type = typeof obj
-    if(type != 'object') {
+    if(type != 'object' || obj === null) {
       //字符串 undefined function 对象中的key 要加""
       if(/undefined|function|string/.test(type)) {
         obj = '"' + obj + '"'
