@@ -5,12 +5,22 @@
 // wildcardMatching('x*ccd', 'abccd') -> false
 function wildcardMatching(wildcard, str) {
   if (wildcard == '*') return true
+  wildcard = wildcard.replace(/(?=[^\w\s])(?![?*])/g, '\\')
   let reg = /\*/g
-  wildcard = wildcard.replace(reg,'.\*')
+  wildcard = wildcard.replace(/\*/g,'.\*')
   let reg2 = /\?/g
-  wildcard = wildcard.replace(reg2,'.\{1\}')
-  let reg3 = new RegExp(wildcard)
+  wildcard = wildcard.replace(reg2,'.')
+  let reg3 = new RegExp('^'+wildcard+'$')
   return reg3.test(str)
+}
+
+function wildcardMatching(wildcard, str) {
+  var reSource = wildcard
+    .replace(/(?=[^\w\s])(?![?*])/g, '\\') //不能让+.这类字符生效
+    .replace(/\*/g, '.*')
+    .replace(/\?/g, '.')
+  var re = new RegExp('^'+ reSource +'$')
+  return re.test(str)
 }
 
 console.log(wildcardMatching('??ccd', 'abccd') )

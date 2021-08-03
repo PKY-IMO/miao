@@ -47,7 +47,8 @@
       font-size: 16px;
       white-space: pre-wrap;
       overflow-y: scroll;
-      overflow-x: hidden;
+      xoverflow-x: hidden;
+      word-break: break-all;
     }
     section textarea {
       position: relative;
@@ -73,13 +74,13 @@
     <label><input type="checkbox" checked onclick="run()" id="global">g</label>
     <label><input type="checkbox" onclick="run()" id="multiline">m</label>
     <br>
-    <input type="text" id="reg" value="fo." onkeyup="run()"> <br>
+    <input type="text" id="reg" value="fo." oninput="run()"> <br>
     <p id="regError"></p>
     请输入内容：<br>
     <section>
       <pre id="result">
       </pre>
-      <textarea onscroll="setScroll()" spellcheck="false" id="strInput" cols="30" onkeyup="run()" rows="10">foobarbaz aaabbccc
+      <textarea onscroll="setScroll()" spellcheck="false" id="strInput" cols="30" oninput="run()" rows="10">foobarbaz aaabbccc
       ddddoofob foa foceeefoofsl lksdjf
     129842 foo
   sd942034 234 lsfowe</textarea>
@@ -89,11 +90,12 @@
   <script>
     function setScroll() {
       var scrollTop = strInput.scrollTop
-      result.style.top = -strInput.scrollTop + 'px'
+      result.scrollTop = scrollTop
     }
     function run() {
       console.time('run')
       var regSource = reg.value
+      console.log(regSource)
       var flags = getFlags()
       if (regSource == '') {
         result.innerHTML = ''
@@ -111,6 +113,7 @@
       }
       console.log(re)
       var str = strInput.value
+      console.log(str)
       var match
       if (re.global) {
         var resultHTML = ''
@@ -124,14 +127,14 @@
           }
         }
         resultHTML += str.slice(lastIndex)
-        result.innerHTML = resultHTML
+        result.innerHTML = resultHTML + '\n'
       } else { // no global
         var resultHTML = ''
         match = re.exec(str)
         resultHTML += str.slice(0, match.index)
         resultHTML += '<em>' + match[0] + '</em>'
         resultHTML += str.slice(match[0].length + match.index)
-        result.innerHTML = resultHTML
+        result.innerHTML = resultHTML + '\n'
       }
       console.timeEnd('run')
     }

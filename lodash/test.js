@@ -1721,4 +1721,127 @@ function iseakSap(value) {
   return getType(value) === 'weaksap'
 }
 
-console.log(isSet(new WeakSet))
+
+
+function parseJson(input) {
+  let str = input
+  let i = 0
+  return parseValue()
+  function parseValue() {
+    var c = str[i]
+
+    if (c == '[') {
+      return parseArray()
+    }
+    if (c == '{') {
+      return parseObject()
+    }
+    if (c == '"') {
+      return parseString()
+    }
+    if (c == 't') {
+      return parseTrue()
+    }
+    if (c == 'f') {
+      return parseFalse()
+    }
+    if (c == 'n') {
+      return parseNull()
+    }
+    return parseNumber()
+  }
+
+  // 从i指向的位置解析出一个true，并将i指向true的下一个位置
+  function parseTrue() {
+    i += 4
+    return true
+  }
+
+  function parseFalse() {
+    i += 5
+    return false
+  }
+
+  function parseNull() {
+    i += 4
+    return null
+  }
+
+  // 从i指向的位置（此时是"）解析出一个字符串，并将i移动到字符串之后
+  function parseString() {
+    i++ // 跳过当前双引号
+    var result = ''
+    while (str[i] !== '"') {
+      result += str[i++]
+    }
+    i++ // 跳过最后一个双引号
+    return result
+  }
+
+  // 从i指向的位置解析出一个数值，此时i已经指向了该数值的最左一位
+  function parseNumber() {
+    var numStr = ''
+    while (str[i] >= '0' && str[i] <= '9') {
+      numStr += str[i++]
+    }
+    return Number(numStr)
+  }
+
+  // 此时i指向数组开始的中括号（[），解析出这个数组，移动i到数组后面，并返回解析出的数组
+  function parseArray() {
+    var result = []
+    i++
+    while (str[i] !== ']') {
+      var val = parseValue()
+      result.push(val)
+      if (str[i] == ',') {
+        i++ // 跳过这个逗号
+      }
+    }
+    i++
+    return result
+  }
+
+  // 此时i指向对象开始的中括号（{），解析出这个对象，移动i到对象后面，并返回解析出的对象
+  function parseObject() {
+    var result = {}
+    i++
+    while (str[i] !== '}') {
+      var key = parseString()
+      i++ // 跳过冒号
+      var val = parseValue()
+      result[key] = val
+      if (str[i] == ',') {
+        i++
+      }
+    }
+    i++
+    return result
+  }
+  
+}
+
+function stringifyJson(obj) {
+  let type = typeof obj
+  if(type != 'object') {
+    //字符串 undefined function 对象中的key 要加""
+    if(/undefined|function|string/.test(type)) {
+      obj = '"' + obj + '"'
+    }
+    return String(obj)
+  }else {
+    let res = []
+    let arr = Array.isArray(obj)
+    for (let key in obj) {
+      let value = stringifyJson(obj[key])
+      if(arr) {
+        res.push(value)
+      }else {
+        let t = '"' + key + '":' + value
+        res.push(t)
+      }
+    }
+    return (arr ? '[' : '{') + String(res) + (arr ? ']' : '}') 
+  }
+}
+console.log(stringifyJson(parseJson('[1,"fooo",[1,222235,true],{"a":1,"b":[1,2,3],"c":{"x":1,"yyy":false}},5,null]')))

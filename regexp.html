@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    input[type='text'], textarea {
+      width: 300px;
+    }
+    label {
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    pre {
+      width: 300px;
+    }
+    em {
+      background-color: #9fcfff;
+      font-style: normal;
+    }
+    /*匹配为空*/
+    em:empty {
+      border-right: 1px dotted red;
+      margin-right: -1px;
+      background-color: transparent;
+    }
+    em:nth-of-type(even) {
+      background-color: #d5ebff;
+    }
+    pre {
+      white-space: pre-wrap;
+    }
+    section {
+      width: 300px;
+      height: 200px;
+      position: relative;
+      margin: 0;
+      padding: 0;
+      xoverflow: hidden;
+    }
+    section textarea,
+    section pre {
+      width: 100%;
+      height: 100%;
+      box-sizing: border-box;
+      border: 2px solid;
+      margin: 5px;
+      padding: 5px;
+      /*控制空白字符的显示(空格换行符自动换行)*/
+      white-space: pre-wrap;
+      font-family: consolas;
+      font-size: 16px;
+      /*控制单词如何被拆分换行*/
+      word-break: break-all;
+      overflow-y: scroll;
+      overflow-x: hidden;
+    }
+    textarea {
+      z-index: 1;
+      position: relative;
+      background-color: transparent;
+      resize: none;
+    }
+    pre {
+      color: transparent;
+      position: absolute;
+      top: 0;
+    }
+    p {
+      color: red;
+      margin: 0;
+      height: 2em;
+    }
+    
+  </style>
+</head>
+<body>
+    <div>
+      请输入正则表达式:
+       <label for="ignore"><input type="checkbox" name="" id="ignoreBox" onclick="run()">i</label> 
+       <label for="globalBox"><input type="checkbox" name="" id="globalBox" onclick="run()" checked>g</label> 
+       <label for="multiLineBox"><input type="checkbox" name="" id="multiLineBox" onclick="run()">m</label> 
+       <label for="multiLineBox"><input type="checkbox" name="" id="extendedBox" onclick="run()">x</label> 
+       <label for="multiLineBox"><input type="checkbox" name="" id="singleLineBox" onclick="run()">s</label> 
+       <label for="multiLineBox"><input type="checkbox" name="" id="unicodeBox" onclick="run()">u</label> 
+      <br>
+      <!-- onkeydown |onkeypress onkeyup -->
+      <input type="text" name="" id="regInput" value='fo.' oninput="run()">
+      <br>
+      请输入文本框<br>
+      <section>
+        <textarea onscroll="setScroll()" name="" id="strInput" cols="30" rows="10" oninput="run()">foobarbaz aaabbccc
+          ddddoofob foa foceeefoofsl lksdjf
+        129842 foo
+      sd942034 234 lsfowe
+        </textarea>   
+        <pre id="resOutput"></pre> 
+      </section>
+      <p id="regError"></p>
+
+    </div>
+    <script>
+      function setScroll() {
+        var scrollTop = strInput.scrollTop
+        //固定高度 设置top pre直接上去了，要直接设置滚动高度
+        //resOutput.style.top = -scrollTop + 'px'
+        resOutput.scrollTop = scrollTop
+      }
+      function run() {
+        let pattern = regInput.value
+        let flag = getFlags()
+        let reg
+        if (!pattern) {
+          resOutput.innerHTML = ''
+          return -1       
+        }
+        try {
+          reg = new RegExp(pattern, flag)
+          regError.innerHTML = ''
+        }catch(e) {
+          regError.innerHTML = e.message
+          resOutput.innerHTML = ''
+          return -1
+        }
+
+        let sourceStr = strInput.value
+        let resHTML = ''
+        if (reg.global) {
+          let startIdx = reg.lastIndex
+          let match = null
+          while(match = reg.exec(sourceStr)) {
+            resHTML += sourceStr.slice(startIdx, match.index)
+            resHTML += '<em>' + match[0] + '</em>'
+            startIdx = reg.lastIndex
+            if (match[0] == '') {
+              reg.lastIndex++
+            }
+          }
+          resHTML += sourceStr.slice(startIdx)
+          resOutput.innerHTML = resHTML 
+        }else {
+          let startIdx = reg.lastIndex
+          let match = reg.exec(sourceStr)
+          resHTML += sourceStr.slice(startIdx, match.index)
+          resHTML += '<em>' + match[0] + '</em>'
+          resHTML += sourceStr.slice(match.index + match[0].length)
+          resOutput.innerHTML = resHTML 
+        }
+      }
+      function getFlags() {
+        let flags = ''
+        if (ignoreBox.checked) {
+          flags += 'i'
+        }
+        if (globalBox.checked) {
+          flags += 'g'
+        }
+        if (multiLineBox.checked) {
+          flags += 'm'
+        }
+        if (extendedBox.checked) {
+          flags += 'x'
+        }
+        if (singleLineBox.checked) {
+          flags += 's'
+        }
+        if (unicodeBox.checked) {
+          flags += 'u'
+        }
+        return flags
+      }
+    </script>
+</body>
+</html>

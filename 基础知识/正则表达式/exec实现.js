@@ -139,9 +139,13 @@ String.prototype.split3 = function(reg) {
   while(match = reg.exec(str)){
     let end = match.index
     res.push(str.slice(idx, end))
+    res.push(...match.slice(1)) // 将分组捕获到的内容放入隔板位置
     idx = reg.lastIndex
+    if (match[0] == '') { // 零宽匹配
+      reg.lastIndex++
+    }
   }
-  res.push(str.slice(idx, str.length))
+  res.push(str.slice(idx))
   return res
 }
 
@@ -171,5 +175,107 @@ String.prototype.replace3 = function(reg, replacement) {
     //传值的replacement是函数
     res.push(str.slice(0, begin), replacement, str.slice(end, str.length))
     return res.join('')
+  }
+}
+
+String.prototype.split2 = function (spliter) {
+  var result = []
+  var str = this
+  if (typeof spliter == 'string') {
+    var startIdx = 0
+    var i
+
+    while ((i = str.indexOf(spliter, startIdx)) >= 0) {
+      result.push(str.slice(startIdx, i))
+      startIdx = i + spliter.length
+    }
+
+    result.push(str.slice(startIdx))
+    return result
+  } else {
+    var oldLastIndex = spliter.lastIndex
+    spliter.lastIndex = 0
+
+    if (!spliter.global) {
+      spliter = new RegExp(spliter, spliter.flags + 'g')
+    }
+
+    var startIndex = spliter.lastIndex
+    var match = null
+
+    while (match = spliter.exec(str)) {
+      result.push(str.slice(startIndex, match.index)) // 隔板之前的位置
+      result.push(...match.slice(1)) // 将分组捕获到的内容放入隔板位置
+      startIndex = spliter.lastIndex
+      if (match[0] == '') { // 零宽匹配
+        spliter.lastIndex++
+      }
+    }
+    result.push(str.slice(startIndex))
+
+    spliter.lastIndex = oldLastIndex
+    return result
+  }
+}
+
+String.prototype.replace2 = function (replacer, replacement) {
+  if (typeof replacer == 'string') {
+    var idx = this.indexOf(replacer)
+    if (typeof replacement == 'function') {
+      replacement = replacement(replacer, idx, this)
+    } else {
+      replacement = replacement.split2('$&').join(replacer)
+    }
+    if (idx == -1) {
+      return this
+    } else {
+      return this.slice(0, idx) + replacement + this.slice(idx + replacer.length)
+    }
+  } else {
+    var oldLastIndex = replacer.lastIndex
+    replacer.lastIndex = 0
+    replacement = transformReplacementStringToReplacementFunction(replacement)
+    var result = ''
+
+    var match = null
+    var startIndex = replacer.lastIndex
+    while (match = replacer.exec(this)) {
+      result += this.slice(startIndex, match.index)
+      result += replacement(...match)
+      startIndex = replacer.lastIndex
+      if (match[0] == '') { // 零宽匹配
+        replacer.lastIndex++
+      }
+    }
+    result += this.slice(startIndex)
+
+    return result
+  }
+
+}
+
+
+//将形如'aaa$&bbb$1ccc$2d'的字符串转换为等价的函数
+function transformReplacementStringToReplacementFunction(replacementString) {
+  if (typeof replacementString == 'function') {
+    return replacementString
+  }
+  // replacementString: 'aaa$&bbb$1ccc$2d'
+  var splitted = replacementString.split2(/(\$[\d&])/)
+  // splitted is like ["aaa", "$&", "bbb", "$1", "ccc", "$2", "d"]
+  return function (...args) {
+    var str = ''
+    for (var part of splitted) {
+      if (part.length == 2 && part[0] == '$') { // part is like $& $5 $7
+        if (part[1] == '&') {
+          str += args[0]
+        } else {
+          str += args[part[1]] || ''
+        }
+      } else {
+        str += part
+      }
+    }
+    return str
   }
 }
