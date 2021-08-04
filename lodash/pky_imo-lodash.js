@@ -1639,11 +1639,15 @@ var pky_imo = function () {
   }
   
   function stringifyJson(obj) {
+    //undefined function symbol 序列化时： 
+    //数组转为null;对象忽略;单独传值则是undefined
     let type = typeof obj
     if(type != 'object' || obj === null) {
-      //字符串 undefined function 对象中的key 要加""
-      if(/undefined|function|string/.test(type)) {
+      //字符串  对象中的key 要加"" 
+      if(/string/.test(type)) {
         obj = '"' + obj + '"'
+      }else if(/undefined|function|symbol/.test(type)) {
+        obj = null
       }
       return String(obj)
     }else {
