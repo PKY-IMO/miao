@@ -1,0 +1,44 @@
+footer 吸底
+html:
+  height: 100%;
+body：
+  min-height: 100%;
+  display: flow-root;
+  margin:0;
+  position: relative;
+  padding-bottom: 2em;
+  box-sizing: border-box;
+footer:
+  position: absolute;
+  bottom: 0;
+
+
+headers
+main
+footer
+
+html:
+  height: 100%;
+body：
+  min-height: 100%;
+  display: flex;
+  flex-flow: column;
+main: margin-bottom: auto;
+      或者 flex-grow：1;
+
+float右侧元素不折行：绝对定位脱标设置不折行，左margin为负
+(1) position：absolute;
+    white-space: nowrap; 或者定宽
+    right: 0;
+    top: 0;
+(2) margin-left: -999px;
+
+两栏布局：父盒子 display: flex;
+  问题：aside定宽，右侧main元素flex-grow:1; 右侧内容增多左侧减少
+  原因：默认 flex-shrink:1 flex-basis: auto,
+  方案一： aside：flex-shrink：0
+  方案二： main： width: 0; 或者 flex:1;(flex-basis: 0%;)
+
+  问题：垂直方向内容溢出，overflow：hidden失效
+  原因：父盒子溢出 flex-basis: auto,
+  方案：父盒子：height：0；flex-grow: 1; 或者 flex：1； height： 0；

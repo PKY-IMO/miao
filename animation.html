@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      background-color: #ccc;
+    }
+    span {
+      width: 30px;
+      height: 30px;
+      display: block;
+      border-radius: 50%;
+      position: absolute;
+      transform: translate(-50%,-50%);
+    }
+    span img{
+      width: 100%;
+      height: 100%;
+    }
+    .sun {
+      width: 100px;
+      height: 100px;
+      
+    }
+    .earth {
+      width: 60px;
+      height: 60px;
+    }
+    .moon {
+      width: 20px;
+      height: 20px;
+    }
+  </style>
+</head>
+<body>
+  
+  <span class="sun"><img src="resource/sun.png" alt=""></span>
+  <span class="earth"><img src="resource/earth.png" alt=""></span>
+  <span class="moon"><img src="resource/moon.png" alt=""></span>
+  <script>
+    var sun = document.querySelector('.sun')
+    var earth = document.querySelector('.earth')
+    var moon = document.querySelector('.moon')
+    var earthAngle = 0, moonAngle = 0, sunAngle = 0, lastTime = null
+    var sunR = 100, eathR = 150, moonR = 40, basisX = 200, basisY = 200
+    var baseTime = 0.000000000001
+    var earthH = earth.offsetHeight
+
+
+    function animate(time) {
+      if (lastTime != null) {
+        sunAngle += (time-lastTime) * baseTime;
+        earthAngle = sunAngle * 2.5 * 100000000
+        moonAngle = earthAngle * 13.37
+      }
+      lastTime = time
+
+      sunX = Math.cos(sunAngle) * sunR + basisX 
+      sunY = Math.sin(sunAngle) * sunR + basisY
+
+      earthX = Math.cos(earthAngle) * eathR + sunX 
+      earthY = Math.sin(earthAngle) * eathR + sunY 
+
+      moonX = Math.cos(moonAngle) * moonR + earthX 
+      moonY = Math.sin(moonAngle) * moonR + earthY 
+      
+      sun.style.top = sunY + 'px'
+      sun.style.left = sunX + 'px'
+
+      earth.style.top = earthY + 'px'
+      earth.style.left = earthX + 'px'
+
+      moon.style.top = moonY + 'px'
+      moon.style.left = moonX + 'px'
+      
+      requestAnimationFrame(animate)
+    }
+
+    
+
+    // function animate(time) {
+    //   //time = 10
+    //   earthAngle = time * baseTime;
+    //   moonAngle = earthAngle * 12.1
+
+
+    //   earthX = Math.cos(earthAngle) * eathR + basisX
+    //   earthY = Math.sin(earthAngle) * eathR + basisY
+
+
+
+    //   moonX = Math.cos(moonAngle) * (moonR )+ earthX
+    //   moonY = Math.sin(moonAngle) * (moonR )+ earthY
+    //   earth.style.top = earthY + 'px'
+    //   earth.style.left = earthX+ 'px'
+
+    //   moon.style.top = moonY  + 'px'
+    //   moon.style.left = moonX  + 'px'
+      
+    //   requestAnimationFrame(animate)
+    // }
+
+    requestAnimationFrame(animate)
+  </script>
+</body>
+</html>

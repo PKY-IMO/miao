@@ -1,0 +1,219 @@
+<script>
+
+  // 传入什么属性名，它返回的函数就用来获取对象的什么属性名
+  function property(prop) {// a.b
+    return get.bind(null, window, prop)
+    // return function(obj) {
+    //   return get(obj, prop)
+    // }
+  }
+
+
+  function bind(f, thisArg, ...fixedArgs) { // bind(f, {}, 1, _, _, 3, _, 4)
+    return function(...args) { // 5,8
+      var ary = fixedArgs.slice()
+      var j = 0
+      for (var i = 0; i < ary.length; i++) {
+        if (Object.is(ary[i], bind.placeholder)) {
+          if (j < args.length) {
+            ary[i] = args[j++]
+          } else {
+            ary[i] = undefined
+          }
+        }
+      }
+      while (j < args.length) {
+        ary.push(args[j++])
+      }
+      return f.apply(thisArg, ary)
+    }
+  }
+  bind.placeholder = NaN
+
+  // function f(a,b) {
+  //   return Math.max(10,a,b)
+  // }
+  // var f = Math.max.bind(null, 10)
+
+  function get(object, path, defaultVal = undefined) {
+    path = toPath(path)
+    // return path.reduce((obj, curPath) => {
+    //   return obj[curPath]
+    // }, object)
+
+    for (var i = 0; i < path.length; i++) {
+      if (object == undefined) {
+        return defaultVal
+      } else {
+        object = object[path[i]]
+      }
+    }
+    return object
+  }
+
+  function toPath(val) {
+    if (Array.isArray(val)) {
+      return val
+    } else {
+      return val.split('][')
+        .reduce((ary,it) => ary.concat(it.split('].')), [])
+        .reduce((ary,it) => ary.concat(it.split('[')), [])
+        .reduce((ary,it) => ary.concat(it.split('.')), [])
+    }
+  }
+
+  function get(object, path, defaultVal = undefined) {
+    if (object == undefined) {
+      return defaultVal
+    } else if (path.length == 0){
+      return object
+    } else {
+      return get(object[path[0]], path.slice(1))
+    }
+  }
+
+  function isMatch(object, source) {
+    if (object == source) {
+      return true
+    }
+    if (typeof object !== 'object' || typeof source !== 'object') {
+      return false
+    }
+    for (var key in source) {
+      if (source[key] && typeof source[key] !== 'object') {
+        if (object[key] !== source[key]) {
+          return false
+        }
+      } else {
+        if (!isMatch(object[key], source[key])) {
+          return false
+        }
+      }
+    }
+    return true
+  }
+
+  function matches(src) {
+    // return bind(isMatch, null, window, src)
+    return function(obj) {
+      return isMatch(obj, src)
+    }
+  }
+
+  function matchesProperty(path, val) {
+    return function(obj) {
+      return isEqual(get(obj, path), val)
+    }
+  }
+
+  function iteratee(maybePredicate) {
+    if (typeof maybePredicate == 'function') {
+      return maybePredicate
+    }
+    if (typeof predicate == 'string') {
+      return property(predicate)
+    }
+    if (Array.isArray(predicate)) {
+      return matchesProperty(...predicate)
+    }
+    if (typeof predicate == 'object') {
+      return matches(predicate)
+    }
+  }
+
+
+  function map(collection, mapper) {
+    mapper = iteratee(mapper)
+
+    var result = []
+    for (var key in collection) {
+      result.push(mapper(collection[i], i, collection))
+    }
+    return result
+  }
+
+
+  function filter(collection, predicate) {
+    predicate = iteratee(predicate)
+
+    var result = []
+    for (var key in collection) {
+      if (predicate(collection[i], i, collection) === true) {
+        result.push(collection[i])
+      }
+    }
+    return result
+  }
+
+  function identity(val) {
+    return val
+  }
+
+  function sumBy(ary, predicate = identity) {
+    predicate = iteratee(predicate)
+
+    var s = 0
+    for (var i = 0; i < ary.length; i++) {
+      s += predicate(ary[i])
+    }
+    return s
+  }
+
+  function sum(ary) {
+    return sumBy(ary)
+  }
+
+  function uniq(ary) {
+    return Array.from(new Set(ary))
+  }
+
+  function uniq(ary) {
+    var result = []
+    for (var i = 0; i < ary.length; i++) {
+      if (!result.includes(ary[i])) {
+        result.push(ary[i])
+      }
+    }
+    return result
+  }
+
+  function uniqBy(ary, predicate) {
+    var result = []
+    var seen = []
+    for (var i = 0; i < ary.length; i++) {
+      var computed = predicate(ary[i], i, ary)
+      if (!seen.includes(computed)) {
+        result.push(ary[i])
+        seen.push(computed)
+      }
+    }
+    return result
+  }
+
+  function uniqBy(ary, predicate) {
+    var result = []
+    var seen = new Set()
+    for (var i = 0; i < ary.length; i++) {
+      var computed = predicate(ary[i], i, ary)
+      if (!seen.has(computed)) {
+        result.push(ary[i])
+        seen.add(computed)
+      }
+    }
+    return result
+  }
+
+  function uniqWith(ary, predicate) {
+    var result = []
+    for (var i = 0; i < ary.length; i++) {
+      if ( !result.some(it => predicate(it, ary[i]))   ) {
+        result.push(ary[i])
+      }
+    }
+    return result
+  }
+
+
+
+</script>
+<script src="lodash.js"></script>

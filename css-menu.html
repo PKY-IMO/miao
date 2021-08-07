@@ -3,101 +3,114 @@
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=
+  , initial-scale=1.0">
   <title>Document</title>
   <style>
     *{
       margin: 0;
       padding: 0;
     }
-    .topbar {
-      height: 55px;
-      background-color: rgb(50,50,50);
-      font-size: 20px;
+    body {
+      background-color: rgb(223, 167, 167);
     }
-    .menu {
-      height: 55px;
-      color: rgb(180,180,180);
+    .topbar {
+      width: 100%;
+      height: 90px;
+      position: fixed;
+      top: 0;
+      background-color: #fff;
+      padding-left: 20px;
+      font-size: 18px;
+      text-align: center;
+      min-width: 900px;
+    }
+    li {
+      list-style: none;
+      background-color: #fff;
     }
     .logo {
-      display: block;
       float: left;
-      width: 70px;
-      height: 55px;
+      margin-right: 20px;
     }
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-    }
-    .menu li {
-      list-style: none;
-      width: 100px;
+    .menu>li {
       float: left;
+      padding: 0 10px;
+      line-height: 90px;
       position: relative;
-
-      line-height: 55px;
-      height: 55px;
-      text-align: center;
-    }
-    li:hover {
-      background-color: rgb(80,80,80);
     }
     .menu li ul {
       visibility: hidden;
-    }
-
-    .menu li:hover>ul {
+      width: 200px;
       position: absolute;
-      visibility: visible;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #fff;
     }
-    .sonMenu li:hover .gsonMenu {
-      left: 100%;
+    .sonMenu li {
+      width: 200px;
+      height: 0px;
+      line-height: 50px;
+      position: relative;
+    }
+    li:hover {
+      background-color: rgb(150, 135, 135);
+    }
+    .menu li:hover>ul>li{
+      visibility: visible;
+      height: 50px;
+      /*高度过渡，需要将原始高度设为0*/
+      transition: height 0.3s ease, visibility 2s;
+    }
+    .sonMenu li:hover .gsonMenu{
+      left: 150%;
       top: 0;
     }
-    .menu li ul li {
-      width: 200px;
-      height: 55px;
-      padding: 0 50px;
-      text-align: left;
-      background-color: rgb(50,50,50);
-    }
-    .sonMenu li:hover {
-      background-color: rgb(0, 122, 204);
-    }
 
+    /* 伪元素在li后追加元素*/
+    .sonMenu li::after {
+      content: attr(d-shortKey);
+      position: absolute;
+      right: 20px;
+    }
   </style>
 </head>
 <body>
-
   <nav class="topbar">
     <div class="logo">
-      <img src="/resource/vscode.png" alt="">
+      <img src="./resource/logocsdn.png" alt="">
     </div>
     <ul class="menu">
-      <li>文件(F)
+      <li>首页</li>
+      <li>博客</li>
+      <li>专栏课程
         <ul class="sonMenu">
-          <li>新建文件</li>
-          <li>新建窗口</li>
-          <li>打开文件</li>
-          <li>打开文件夹</li>
-          <li >打开工作区 
-            <ul class="gsonMenu">
-              <li>打开工作区</li>
-              <li>打开工作区</li>
-              <li>打开工作区</li>
-              <li>打开工作区</li>
-            </ul>
-          </li>
-          <li>打开最近的文件</li>
+          <li>二级菜单</li>
+          <li>二级菜单</li>
+          <li>二级菜单</li>
+          <li>二级菜单</li>
         </ul>
       </li>
-      <li>编辑(E)</li>
-      <li>选择(s)</li>
-      <li>查看(V)</li>
-      <li>转到(G)</li>
+      <li>下载</li>
+      <li>问答</li>
+      <li>社区</li>
+      <li>代码>
+        <ul class="sonMenu">
+          <li>下拉菜单</li>
+          <li>下拉菜单</li>
+          <li>下拉菜单</li>
+          <li d-shortkey="cc">下拉菜单
+            <ul class="gsonMenu">
+              <li>三级下拉菜单</li>
+              <li>三级下拉菜单</li>
+              <li>三级下拉菜单</li>
+              <li>三级下拉菜单</li>
+            </ul>
+          </li>
+          <li>下拉菜单</li>
+        </ul>
+      </li>
     </ul>
   </nav>
-
 </body>
 </html>

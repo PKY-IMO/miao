@@ -22,7 +22,7 @@ function flat3(arr) {
 
  ary = [1, [2, [3, [4, 5]]],[8,[5],9],[8,9], 6]
  ary1 = [[[[]]]]
- let depth = 1
+ let depth = 1//wrong
  function flattenArr6(arr) {
   let result = []
   arr.forEach(i => {

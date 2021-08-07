@@ -103,3 +103,7 @@ get: function(){return this}
 })
 
 var obj = f('self')
+
+
+//获取属性描述符
+Object.getOwnPropertyDescriptor(OBJ,'self')

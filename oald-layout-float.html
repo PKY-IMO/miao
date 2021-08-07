@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>oald-float</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    .left {
+      float: left;
+      background-color: yellow;
+      width: 200px;
+      height: 100vh;
+    }
+    .right1 {
+       float: right;
+       width: 100px;
+       height: 100vh;
+       background-color: red;
+    }
+    .right2 {
+       float: right;
+       width: 100px;
+       height: 100vh;
+       background-color: green;
+      }
+    .mid {
+      height: 100vh;
+      overflow: hidden;
+      background-color: pink;
+    }
+    .top {
+      height: 200px;
+      background-color: blue;
+    }
+    .bottom {
+      height: calc(100vh - 200px);
+      overflow: scroll;
+    }
+    .contain {
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+
+      <div class="left">left</div> 
+      <div class="right2">2</div>
+      <div class="right1">1</div>
+      <div class="mid"><div class="top"></div><div class="bottom"><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa, eligendi reprehenderit dicta quasi debitis sint voluptate excepturi officiis maxime quisquam laborum corporis tenetur expedita esse dolore repellat quod id possimus?</p></div></div>
+
+
+
+
+</body>
+</html>

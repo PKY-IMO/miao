@@ -61,6 +61,7 @@ function deepClone2(obj, map = new Map()) {
  * 对特殊数字类型--》null
  * 抛弃所有对象的构造器，指向object
  * boolean、string、number无法区分包装类型
+ * undefined,function,symbol 对象中忽略，数组fanhuinull，单独传值返回undefined
  */
 
 

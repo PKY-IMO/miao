@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    /* body, html {
+      height: 100%;
+    } */
+    .inline {
+      font-size: 0;
+      min-width: 700px;
+    }
+    .header {
+      font-size: 16px;
+      display: inline-block;
+      width: 100%;
+      height: 200px;
+      background-color: red;
+      vertical-align: bottom;
+    }
+    .aside {
+      font-size: 16px;
+      display: inline-block;
+      width: 200px;
+      height: calc(100vh - 200px);
+      background-color: green;
+      vertical-align: bottom;
+    }
+    .main {
+      font-size: 16px;
+      display: inline-block;
+      width: calc(100% - 200px);
+      height: calc(100vh - 200px);
+      background-color: blue;
+      overflow: scroll;  
+      /* min-width: 500px;  只设置这个会换行*/
+    }
+  </style>
+</head>
+<body>
+  <div class="inline">
+    <div class="header"></div>
+    <div class="aside">aa</div>
+    <div class="main">aa</div>
+  </div>
+</body>
+</html>
