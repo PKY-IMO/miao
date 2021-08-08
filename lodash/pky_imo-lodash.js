@@ -589,7 +589,7 @@ var pky_imo = function () {
   }
   
   function xorBy(...args) {
-    let predicate = iteratee(args[args.length - 1])
+    let predicate = iterator(args[args.length - 1])
     let ary = [].concat(...args.slice(0, args.length - 1))
     let res = [], map = new Map()
     for (let item of ary) {
@@ -904,7 +904,7 @@ var pky_imo = function () {
   }
 
   function size(collection) {  
-    return  keys(collection).length
+    return  collection.length || Object.keys(collection).length
   }
 
   function castArray(value){
@@ -1184,7 +1184,7 @@ var pky_imo = function () {
   }
 
   function some(collection, predicate) {
-    predicate = iteratee(predicate)
+    predicate = iterator(predicate)
     for (let key in collection) {
       if (predicate(collection[key], key, collection)) return true
     }
@@ -1297,7 +1297,7 @@ var pky_imo = function () {
   }
 
   function filter(collection, predicate) {
-    predicate = iteratee(predicate)
+    predicate = iterator(predicate)
 
     var result = []
     for (var i in collection) {
