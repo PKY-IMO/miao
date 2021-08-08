@@ -110,18 +110,26 @@
                 phone: phone.value
             }
             stus.push(user)
-            let text = `<tr class="person">
-                    <td>${user.name}</td>
-                    <td>${user.age}</td>
-                    <td>${user.sex}</td>
-                    <td>${user.phone}</td>
-                    <td onclick="remove(${index})">删除</td>
+            let text = ''
+            stus.forEach((item,idx) => {
+                text += `<tr class="person${idx}">
+                    <td>${item.name}</td>
+                    <td>${item.age}</td>
+                    <td>${item.sex}</td>
+                    <td>${item.phone}</td>
+                    <td onclick="remove(${idx})">删除</td>
                 </tr> `
+            })
+             
             //let pre = tody.innerHTML
-            tbody.innerHTML += text
+            tbody.innerHTML = text
         }
         // 3.删除操作
-        
+        function remove(idx) {
+            let target = tbody.getElementsByClassName('person'+idx)[0]
+            stus.splice(idx,1)
+            tbody.removeChild(target)
+        }
 
     </script>
 </body>

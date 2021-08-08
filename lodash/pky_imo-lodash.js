@@ -1168,9 +1168,10 @@ var pky_imo = function () {
 
   function values(obj) {
     let res = []
-    let keyArr = keys(obj)
     for (let key in obj) {
-      if (keyArr.includes(key)) res.push(obj[key])
+      if (obj.hasOwnProperty(key)) {
+        res.push(obj[key])
+      }
     }
     return res
   }
@@ -1215,28 +1216,6 @@ var pky_imo = function () {
       return true
     }else return a == b
   }
-
-  function isMatch(object, source) {
-    if (object == source) {
-      return true
-    }
-    if (typeof source !== 'object' || typeof object !== 'object') {
-      return false
-    }
-    for (var key in source) {
-      if (source[key] && typeof source[key] !== 'object') {
-        if (object[key] !== source[key]) {
-          return false
-        } else {
-          if (!isMatch(bject[key], source[key])) {
-            return false
-          }
-        }
-      }
-    }
-    return true
-  }
-
 
   function reverse(arr) {
     if (arr.length <= 1) return arr
@@ -1529,7 +1508,7 @@ var pky_imo = function () {
   }
   
   function isTypedArray(value) {
-    return getType(value) === 'typedarray'
+    return getType(value) === 'unit8array'
   }
   
   function isWeakMap(value) {

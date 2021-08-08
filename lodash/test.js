@@ -1276,21 +1276,7 @@ function insertSort(array) {
   return array
 }
 
-function orderBy(arr, iter = [identity], orders) {
-  for (var i = 1; i < arr.length; i++) {
-    var t = arr[i]
-    for (var j = i - 1; j >= 0; j--) {
-      // if (arr[j] > t)
-      if (comparetor2(arr[j], t, iter, orders) > 0) {
-        arr[j + 1] = arr[j]
-      } else {
-        break
-      }
-    }
-    arr[j + 1] = t
-  }
-  return arr
-}
+
 
 function zip(...arr) {
   let num = arr.length
@@ -1306,19 +1292,7 @@ function zip(...arr) {
   return res
 }
 
-function comparetor2(a, b, iter, orders) {
-  let iterArr = zip(iter, orders)
-  for (let it of iterArr) {
-    let f = iteratee(it[0])
-    let flag = it[1] == 'asc' ? 1 : -1
-    if ( f(a) > f(b)) {
-      return 1*flag
-    }else if ( f(a) < f(b)){
-      return -1*flag
-    }else continue
-  }
-  return 0
-}
+
 
 function comparetor(a, b, iterator) {
   for (let it of iterator) {
@@ -1848,3 +1822,80 @@ function xorBy(...args) {
   return res
 }
 console.log(xorBy([{x:1},{x:2},{x:1}],'x'))
+
+function isEmpty(value) {
+  // 不是 object、string
+  if (!isObjectLike(value) && typeof value !== 'string') return true 
+  // map set
+  if (getType(value) === 'map' || getType(value) === 'set') return value.size === 0 
+  // 类数组对象 string 之类
+  if (isArrayLike(value)) return value.length === 0
+  // object对象
+  return keys(value).length === 0
+}
+
+function orderBy(arr, iter = [identity], orders) {
+  for (var i = 1; i < arr.length; i++) {
+    var t = arr[i]
+    for (var j = i - 1; j >= 0; j--) {
+      // if (arr[j] > t)
+      if (comparetor2(arr[j], t, iter, orders) > 0) {
+        arr[j + 1] = arr[j]
+      } else {
+        break
+      }
+    }
+    arr[j + 1] = t
+  }
+  return arr
+}
+
+function comparetor3(a, b, iter, orders) {
+  for (let i = 0; i < iter.length; i++) {
+    let f = (obj) => obj[iter[i]]
+    let flag = orders[i] == 'asc' ? 1 : -1
+    if ( f(a) > f(b)) {
+      return 1*flag
+    }else if ( f(a) < f(b)){
+      return -1*flag
+    }
+  }
+  return 0
+}
+
+function orderBy(arr, iter = [identity], orders) {
+  function comparetor3(a, b, iter, orders) {
+    for (let i = 0; i < iter.length; i++) {
+      let f = (obj) => obj[iter[i]]
+      let flag = orders[i] == 'asc' ? 1 : -1
+      if ( f(a) > f(b)) {
+        return 1*flag
+      }else if ( f(a) < f(b)){
+        return -1*flag
+      }
+    }
+    return 0
+  }
+
+  for (var i = 1; i < arr.length; i++) {
+    var t = arr[i]
+    for (var j = i - 1; j >= 0; j--) {
+      // if (arr[j] > t)
+      if (comparetor3(arr[j], t, iter, orders) > 0) {
+        arr[j + 1] = arr[j]
+      } else {
+        break
+      }
+    }
+    arr[j + 1] = t
+  }
+  return arr
+}
+
+var users = [
+  { 'user': 'fred',   'age': 48 },
+  { 'user': 'barney', 'age': 34 },
+  { 'user': 'fred',   'age': 40 },
+  { 'user': 'barney', 'age': 36 }
+]
+console.log(orderBy(users, ['user', 'age'], ['asc', 'desc']))
