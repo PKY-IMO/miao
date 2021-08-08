@@ -800,11 +800,24 @@ var pky_imo = function () {
   }
 
   function orderBy(arr, iter = [identity], orders) {
+    function comparetor3(a, b, iter, orders) {
+      for (let i = 0; i < iter.length; i++) {
+        let f = (obj) => obj[iter[i]]
+        let flag = orders[i] == 'asc' ? 1 : -1
+        if ( f(a) > f(b)) {
+          return 1*flag
+        }else if ( f(a) < f(b)){
+          return -1*flag
+        }
+      }
+      return 0
+    }
+
     for (var i = 1; i < arr.length; i++) {
       var t = arr[i]
       for (var j = i - 1; j >= 0; j--) {
         // if (arr[j] > t)
-        if (comparetor2(arr[j], t, iter, orders) > 0) {
+        if (comparetor3(arr[j], t, iter, orders) > 0) {
           arr[j + 1] = arr[j]
         } else {
           break
@@ -1007,7 +1020,7 @@ var pky_imo = function () {
     // 类数组对象 string 之类
     if (isArrayLike(value)) return value.length === 0
     // object对象
-    return keys(value).length === 0
+    return Object.keys(value).length === 0
   }
   
   function isEqual(a, b) {
@@ -1418,6 +1431,7 @@ var pky_imo = function () {
         .reduce((ary,it) => ary.concat(it.split('.')), [])
     }
   }
+
 
 
   function comparetor2(a, b, iter, orders) {
