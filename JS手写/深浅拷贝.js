@@ -91,3 +91,43 @@ let a = { val: 2,
 a.target = a
 let cpy = deepClone(a)
 console.log(cpy)
+
+function deepClone(obj, hash = new WeakMap()) {
+  if (obj instanceof RegExp) return new RegExp(obj)
+  if (obj instanceof Date) return new Date(obj)
+  if (obj === null || typeof obj !== 'object') {
+    return obj
+  }
+  if (hash.has(obj)) return obj
+
+  let t = new obj.constructor()
+  hash.set(obj, t)
+  if (Object.prototype.toString.call(obj) == '[object Map]') {
+    obj.forEach((val, key) => {
+      t.set(key, deepClone(obj.get(key), hash))    
+    });
+  }else if (Object.prototype.toString.call(obj) == '[object Set]') {
+    obj.forEach((val,key)=> {
+      t.add(deepClone(obj.get(key), hash))
+    })
+  }else {
+    for (let key in obj) {
+      if (obj.hasOwnProperty(key)) {
+        t[key] = deepClone(obj[key], hash)
+      }
+    }
+  }
+  return t
+}
+
+let a = { val: 2,
+  w: {
+    h : 4
+  },
+}
+
+let map = new Map()
+map.set(1,2)
+map.set(a,2)
+
+console.log(deepClone(map))

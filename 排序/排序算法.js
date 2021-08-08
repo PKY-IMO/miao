@@ -26,7 +26,7 @@ function swap(array, i, j) {
   return array
 }
 
-/**
+/**选择排序
  * 时间复杂度：O(n * n)
  * 空间复杂度：O(1)
  */
@@ -65,7 +65,7 @@ function insertSort(array) {
 
 /**
  * 希尔排序：将数组一分为二分别排序，再将两个有序数组合并
- * 时间复杂度：n*log(n)
+ * 时间复杂度：n*log(n)-
  * 空间复杂度：n
  */
  function shellSort(array) {
@@ -209,7 +209,7 @@ function isSorted(array) {
   return true
 }
 
-//不稳定的排序算法 ： 选择，快速
+//不稳定的排序算法 ： 选择，快速,堆排
 
 function countSort(array) {
   let max = array.reduce((prev,item) => item > prev ? item : prev)

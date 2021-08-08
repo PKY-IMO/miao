@@ -1280,7 +1280,7 @@ var pky_imo = function () {
   }
 
   function sum(arr) {
-    return reduce(arr, (a,b)=> a+b)
+    return arr.reduce((a,b)=> a+b)
   }
 
   function sumBy(arr, f) {
@@ -1522,7 +1522,7 @@ var pky_imo = function () {
   }
   
   function isTypedArray(value) {
-    return getType(value) === 'unit8array'
+    return getType(value) === 'uint8array'
   }
   
   function isWeakMap(value) {

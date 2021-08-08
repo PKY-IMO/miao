@@ -1306,21 +1306,7 @@ function comparetor(a, b, iterator) {
   return 0
 }
 
-function sortBy(arr, iteratees = [identity]) {
-  for (var i = 1; i < arr.length; i++) {
-    var t = arr[i]
-    for (var j = i - 1; j >= 0; j--) {
-      // if (arr[j] > t)
-      if (comparetor(arr[j], t, iteratees) > 0) {
-        arr[j + 1] = arr[j]
-      } else {
-        break
-      }
-    }
-    arr[j + 1] = t
-  }
-  return arr
-}
+
 
 function partition(collection, predicate = identity) {
   predicate = iteratee(predicate)
@@ -1892,10 +1878,50 @@ function orderBy(arr, iter = [identity], orders) {
   return arr
 }
 
+
+function sortBy(arr, iteratees = [identity]) {
+  function comparetor4(a, b, iterator) {
+    for (let it of iterator) {
+      let f = typeof it == 'function' ? it : (obj)=>obj[it]
+      if ( f(a) > f(b)) {
+        return 1
+      }else if ( f(a) < f(b)){
+        return -1
+      }else continue
+    }
+    return 0
+  }
+  for (var i = 1; i < arr.length; i++) {
+    var t = arr[i]
+    for (var j = i - 1; j >= 0; j--) {
+      // if (arr[j] > t)
+      if (comparetor4(arr[j], t, iteratees) > 0) {
+        arr[j + 1] = arr[j]
+      } else {
+        break
+      }
+    }
+    arr[j + 1] = t
+  }
+  return arr
+}
+
+function comparetor4(a, b, iterator) {
+  for (let it of iterator) {
+    let f = typeof it == 'function' ? it : (obj)=>obj[it]
+    if ( f(a) > f(b)) {
+      return 1
+    }else if ( f(a) < f(b)){
+      return -1
+    }else continue
+  }
+  return 0
+}
+
 var users = [
   { 'user': 'fred',   'age': 48 },
   { 'user': 'barney', 'age': 34 },
   { 'user': 'fred',   'age': 40 },
   { 'user': 'barney', 'age': 36 }
 ]
-console.log(orderBy(users, ['user', 'age'], ['asc', 'desc']))
+console.log(sortBy(users, ['user', 'age']))

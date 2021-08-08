@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #fa{
+            width: 600px;
+            height: 600px;
+            border:1px solid red;
+        }
+        #fa>div{
+            width: 33%;
+            height: 33%;
+            border: 1px solid red;
+            float: left;
+            line-height: 200px;
+            text-align: center;
+            font-size: 30px;
+            font-weight: bold;
+        }
+        #start{
+            cursor: pointer;
+            background-color: pink;
+        }
+        .click {
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="fa">
+        <div class="option">a老师</div>
+        <div class="option">b老师</div>
+        <div class="option">v老师</div>
+        <div class="option">g老师</div>
+        <div id="start">开始抽奖</div>
+        <div class="option">g南</div>
+        <div class="option">ga</div>
+        <div class="option">mb</div>
+        <div class="option">kk</div>
+    </div>
+
+    <script>
+        // 逻辑：1.点击开始，触发一个定时器  
+        // 2.定时器内部，随机一个数，通过这个数来获取  奖品所在的元素
+        // 3.必须设置一个时间点，停止定时器,5秒停止
+        let btn = document.getElementById('start');
+        let options = document.getElementsByClassName('option');
+        let timer = null;
+        let pre = 0
+        btn.onclick = function() {
+            if(!timer) {
+                let t = 0
+                timer = setInterval(()=>{
+                    t++
+                    options[pre].style.backgroundColor = 'white'
+                    let random = Math.floor(Math.random()*8)
+                    let target = options[random]
+                    target.style.backgroundColor = 'red'
+                    pre = random
+                    if( t>= 30) {
+                        clearInterval(timer)
+                        timer = null
+                    }
+                },100)
+            }
+        }
+
+
+
+
+    </script>
+</body>
+</html>
