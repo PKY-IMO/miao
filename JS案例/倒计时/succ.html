@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="author"/>
+    <title>Document</title>
+    <style>
+        div{
+            margin:0 auto;
+            width: 500px;
+        }
+        #jumpTo{
+            color: red;
+            font-size: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <h2>恭喜您，支付成功</h2>
+        <span id="jumpTo">3</span>秒后自动返回首页
+        <p><button>立即返回</button></p>
+    </div>
+    <script>
+        window.onload = function() {
+            let time = 3
+            setInterval(() => {
+                time--
+                jumpTo.innerText = time
+                if(time <= 0) {
+                    location.href = 'https://www.baidu.com/'
+                }
+            }, 1000);
+        }
+        let back = document.getElementsByTagName('button')[0]
+        back.onclick = function() {
+            location.href = 'https://www.baidu.com/'
+        }
+    </script> 
+</body>
+
+</html>

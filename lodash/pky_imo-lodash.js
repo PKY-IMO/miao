@@ -291,7 +291,7 @@ var pky_imo = function () {
     // 2.The Strict Equality Comparison Algorithm ( === ) 
     //    (1) NaN===NaN          // false      (2) 0 === -0         // true
     // 3.SameValue (Object.is()) 
-    //    (1)Object.is(NaN, NaN) // true       (2) Object.is(0, -0) // false
+    //    (1)Object.is(NaN, NaN) // true       (2) Object.is(0, -0) // false//Object.is(0,+0)true
     // *4.SameValueZero (has includes) const a = [0, NaN]
     //    (1) a.includes(NaN)    // true       (2) a.includes(-0)   // true 
     return array.filter((item) => {
@@ -749,7 +749,7 @@ var pky_imo = function () {
 
   function groupBy(collection, iter) {
     let map = {}
-    iter = iteratee(iter)
+    iter = iterator(iter)
     for (let item of collection) {
       let key = iter(item)
       if(!(key in map)) {
@@ -1444,7 +1444,7 @@ var pky_imo = function () {
   function comparetor2(a, b, iter, orders) {
     let iterArr = zip(iter, orders)
     for (let it of iterArr) {
-      let f = iteratee(it[0])
+      let f = iterator(it[0])
       let flag = it[1] == 'asc' ? 1 : -1
       if ( f(a) > f(b)) {
         return 1 * flag

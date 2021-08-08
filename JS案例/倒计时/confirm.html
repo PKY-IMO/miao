@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div{
+            width: 200px;
+            height: 280px;
+            background-color: #eee;
+            padding: 20px;
+            margin:0 auto;
+        }
+        button{
+            margin: 30px 25px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <p>
+            <button>取消</button>
+            <button>支付</button>
+        </p>
+    </div>
+    <script>
+        let pay = document.getElementsByTagName('button')[1]
+        pay.onclick = function() {
+            let res = window.confirm('确定支付')
+            if (res) {
+                location.href = './succ.html'
+            }
+        }
+    </script>
+</body>
+</html>

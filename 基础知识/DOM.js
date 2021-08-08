@@ -294,14 +294,14 @@ matches() 元素是否匹配选择器
 ```
 dom尺寸位置相关属性：
 滚动：
-srollTop scrollLeft 元素【滚动条】到顶部的距离
-边框：
-clientLeft clientTop 元素边框的宽度(粗细) left可加滚动条
+srollTop scrollLeft 元素【滚动条】到顶部的距离//goTop
 偏移量：
 offsetLeft offsetTop  左上角相对于定位元素的父元素左上角的偏移量。 相当于定位元素的 left top 属性。
+边框：
+clientLeft clientTop 元素边框的宽度(粗细) left可加滚动条
 
 元素宽高：
-  clientWidth、clientHeight： padding-box - 滚动条（17）
+  clientWidth、clientHeight： padding-box - 滚动条（17）可视区域
   scrollWidth、scrollHeight： padding-box - 滚动条 包括隐藏的尺寸
   offsetWidth、offsetHeight： border-box 
 

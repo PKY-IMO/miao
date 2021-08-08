@@ -1077,23 +1077,7 @@ function findIndex(arr, f, idx = 0) {
   return -1
 }
 
-function xorBy(...args) {
-  let predicate = iteratee(args[args.length - 1])
-  let ary = [].concat(...args.slice(0, args.length - 1))
-  let res = [], map = new Map()
-  for (let item of ary) {
-    let i = predicate(item)
-    if (map.has(i)) {
-      map.set(i, map.get(i)+1)
-      let idx = findIndex(res, it => predicate(it) == i)
-      res.splice(idx,1)
-    }else {
-      map.set(i, 1)
-      res.push(item)
-    }
-  }
-  return res
-}
+
 
 function xorWith(...args) {
   let compare = args[args.length - 1]
@@ -1845,3 +1829,22 @@ function stringifyJson(obj) {
   }
 }
 console.log(stringifyJson(parseJson('[1,"fooo",[1,222235,true],{"a":1,"b":[1,2,3],"c":{"x":1,"yyy":false}},5,null]')))
+
+function xorBy(...args) {
+  let predicate = iteratee(args[args.length - 1])
+  let ary = [].concat(...args.slice(0, args.length - 1))
+  let res = [], map = new Map()
+  for (let item of ary) {
+    let i = predicate(item)
+    if (map.has(i)) {
+      map.set(i, map.get(i)+1)
+      let idx = findIndex(res, it => predicate(it) == i)
+      res.splice(idx,1)
+    }else {
+      map.set(i, 1)
+      res.push(item)
+    }
+  }
+  return res
+}
+console.log(xorBy([{x:1},{x:2},{x:1}],'x'))
