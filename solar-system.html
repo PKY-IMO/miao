@@ -15,7 +15,7 @@
       display: block;
       border-radius: 50%;
       position: absolute;
-      transform: translate(-50%,-50%);
+      /* transform: translate(-50%,-50%); */
     }
     span img{
       width: 100%;
@@ -59,14 +59,14 @@
       }
       lastTime = time
 
-      sunX = Math.cos(sunAngle) * sunR + basisX 
-      sunY = Math.sin(sunAngle) * sunR + basisY
+      sunX = Math.cos(sunAngle) * sunR + basisX - sun.clientWidth/2
+      sunY = Math.sin(sunAngle) * sunR + basisY - sun.clientHeight/2
 
-      earthX = Math.cos(earthAngle) * eathR + sunX 
-      earthY = Math.sin(earthAngle) * eathR + sunY 
+      earthX = Math.cos(earthAngle) * eathR + sunX + sun.clientWidth/2 - earth.clientWidth/2
+      earthY = Math.sin(earthAngle) * eathR + sunY + sun.clientHeight/2 - earth.clientHeight/2
 
-      moonX = Math.cos(moonAngle) * moonR + earthX 
-      moonY = Math.sin(moonAngle) * moonR + earthY 
+      moonX = Math.cos(moonAngle) * moonR + earthX + earth.clientWidth/2 - moon.clientWidth/2
+      moonY = Math.sin(moonAngle) * moonR + earthY + earth.clientHeight/2 - moon.clientHeight/2
       
       sun.style.top = sunY + 'px'
       sun.style.left = sunX + 'px'

@@ -5,18 +5,50 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <style>
+    div {
+      width: 100px;
+      height: 100px;
+      background-color: red;
+      position: absolute;
+      overflow: scroll;
+    }
+  </style>
 </head>
 <body>
-  <div>
-    <div>
-      <span id="mm">1</span>
-      <span id="a">a</span>
-      <span id="gg">2</span>
-      <div>   das
-      
-        <span id="b">b</span> 
-      </div>
-    </div>
+  <div id="div">
+
   </div>
+  <script>
+      div.onclick = function() {
+        console.log(this.clientWidth)//不可改
+        console.log(this.offsetTop)//不可改
+        // checkbox.check = true //check属性可以直接读取
+        // input.value = '111' //input的value可以直接获取
+        // img.src = 'resource/1.jpg' //img的src可以直接获取
+        // document.body.scrollTop = 0 
+        div.style.width = 200 + 'px'
+        //div.style.top = 100 +'px' //css要有设置
+        this.style.backgroundPositionY = 100+'px'
+        // e.keyCode == 38
+        //div.style.display = 'none'
+        this.style.backgroundColor =  '#eee'
+      }
+
+
+      let goTop = document.getElementsByClassName('goTop')[0]
+        window.onscroll = function() {
+            let pos = document.documentElement.scrollTop || document.body.scrollTop
+            if (pos > 400) {
+                goTop.style.display = 'block'
+            }else {
+                goTop.style.display = 'none'
+            }
+        }
+        goTop.onclick = function() {
+            document.documentElement.scrollTop = 0
+            document.body.scrollTop = 0
+        }
+  </script>
 </body>
 </html>

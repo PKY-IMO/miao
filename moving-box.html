@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    div {
+      width: 50px;
+      height: 50px;
+      position: absolute;
+    }
+    .red {
+      background-color: red;
+    }
+    .blue {
+      background-color: blue;
+    }
+  </style>
+</head>
+<body>
+  <div style="left:100px;top:100px;" class="red"></div>
+  <div style="left:200px;top:100px;" class="blue"></div>
+  <script>
+    // 实现按了一个按钮就一直朝一个方向移动，
+    // 多个组合重复按要消除 需要判断相反按钮的点击状态，所以需要绑定松开事件
+    
+    let red = document.querySelector('.red')
+    let blue = document.querySelector('.blue')
+    class Box {
+      constructor(box) {
+        this.box = box
+        this.left = false
+        this.right = false
+        this.up = false
+        this.down = false
+        this.vx = 0
+        this.vy = 0
+      }
+    }
+    let redBox = new Box(red)
+    let buleBox = new Box(blue)
+    let userArr = [redBox, buleBox]
+    //0:right 1:left 2:up 3:down
+    let keyArr = [['ArrowRight','d'],['ArrowLeft','a'],['ArrowUp','w'],['ArrowDown','s']]
+
+    function keyDown(e, userMap){   
+      if(keyArr[0].includes(e.key)) {
+        let index = keyArr[0].indexOf(e.key)
+        userArr[index].right = true
+        if (userArr[index].left) {
+          userArr[index].vx = 0
+        }else {
+          userArr[index].vx = 1
+        }
+      }
+      if(keyArr[1].includes(e.key)) {
+        let index = keyArr[1].indexOf(e.key)
+        userArr[index].left = true
+        if (userArr[index].right) {
+          userArr[index].vx = 0
+        }else {
+          userArr[index].vx = -1
+        }
+      }
+      if(keyArr[2].includes(e.key)) {
+        let index = keyArr[2].indexOf(e.key)
+        userArr[index].up = true
+        if (userArr[index].down) {
+          userArr[index].vy = 0
+        }else {
+          userArr[index].vy = 1
+        }
+      }
+      if(keyArr[3].includes(e.key)) {
+        let index = keyArr[3].indexOf(e.key)
+        userArr[index].down = true
+        if (userArr[index].up) {
+          userArr[index].vy = 0
+        }else {
+          userArr[index].vy = -1
+        }
+      }
+
+    }
+
+    function keyUp(e, userMap){   
+      if(keyArr[0].includes(e.key)) {
+        let index = keyArr[0].indexOf(e.key)
+        userArr[index].right = false
+        if (!userArr[index].left) {
+          userArr[index].vx = 0
+        }else {
+          userArr[index].vx = -1
+        }
+      }
+      if(keyArr[1].includes(e.key)) {
+        let index = keyArr[1].indexOf(e.key)
+        userArr[index].left = false
+        if (!userArr[index].right) {
+          userArr[index].vx = 0
+        }else {
+          userArr[index].vx = 1
+        }
+      }
+      if(keyArr[2].includes(e.key)) {
+        let index = keyArr[2].indexOf(e.key)
+        userArr[index].up = false
+        if (!userArr[index].down) {
+          userArr[index].vy = 0
+        }else {
+          userArr[index].vy = -1
+        }
+      }
+      if(keyArr[3].includes(e.key)) {
+        let index = keyArr[3].indexOf(e.key)
+        userArr[index].down = false
+        if (!userArr[index].up) {
+          userArr[index].vy = 0
+        }else {
+          userArr[index].vy = 1
+        }
+      }
+
+    }
+
+    document.addEventListener('keydown', keyDown)
+    document.addEventListener('keyup', keyUp)
+    // document.addEventListener('keydown',function(){   
+    //   if(e.key === 'ArrowRight') {
+    //     right = true
+    //     if (left) {
+    //       vx = 0
+    //     }else {
+    //       vx = 1
+    //     }
+    //   }
+    //   if(e.key === 'ArrowLeft') {
+    //     left = true
+    //     if (right) {
+    //       vx = 0
+    //     }else {
+    //       vx = -1
+    //     }
+    //   }
+    //   if(e.key === 'ArrowUp') {
+    //     up = true
+    //     if (down) {
+    //       vy = 0
+    //     }else {
+    //       vy = 1
+    //     }
+    //   }
+    //   if(e.key === 'ArrowDown') {
+    //     down = true
+    //     if (up) {
+    //       vy = 0
+    //     }else {
+    //       vy = -1
+    //     }
+    //   }
+
+    // })
+    
+    // document.addEventListener('keyup', function(e){
+    //   if(e.key === 'ArrowRight') {
+    //     right = false
+    //     if (!left) {
+    //       vx = 0
+    //     }else {
+    //       vx = -1
+    //     }
+    //   }
+    //   if(e.key === 'ArrowLeft') {
+    //     left = false
+    //     if (!right) {
+    //       vx = 0
+    //     }else {
+    //       vx = 1
+    //     }
+    //   }
+    //   if(e.key === 'ArrowUp') {
+    //     up = false
+    //     if (!down) {
+    //       vy = 0
+    //     }else {
+    //       vy = -1
+    //     }
+    //   }
+    //   if(e.key === 'ArrowDown') {
+    //     down = false
+    //     if (!up) {
+    //       vy = 0
+    //     }else {
+    //       vy = 1
+    //     }
+    //   }
+    // })
+
+    let lastTime = 0 //键盘点击频率比帧刷新频率低，插帧让画面流畅
+    function move(time) {
+      let timeDiff = (time - lastTime)*0.1
+      lastTime = time
+      //box.clientWidth 是自身的宽高 box.offsetLeft左侧距离 整数
+      for (let i = 0; i < userArr.length; i++) {
+        userArr[i].box.style.left = parseFloat(userArr[i].box.style.left) + userArr[i].vx * timeDiff + 'px'
+        userArr[i].box.style.top = parseFloat(userArr[i].box.style.top) - userArr[i].vy * timeDiff + 'px'
+      }
+        
+      requestAnimationFrame(move)
+    }
+    requestAnimationFrame(move)
+  </script>
+</body>
+</html>

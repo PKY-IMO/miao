@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./jq.js"></script>
+    <style>
+        table,
+        th,
+        td {
+            border: 1px solid black;
+        }
+
+        table {
+            border-collapse: collapse;
+            margin-top: 30px;
+            margin-bottom: 30px;
+            width: 600px;
+            text-align: center;
+        }
+        td,th{
+            width: 120px;
+        }
+        button {
+            border: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <table>
+        <tr>
+            <th><button class="all" id='all'>全选</button></th>
+            <th>商品名称</th>
+            <th>单价</th>
+            <th>数量</th>
+            <th>小计</th>
+            <th>操作</th>
+        </tr>
+        <tr class='goods' id='list1'>
+            <td><input type="checkbox" name="" class="getGoods"> </td>
+            <td>电脑</td>
+            <td class="price">200</td>
+            <td>
+                <button class="minus" >-</button>
+                <span>1</span>
+                <button class="add" >+</button>
+            </td>
+            <td class="total">200</td>
+            <td class="del">删除</td>
+        </tr>
+        <tr class='goods' id='list2'>
+            <td><input type="checkbox" name=""  class="getGoods"> </td>
+            <td>手机</td>
+            <td class="price">100</td>
+            <td>
+                <button class="minus" >-</button>
+                <span>1</span>
+                <button class="add" >+</button>
+            </td>
+            <td class="total">100</td>
+            <td class="del">删除</td>
+        </tr>
+    </table>
+    <div>
+        <span>总计：</span>
+        <span class="sum">0</span>
+    </div>
+
+    <script>
+        let goods = document.getElementsByClassName('goods')
+        let total = document.getElementsByClassName('total')
+        let price = document.getElementsByClassName('price')
+        let totalSum = document.getElementsByClassName('sum')[0]
+        let checkbox = document.getElementsByClassName('getGoods')
+        let checkAll = document.getElementById('all')
+        let flag = false
+        getSum()
+        checkAll.onclick = function() {
+            if(!flag) {
+                flag = !flag
+                for (let i = 0; i < checkbox.length; i++) {
+                    checkbox[i].checked = true
+                }
+                this.innerText = '全不选'
+                getSum()
+            }else {
+                flag = !flag
+                for (let i = 0; i < checkbox.length; i++) {
+                    checkbox[i].checked = false
+                }
+                this.innerText = '全选'
+                getSum()
+            }
+        }
+        function getSum() {
+            let sum = 0
+            for(let i = 0; i < total.length; i++) {
+                if(checkbox[i].checked) {
+                    sum += total[i].innerText | 0
+                }
+            }
+            totalSum.innerText = sum
+        }
+        for(let i = 0; i < goods.length; i++) {
+            let addBtn = goods[i].getElementsByClassName('add')[0]
+            let minusBtn = goods[i].getElementsByClassName('minus')[0]
+            goods[i].lastElementChild.onclick = function() {
+                goods[i].parentNode.removeChild(goods[i])
+                getSum()
+            }
+            addBtn.onclick = function() {
+                let count = this.previousElementSibling.innerText
+                this.previousElementSibling.innerText = ++count
+                total[i].innerText = price[i].innerText * count
+                getSum()
+            }
+            minusBtn.onclick = function() {
+                let count = --this.nextElementSibling.innerText
+                if (count < 0) count = 0
+                this.nextElementSibling.innerText = count
+                total[i].innerText = price[i].innerText * count
+                getSum()
+            }
+            checkbox[i].onclick = function() {
+                let allCheck = true, allNoCheck = true
+                for (let j = 0; j < checkbox.length; j++) {
+                    if (checkbox[j].checked == false) {
+                        allCheck = false
+                    }else {
+                        allNoCheck = false
+                    }
+                }
+                if (allCheck) {
+                    flag = true
+                    checkAll.innerText = '全不选'
+                }else {
+                    flag = false
+                    checkAll.innerText = '全选'
+                }
+                getSum()
+            }
+        }
+        
+    </script>
+
+</body>
+
+</html>

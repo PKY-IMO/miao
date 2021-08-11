@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <button id='test' onclick="fun()">aaa</button>
+  <script>
+    //test.onclick 不仅会覆盖test.onclick   也会覆盖声明在行内的onclick ，
+    function fun(){
+      console.log('hi')
+    }
+    test.addEventListener('click',function(){
+      console.log('addEventListener')
+    })
+    test.onclick = function(){ 
+      console.log('onclick')
+    }
+    //优先级问题
+    //行内的事件，优先于绑定事件， 如果不是行内的事件则按顺序执行 
+    //注意onclik的覆盖问题，覆盖的是行内onclick则为dom0级别事件，优先执行
+    // DOM0和DOM2的主要区别:
+    // 同一个元素绑定相同的DOM0级事件,后面的事件会覆盖先定义的事件;
+    //而同一个元素绑定相同的DOM2级事件,事件会按顺序执行;
+    // DOM0级事件是默认冒泡执行的;DOM2级事件可指定是冒泡仍是捕获执行
+
+    test.addEventListener('click', function(){},true)//useCapture 捕获阶段执行
+    test.addEventListener('click',function(){}, {
+      capture: true,//捕获阶段执行
+      passive: true, //被动事件，指事件函数中不会调用preventDefault()方法，提前告诉浏览器可以同时执行函数和默认行为，里面写了则报错
+    })
+  </script>
+</body>
+</html>

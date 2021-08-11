@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		#box{
+			width:512px;
+			height: 536px;
+			border:1px solid red;
+			background: url('./bg2.jpg') no-repeat 0px -1000px;
+			position: relative;
+		}
+		#plane{
+			position: absolute;
+			bottom: 100px;
+			left:200px;
+		}
+		button {
+			position: relative;
+			left: 200px;
+			top: 10px;
+		}
+	</style>
+</head>
+<body>
+	<div id="box">
+		<img src="./me.png" alt="" id="plane">
+	</div>
+	<button id="start">start</button>
+	<script>
+		// 逻辑
+		// 1.背景图片向下移动
+		let box = document.getElementById('box');
+		let plane = document.getElementById('plane');
+		let startBtn = document.getElementById('start')
+		let timer = null
+		startBtn.onclick = function() {
+			if(!timer) {
+				this.innerText = 'restart'
+				let count = 0
+				timer = setInterval(function(){
+					count++
+					if(count >= 1000) count=0
+					box.style.backgroundPositionY = -1000 + count +'px'
+				}, 10)
+			}else {
+				this.innerText = 'start'
+				box.style.backgroundPositionY = -1000 + 'px'
+				clearInterval(timer)
+				timer = null
+			}
+		}
+		window.addEventListener('keydown', function(e) {
+			e = e || window.event
+			if(timer) {
+				if(e.keyCode == 38) {//上
+					let top = plane.offsetTop - 10
+					if (top <= 0) top = 0
+					plane.style.top = top + 'px';
+				}
+				if(e.keyCode == 40) {//下
+					let top = plane.offsetTop + 10
+					if (top >= 460) top = 460
+					plane.style.top = top + 'px';
+				}
+				if(e.keyCode == 37) {//左
+					let left = plane.offsetLeft - 10
+					if (left <= 0) left = 0
+					plane.style.left = left + 'px';
+				}
+				if(e.keyCode == 39) {//右
+					let left = plane.offsetLeft + 10
+					if (left >= 400) left = 400
+					plane.style.left = left + 'px';
+				}	
+			}			
+		})
+
+		
+
+
+	</script>
+</body>
+</html>

@@ -86,3 +86,25 @@ console.log(add(1)(2, 3)); // 6
 console.log(add(1, 2)(3)); // 6
 console.log(add(1, 2, 3)); // 6
 
+
+
+// 4+2-1=5
+console.log((4).add(2).minus(1)); // 5
+Number.prototype.add = function(n) {
+  // this为 Number {4} 实例对象
+  // this.valueOf()为Number {4}的基本数字值4
+  return this.valueOf() + n;
+};
+Number.prototype.minus = function(n) {
+  return this.valueOf() - n;
+};
+
+// 同样，也可以添加乘、除的方法
+Number.prototype.mul = function(n) {
+  return this.valueOf() * n;
+};
+
+Number.prototype.div = function(n) {
+  return this.valueOf() / n;
+};
+

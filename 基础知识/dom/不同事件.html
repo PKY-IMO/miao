@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+    <input id="key">key</input>
+    <p id="click">click</p>
+    <script>
+      //键盘事件 
+      // keydown 可重复触发 keyCode key小写/process  code
+      //  keypress 获取输入内容 charCode 
+      // $0.tabIndex=1  $0.removeAttribute('tabindex') 
+      // 元素必须有焦点才可以触发键盘事件
+
+      key.addEventListener("keydown",function(e){
+        console.log(e)
+      })
+
+      //鼠标事件 clientX 鼠标距窗口左上角位置 与getBoundingclientRect计算鼠标相对于元素的位置
+      // pageX pageY
+      //mousedown mouseup 不会重复触发
+      //CSS pointEvents:null 可以设置不可以被点
+      //click 的target为同时包含 mousedown mouseup 的最内侧元素
+      //双击事件 dblclick
+      // 按键buttons which 0无，1左，2中，3右键   111 中右左 buttons 左1 中2 右4
+      //mousemove 也可以得到按键事件 绑定在窗口上
+      //进入元素离开 mouseover 和 mouseout 可以得到relatedTarget  进入子元素会先out再over 自动冒泡也可以
+      //mouseenter mouseleave 
+      //mouseleave 仅在指针离开元素时被触发，不冒泡；
+      //而 mouseout 在指针离开元素或进入该元素的子元素时均会被触发，冒泡。
+      click.addEventListener('click',function(e){
+        console.log(e)
+      })
+
+      function mousePos(node) {
+        let box = node.getBoundingClientRect() //DOMRext {x:,y:,width,height:,top,left}
+        return {
+          x: window.event.clientX - box.x,
+          y: window.event.clientY - box.y,
+        }
+      }
+    </script>
+</body>
+</html>

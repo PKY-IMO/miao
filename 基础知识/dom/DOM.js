@@ -292,7 +292,7 @@ matches() 元素是否匹配选择器
 
 
 ```
-dom尺寸位置相关属性：
+dom尺寸位置相关属性：div.clientWidth
 滚动：
 srollTop scrollLeft 元素【滚动条】到顶部的距离//goTop
 偏移量：
@@ -334,3 +334,115 @@ function swapNode(idA, idB) {
   pA.removeChild(a)
   pB.removeChild(b)
 }
+
+function swapNode(a,b) {
+  if (a.contains(b) || b.contains(a)) {
+    return
+  }
+  var placeholder = document.createTextNode('')
+  a.parentNode.insertBefore(placeholder, a)
+  b.parentNode.replaceChild(a, b)
+  a.parentNode.replaceChild(b,placeholder)
+}
+
+
+```
+<button onclick="foo(event);xxx;"></button>  //this指向window //event实参 window.event
+with(document) {
+  with(button) {
+    btn.onclick = function() {
+      foo(event);xxx;
+    }
+  }
+}
+
+btn.onclick = foo //this指向btn
+
+
+
+DOM0级别优先于dom2
+btn.onclick 【覆盖】也可定义在标签内，DOM0级事件流，冒泡时发生，一个事件只能绑定一个函数 getter setter 
+
+btn.addEventListener('click',function,false/true) 【不覆盖】 dom2 按照js代码顺序执行, false为默认冒泡，true为捕获，DOM
+btn.onclick
+
+btn.removeEventListner('click', once)
+
+一个事件发生，window.event指向这个事件
+
+事件流：事件模型
+event.stopImmediatePropagation()  既能阻止事件向父元素冒泡，也能阻止元素同事件类型的其它监听器被触发
+event.stopPropagation() 阻止事件冒泡到父元素，阻止任何父事件处理程序被执行||
+                  最新：所有元素分为目标阶段和冒泡阶段 阻止元素向下一个阶段传播（同阶段可以运行）  || 原来目标函数所有阶段都执行，不按照捕获冒泡顺序
+                  下一行代码正常执行
+event. preventDefault() 阻止默认行为  userselect:none  事件selectstrat
+事件处理函数返回值没有用
+目标元素：
+event.target //srcElement  (事件委托：由元素的公共祖先绑定事件，事件冒泡原理)
+event.currentTarget 当前监听事件的对象
+
+DOM1映射文档html
+DOM2 事件接口 addEventLisener
+DOM3 读取滚动
+
+contextmenu 右键
+selectstart 选中文本 css：uer-select:none
+beforeunload 离开时提醒
+```
+
+```事件委托案例:
+    <ul>
+      <li>1</li>
+      <li>2</li>
+      <li>3</li>
+    </ul>
+```
+```
+  let ul = document.querySelector('ul')
+  ul.addEventListener('click', (e) => {
+      console.log(Array.from(ul.children).indexOf(e.target)+1)
+  })
+```
+```
+<div id="a">
+    aaaa
+  <div id="b">
+      bbbb
+    <div id="c">
+        cccc
+      <div id="d">
+          dddd
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+    document.getElementById("a").addEventListener("click", function (e) {
+        console.log(
+            "target:" + e.target.id + "&currentTarget:" + e.currentTarget.id
+        );
+    });
+    document.getElementById("b").addEventListener("click", function (e) {
+        console.log(
+            "target:" + e.target.id + "&currentTarget:" + e.currentTarget.id
+        );
+    });
+    document.getElementById("c").addEventListener("click", function (e) {
+        console.log(
+            "target:" + e.target.id + "&currentTarget:" + e.currentTarget.id
+        );
+    });
+    document.getElementById("d").addEventListener("click", function (e) {
+        console.log(
+            "target:" + e.target.id + "&currentTarget:" + e.currentTarget.id
+        );
+    });
+</script>
+
+当我们点击最里层的元素d的时候，会依次输出:
+target:d&currentTarget:d
+target:d&currentTarget:c
+target:d&currentTarget:b
+target:d&currentTarget:a
+```

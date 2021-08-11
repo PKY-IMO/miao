@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    div {
+      width: 100px;
+      height: 100px;
+      position: absolute;
+    }
+    .red {
+      background-color: red;
+    }
+    .blue {
+      background-color: blue;
+      top: 80px;
+      left: 80px;
+    }
+    .orange {
+      background-color:  orange;
+      top: 120px;
+      left: 200px;
+    }
+  </style>
+</head>
+<body>
+  <div class="red"></div>
+  <div class="blue"></div>
+  <div class="orange"></div>
+  <script>
+    let target = null, innerPos = null, border = null
+    let w = window.innerWidth
+    let h = window.innerHeight
+    let z = 1
+    function getInnerPos(target) {
+      return {
+        x: window.event.clientX - target.offsetLeft,
+        y: window.event.clientY - target.offsetTop
+      }
+    }
+    function moveInner(e) {
+      let w = document.documentElement.clientWidth
+      let h = document.documentElement.clientHeight - 10
+      if(e.clientX <= innerPos.x) {
+        target.style.left = innerPos.x
+      }else if (e.clientX >= w - target.clientWidth + innerPos.x) {
+        target.style.left = w - target.clientWidth + innerPos.x
+      }else  {
+        target.style.left = e.clientX - innerPos.x + 'px'
+      }
+      if(e.clientY <= innerPos.y) {
+        target.style.top = innerPos.y
+      }else if (e.clientX >= h - target.clientHeight+ innerPos.y) {
+        target.style.top = h - target.clientHeight + innerPos.y
+      }else  {
+        target.style.top = e.clientY - innerPos.y + 'px'
+      }
+
+
+    }
+    function move(e) {
+      target.style.left = e.clientX - innerPos.x + 'px'
+      target.style.top = e.clientY - innerPos.y + 'px'
+    }
+    function clear(e) {
+      //target.style.removeProperty('z-index')
+      console.log(1)
+      target = null
+      innerPos = null
+      document.removeEventListener('mousemove', move)
+      document.removeEventListener('mouseup', clear)
+
+    }
+    function createBorder(target, innerPos) {
+      let border = document.createElement('div')
+      border.style.width = w - target.clientWidth + 'px'
+      border.style.height = h - target.clientHeight + 'px'
+      border.style.left = innerPos.x + 'px'
+      border.style.top = innerPos.y + 'px'
+      border.style.border = '1px solid red'
+      document.body.appendChild(border)
+    }
+
+    document.addEventListener('mousedown', function (e){
+      if(document.body.contains(e.target)){
+        target = e.target
+        innerPos = getInnerPos(target)
+        //setAttribute 添加属性
+        //target.style在style表里的内容
+        target.style.zIndex = z
+        z++
+        // border = createBorder(target, innerPos)
+
+        document.addEventListener('mousemove', move)
+        document.addEventListener('mouseup', clear)
+        document.documentElement.addEventListener('mouseleave', clear)
+        // if(border) {
+        //   border.addEventListener('mouseover', clear)
+        // }
+
+      }
+    })
+  </script>
+</body>
+</html>
