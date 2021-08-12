@@ -45,47 +45,31 @@
     //0:right 1:left 2:up 3:down
     let keyArr = [['ArrowRight','d'],['ArrowLeft','a'],['ArrowUp','w'],['ArrowDown','s']]
 
-    function keyDown(e, userMap){   
+    function keyDown(e){   
       if(keyArr[0].includes(e.key)) {
         let index = keyArr[0].indexOf(e.key)
         userArr[index].right = true
-        if (userArr[index].left) {
-          userArr[index].vx = 0
-        }else {
-          userArr[index].vx = 1
-        }
+        userArr[index].vx = 1
       }
       if(keyArr[1].includes(e.key)) {
         let index = keyArr[1].indexOf(e.key)
         userArr[index].left = true
-        if (userArr[index].right) {
-          userArr[index].vx = 0
-        }else {
-          userArr[index].vx = -1
-        }
+        userArr[index].vx = -1
       }
       if(keyArr[2].includes(e.key)) {
         let index = keyArr[2].indexOf(e.key)
         userArr[index].up = true
-        if (userArr[index].down) {
-          userArr[index].vy = 0
-        }else {
-          userArr[index].vy = 1
-        }
+        userArr[index].vy = 1
       }
       if(keyArr[3].includes(e.key)) {
         let index = keyArr[3].indexOf(e.key)
         userArr[index].down = true
-        if (userArr[index].up) {
-          userArr[index].vy = 0
-        }else {
-          userArr[index].vy = -1
-        }
+        userArr[index].vy = -1
       }
 
     }
 
-    function keyUp(e, userMap){   
+    function keyUp(e){   
       if(keyArr[0].includes(e.key)) {
         let index = keyArr[0].indexOf(e.key)
         userArr[index].right = false

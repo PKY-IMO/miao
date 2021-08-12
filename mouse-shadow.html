@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      width: 100vw;
+      height: 100vh;
+    }
+    div {
+      width: 20px;
+      height: 20px;
+      background-color: pink;
+      position: absolute;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="div"></div>
+  <div id="div"></div>
+  <div id="div"></div>
+  <div id="div"></div>
+  <div id="div"></div>
+  <script>
+     //  逻辑：1.先获取鼠标的X、Y坐标
+     // 2.给div进行位置赋值 left 、 top
+    let div = Array.from(document.querySelectorAll('div'))
+    let arr = new Array(5).fill(0)
+    document.addEventListener('mouseenter', function (e){
+      arr.fill({x: e.clientX,y: e.clientY})
+      document.addEventListener('mousemove', move)   
+      document.body.addEventListener('mouseleave', function once(){
+        div.forEach(el => {el.style.display = 'none'})
+        document.removeEventListener('mousemove', move)
+    })
+    })
+    
+    
+    function move(e) {
+      arr.shift()
+      arr.push({x: e.clientX,y: e.clientY})
+      if(arr.length == 5) {
+        div.forEach((el, idx) => {
+          el.style.display = 'block'
+          el.style.left = arr[idx].x- el.clientWidth/2 + 'px'
+          el.style.top = arr[idx].y - el.clientHeight/2 + 'px'
+        })
+      }
+
+    }
+  </script>
+</body>
+</html>

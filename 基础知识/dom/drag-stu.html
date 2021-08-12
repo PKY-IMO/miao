@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      div {
+        position: absolute;
+        height: 80px;
+        width: 80px;
+        border: white;
+        /* border-radius: 10%; */
+        z-index: 0;
+      }
+      div:nth-child(1) {
+        background-color: hsl(190, 40%, 70%);
+        top: 80px;
+        left: 80px;
+      }
+      div:nth-child(2) {
+        top: 20px;
+        background-color: hsl(300, 80%, 70%);
+        left: 80px;
+      }
+      div:nth-child(3) {
+        background-color: hsl(50, 80%, 70%);
+        top: 80px;
+        left: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div></div>
+      <div></div>
+      <div></div>
+    </main>
+    <script>
+      let trigger = false
+      let position = {
+        x: 0,
+        y: 0,
+      }
+      Array.from(document.querySelectorAll('div')).forEach((e) => {
+        e.addEventListener('mousedown', function (e) {
+          trigger = true
+          let pos = e.target.getBoundingClientRect()
+          position.x = e.clientX - pos.left || 0
+          position.y = e.clientY - pos.top || 0
+        })
+        e.addEventListener('mousemove', function (e) {
+          if (trigger) {
+            let left = e.clientX - position.x
+            let top = e.clientY - position.y
+            e.target.style.left = left + 'px'
+            e.target.style.top = top + 'px'
+          }
+        })
+        e.addEventListener('mouseup', function (e) {
+          trigger = false
+        })
+      })
+    </script>
+  </body>
+</html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    main {
+      width: 500px;
+      height: 500px;   
+      position: relative;   
+    }
+    svg {
+      width: 500px;
+      height: 500px;
+      border: 1px solid red;
+    }
+    input[type="color"] {
+      position: absolute;
+      left: 100px;
+    }
+    input[type="range"] {
+      position: absolute;
+      left: 200px;
+    }
+    
+  </style>
+</head>
+<body>
+  <main>
+    <svg></svg>
+    <input type="color">
+    <input type="range">
+  </main>
+
+  <script>
+    let svg = document.querySelector('svg')
+    let colorControl = document.querySelector('input[type="color"]')
+    let rangeControl = document.querySelector('input[type="range"]')
+    const svgNS ="http://www.w3.org/2000/svg"
+    const svgX = svg.getBoundingClientRect().x//offsetLeft
+    const svgY = svg.getBoundingClientRect().y//offsetTop
+    let startPos = null
+    let nowPos = null
+    let color = colorControl.value
+    let width = rangeControl.value
+    let flag = false
+    function getPos() {
+      return {
+        x: window.event.clientX - svgX,
+        y: window.event.clientY - svgY
+      }
+    }
+    function draw(){
+      //解决越界问题
+      if (flag){
+        nowPos = getPos()
+        if(!startPos) {
+          startPos = nowPos
+        }
+        let line = drawLine()
+        svg.appendChild(line)
+        startPos = nowPos  
+      }
+    }
+    function clear(){
+      flag = false
+      startPos = null
+      svg.removeEventListener('mousemove', draw)
+      svg.removeEventListener('mouseup', clear)
+      svg.removeEventListener('mouseleave', clear)
+    }
+    function drawLine() {
+      let line = document.createElementNS(svgNS, 'line') 
+      line.setAttribute('x1', startPos.x)
+      line.setAttribute('y1', startPos.y)
+      line.setAttribute('x2', nowPos.x)
+      line.setAttribute('y2', nowPos.y)
+      line.setAttribute('stroke', color)
+      line.setAttribute('stroke-width',width /10)
+      return line
+    }
+    
+    svg.addEventListener('mousedown', function (){
+      flag = true
+      svg.addEventListener('mousemove', draw)
+      svg.addEventListener('mouseup', clear)
+      //离开元素
+      svg.addEventListener('mouseleave', clear)
+    })
+    // document.addEventListener('mouseup', function() {
+    //   flag = false
+    //   startPos = null
+    // })
+    // svg.addEventListener('mouseleave', function() {
+    //   flag = false
+    //   startPos = null
+    // })
+
+    //变色
+    colorControl.addEventListener('change', function() {
+      color = colorControl.value
+    })
+    //变粗
+    rangeControl.addEventListener('change', function(){
+      width = rangeControl.value
+    })
+    //回退
+    document.addEventListener('keydown', function(e) {
+      if(e.ctrlKey && e.key === 'z') {
+        if(svg.hasChildNodes()) {
+          svg.removeChild(svg.lastElementChild)
+        }        
+      }
+    })
+    // let control = false
+    // document.addEventListener('keydown', function(e){
+    //   if (e.key === 'Control') {
+    //     control = true
+    //   }
+    //   if (control && e.key === 'z') {
+    //     if(svg.hasChildNodes()) {
+    //       svg.removeChild(svg.lastElementChild)
+    //     }
+    //   }
+    // })
+    // document.addEventListener('keyup', function(e) {
+    //   if (e.key === 'control') {
+    //     control = false
+    //   }
+    // })
+    // document.addEventListener('keyup', function(e) {
+    //   if (e.key === 'z') {
+    //     control = false
+    //   }
+    // })
+    
+
+    
+
+  </script>
+</body>
+</html>

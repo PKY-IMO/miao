@@ -1,7 +1,7 @@
 function MyNew(fn, ...args) {
-  // let obj = {}
-  // obj.__proto__ = fn.prototype
-  let obj = Object.create(Constructor.prototype)
+  let obj = {}
+  obj.__proto__ = fn.prototype
+  // let obj = Object.create(fn.prototype)
   let res = fn.call(obj, ...args)
   return typeof res === 'object' ? res : obj
 }

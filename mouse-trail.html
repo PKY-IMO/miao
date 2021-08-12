@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    div {
+      width: 20px;
+      height: 20px;
+      background-color: paleturquoise;
+      border-radius: 50%;
+      position: absolute;
+    }
+  </style>
+</head>
+<body>
+  <div></div>
+  <div></div>
+  <div></div>
+  <script>
+    //盒子随着鼠标移动而以鼠标的位置为圆心旋转
+    // 先写一个盒子转
+    let box = document.querySelectorAll('div')
+    // mouseenter mouseleave 不冒泡 
+    // mousemove得进去
+    function trail(box, begin, speed) {
+      let centerX = 0, centerY = 0, distance = 50, 
+          start = Math.PI * begin / 180,
+          angle = start, speed2
+
+      document.addEventListener('mousemove', function(e){
+        // let dis = Math.sqrt(e.movementX**2 + e.movementY**2)/10 + 1
+        // speed2 = dis  > 2 ? 2 : dis
+        centerX = e.clientX
+        centerY = e.clientY
+      })
+
+      function animate(time) {
+        // console.log(speed2)
+        // angle = time * (speed*speed2) + start
+        // speed2 = 1
+        angle = time * speed + start
+        boxX = Math.cos(angle) * distance + centerX - box.clientWidth/2
+        boxY = Math.sin(angle) * distance + centerY - box.clientHeight/2
+        
+        box.style.top = boxY + 'px'
+        box.style.left = boxX + 'px'
+        
+        requestAnimationFrame(animate)
+      }
+      requestAnimationFrame(animate)
+
+      // let interval=0
+      // setInterval(function(){
+      //   interval += 16
+      //   angle = interval * 0.001 + start
+
+      //   boxX = Math.cos(angle) * distance + centerX - box.clientWidth/2
+      //   boxY = Math.sin(angle) * distance + centerY - box.clientHeight/2
+        
+      //   box.style.top = boxY + 'px'
+      //   box.style.left = boxX + 'px'
+      // }, 16)
+    }
+    trail(box[0], 0, 0.003)
+    trail(box[1], 120, 0.003)
+    trail(box[2], 240, 0.003)
+
+
+    
+  </script>
+</body>
+</html>

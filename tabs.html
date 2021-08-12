@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .box {
+      width: 400px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      margin: 5px 50px;
+      padding: 20px;
+      position: relative;
+      font-family: system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans","Liberation Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";;
+    }
+    .box div {
+      opacity: 0;
+      width: 400px;
+      color: dimgrey;
+      text-indent: 2em;
+      word-break: break-all;
+      position: absolute;
+      overflow: hidden;
+    }
+    .box div::first-line {
+      color: black;
+    }
+    div[data-tabname].visible {
+      opacity: unset;
+      transition: all 1s;
+    }
+    ul {
+      top: 0;
+      display: flex;
+      word-break: break-all;
+      border-bottom: 1px solid #ccc;
+      margin: 0;
+      padding-left: 0;
+      margin-bottom: 10px;
+      height: 30px;
+
+    }
+    li {
+      display: float;
+      float: left;
+      list-style: none;
+      width: 60px;
+      padding: 0;
+    }
+    button {
+      font-size: 16px;
+      width: 100%;
+      height: 30px;
+      position: relative;
+      top: 1px;
+      border: none;
+      border-bottom: 1px solid #ccc;
+      background-color: #fff;
+      padding: 5px;
+      box-sizing: border-box;
+    }
+    button:hover {
+      border-top-left-radius: 3px;
+      border-top-right-radius: 3px;
+      border-top: 1px solid #ccc;
+      border-left: 1px solid #ccc;
+      border-right: 1px solid #ccc;
+    }
+    .click {
+      color: #0d6efd;
+      border-top-left-radius: 3px;
+      border-top-right-radius: 3px;
+      border: 1px solid #ccc;
+      border-bottom: 1px solid white;
+    }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <div data-tabname="Home" class="visible">Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique neque, doloremque voluptates nulla id tempore debitis molestiae atque laborum? Veritatis obcaecati tenetur, dolor nobis ut placeat quo necessitatibus repellendus tempore!</div>
+    <div data-tabname="Link">Consequuntur, eaque iure ipsa aliquid pariatur eum fuga enim incidunt! Nostrum excepturi voluptatum quaerat iure culpa quo quam consectetur reiciendis ullam iste, labore hic saepe accusantium sit sapiente quidem fuga.</div>
+    <div data-tabname="About">Animi itaque reiciendis modi voluptatem doloremque. Sit consequuntur porro quisquam sunt in? Dolor consequatur qui ab iure autem amet, vero itaque quod quibusdam, minus voluptas atque neque odit sequi repellat?</div>
+  </div>
+
+
+  <!-- <ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item" role="presentation">
+      <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Home</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Profile</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Contact</button>
+    </li>
+  </ul>
+  <div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">...</div>
+    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">...</div>
+    <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
+  </div> -->
+
+  <script>
+    let node = document.querySelector('div')
+
+    function asTabs(node) {
+      let parent = node
+      
+      let ul = document.createElement('ul')
+
+      let children = Array.from(parent.querySelectorAll('div'))
+
+      let h = 0
+      children.forEach(el => {
+        let li = document.createElement('li')
+        let button = document.createElement('button')
+
+        let tabname = el.getAttribute('data-tabname')
+        let show = el.classList.contains('visible')
+        if (show) {
+          h = el.clientHeight
+          button.classList.add('click')
+        }
+        button.setAttribute('target', tabname)
+        button.innerText = tabname
+
+        // button.onclick = function show() {
+        //   // div全部隐藏，target显示
+        //   children.forEach(el=>el.classList.remove('visible'))
+        //   let tabname = this.getAttribute('target')
+        //   let target = parent.querySelector(`div[data-tabname = ${tabname}]`)
+        //   target.classList.add('visible')
+        //   //button显示高亮
+        //   let buttons = node.querySelectorAll('button')
+        //   console.log(buttons)
+        //   buttons.forEach(el => el.classList.remove('click'))
+        //   this.classList.add('click')
+        // }
+        li.appendChild(button)
+        ul.appendChild(li)
+      })
+
+      // 事件委托
+      parent.addEventListener('click', function show(e) {
+        if(e.target.tagName !== 'BUTTON') {
+          return
+        }
+        let button = e.target
+        // div全部隐藏，target显示
+        children.forEach(el=>el.classList.remove('visible'))
+        let tabname = button.getAttribute('target')
+        let target = parent.querySelector(`div[data-tabname = ${tabname}]`)
+        target.classList.add('visible')
+        //button显示高亮
+        let buttons = parent.querySelectorAll('button')
+        buttons.forEach(el => el.classList.remove('click'))
+        button.classList.add('click')
+        parent.style.height = 30 + target.clientHeight + 'px'
+      })
+
+      parent.insertBefore(ul, parent.firstElementChild)
+      parent.style.height = 30 + h + 'px'
+    }
+    
+    asTabs(node)
+
+  </script>
+</body>
+</html>

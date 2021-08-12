@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    div {
+      width: 100px;
+      height: 100px;
+      position: absolute;
+    }
+    .red {
+      background-color: red;
+    }
+    .blue {
+      background-color: blue;
+      top: 80px;
+      left: 80px;
+    }
+    .orange {
+      background-color:  orange;
+      top: 120px;
+      left: 200px;
+    }
+  </style>
+</head>
+<body>
+  <div class="red"></div>
+  <div class="blue"></div>
+  <div class="orange"></div>
+  <script>
+    let target = null, innerPos = null, hasMove = false
+    let w = window.innerWidth
+    let h = window.innerHeight
+    let z = 1
+    function getInnerPos(target) {
+      return {
+        x: window.event.clientX - target.offsetLeft,
+        y: window.event.clientY - target.offsetTop
+      }
+    }
+    function move(e) {
+      if(hasMove) {
+        target.style.left = e.clientX - innerPos.x + 'px'
+        target.style.top = e.clientY - innerPos.y + 'px'
+      }
+    }
+    function clear(e) {
+      if(hasMove) {
+        target = null
+        innerPos = null
+        hasMove = false
+      }
+    }
+
+    document.addEventListener('mousedown', function (e){
+      if(document.body.contains(e.target)){
+        target = e.target
+        innerPos = getInnerPos(target)
+        target.style.zIndex = z
+        z++
+        hasMove = true
+      }
+    })
+    document.addEventListener('mouseover', move)
+    document.addEventListener('mouseleave', clear)
+    document.addEventListener('mouseup', clear)
+  </script>
+</body>
+</html>
