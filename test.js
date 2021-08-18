@@ -1,71 +1,126 @@
+(function fairyDustCursor() {
 
-function lastSurvivors(str) {
-  let reg = /([a-z])[^\\1]*\1/g
-  while (reg.test(str)) {
-    str = str.replace(reg, ($0,$1) => {
-      let code = $1.charCodeAt() + 1
-      if( code == 123) code = 97
-      return String.fromCharCode(code) + $0.slice(1,$0.length-1)
-    })
+  var possibleColors = ["#D61C59", "#E7D84B", "#1B8798"]
+  var width = window.innerWidth;
+  var height = window.innerHeight;
+  var cursor = { x: width / 2, y: width / 2 };
+  var particles = [];
+
+  function init() {
+    bindEvents();
+    loop();
   }
-  return str
-}
-str = "zzzab"
 
+  // Bind events that are needed
+  function bindEvents() {
+    document.addEventListener('mousemove', onMouseMove);
+    document.addEventListener('touchmove', onTouchMove);
+    document.addEventListener('touchstart', onTouchMove);
 
-reg = /(^\*([^\*]+) matches .+\2$)|(^(.+) matches \4$)|(^([^\*]+)\* matches \6(.+)$)|(.*\*([^*])([^*]+)([^*]*)\*.* matches [^\\8]+\8\9\10[^\\10]+$)/
-str = '*hormog matches hormogonium'
+    window.addEventListener('resize', onWindowResize);
+  }
 
+  function onWindowResize(e) {
+    width = window.innerWidth;
+    height = window.innerHeight;
+  }
 
-ret = /(^\*([^\*]+) matches (.+)(\2)$)/
-
-console.log(str.match(ret))
-
-function maskify(cc) {
-  if (cc.length <= 4) return cc
-  let reg = /^(\w+)(\w{4})$/
-  return cc.replace(reg, (_,$1,$2)=> { console.log($1,$2); return'#'.repeat($1.length)+$2})
-}
-
-console.log(maskify('4556364607935616'))
-
-function decipherThis(str) {
-  //have fun!
-    let reg = /\d+/g
-    let reg2 = /\b(\w+)\b/g
-    let arr
-    return str.replace(reg, x=>String.fromCharCode(x|0)).replace(reg2, (match)=>{
-      let len = match.length
-      if (len<=2) return match
-      arr = match.split('')
-
-      let t = arr[len-1]
-      arr[len - 1] =arr[1]
-      arr[1] = t 
-      return arr.join('')
-    })
-  
-  }; 
-  console.log(decipherThis('72eva 97 103o 97t 116sih 97dn 115ee 104wo 121uo 100o'))
-  
-  function uniqBy(arr, iteratee) {
-    var it = compare(iteratee)
-    let map = {}, res = []
-    arr.forEach((item) => {
-      let key = it(item)
-      if (!(key in map)) {
-        map[key] = item
-        res.push(item)
+  function onTouchMove(e) {
+    if (e.touches.length > 0) {
+      for (var i = 0; i < e.touches.length; i++) {
+        addParticle(e.touches[i].clientX, e.touches[i].clientY, possibleColors[Math.floor(Math.random() * possibleColors.length)]);
       }
-    })
-    return res
+    }
   }
 
+  function onMouseMove(e) {
+    cursor.x = e.clientX;
+    cursor.y = e.clientY;
 
-  let  kua = 0
-  if(kua = 5) 
-    console.log(kua)
-  
+    addParticle(cursor.x, cursor.y, possibleColors[Math.floor(Math.random() * possibleColors.length)]);
+  }
+
+  function addParticle(x, y, color) {
+    var particle = new Particle();
+    particle.init(x, y, color);
+    particles.push(particle);
+  }
+
+  function updateParticles() {
+
+    for (var i = 0; i < particles.length; i++) {
+      particles[i].update();
+    }
+
+    for (var i = particles.length - 1; i >= 0; i--) {
+      if (particles[i].lifeSpan < 0) {
+        particles[i].die();
+        particles.splice(i, 1);
+      }
+    }
+
+  }
+
+  function loop() {
+    requestAnimationFrame(loop);
+    updateParticles();
+  }
+
+  function Particle() {
+
+    this.character = "*";
+    this.lifeSpan = 120; //ms
+    this.initialStyles = {
+      "position": "fixed",
+      "top": "0", //必须加
+      "display": "block",
+      "pointerEvents": "none",
+      "z-index": "10000000",
+      "fontSize": "20px",
+      "will-change": "transform"
+    };
+
+    this.init = function (x, y, color) {
+
+      this.velocity = {
+        x: (Math.random() < 0.5 ? -1 : 1) * (Math.random() / 2),
+        y: 1
+      };
+
+      this.position = { x: x - 10, y: y - 20 };
+      this.initialStyles.color = color;
+      console.log(color);
+
+      this.element = document.createElement('span');
+      this.element.innerHTML = this.character;
+      applyProperties(this.element, this.initialStyles);
+      this.update();
+
+      document.body.appendChild(this.element);
+    };
+
+    this.update = function () {
+      this.position.x += this.velocity.x;
+      this.position.y += this.velocity.y;
+      this.lifeSpan--;
+
+      this.element.style.transform = "translate3d(" + this.position.x + "px," + this.position.y + "px,0) scale(" + (this.lifeSpan / 120) + ")";
+    }
+
+    this.die = function () {
+      this.element.parentNode.removeChild(this.element);
+    }
+
+  }
+
+  function applyProperties(target, properties) {
+    for (var key in properties) {
+      target.style[key] = properties[key];
+    }
+  }
+
+  init();
+})();
   
 
 

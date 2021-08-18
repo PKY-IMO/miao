@@ -8,12 +8,34 @@
 </head>
 <body>
   <input type="text">
+  <textarea name="" id="text" cols="30" rows="10"></textarea>
   <script>
     let specialInput = document.querySelector('input')
     // change在回车之后触发，input直接输入就触发
     specialInput.addEventListener('input', function(){
       let text = specialInput.value
       specialInput.value = text.replace(/[QWX]/g,'')
+    })
+
+
+    let textarea = document.getElementById('text')
+    textarea.addEventListener('keydown', e=>{
+      if(e.key === 'Q' || e.key === 'W') {
+        e.preventDefault()
+      }
+    })
+    textarea.addEventListener('paste', e=>{console.log(e)})
+    textarea.addEventListener('drop',e=>{})
+
+    // textarea 原型上的value属性的属性描述符,因为是访问属性不能直接
+    var prevValue = Object.getOwnPropertyDescriptor(textarea.__proto__, 'value')
+    Object.defineProperty(textarea, 'value', {
+      get: function() {
+        return prevValue.get.call(this)
+      },
+      set: function(val) {
+        return prevValue.set.call(this, val.replace(/[QWX]/g, '*'))
+      }
     })
   </script>  
 </body>

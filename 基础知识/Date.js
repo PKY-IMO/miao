@@ -28,4 +28,13 @@ d2 = new Date(2021, 7, 28) //2021-08-27T16:00:00.000Z 八月
 
 d3 = new Date('2021/07/28') //正确
 
+function fmtDate(obj){
+  var date =  new Date(obj);
+  var y = date.getFullYear();
+  var m = "0"+(date.getMonth()+1);
+  var d = "0"+date.getDate();
+  return y+"-"+m.substring(m.length-2,m.length)+"-"+d.substring(d.length-2,d.length);
+}
+
+
 

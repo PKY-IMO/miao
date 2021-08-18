@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>记事本</title>
+  <style>
+    * {
+      xbox-shadow: inset 0 0  1px 1px red;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Courier New', Courier, monospace;
+    }
+    header {
+      height: 20px;
+      width: 100vw;
+      padding: 0;
+      background-color: #ccc;
+    }
+    main {
+      width: 100vw;
+      border-top: 1px solid grey;
+      overflow: hidden;
+      height: calc(100vh - 20px);
+      display: flex;
+    }
+    aside {
+      width: 100px;
+      float: left;
+      padding: 10px 4px 0;
+      /* margin-bottom: -100vh; */ 
+      flex: 0 1 auto;
+      border-right: 1px solid grey;
+      overflow-y: auto;
+    }
+    section {
+      overflow: hidden;
+      position: relative;
+      /* padding-bottom: 100vh;
+      margin-bottom: -100vh; */
+      flex: 1;
+      background-size: contain;
+      background-position: right;
+      background-repeat: no-repeat;
+      background-image: url(./resource/note2.jpg) ;
+
+    }
+    div note {
+      width: 200px;
+
+    }
+    div.box {
+      position: absolute;
+      background-color: #fff;
+      width: 200px;
+      min-width: 200px;
+      min-height: 170px;
+      padding: 10px 10px 25px;
+      box-shadow: 0 15px 45px rgb(0,0,0,.1);
+      resize: both;
+      overflow: auto;
+      left: 10px;
+      top: 10px;
+      border-radius: 5px;
+      background-size: contain;
+      background-position: right;
+      background-repeat: no-repeat;
+      background-image: url(./resource/note2.jpg) ;
+    }
+
+    p.content {
+      z-index: 3;
+      width: 100%;
+      height: 120px;
+      background-color: rgb(204, 204, 204,0.3);
+      /* 必需同时设置overflow */
+      resize: vertical;
+      overflow: auto;
+      padding: 5px;
+      outline: none;
+    }
+    .box p:focus,.box h3:focus {
+      border: 1px solid rgb(138, 108, 113);
+    }
+    .box h3 {
+      border: 1px solid white;
+      margin-right: 0;
+      outline: none;
+    }
+    .box::before {
+      content: attr(date);
+      display: inline-block;
+      position: absolute;
+      right: 10px;
+      bottom: 5px;
+      color: black;
+      font-size: 4px;
+    }
+
+
+    ul li {
+      margin-top: 5px;
+      background-color: #fff;
+      box-shadow: 0 15px 45px rgb(0,0,0,.3);
+      position: relative;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      padding:0 5px;
+      border-radius: 2px;
+    }
+    li:hover {
+      transform: translateY(1px);
+    }
+    .show {
+      box-shadow: 0 15px 45px rgb(0,0,0,.3);
+      background-color: rgba(0,0,0, 0.3);
+      border: 1px solid rgb(158, 158, 158);
+      color: white;
+      /* background-color: rgb(235, 181, 190);
+      color: white;
+      border: 1px solid rgb(206, 154, 163); */
+    }
+
+    /* 加号按钮 */
+    .add {
+      width: 100%;
+      height: 20px;
+      background-color: #fff;
+      border: 1px dashed #ccc;
+      margin-bottom: 10px;
+      border-radius: 3px;
+    }
+    .add::before {
+      content: "+";
+      display: block;
+      color: #ccc;
+      text-align: center;
+    }
+    .add:hover{
+      border: 1px dashed rgb(206, 154, 163);
+      transform: translateY(1px);
+    }
+    .add:hover::before{
+      color: rgb(206, 154, 163);     
+    }
+    /* 添加标签的盒子 */
+    .newBox {
+      width: 100%;
+      height: 100%;
+      position: fixed;
+      top: 50;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      z-index: 99;
+      background-color: rgba(0, 0, 0, 0.1);
+      display: none;
+    }
+    .newBox .box {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      xbackground-color: #ccc;
+    }
+    .newBox .box p {
+      background-color: #fff;
+      border: 1px solid rgb(128, 118, 118, 0.3);
+      border-radius: 5px;
+      background-color: rgba(238, 210, 210, 0.1);
+    }
+
+
+    button.cancle {
+      position: absolute;
+      top: 5px;
+      right: 10px;
+      background-color: transparent;
+      border: none;
+      font-size: 20px;
+      color: rgb(202, 201, 201,0.8);
+    }
+    button.new {
+      display: block;
+      width: 100%;
+      margin: 10px auto 0px;
+      background-color: #fff;
+      border: 1px dashed rgb(233, 155, 155);
+      border-radius: 5px;
+    }
+    button.delete {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      line-height: 9px;
+      font-size: 16px;
+      text-align: center;
+      right: 5px;
+      top: 0;
+      bottom: 0;
+      margin: auto;
+      padding: 0;
+      background-color: transparent;
+      color: rgb(202, 201, 201,0.5);
+      border: none;
+    }
+    button.delete:hover {
+      color: #ccc;
+      transform: scale(1.3);
+    }
+    button.new:hover {
+      background-color: rgb(206, 132, 144);
+      color: white;
+      border: 1px solid rgb(206, 132, 144);
+    }
+    button.cancle:hover {
+      translate: scale(1.5);
+      color:rgb(206, 132, 144);
+    }
+
+  </style>
+  
+</head>
+<body>
+  <header>记事本</header>
+  <main>
+    <aside>
+      <div class="add"></div>
+      <ul></ul>
+      <div class="newBox">
+        <div class="box">
+          <button class="cancle">×</button>
+          <h3 autofocus contenteditable>Title</h3>
+          <p  class="content" contenteditable></p>
+          <button class="new">new</button>
+        </div>
+      </div>
+    </aside>
+    <section>
+    </section>
+  </main>
+
+  <script>
+    let box = document.querySelector('div.box')
+    let h3 = document.querySelector('h3')
+    let p = document.querySelector('p.content')
+    let aside = document.querySelector ('aside')
+    let section = document.querySelector('section')
+    let addBtn = document.querySelector('div.add')
+    let newBox = document.querySelector('div.newBox')
+    let cancleBtn = document.querySelector('button.cancle')
+    let newBtn = document.querySelector('button.new')
+    let ul = document.querySelector('ul')
+    let root = []
+    let defaulttime = new Date().getTime().toString()
+    let defaultValue = {}
+        defaultValue[defaulttime] = {"title": "title","content" : "content"}
+    let notes = JSON.parse(localStorage.getItem('notes')) || defaultValue
+  
+    function init() {
+      let first = true
+      for (let key in notes) {
+        li = createLi(key)
+        if(first) {
+          first = false
+          createNote(key)
+          li.classList.add('show')
+        }
+        root.unshift(key)
+      }
+    }
+    init()
+    ul.addEventListener('click', function (e) {
+      // 切换
+      if (e.target.tagName === 'LI') {
+        Array.from(this.querySelectorAll('li')).forEach(item => item.classList.remove('show'))
+        e.target.classList.add('show')
+        let key = e.target.getAttribute('id')
+        root.push(key)
+        let idx = root.indexOf(key)
+        root.splice(idx,1)
+        createNote(key)
+      }
+      // 删除
+      if (e.target.tagName === 'BUTTON') {
+        let flag = confirm('确认删除？')
+        if (flag) {
+          let li = e.target.parentNode
+          let key = li.getAttribute('id')
+          let idx = root.indexOf(key)
+              root.splice(idx,1)
+          if (li.classList.contains('show')) {
+            if(root.length) {
+              let key = root[root.length-1]
+              console.log(key)
+              aside.querySelector(`li[id="${key}"]`).classList.add('show')
+              createNote(key)
+            }else {
+              section.innerHTML = ''
+            }
+          }
+          ul.removeChild(li)
+          delete notes[key]
+          window.localStorage.setItem('notes', JSON.stringify(notes))
+        }
+      }
+
+    })
+    // 标题改变，对应内容得变
+    function titleChange(e) {
+      // 获取对应的key
+      let key = e.target.parentNode.getAttribute('id')
+      notes[key].title = e.target.innerText
+      //改左侧li
+      let li = aside.querySelector(`li[id="${key}"]`)
+      aside.querySelector(`li[id="${key}"]`).innerText = e.target.innerText
+      //存储localStorage
+      window.localStorage.setItem('notes', JSON.stringify(notes))
+    }
+
+    function save(e){
+      let box = e.target.parentNode
+      let key = box.getAttribute('id')
+      let title = box.querySelector('h3').innerText
+      let content = box.querySelector('p').innerText
+      console.log(title, content)
+      notes[key].title = title
+      notes[key].content = content
+      window.localStorage.setItem('notes', JSON.stringify(notes))
+    }
+
+    function load() {
+    }
+    // 创建更新日志
+    function createNote(key) {
+      let box = document.createElement('div')
+      let h3 = document.createElement('h3')
+      let p = document.createElement('p')
+      box.classList.add('box')
+      p.classList.add('content')
+      h3.contentEditable = true
+      p.contentEditable = true
+      h3.addEventListener('input', titleChange)
+      p.addEventListener('input', save)
+
+      box.setAttribute('id', key)
+      box.setAttribute('date',fmtTime(Number(key)))
+      h3.innerText = notes[key].title
+      p.innerText = notes[key].content
+      box.append(h3)
+      box.append(p)
+      section.innerHTML = ''
+      section.append(box)
+    }
+
+    // 创建li标签
+    function createLi(key) {
+      let li = document.createElement('li')
+      let button = document.createElement('button')
+      button.classList.add('delete')
+      button.innerText = '×'
+      li.innerText = notes[key].title
+      li.setAttribute('id', key)
+      li.setAttribute('date', fmtTime(Number(key)))
+      li.append(button)
+      ul.append(li)
+      return li
+    }
+
+    //添加逻辑
+    addBtn.addEventListener('click', () => newBox.style.display = 'block')
+    newBtn.addEventListener('click', add)
+    cancleBtn.addEventListener('click', cancle)
+    function resetNewbox() {
+      newBox.querySelector('h3').innerText = 'Title'
+      newBox.querySelector('p').innerText = ''
+      newBox.style.display = 'none'
+    }
+    function cancle() {
+      console.log(1)
+      let res = confirm('确定放弃创建？')
+      if (res) {
+        resetNewbox()
+      }
+    }
+    function add(e) {
+      let title = e.target.parentNode.querySelector('h3').innerText
+      let content = e.target.parentNode.querySelector('p').innerText
+      let key = new Date().getTime()
+      let node = {
+        title: title,
+        content: content,
+      }
+      notes[key] = node
+      window.localStorage.setItem('notes', JSON.stringify(notes))
+      let li = createLi(key)
+      // 如果都删完了得创建并让这个li作为选中
+      if (!section.lastElementChild) {
+        li.classList.add('show')
+        createNote(key) 
+      }
+      root.unshift(key+'')
+      //重置新建的表单
+      resetNewbox()
+    }
+
+    function fmtTime(timestamp) {
+        var date = new Date(timestamp);//时间戳为10位需*1000，时间戳为13位的话不需乘1000
+        var Y = date.getFullYear() + '-';
+        var M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1):date.getMonth()+1) + '-';
+        var D = (date.getDate()< 10 ? '0'+date.getDate():date.getDate())+ ' ';
+        var h = (date.getHours() < 10 ? '0'+date.getHours():date.getHours())+ ':';
+        var m = (date.getMinutes() < 10 ? '0'+date.getMinutes():date.getMinutes());
+        var s = date.getSeconds() < 10 ? '0'+date.getSeconds():date.getSeconds();
+        return Y+M+D+h+m;
+    }
+  </script>
+</body>
+</html>

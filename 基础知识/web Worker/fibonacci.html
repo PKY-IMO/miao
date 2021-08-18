@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <input type="text" id='input' placeholder="fib">
+  <span></span>
+  <script>
+    //  结构化克隆算法 
+    // Error和Function对象不能通过结构化克隆算法复制；尝试这样做将引发DATA_CLONE_ERR异常。
+    // 克隆DOM节点会引发DATA_CLONE_ERR异常。
+    // 对象的以下参数不会保留：
+    // RegExp对象的lastIndex字段不会保留。
+    // 属性描述符，setter和getter(以及类似元数据的功能)不会被复制。
+    // 例如，如果使用属性描述符将对象标记为只读，则复制后的对象中是可读写(默认配置)。
+    // 原型链不会复制。
+    // symbol
+    let input = document.querySelector('#input')
+    let span = document.querySelector('span')
+    // function fib(n) {
+    //   return n<=2 ? 1 : fib(n-1) + fib(n-2)
+    // }
+    // class Miao {
+    //   constructor (name, age) {
+    //     this.name = name
+    //     this.age = age
+    //   }
+    // }
+    // let miao = new Miao('PP', 18)
+    input.addEventListener('change', e => {
+      let number = input.value
+      let worker = new Worker('./fibworker.js')
+      // 监听分线程发送 的消息
+      worker.addEventListener('message', e => {
+        console.log('收到分线程发送的消息')
+        span.textContent = e.data
+        worker.terminate()
+      })
+      worker.addEventListener('error', function (event) {
+        console.log('error', e)
+        worker.terminate()
+      });
+      console.log('已发送')
+      worker.postMessage(number)
+      // span.textContent = fib(input.value)
+      
+    })
+
+    // worker.terminate()
+  </script>
+</body>
+</html>

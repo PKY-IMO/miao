@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>自动补全搜索框</title>
+  <style>
+    .inputWrapper {
+      position: relative;
+      width: 300px;
+      margin: 0;
+      padding: 0;
+      font-size: 16px;
+    }
+    ul {
+      margin: 0;
+      padding: 0;
+      border-radius: 0 0 5px 5px;
+    }
+    li {
+      padding: 2px 5px;
+      list-style: none;
+      font-size: 16px;
+    }
+    .selector {
+      width: 100%;
+      /* position: absolute; */
+      box-sizing: border-box;
+      position: relative;
+      border: 2px solid blue;
+      /* top: 20px; */
+      margin-top: -4px;
+      background-color: #fff;
+      border-top: none;
+      display: none;
+      z-index: 2;
+    }
+    input {
+      width: 100%;
+      font-size: 16px;
+      outline: none;
+      box-sizing: border-box;
+      border-radius: 5px;
+      padding: 5px;
+    }
+    input:focus {
+      border: 2px solid blue;
+    }
+  </style>
+</head>
+<body>
+    <nav class="inputWrapper">
+      <div id="total" tabindex="-99">
+        <input type="text" name="" id="">
+        <ul class="selector"></ul>
+      </div>
+    </nav>
+
+    <script>
+      let searchInput = document.querySelector('input')
+      let selector = document.querySelector('.selector')
+      let data = ['a','aa','aaa','bbb','g','v']
+      total.onblur = function () {
+        selector.style.display = 'none'
+      }
+      searchInput.addEventListener('input', debounce(find, 500))
+      function find() {
+        selector.innerHTML = ''
+        let searchValue = searchInput.value
+        if (!searchValue.length) {
+          selector.style.display = 'none'
+          return
+        }
+        selector.style.display = 'block'
+        let show = false
+        for (let item of data) {
+          if (item.indexOf(searchValue) !== -1) {
+            show = true
+            let li = document.createElement('li')
+            li.innerText = item
+            selector.append(li)
+          }
+        }
+        if(!show) {
+          console.log(1)
+          let li = document.createElement('li')
+          li.innerText = '未找到'+ Math.random()*100
+          selector.append(li)
+        }
+      }
+      
+      
+
+      selector.onclick = function(e) {
+        console.log(e.target.tagName)
+        if (e.target.tagName === 'LI') {
+          console.log(3)
+          searchInput.value = e.target.textContent
+          selector.style.display = 'none'
+        }
+      }
+      function debounce(f, delay) {
+        let timer = null
+        return function() {
+          let args = this.arguments
+          let self = this
+          if (timer) {
+            clearTimeout(timer)
+          }
+          timer = setTimeout(() => {
+            f.apply(self, args)
+          }, delay);
+        }
+      }
+    </script>
+</body>
+</html>

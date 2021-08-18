@@ -12,7 +12,7 @@
       position: relative;   
     }
     svg {
-      width: 100%;
+      width: 800px;
       height: 500px;
       border: 1px solid black;
     }
@@ -20,8 +20,9 @@
       display: flex;
       font-family: cursive;
     }
-    footer div {
-      flex: 1;
+    footer div {  
+      flex: 1 0 auto;
+
       
     }
     button {
@@ -44,35 +45,56 @@
     .reverseY {
       transform: rotateY(180deg);
     }
-    button.width {
-      width: 20px;
-    }
     div {
       line-height: 20px;
       text-align: center;
+    }
+    button.save,button.open{
+      border-color: blue;
+      border-radius: 3px;
+      background-color: #fff;
+      white-space: pre;
+    }
+    button.open {
+      position: relative;
+    }
+    input[type='file'] {
+      opacity: 0;
+      position: absolute;
+      display: block;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
     }
     
   </style>
 </head>
 <body>
   <main>
-    <svg></svg>
+    <section><svg width="800px" height="500px" version="1.1" viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"></svg></section>
     <footer>
-      <div>形状：<button class="line click">线条</button> <button class="circle">圆圈</button> <button class="rect">方形</button></div>
+      <div>形状：<button class="draw line click" >线条</button> <button class="draw circle">圆圈</button> <button class="draw rect">方形</button></div>
       <div>颜色<input type="color"></div>
-      <div>粗细：<input type="range" min="1" max="10" value="2" class="width"><span class='widthShow'>2</span></div>      
+      <div>粗细：<input type="range" min="1" max="10" value="2" class="width"><span class='widthShow'> 2 </span></div> 
+      <div><button class="save">保 存</button></div>
+      <div><button class="open">打 开<input type="file" name="" id="file" accept=".svg"></button></div>
     </footer>
   </main>
 
   <script>
-    let svg = document.querySelector('svg')
+
     let colorControl = document.querySelector('input[type="color"]')
     let rangeControl = document.querySelector('input[type="range"]')
     let widthShow = document.querySelector('.widthShow')
     let lineControl = document.querySelector('.line')
     let circleControl = document.querySelector('.circle')
     let rectControl = document.querySelector('.rect')
-    let buttons = Array.from(document.querySelectorAll('button'))
+    let buttons = Array.from(document.querySelectorAll('button[class*=draw]'))
+    let saveBtn = document.querySelector('.save')
+    let fileBtn = document.querySelector('#file')
+    let svgBox = document.querySelector('section')
+    let svg = svgBox.querySelector('svg')
     const svgNS ="http://www.w3.org/2000/svg"
     const svgX = svg.getBoundingClientRect().x//offsetLeft
     const svgY = svg.getBoundingClientRect().y//offsetTop
@@ -80,6 +102,7 @@
     let flag = false
     let shape = 'line'
     let startPos = null
+    let hasSaved = false
 
     let polyLine = null
     let ellipse = null
@@ -93,6 +116,7 @@
     }
     function draw(){
       if (flag){
+        hasSaved = false
         let pos = getPos()
         if (shape === 'line') {
           let newPoints = polyLine.getAttribute('points') + `${pos.x} ${pos.y} `
@@ -175,13 +199,20 @@
     }
 
     
-    svg.addEventListener('mousedown', function (){
+    svgBox.addEventListener('mousedown', function (e){
+      console.log(e.target === svg)
+      if (!svg.contains(e.target)) {
+        console.log('gg')
+        return
+      }
+      console.log('111')
       flag = true
       let pos = getPos()
       if (shape === 'line') {
         polyLine = document.createElementNS(svgNS, 'polyline')
         var points = `${pos.x} ${pos.y} ${pos.x} ${pos.y} `
         initPolyLine(points)
+        console.log(svg)
         svg.appendChild(polyLine)
       }
       if (shape === 'circle') {
@@ -231,11 +262,57 @@
     // 回退
     document.addEventListener('keydown', function(e) {
       if(e.ctrlKey && e.key === 'z') {
-        if(svg.hasChildNodes()) {
+        if(svg.lastElementChild) {
           svg.removeChild(svg.lastElementChild)
         }        
       }
     })
+    //保存
+    saveBtn.addEventListener('click', save)
+    window.addEventListener('beforeunload', e=>{
+      if(!hasSaved) {
+        return  e.returnValue = '是否保存，是否退出？'
+      }
+    })
+
+    function save() {
+      //outerHTML 包括元素自身 innerHTML 不包括元素自身
+      let svgSource = svg.outerHTML
+      // svg标签内需要样式描述，Blob可以 File不行
+      let b = new Blob(['<?xml version="1.0" encoding="utf-8"?>', svgSource], {type: 'image/xml+svg'})
+      let anchor = document.createElement('a')
+      // URL.revokeObjectURL(b)
+      let urlObj = URL.createObjectURL(b)
+      anchor.href = urlObj
+      //download html5新增， 触发下载自己网站的资源，默认以download的名称存储，
+      anchor.download = `${Math.random().toFixed(6).slice(2)}.svg`
+      anchor.click()
+      hasSaved = true //得不到对话框的选项
+    }
+
+    //打开
+    fileBtn.addEventListener('click', check)
+    fileBtn.addEventListener('change', openFile)
+    function check() {
+      if(!hasSaved) {
+        let flag = confirm('未保存，确定打开？')
+        if (!flag) {
+          e.preventDefault()
+          return
+        }
+      }
+    }
+    function openFile(e) {
+      let file = this.files[0]
+      let fr = new FileReader()
+      fr.onload = function () {
+        svgBox.innerHTML = fr.result
+        // LET 声明的变量不保存在变量上
+        svg = document.querySelector('svg')
+      }
+      fr.readAsText(file)
+    }
+    
 
      
 

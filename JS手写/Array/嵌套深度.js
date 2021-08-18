@@ -19,10 +19,10 @@
 //递归
 function getArrayDepth(arr, depth = 1) {
   let max = depth;
-  for (const iterator of arr) {
+  for (const item of arr) {
     let tempIndex = depth
-    if (typeof iterator === 'object') {
-      tempIndex = getArrayDepth(iterator, depth + 1)
+    if (Array.isArray(item)) {
+      tempIndex = getArrayDepth(item, depth + 1)
       max = Math.max(tempIndex, max)
     }
   }

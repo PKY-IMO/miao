@@ -1,0 +1,16 @@
+/* // your css code ...
+// 第一种  */
+div {
+      /* inset x y 模糊半径 扩展半径 颜色 */
+    box-shadow: 0 0 0 10px red,0 0 0 16px green, 0 2px 5px 16px rgba(0,0,0,.5);
+}
+ 
+/* // 第二种 (有局限，只能模拟出双边框)  */
+ 
+div {
+    outline: 1px solid red;
+    border: 1px solid green;
+}
+/* // 如果使用嵌套dom结构，检查对普通css属性的理解 */
+
+/* border-radius box-shadow border-image */

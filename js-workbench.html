@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>代码运行</title>
+  <style>
+    pre {
+      width: 200px;
+      height: 50px;
+      word-wrap: break-word;
+      word-break: break-all;
+      overflow: hidden;
+      white-space: normal;
+      border: 1px solid blue;
+      padding: 5px;
+    }
+  </style>
+</head>
+<body>
+  <textarea name="" id="" cols="30" rows="10">
+    var a = 1
+    var b = 2 
+    c = a * b
+    console.log(a)
+    console.log(b)
+  </textarea>
+  <pre></pre>
+  <button onclick="run()">run</button>
+
+  <script>
+    let button = document.querySelector('button')
+    let pre = document.querySelector('pre')
+    let codeInput = document.querySelector('textarea')
+    function run(){
+      try {
+        let code = codeInput.value
+        pre.innerText = ''
+        let console = {
+          log: function(...args) {
+            pre.innerText += args.join(' ') + '\n'     
+          }
+        }
+        let window = {
+        }
+        let res = eval(code)
+        pre.innerText += '>' + res  
+      } catch (error) {
+        pre.innerText = error
+      }
+
+    }
+  </script>
+</body>
+</html>

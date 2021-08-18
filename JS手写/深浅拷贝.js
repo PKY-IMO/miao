@@ -71,7 +71,7 @@ function deepClone(obj, hash = new WeakMap()) {
   if (obj === null || typeof obj !== 'object') {
     return obj
   }
-  if (hash.has(obj)) return obj
+  if (hash.has(obj)) return hash.get(obj)
 
   let t = new obj.constructor()
   hash.set(obj, t)
@@ -92,28 +92,28 @@ a.target = a
 let cpy = deepClone(a)
 console.log(cpy)
 
-function deepClone(obj, hash = new WeakMap()) {
+function deepClone(obj, map = new Map()) {
   if (obj instanceof RegExp) return new RegExp(obj)
   if (obj instanceof Date) return new Date(obj)
   if (obj === null || typeof obj !== 'object') {
     return obj
   }
-  if (hash.has(obj)) return obj
+  if (map.has(obj)) return map.get(obj)
 
   let t = new obj.constructor()
-  hash.set(obj, t)
+  map.set(obj, t)
   if (Object.prototype.toString.call(obj) == '[object Map]') {
     obj.forEach((val, key) => {
-      t.set(key, deepClone(obj.get(key), hash))    
+      t.set(key, deepClone(obj.get(key), map))    
     });
   }else if (Object.prototype.toString.call(obj) == '[object Set]') {
     obj.forEach((val,key)=> {
-      t.add(deepClone(obj.get(key), hash))
+      t.add(deepClone(obj.get(key), map))
     })
   }else {
     for (let key in obj) {
       if (obj.hasOwnProperty(key)) {
-        t[key] = deepClone(obj[key], hash)
+        t[key] = deepClone(obj[key], map)
       }
     }
   }

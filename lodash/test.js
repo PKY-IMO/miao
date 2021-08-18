@@ -1924,4 +1924,5 @@ var users = [
   { 'user': 'fred',   'age': 40 },
   { 'user': 'barney', 'age': 36 }
 ]
+b = sortBy(users, ['user', 'age'])
 console.log(sortBy(users, ['user', 'age']))

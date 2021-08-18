@@ -1,0 +1,5 @@
+innerText只有HTML元素才可以调用，
+但是textContent任意Node节点都可以：HTMLElement.innerText和Node.textContent。
+
+推荐使用textContent 不引发回流
+*innerText无法获取display为none的文本内容

@@ -256,3 +256,51 @@ const arr2 = [
   //paint
   //css-3d
   //footer
+
+
+  Function.prototype.myCall = function(ctx = window,...args) {
+    if (typeof ctx !== 'object') {
+      ctx = Object(ctx)
+    }
+    let fn = new Symbol()
+    ctx[fn] = this
+    let res = ctx[fn](...args)
+    delete ctx[fn]
+    return res
+  }
+
+  Function.prototype.myApply = function(ctx = window, args) {
+    if (!Array.isArray(args)) {
+      return TypeError('args must be array')
+    }
+    if (typeof ctx !== 'object') {
+      ctx = Object(ctx)
+    }
+    let fn = new Symbol()
+    ctx[fn] = this
+    let res = ctx[fn](args)
+    delete ctx[fn]
+    return res
+  }
+
+  Function.prototype.myBind = function(obj, ...fixedArgs) {
+    let self = this
+    let resFn = function(...args) {
+      return self.call(this instanceof resFn ? this : obj,...fixedArgs, ...args)
+    }
+    function buff(){}
+    buff.prototype = self.prototype
+    resFn.prototype = new buff()
+    return resFn
+  }
+// bind
+
+let res = 0
+function d(step=39, count) {
+  if(step<0) return
+  if (step===0 && count % 2 ===0) {
+    res++
+  }
+  if(step>=1) d(step-1,count+1)
+  if(step>=2) d(step-2,count+1)
+}

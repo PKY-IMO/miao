@@ -7,9 +7,9 @@ function MyNew(fn, ...args) {
 }
 
 function create(proto) {//返回对象的__proto__ 指向 proto
-  function F(){}
-  F.prototype = proto
-  return new F()
+  function buff(){}
+  buff.prototype = proto
+  return new buff()
 }
 
 function Person(name, age) {

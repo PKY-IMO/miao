@@ -6,13 +6,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <style>
-    body {
-      width: 100vw;
-      height: 100vh;
-    }
+
     div {
-      width: 20px;
-      height: 20px;
+      width: 5px;
+      height: 5px;
       background-color: pink;
       position: absolute;
       display: none;
@@ -33,11 +30,12 @@
     document.addEventListener('mouseenter', function (e){
       arr.fill({x: e.clientX,y: e.clientY})
       document.addEventListener('mousemove', move)   
-      document.body.addEventListener('mouseleave', function once(){
+      document.addEventListener('mouseleave', function once(){
         div.forEach(el => {el.style.display = 'none'})
         document.removeEventListener('mousemove', move)
     })
     })
+    
     
     
     function move(e) {

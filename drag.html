@@ -47,6 +47,7 @@
       }
       let target = e.target
       let innerPos = getInnerPos(target)
+      console.log(innerPos,e.offsetX)// offsetX 在元素内部的偏移量
       target.style.zIndex = z
       z++
       function move(e){

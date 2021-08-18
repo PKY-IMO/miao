@@ -133,6 +133,32 @@
       </section>
     </div>
   </div>
+    <script id = "worker">
+      addEventListener('message', e => {
+        let re = e.data.re
+        let str = e.data.str
+        let matches = []
+        let match = null
+
+        while (match = re.exec(str)) {
+          matches.push(match)
+          if (match[0] == '') {
+            re.lastIndex++
+          }
+          if (!re.global) {
+            break
+          }
+        }
+        postMessage(matches)
+      })
+
+      function startWorker(f) {
+        let source = '(' + f.toString() + ')()'
+        var blob = new Blob([source], {type: 'application/javascript'})
+        var url = URL.createObjectURL()   //Blob对象
+        return new Worker(url)
+      }
+    </script>
     <script>
       function setScroll() {
         var scrollTop = strInput.scrollTop
@@ -163,6 +189,28 @@
 
         let sourceStr = strInput.value
         let resHTML = ''
+
+        /**
+         * var worker = new Worker('./re-worker.js')
+         * var success = false
+         * worker.addEventListener('message', e => {
+         *  success = true
+         *  var matches = e.data
+         *  
+         *  拼html
+         *  显示到页面上
+         * 
+         * })
+         * worker.postMessage({re: re, str: str})
+         * setTimeout(() => {
+         *  if(!success) {
+         *    显示匹配超时
+         *    worker.terminate()
+         *  }
+         * },2000)
+         */
+
+
         if (reg.global) {
           let startIdx = reg.lastIndex
           let match = null

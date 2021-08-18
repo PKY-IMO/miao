@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>conway</title>
+  <style>
+
+    div {
+      width: 200px;
+      height: 200px;
+      border: 1px solid blue;
+      position: relative;
+      margin: 0;
+      padding: 0;
+    }
+    /* input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      border-radius: 0px;
+      border:1px solid #ddd;
+      margin: 0;
+    }
+    input[type="checkbox"]:checked {
+      background-color: red;
+      border: 1px solid red;
+      background: url('./resource/sun.png') no-repeat center;
+    }
+    input[type="checkbox"]:hover {
+      xdisplay: none;
+      outline: 1px solid red;
+
+    } */
+  </style>
+</head>
+<body>
+  <main>
+    <div class="cells"></div>
+    <footer>
+      <button class="next">next</button>
+      <button class="auto">auto</button>
+      <button class="random">random</button>
+      <button class="stop">stop</button>
+    </footer>
+  </main>
+
+  <script>
+    let container = document.querySelector('.cells')
+    let nextBtn = document.querySelector('.next')
+    let autoBtn = document.querySelector('.auto')
+    let randomBtn = document.querySelector('.random')
+    let stopBtn = document.querySelector('.stop')
+    let matrix = Array.from(new Array(10),()=>new Array(10).fill(0))
+    let boxMatrix = Array.from(new Array(10),()=>new Array())
+    let timer = null
+
+    class Cell {
+      constructor(i, j) {
+        this.x = i
+        this.y = j
+        this.status = 0
+        this.box = null
+      }
+      init() {
+        let checkBox = document.createElement("input")
+        checkBox.setAttribute("type","checkbox") 
+        checkBox.setAttribute("x", this.x) 
+        checkBox.setAttribute("y", this.y) 
+        checkBox.style.position = 'absolute'
+        checkBox.style.left = this.y * 20 + 'px'
+        checkBox.style.top = this.x * 20 + 'px'
+        this.box = checkBox
+        container.appendChild(checkBox)
+      }
+    }
+    function begin() {
+
+      for (let i = 0; i < 10; i++) {
+        for (let j = 0; j < 10; j++) {
+          let box = new Cell(i,j)
+          box.init()
+          boxMatrix[i].push(box)
+        }
+      }
+    }
+    begin()
+    container.addEventListener('click', function(e) {
+      clearInterval(timer)
+      timer = null
+      if (e.target.tagName !== 'INPUT') {
+        return
+      }
+      let i = e.target.getAttribute('x')
+      let j = e.target.getAttribute('y')
+      let pre = boxMatrix[i][j].status 
+      boxMatrix[i][j].status = pre === 0 ? 1 : 0
+
+      matrix[i][j] = boxMatrix[i][j].status
+    })
+    nextBtn.addEventListener('click', stepChange)
+    autoBtn.addEventListener('click', autoChange)
+
+    function stepChange() {
+      clearInterval(timer)
+      timer = null
+      nextChange()
+    }
+
+    function nextChange() {
+      matrix = next(matrix)
+      for (let i = 0; i < 10; i++) {
+        for (let j = 0; j < 10; j++) {
+          if (matrix[i][j] === 1) {
+            boxMatrix[i][j].status = 1
+            boxMatrix[i][j].box.checked = true
+          }else {
+            boxMatrix[i][j].status = 0
+            boxMatrix[i][j].box.checked = false
+          }
+        }
+      }
+
+    }
+
+    function next(board) {
+      if(board.length == 0 || board[0].length==0) return;
+      let m = board.length, n = board[0].length 
+      for (let i = 0; i < m; i++) {
+        for (let j = 0; j < n; j++) {
+          if (board[i][j] % 10 == 1) {
+            for (let k = i-1; k < i+2; k++) {
+              for (let l = j-1; l < j+2; l++) {
+                if (k == i && l == j)  continue
+                if (k >= 0 && l >= 0 && k < m && l < n) board[k][l] += 10
+              }
+            }
+          }
+        }
+      }      
+      for(let i = 0; i < m; i++) {
+        for(let j = 0; j < n; j++) {
+            if(board[i][j] == 21 || board[i][j] == 31) {
+              board[i][j] = 1;
+            }else if(board[i][j] == 30) {
+              board[i][j] = 1
+            }else {
+              board[i][j] = 0
+            }
+          }
+      }
+      return board
+    }
+  
+    function autoChange() {
+      if (timer) {
+        clearInterval(timer)
+        timer = null
+      }
+      timer = setInterval(() => {
+        nextChange()
+      }, 500);
+    }
+    
+    randomBtn.addEventListener('click', randomSet)
+
+    function randomSet() {
+      clearInterval(timer)
+      timer = null
+      for (let i = 0; i < 10; i++) {
+        for (let j = 0; j < 10; j++) {
+          let t = Math.random() > 0.5 ? true : false
+          if (t) {
+            matrix[i][j] = 1
+            boxMatrix[i][j].status = 1
+            boxMatrix[i][j].box.checked = true
+          }else  {
+            matrix[i][j] = 0
+            boxMatrix[i][j].status = 0
+            boxMatrix[i][j].box.checked = false
+          }
+        }
+      }
+    }
+
+    stopBtn.addEventListener('click', stop)
+    function stop() {
+      if(timer) {
+        clearInterval(timer)
+        timer = null
+      }
+    }
+  
+  </script>
+</body>
+</html>

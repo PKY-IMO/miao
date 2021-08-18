@@ -44,8 +44,28 @@
         }
       }
 
-      //focus blur 不冒泡
+      //focus blur 不冒泡 mouseleave mouseenter
       //focusin out 可冒泡
+
+      //dispatchEvent
+      $0.dispatchEvent(new Event())
+
+
+      //表单事件
+      //input:text 光标离开触发change   主动修改不触发
+      // autofocus ===  XXX.focus()
+      // tabindex
+      // disable vs draggable="true"
+
+
+      //顺序 先如下 再全局
+      with(document) {
+        with($0) {
+          function open() {
+
+          }
+        }
+      }
       
     </script>
 </body>
