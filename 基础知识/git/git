@@ -1,0 +1,27 @@
+撤销回退  
+  git reset 将最后一次commit指针移动到指定的一次提交
+    用git reset --hard HEAD回退到最新提交的版本
+    用git reset --hard HEAD^回退到上一个版本
+    用git reset --hard commit_id回退到指定
+    --soft 工作目录和暂存区文件不会丢弃，移动head指针
+    --mixed 暂存区丢弃，工作区不丢弃
+    --hard 工作目录和暂存区文件都会丢弃
+    git reflog     
+    *git reset命令既可以回退版本，也可以把暂存区的修改回退到工作区。当我们用HEAD时，表示最新的版本。如git reset HEAD readme.txt
+
+  git revert 此次操作之前和之后的commit和history都会保留，把这次撤销作为一次新的提交
+
+  *git checkout -- readme.txt 让这个文件回到最近一次git commit或git add时的状态
+
+合并
+  git pull == git fetch + git merge
+  合并之前先pull 减少冲突
+  git merge 创建新的commit，保留分支的历史默认 --ff
+            -ff 自动合并模式：当合并的分支为当前分支的后代的，那么会自动执行 --ff (Fast-forward) 模式，如果不匹配则执行 --no-ff（non-Fast-forward） 合并模式
+            --no-ff 非 Fast-forward 模式：在任何情况下都会创建新的 commit 进行多方合并（及时被合并的分支为自己的直接后代）
+            --ff-only Fast-forward 模式：只会按照 Fast-forward 模式进行合并，如果不符合条件（并非当前分支的直接后代），则会拒绝合并请求并且推出
+  git rebase  rebase, 这个命令会始终把你最新的修改放到最前面，单线历史
+
+查看当前分支对应远程哪个分支
+ git branch -va
+ git config --list

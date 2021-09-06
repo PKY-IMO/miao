@@ -1,0 +1,9 @@
+无法被鼠标点击
+•方法一: cursor: not-allowed; document.getElementById('id').style.cursor="not-allowed";
+•方法二: pointer-events:none;
+无法被键盘
+ tabIndex = “-1”
+
+文本只读
+readonly="readonly"属性，设置input为只读
+disabled="disabled"

@@ -1429,6 +1429,7 @@ var pky_imo = function () {
         .reduce((ary,it) => ary.concat(it.split('].')), [])
         .reduce((ary,it) => ary.concat(it.split('[')), [])
         .reduce((ary,it) => ary.concat(it.split('.')), [])
+        .reduce((ary,it) =>ary.concat(it.replace(']','')), [])
     }
   }
 
@@ -1658,6 +1659,273 @@ var pky_imo = function () {
       return (arr ? '[' : '{') + String(res) + (arr ? ']' : '}') 
     }
   }
+  
+  function defer(func, ...args) {
+    let self = this
+    let timer = setTimeout(()=>{
+      func.apply(self, args)
+    },1)
+    return timer
+  }
+
+  function delay(func, wait, ...args) {
+    let self = this
+    let timer = setTimeout(()=>{
+      func.apply(self, args)
+    }, wait)
+    return timer
+  }
+
+  function add(a,b){
+    return a+b
+  }
+
+  function ceil(num, precision = 0) {
+    let mul = Math.pow(10, precision)
+    const f = (num) => num % 1 === 0 ? num : parseInt(num) + 1
+    return f(num * mul) / mul
+  }
+
+  function round(num, precision = 0) {
+    let mul = Math.pow(10, precision)
+    const f = (num) => num % 1 < 0.5 ? num : parseInt(num) + 1
+    return f(num * mul) / mul
+  }
+
+  function divide(a, b) {
+    return a/b
+  }
+
+  function floor(num, precision = 0) {
+    let mul = Math.pow(10, precision)
+    const f = (num) => num % 1 === 0 ? num : parseInt(num)
+    return f(num * mul) / mul
+  }
+
+  function max(array) {
+    if (array.length === 0) return undefined
+    return array.reduce((max,item)=>item > max ? item : max)
+  }
+
+  function maxBy(array, iter) {
+    if (array.length === 0) return undefined
+    iter = iterator(iter)
+    return array.reduce((max, item) => iter(max) > iter(item) ? max : item)
+  }
+
+  function mean(array) {
+    if (array.length === 0) return undefined
+    return array.reduce((sum, item) => sum + item) / array.length
+  }
+
+  function meanBy(array, iter) {
+    if (array.length === 0) return undefined
+    iter = iterator(iter)
+    return array.reduce((sum, item) => sum + iter(item), 0) / array.length
+  }
+
+  function min(array) {
+    if (array.length === 0) return undefined
+    return array.reduce((max,item)=>item < max ? item : max)
+  }
+
+  function minBy(array, iter) {
+    if (array.length === 0) return undefined
+    iter = iterator(iter)
+    return array.reduce((max, item) => iter(max) < iter(item) ? max : item)
+  }
+
+  function multiply(a,b) {
+    return a * b
+  }
+
+  function subtract(a, b) {
+    return a - b
+  }
+
+  function sum(array) {
+    if (array.length === 0) return undefined
+    return array.reduce((sum, item) => sum + item)
+  }
+
+  function sumBy(array) {
+    if (array.length === 0) return undefined
+    iter = iterator(iter)
+    return array.reduce((sum, item) => sum + iter(item), 0)
+  }
+
+  function clamp(num, lower, upper) {
+    if (num >= upper) return upper
+    if (num <= lower) return lower
+  }
+
+  function inRange(num, start = 0, end) {
+    if (end === undefined) {
+      end = start
+      start = 0
+    }
+    if (start > end) {
+      [start, end] = [end, start];
+    }
+    return num > start && num < end
+  }
+
+  function random(lower = 0, upper, float = false) {
+    if (typeof upper !== 'number') {
+      if (typeof upper === 'boolean') {
+        float = upper
+      }
+      upper = lower
+      lower = 0
+    }
+    return float ? Math.random()*(upper-lower) + lower : Math.floor(Math.random()*(upper-lower) + lower)
+  }
+
+  function assignIn(obj, ...sources) {
+    for(let s of sources) {
+      for (let key in s) {
+        obj[key] = s[key]
+      }
+    }
+    return obj
+  }
+
+  function at(obj, paths) {
+    let res = []
+    for (let s of paths) {
+      let path = toPath(s)
+      let tmp = obj
+      for (let p of path) {
+        tmp = tmp[p]
+      }
+      res.push(tmp)
+    }
+    return res
+  }
+
+  function defaults(obj, ...srcs) {
+    for (let src of srcs) {
+      for(let key in src) {
+        if (!obj.hasOwnProperty(key)) {
+          obj[key] = src[key]
+        }
+      }
+    }
+    return obj
+  }
+
+  function defaultsDeep(obj, ...srcs) {
+    for (let src of srcs) {
+      for(let key in src) {
+        if (typeof src[key] === 'object') {
+          defaultsDeep(obj[key], src[key])
+        }else {
+          if (!obj.hasOwnProperty(key)) {
+            obj[key] = src[key]
+          }
+        }
+      }
+    }
+    return obj
+  }
+
+  function findKey(obj, predicate) {
+    predicate = iterator(predicate)
+    for (let key in obj) {
+      if (predicate(obj[key])) {
+        return key
+      }
+    }
+  }
+
+  function findLastKey(obj, predicate) {
+    predicate = iterator(predicate)
+    let keys = Object.keys(obj)
+    let n = keys.length
+    for (let i = n - 1; i>=0; i--) {
+      let key = keys[i]
+      if (predicate(obj[key])) {
+        return key
+      }
+    }
+  }
+
+  function forIn(obj, iter) {
+    for (let key in obj) {
+      if(!iter(obj[key], key, obj)) {
+        break
+      }
+    }
+    return obj
+  }
+
+  function forInRight(obj, iter) {
+    const allKeys = (obj) => {
+      let keys = []
+      for (let key in obj) {
+        keys.push(key)
+      }
+      return keys
+    }
+    let keys = allKeys(obj)
+    let n = keys.length
+    for (let i = n - 1; i >= 0; i++) {
+      let key = keys[i]
+      if (!iter(obj[key], key, obj)) {
+        break
+      }
+    }
+    return obj
+  }
+
+  function forOwn(obj, iter) {
+    for (let key in obj) {
+      if (obj.hasOwnProperty(key)) {
+        if(!iter(obj[key], key, obj)) {
+          break
+        }
+      }
+    }
+    return obj
+  }
+
+  function forOwnRight(obj, iter) {
+    let keys = Object.keys(obj)
+    let n = keys.length
+    for (let i = n - 1; i >= 0; i++) {
+      let key = keys[i]
+      if (!iter(obj[key], key, obj)) {
+        break
+      }
+    }
+    return obj
+  }
+
+  function functions(obj) {
+    return Object.keys(obj).filter(it => typeof obj[it] === 'function')
+  }
+
+  function functionsIn(obj) {
+    const allKeys = (obj) => {
+      let keys = []
+      for (let key in obj) {
+        keys.push(key)
+      }
+      return keys
+    }
+    return allKeys(obj).filter(it => typeof obj[it] === 'function')
+  }
+
+  function isNative(f) {
+    if (typeof f !== 'function') return false
+    return Function.prototype.toString.call(f).includes('native code')
+  }
+
+
+
+
+
+
 
   return {
     chunk: chunk,
@@ -1793,6 +2061,7 @@ var pky_imo = function () {
     isTypedArray: isTypedArray,
     isWeakMap: isWeakMap,
     isWeakSet: isWeakSet,
+    isNative: isNative,
     toArray: toArray,
     toFinite: toFinite,
     toInteger: toInteger,
@@ -1819,14 +2088,44 @@ var pky_imo = function () {
 
     isUndefined: isUndefined,
     toArray: toArray,
-    sum: sum,
-    sumBy: sumBy,
 
     get: get,
     has: has,
 
     parseJson: parseJson,
     stringifyJson: stringifyJson,
+    defer: defer,
+    delay: delay,
+
+    add: add,
+    ceil: ceil,
+    divide: divide,
+    floor: floor,
+    max: max,
+    maxBy: maxBy,
+    mean: mean,
+    meanBy: meanBy,
+    min: min,
+    minBy: minBy,
+    multiply: multiply,
+    round: round,
+    subtract: subtract,
+    sum: sum,
+    sumBy: sumBy,
+    clamp: clamp,
+    inRange: inRange,
+    random: random,
+    assignIn: assignIn,
+    at: at,
+    defaults: defaults,
+    defaultsDeep: defaultsDeep,
+    findKey: findKey,
+    findLastKey: findLastKey,
+    forIn: forIn,
+    forInRight: forInRight,
+    functions: functions,
+    functionsIn: functionsIn,
+
   }
 
 }()

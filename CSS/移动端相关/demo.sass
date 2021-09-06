@@ -1,0 +1,46 @@
+// sass 变量 可以直接引用计算需要单位保持一致
+$main-color: lightblue;
+$card-width: 55px;
+$card-height: $card-width + 60px;
+$card-border: $card-width solid red;
+// sass 单位一致  不支持：400px - 2em  报错
+
+// sass & 代表外层所有元素
+// 选择器嵌套
+div {
+  h1, h2 {
+  }
+  section {
+    & :hover {
+      
+    }
+  }
+}
+// sass 循环 to       <
+//          through  <=
+@for $i from 1 to 100 {
+  div:nth-child(#{$i}) {
+    @include square(50px);
+    color: red;
+    width: $i * 5px;
+  }
+}
+.foo {
+  color: red;
+}
+
+// 函数
+@mixin square($size) {
+  width: $size;
+  hetight: $size;
+}
+
+
+  
+// less   @main-color   单位不一致不报错：以第一个为准
+
+// css 的变量 --声明 使用var
+section {
+  --size: 8px;
+  width: calc(var(--size) * 10);
+}

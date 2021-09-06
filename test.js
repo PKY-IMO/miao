@@ -122,6 +122,16 @@
   init();
 })();
   
-
+var name = '123'
+var obj = {
+  name: '456',
+  getName: function() {
+    let self = this
+    function a(){
+      console.log(self.name)
+    }
+    a()
+  }
+}
 
  

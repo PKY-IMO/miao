@@ -10,9 +10,12 @@
   <input type="text">
   <ul></ul>
   <script>
+    // 防抖了一个函数，函数的操作时间不固定导致的前后修改覆盖的问题
+    // 为每个函数定义开始执行的时间，设置一个全局变量记录当前内容显示的初始执行时间
+    // 修改时比较当前时间和本次函数操作的发起时间，如果发起时间早则取消
     var input = document.querySelector('input')
     var ul = document.querySelector('ul')
-    var currentShowStartTime = 0 // 当前展示的联想内容的发起时间
+    var currentShowStartTime = 0 // 当前展示的联想内容的发起时间,每次成功绘制时修改
 
     input.addEventListener(
       'input',

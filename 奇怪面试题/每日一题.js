@@ -104,11 +104,11 @@ function Child() {
 Function.prototype.print = function() {
   console.log(this.a)
 }
- 
+// 构造函数的原型链上有Function.prototype
 Parent.print() // undefined
 Child.print() // undefined
  
-var p = new Parent()
+var p = new Parent() //实例对象原型链没有Function.prototype
 p.print() // error
 
 2.//原型链改变过程中创建的对象指向不同原型

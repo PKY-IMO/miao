@@ -1918,11 +1918,32 @@ function comparetor4(a, b, iterator) {
   return 0
 }
 
-var users = [
-  { 'user': 'fred',   'age': 48 },
-  { 'user': 'barney', 'age': 34 },
-  { 'user': 'fred',   'age': 40 },
-  { 'user': 'barney', 'age': 36 }
-]
-b = sortBy(users, ['user', 'age'])
-console.log(sortBy(users, ['user', 'age']))
+function findKey(obj, predicate) {
+  predicate = iterator(predicate)
+  for (let key in obj) {
+    if (predicate(obj[key])) {
+      return key
+    }
+  }
+}
+
+var users = {
+  'barney':  { 'age': 36, 'active': true },
+  'fred':    { 'age': 40, 'active': false },
+  'pebbles': { 'age': 1,  'active': true }
+};
+ 
+let a1 = findKey(users, function(o) { return o.age < 40; });
+// => 'barney' (iteration order is not guaranteed)
+ 
+// The `_.matches` iteratee shorthand.
+let b = findKey(users, { 'age': 1, 'active': true });
+// => 'pebbles'
+ 
+// The `_.matchesProperty` iteratee shorthand.
+let c = findKey(users, ['active', false]);
+// => 'fred'
+ 
+// The `_.property` iteratee shorthand.
+let d = findKey(users, 'active')
+console.log(a1,b,c,d)

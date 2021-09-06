@@ -446,3 +446,25 @@ target:d&currentTarget:c
 target:d&currentTarget:b
 target:d&currentTarget:a
 ```
+
+```
+自动触发元素事件
+// 三秒后模拟点击
+setTimeout(function() {
+    // IE浏览器
+    if(document.all) {
+        document.getElementById("clickMe").click();
+    }
+    // 其它浏览器
+    else {
+        var e = document.createEvent("MouseEvents");
+        e.initEvent("click", true, true);
+        document.getElementById("btn").dispatchEvent(e);
+    }
+}, 3000);
+```
+
+```
+event.target || event.srcElement
+event.currentTarget
+```

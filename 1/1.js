@@ -304,3 +304,18 @@ function d(step=39, count) {
   if(step>=1) d(step-1,count+1)
   if(step>=2) d(step-2,count+1)
 }
+
+new Array(n).fill(0).map(() => new Array(2).fill(0).map(() => new Array(3).fill(0)));
+
+//执行js 解析dom 计算布局 渲染页面是单线程的
+
+function parse(str) {
+  let obj = {}
+  let str2 = decodeURIComponent(str)
+  let arr = str2.split('&')
+  for (let item of arr) {
+    var [key,value] = item.split('=')
+    obj[key] = value
+  }
+  return obj
+}

@@ -1,0 +1,60 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #result {
+      display: block;
+      width: 200px;
+      height: 200px;
+      border: 1px solid;
+    }
+  </style>
+</head>
+<body>
+  <button>request</button>
+  <div name="" id="result" cols="30" rows="10"></div>
+  <script>
+    // 获取button
+    const btn = document.getElementsByTagName('button')[0]
+    const res = document.getElementById('result')
+    btn.onclick = function() {
+      // 创建对象
+      const xhr = new XMLHttpRequest()
+      // 初始化
+      xhr.open('GET','http://127.0.0.1:8000/server')
+      // ajax 解决缓存问题  加时间戳
+      // xhr.open('GET','http://127.0.0.1:8000/server?t='+Date.now())
+      // xhr.setRequestHeader('Access-Control-Allow-Origin','*')
+      // json
+      xhr.responseType = 'json'
+      // 超时
+      xhr.timeout = 2000
+      xhr.ontimeout= function() {}
+      // 异常
+      xhr.onerror = function() {}
+      // 取消请求
+      // xhr.abort()
+      // 发送
+      xhr.send()
+      // 事件绑定
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4) {
+          if (xhr.status >= 200 && xhr.status < 300) {
+            console.log(xhr.status)//状态码
+            console.log(xhr.statusText)//状态字符串
+            console.log(xhr.getAllResponseHeaders())//响应头
+            console.log(xhr.response)//响应体
+            console.log(xhr.responseText)// responseText responseXML
+            res.innerHTML = xhr.responseText
+          }
+        }
+      }
+    }
+  </script>
+</body>
+</html>

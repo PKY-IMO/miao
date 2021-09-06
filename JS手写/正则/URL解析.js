@@ -18,6 +18,7 @@ function parseParam(url) {
     if(/=/.test(param)) {
       let [key, val] = param.split('=')
       // 递归调用解码
+      // encodeURIComponent()
       val = decodeURIComponent(val);
       if(paramObj.hasOwnProperty(key)) {
         // 判断是不是数组

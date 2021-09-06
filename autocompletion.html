@@ -43,6 +43,7 @@
       box-sizing: border-box;
       border-radius: 5px;
       padding: 5px;
+
     }
     input:focus {
       border: 2px solid blue;
@@ -61,9 +62,9 @@
       let searchInput = document.querySelector('input')
       let selector = document.querySelector('.selector')
       let data = ['a','aa','aaa','bbb','g','v']
-      total.onblur = function () {
-        selector.style.display = 'none'
-      }
+      total.addEventListener('blur' ,function() {
+        setTimeout(()=>selector.style.display = 'none',100)
+      },true)
       searchInput.addEventListener('input', debounce(find, 500))
       function find() {
         selector.innerHTML = ''
