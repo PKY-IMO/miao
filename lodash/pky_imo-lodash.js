@@ -1,5 +1,3 @@
-const { resolve } = require("node:dns/promises")
-
 var pky_imo = function () {
 
   function chunk(arr, size = 1) {
@@ -2532,12 +2530,12 @@ var pky_imo = function () {
     // map
     if (obj instanceof Map) {
       obj.forEach((val, key) => {
-        t.set(key, cloneDeep(val, map))    
+        t.set(cloneDeep(key, map), cloneDeep(val, map))    
       })
     }
     // set
     if (obj instanceof Set) {
-      obj.forEach((val, key) => {
+      obj.forEach(val => {
         t.add(cloneDeep(val, map))    
       })
     }
@@ -2550,7 +2548,44 @@ var pky_imo = function () {
     return t
   }
 
-  
+  function identity(obj) {
+    return obj
+  }
+
+  function pullAt(arr, indexs) {
+    if (typeof indexs === 'number') indexs = [indexs]
+    let res =[], count = 0
+    for (let index of indexs) {
+      res.push(arr.splice(index - count, 1)[0])
+      count++
+    }
+    return res
+  }
+
+  function matches(source) {
+    return function(obj) {
+      for (let key in source) {
+        if (!obj[key] === source[key]) {
+          return false
+        }
+      }
+      return true
+    }
+  }
+
+  function property(path) {
+    return function(obj) {
+      return get(obj, path)
+    }
+  }
+
+  function ary() {
+
+  }
+
+
+
+
 
 
 
@@ -2803,7 +2838,31 @@ var pky_imo = function () {
     replace: replace,
     snakeCase: snakeCase,
     split: split,
-    startCase: startCase
+    startCase: startCase,
+    startsWith: startsWith,
+    toLower: toLower,
+    toUpper: toUpper,
+    trim: trim,
+    trimEnd: trimEnd,
+    trimStart: trimStart,
+    truncate: truncate,
+    unescape: unescape,
+    upperCase: upperCase,
+    upperFirst: upperFirst,
+    words: words,
+    bindAll: bindAll,
+    defaultTo: defaultTo,
+    range: range,
+    rangeRight: rangeRight,
+    times: times,
+    toPath: toPath,
+    uniqueId: uniqueId,
+    cloneDeep: cloneDeep,
+    identity: identity,
+    concat: concat,
+    pullAt: pullAll,
+    matches: matches,
+    property: property
 
 
   }
