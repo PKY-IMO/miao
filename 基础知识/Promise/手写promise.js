@@ -197,6 +197,7 @@ Promise.allSettled = function(promises) {
 Promise.prototype.finally = function(f) {
   return this.then(
     value => Promise.resolve(f()).then(()=>value),
+    // reason => Promise.resolve(f()).then(()=>{throw reason}, reason => {throw reason}) 第二个参数可以省略
     reason => Promise.resolve(f()).then(()=>{throw reason})
   )
 }
@@ -217,4 +218,72 @@ Promise.all = function(promises) {
       })
     }
   })
+}
+
+class Promise {
+  constructor(executor) {
+    this.status = 'pending'
+    this.data = null
+    this.resolveCallback = [] //p.then p.then
+    this.rejectedCallbak = []
+
+    const resolve = value => {
+      if (this.status === 'pending') {
+        this.status = 'fulfilled'
+        this.data = value
+      }
+    }
+    const reject = reason => {
+      if (this.status === 'pending') {
+        this.status = 'rejected'
+        this.data = reason
+      }
+    }
+
+    try {
+      //同步调用[执行器函数]
+      executor(resolve, reject)
+    } catch (error) {
+      reject(error)
+    }
+  }
+
+  then(onResolved, onRejected) {
+    if(typeof onRejected !== 'function') {
+      onRejected = reason => {
+        throw reason
+      }
+    }
+    if(typeof onResolved !== 'function') {
+      onResolved = value => value;
+    }
+
+    return new Promise((resolve, reject) => {
+      if (this.status === 'pending') {
+        this.resolveCallback.push(onResolved)
+        this.rejectedCallbak.push(onRejected)
+      } else {
+        if (this.status === 'fulfilled') {
+          queueMicrotask(()=>{
+            try {
+              let x = onResolved(this.data)
+              if (x instanceof Promise) {
+                x.then(resolve, reject)
+              }else {
+                resolve(x)
+              }       
+            }catch(e) {
+              reject(e)
+            }
+          })
+        }
+        if (this.status === 'rejected') {
+          queueMicrotask(()=>{
+            onRejected(this.data)
+          })
+        }
+      }
+    })
+
+  }
 }

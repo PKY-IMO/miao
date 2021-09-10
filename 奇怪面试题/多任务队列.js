@@ -86,6 +86,8 @@ class TaskQueue2 {
 }
 
 
+
+// async.js 并行执行完tasks，执行回调
 function parallel(tasks, callback) {
   if (tasks.length === 0) {
     callback()
@@ -120,6 +122,7 @@ function series(tasks, callback) {
     tasks[0](next)
   }
 }
+
 series([
   function task1(callback) {
     console.log(1)
@@ -136,3 +139,35 @@ series([
 ], function() {
   console.log('ALL DONE')
 })
+
+
+//
+let print = new Print()
+print.task(1000, () => {
+    console.log(1)
+}).task(2000, () => {
+    console.log(2)
+}).task(3000, () => {
+    console.log(3)
+}).start()
+ 
+function Print() {
+  this.list = []
+  this.task = (time, fn) => {
+      this.list.push({fn, time})
+      return this
+  }
+  this.start = () => {
+      if (this.list.length > 0) {
+          let temp = this.list.shift()
+          let self = this
+          setTimeout(function () {
+              temp.fn()
+              self.start()
+          }, temp.time)
+      }
+  }
+
+}
+
+

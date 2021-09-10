@@ -22,9 +22,10 @@ Function.prototype.myBind = function(obj, ...fixedArgs) {
   let resFn = function(...args) {
     return self.call(this instanceof resFn ? this : obj, ...fixedArgs, ...args)
   }
-  function tmp(){}
-  tmp.prototype = self.prototype
-  resFn.prototype = new tmp() //resFn需要继承self的原型 为什么不能直接 resFn.prototype = new self()
+  // function tmp(){}
+  // tmp.prototype = self.prototype
+  // resFn.prototype = new tmp() //resFn需要继承self的原型 为什么不能直接 resFn.prototype = new self()
+  resFn.prototype = Object.create(self.prototype)
   return resFn
 }
 

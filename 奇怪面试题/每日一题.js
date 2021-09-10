@@ -576,6 +576,31 @@ switchCase(0); //default
 switchCase('0'); //case 0 case 1
 switchCase() //undefined
 
+//作用域 块级作用域的函数声明会意外的改变外部的同名变量
+// 类似于 set
+var a = 0;
+if (true) {
+    function a () {
+
+    }
+    a = 3;
+
+}
+console.log(a) // a() {}
+
+
+// 类似于set
+var a = 0;
+if (true) {
+    //console.log(a, window.a) // function a () {} 0，提升仍然存在
+    a = 1
+    //console.log(a, window.a) // 1 0，a = 1 赋值了块级作用域内的 a
+    function a () {}
+    //console.log(a, window.a) // 1 1，非严格模式下上面那句函数声明将块级作用域里的 a 赋值给了外面
+    a = 21
+    //console.log(a) // 21
+}
+console.log(a) // 1
 
 
 

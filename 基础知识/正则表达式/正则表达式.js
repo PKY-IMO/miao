@@ -9,6 +9,10 @@ reg2 = new RegExp("ab\\+")
 rg = /ab\+/  //ab+
 // 字符串 'fwdaewqabc\+' 存在转义相当于'fwdaewqabc+'
 // 'fwdaewqabc\\+' 相当于'fwdaewqabc\+'
+```需要转义的字符
+[ ] \ ^ $ . | ? * + ( ) { }
+
+```
 
 ```简写形式       字符组，只是其中一个字符
 \d               [0-9]

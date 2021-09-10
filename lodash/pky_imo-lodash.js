@@ -1,3 +1,5 @@
+const { resolve } = require("node:dns/promises")
+
 var pky_imo = function () {
 
   function chunk(arr, size = 1) {
@@ -1179,16 +1181,6 @@ var pky_imo = function () {
     return res
   }
 
-  function values(obj) {
-    let res = []
-    for (let key in obj) {
-      if (obj.hasOwnProperty(key)) {
-        res.push(obj[key])
-      }
-    }
-    return res
-  }
-
   function every(collection, predicate) {
     var it = iterator(predicate)
     for (let key in collection) {
@@ -1421,6 +1413,28 @@ var pky_imo = function () {
     return true
   }
 
+  function hasIn(object, path) {
+    path = toPath(path)
+    
+    const allKeys = (obj) => {
+      let keys = []
+      for (let key in obj) {
+        keys.push(key)
+      }
+      return keys
+    }
+    let keys = allKeys(object)
+
+    for (var i = 0; i < path.length; i++) {
+      if (!(path[i] in keys)) {
+        return false
+      } else {
+        object = object[path[i]]
+      }
+    }
+    return true
+  }
+
   function toPath(val) {
     if (Array.isArray(val)) {
       return val
@@ -1430,6 +1444,7 @@ var pky_imo = function () {
         .reduce((ary,it) => ary.concat(it.split('[')), [])
         .reduce((ary,it) => ary.concat(it.split('.')), [])
         .reduce((ary,it) =>ary.concat(it.replace(']','')), [])
+        .filter(i=>i !== '')
     }
   }
 
@@ -1688,7 +1703,7 @@ var pky_imo = function () {
 
   function round(num, precision = 0) {
     let mul = Math.pow(10, precision)
-    const f = (num) => num % 1 < 0.5 ? num : parseInt(num) + 1
+    const f = (num) => num % 1 < 0.5 ? parseInt(num) : parseInt(num) + 1
     return f(num * mul) / mul
   }
 
@@ -1748,7 +1763,7 @@ var pky_imo = function () {
     return array.reduce((sum, item) => sum + item)
   }
 
-  function sumBy(array) {
+  function sumBy(array, iter) {
     if (array.length === 0) return undefined
     iter = iterator(iter)
     return array.reduce((sum, item) => sum + iter(item), 0)
@@ -1921,6 +1936,625 @@ var pky_imo = function () {
     return Function.prototype.toString.call(f).includes('native code')
   }
 
+  function invert(obj) {
+    let res = {}
+    for (let key in obj) {
+      if (obj.hasOwnProperty(key)) {
+        res[obj[key]] = key
+      }
+    }
+    return res
+  }
+
+  function invertBy(obj, iter) {   
+    let res = {}
+    if (!iter) {
+      iter = v => v
+    }
+    for (let key in obj) {
+      if (obj.hasOwnProperty(key)) {
+        let value = iter(obj[key])
+        if (res[value]) {
+          res[value] = [].concat(key,res[value])
+        }else {
+          res[value] = [key]
+        }
+      }
+    }
+    return res
+  }
+
+  function invoke(obj, path, ...args) {
+    path = toPath(path)
+    let tmp = obj
+    let pre
+    for (let p of path) {
+      if (typeof tmp !== 'function') {
+        pre = tmp
+        tmp = tmp[p]
+      }else {
+        break
+      }
+    }
+    return tmp.call(pre, ...args)
+  }
+
+  function keysIn(obj) {
+    let res = []
+    for (let key in obj) {
+      res.push(key)
+    }
+    return res
+  }
+
+  function mapKeys(obj, iter) {
+    let res = {}
+    for (let key in obj) {
+      if (obj.hasOwnProperty(key)) {
+        key = iter(obj[key],key,obj)
+        res[key] = obj[key]
+      }
+    }
+    return res
+  }
+
+  function mapValues(obj, iter) {
+    let res = {}
+    iter = iterator(iter)
+    for (let key in obj) {
+      if (obj.hasOwnProperty(key)) {
+        let value = iter(obj[key],key,obj)
+        res[key] = value
+      }
+    }
+    return res
+  }
+
+  function merge(obj, ...sources) {
+    for (let src of sources) {
+      for (let key in src) {
+        if (key in obj) {
+          if (typeof obj[key] === 'object' && typeof src[key] === 'object') {
+            merge(obj[key], src[key])
+          }else {
+            obj[key] = src[key]
+          }
+        }else {
+          obj[key] = src[key]
+        }
+      }
+    }
+    return obj
+  }
+
+  function mergeWith(obj, ...args) {
+    let f = args.pop()
+    let sources = args
+    for (let src of sources) {
+      for (let key in src) {
+        if (key in obj) {
+          let value = f(obj[key], src[key], key, obj, src)
+          if (value) {
+            obj[key] = value
+          }else {
+            if (typeof obj[key] === 'object' && typeof src[key] === 'object') {
+              merge(obj[key], src[key])
+            }else {
+              obj[key] = src[key]
+            }
+          }
+        }else {
+          obj[key] = src[key]
+        }
+      }
+    }
+    return obj
+  }
+
+  function omit(obj, paths) {
+    let res = {}
+    if (typeof paths === 'string') paths = [paths]
+    for (let key in obj) {
+      if (!paths.includes(key)) {
+        res[key] = obj[key]
+      }
+    }
+    return res
+  }
+
+  function omitBy(obj, f) {
+    let res = {}
+    for (let key in obj) {
+      if (f(obj[key], key)) {
+        continue
+      }else {
+        res[key] = obj[key]
+      }
+    }
+    return res
+  }
+
+  function pick(obj, paths) {
+    let res = {}
+    if (typeof paths === 'string') {
+      paths = [paths]
+    }
+    for (let key in obj) {
+      if (paths.includes(key)) {
+        res[key] = obj[key]
+      }
+    }
+    return res
+  }
+
+  function pickBy(obj, f) {
+    let res = {}
+    for (let key in obj) {
+      if (f(obj[key], key)) {
+        res[key] = obj[key]
+      }
+    }
+    return res
+  }
+
+  function result(obj, path, defaultVal) {
+    path = toPath(path)
+    for (let p of path) {
+      if(!(p in obj)) {
+        return typeof defaultVal === 'function' ? defaultVal() : defaultVal
+      }
+      obj = obj[p]
+    }
+    return typeof obj === 'function' ? obj() : obj
+  }
+
+  function set(obj, path, value) {
+    path = toPath(path)
+    let n = path.length
+    for (let i = 0; i < n; i++) {
+      key = path[i]
+      if (i < n-1) {
+        if (key in obj) {
+          obj = obj[key]
+        }else {
+          obj[key] = {}
+          obj = obj[key]
+        }
+      }else {
+        obj[key] = value
+      }
+    }
+  }
+
+  function setWith(obj, path, value, f) {
+    //?
+    path = toPath(path)
+    let n = path.length
+    for (let i = 0; i < n; i++) {
+      p = path[i]
+      if (i < n-1) {
+        if (p in obj) {
+          obj = obj[p]
+        }else {
+          obj[p] = new f
+          obj = obj[p]
+        }
+      }else {
+        obj[p] = value
+      }
+    }
+  }
+
+  function toPairs(obj) {
+    let res = []
+    for (let key in obj) {
+      if (obj.hasOwnProperty(key)) {
+        res.push([key, obj[key]])
+      }
+    }
+    return res
+  }
+
+  function toPairsIn(obj) {
+    let res = []
+    for (let key in obj) {
+        res.push([key, obj[key]])
+    }
+    return res
+  }
+
+  function transform(obj, f, acc) {
+    if (acc === undefined) acc = new obj.constructor
+    for (let key in obj) {
+      if (obj.hasOwnProperty(key)) {
+        if(!f(acc, obj[key], key, obj)) break;
+      }
+    }
+    return acc
+  }
+
+  function unset(obj, path) {
+    path = toPath(path)
+    let n = path.length
+    for (let i = 0; i < n -1; i++) {
+      let key = path[i]
+      if (key in obj) {
+        obj = obj[key]
+      }else {
+        return false
+      }
+    }
+    return delete obj[path[n-1]]
+  }
+
+  function update(obj, path, updater) {
+    path = toPath(path)
+    let n = path.length
+    for (let i = 0; i < n - 1; i++) {
+      let key = path[i]
+      if (key in obj) {
+        obj = obj[key]
+      }else {
+        if (/^\d+$/g.test(path[i+1])) {
+          obj[key] = []
+          obj = obj[key]
+        }else {
+          obj[key] = {}
+          obj = obj[key]
+        }
+      }
+    }
+    obj[path[n-1]] = updater(obj[path[n-1]])
+  }
+
+  function updateWith(obj, path, updater, f) {
+    path = toPath(path)
+    let n = path.length
+    for (let i = 0; i < n - 1; i++) {
+      let key = path[i]
+      if (key in obj) {
+        obj = obj[key]
+      }else {
+        obj[key] = new f
+        obj = obj[key]
+      }
+    }
+    obj[path[n-1]] = updater(obj[path[n-1]])
+  }
+
+  function values(obj) {
+    let res = []
+    for (let key in obj) {
+      if (obj.hasOwnProperty(key)) {
+        res.push(obj[key])
+      }
+    }
+    return res
+  }
+
+  function valuesIn(obj) {
+    let res = []
+    for (let key in obj) {
+        res.push(obj[key])
+    }
+    return res
+  }
+
+  function camelCase(str) {
+    return str.trim().toLowerCase()
+              .replace(/([^0-9A-Za-z]+)/g, '-') // 所有符号转换为’-‘
+              .replace(/^-+|-+$/g,'') // 去除头尾的‘-’
+              .replace(/-(\w)/g, (_, x) => x.toUpperCase()) // 中划线转驼峰
+  }
+
+  function capitalize(str) {
+    return str.toLowerCase().replace(/\w/, x => x.toUpperCase())
+  }
+
+  function deburr(str) {
+
+  }
+
+  function endsWith(str, target, pos = str.length) {
+    return str[--pos] === target
+  }
+
+  function escape(str) {
+    let map = {
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      '"': '&quot;',
+      '\'': '&apos;'
+    }
+    return str.replace(/[&><'"]/g, x => map[x])
+  }
+
+  function unescape(str) {
+    let map = {
+      '&amp;': '&',
+      '&lt;': '<',
+      '&gt;': '>',
+      '&quot;': '"',
+      '&apos;': '\''
+    }
+    return str.replace(/(&amp;)|(&lt;)|(&gt;)|(&quot;)|(&apos;)/g, x => map[x])
+  }
+
+  function escapeRegExp(str) {
+    // 正则中需要转义的14个字符 [ ] \ ^ $ . | ? * + ( ) { }
+    return str.replace(/[\[\]\\\^\$\.\|\?\*\+\(\)\{\}]/g, x => '\\'+x)
+  }
+
+  function kebabCase(str) {
+    return str.trim()
+              .replace(/([^A-Z])([A-Z])/g, (_,x,y) => x + '-' + y) //fooBar  找到oB
+              .replace(/^[^a-zA-Z0-9]+|[^a-zA-Z0-9]+$/g, '') // 开头结尾去除
+              .replace(/[^a-zA-Z0-0-]/g,'') 
+              .toLowerCase()
+  }
+
+  function lowerCase(str) {// foo bar
+    return str.replace(/[^a-zA-Z]/g, ' ')
+              .replace(/([a-z])([A-Z])/g, (_, x, y) => x + ' ' + y)
+              .toLowerCase()
+              .trim()
+  }
+
+  function upperCase(str) {// FOO BAR
+    return str.replace(/[^a-zA-Z]/g, ' ')
+              .replace(/([a-z])([A-Z])/g, (_, x, y) => x + ' ' + y)
+              .toUpperCase()
+              .trim()
+  }
+
+  function lowerFirst(str) {
+    return str.replace(/./, x => x.toLowerCase())
+  }
+
+  function upperFirst(str) {
+    return str.replace(/./, x => x.toUpperCase())
+  }
+
+  function pad(str, num = 0, char = ' ') {
+    let n = str.length
+    if (n >= num) return str
+    let start = (num - n) >> 1
+    let end = start + n
+    let leftTimes = Math.ceil(start / char.length)
+    let rightTimes = Math.ceil((num - end) / char.length)
+    return char.repeat(leftTimes).slice(0, start) + str + char.repeat(rightTimes).slice(0, num - end)
+  } 
+
+  function padEnd(str, num = 0, char = ' ') {
+    let n = str.length
+    if (n >= num) return str
+    let times = Math.ceil((num - n) / char.length)
+    return str + char.repeat(times).slice(0, num - n)
+  }
+
+  function padStart(str, num, char = ' ') {
+    let n = str.length
+    if (n >= num) return str
+    let times = Math.ceil((num - n) / char.length)
+    return char.repeat(times).slice(0, num - n) + str
+  }
+
+  function parseInt(str, radix = 10) {
+
+  }
+
+  function repeat(str='', n = 1) {
+    let res = ''
+    for (let i = 0; i < n; i++) {
+      res += str
+    }
+    return res
+  }
+
+  function replace(str, pattern, replacement) {
+    return str.replace(pattern, replacement)
+  }
+
+  function snakeCase(str) {//foo_bar
+    return str.trim()
+    .replace(/([^A-Z])([A-Z])/g, (_,x,y) => x + '_' + y) //fooBar  找到oB
+    .replace(/^[^a-zA-Z0-9]+|[^a-zA-Z0-9]+$/g, '') // 开头结尾去除
+    .replace(/[^\w]/g,'') 
+    .toLowerCase()
+  }
+
+  function split(str, sep, limit) {
+    return str.split(sep).splice(0, limit)
+  }
+
+  function startCase(str) {// Foo BAR
+    return str.replace(/[^a-zA-Z]/g, ' ')
+              .replace(/([a-z])([A-Z])/g, (_, x, y) => x + ' ' + y)
+              .replace(/\s\w/g, x=>x.toUpperCase())
+              .trim()    
+              .replace(/^[a-z]/, x=>x.toUpperCase())     
+  }
+
+  function startsWith(str, target, pos = 0) {
+    return str[pos] === target
+  }
+
+  function toLower(str) {
+    return str.split('').map(i => i.charCodeAt())
+              .map(code => code >=65 && code <=90 ? code + 32 : code)
+              .map(code => String.fromCharCode(code))
+              .join('')
+  }
+
+  function toUpper(str) {
+    return str.split('').map(i => i.charCodeAt())
+              .map(code => code >=97 && code <=122 ? code - 32 : code)
+              .map(code => String.fromCharCode(code))
+              .join('')
+  }
+
+  function trim(str, char = ' ') {
+    // let regStr = `^${char}+|${char}+$`
+    // let reg = new RegExp(regStr, 'g')
+    // return str.replace(reg,'')
+    let left = 0, right = str.length - 1
+    let len = str.length
+    while(left < len && char.includes(str[left])){
+        left++
+    }
+    while(right >= 0 && char.includes(str[right])) {
+      right--
+    }
+    return str.slice(left, right + 1)
+  }
+
+  function trimEnd(str, char = ' ') {
+    let right = str.length - 1
+    while(right >= 0 && char.includes(str[right])) {
+      right--
+    }
+    return str.slice(0, right + 1)
+  }
+
+  function trimStart(str, char = ' ') {
+    let left = 0
+    let len = str.length
+    while(left < len && char.includes(str[left])){
+        left++
+    }
+    return str.slice(left)
+  }
+
+  function truncate(str, options = {}) {  
+    // 处理option
+    if (!options.length) options.lenth = 30
+    if (!options.omission) options.omission = '...'
+    // 不需要操作
+    if (str.length <= options.length) {
+      return str
+    }
+    // 需要操作
+    let omissLen = options.omission.length
+    if (options.separator) {
+      let strArr = str.split(options.separator)
+      let res = ''
+      for (let i = 0; i < strArr.length; i++) {
+        // 预期的长度
+        let tmp = res + strArr[i] + omissLen
+        if (tmp.length < options.length) {
+          res += strArr[i]
+        }else break
+      }
+      return res + options.omission
+    }else {
+      let reserve= options.lenth - omissLen
+      return str.slice(0, reserve) + options.omission
+    }
+  }
+
+  function words(str, pattern) {
+    if (!pattern) {
+      // 普通单词匹配：/\b\w+\b/g
+      return str.match(/([a-zA-Z])+|([0-9])+/g)
+    }else {
+      return str.match(pattern)
+    }
+  }
+
+  function bindAll(obj, methodNames) {
+    obj.methodNames = obj.methodNames.bind(obj)
+    return obj
+  }
+
+  function defaultTo(value, defaultValue) {
+    return value || defaultValue
+  }
+
+  function range(start = 0, end, step = 1) {
+    if (arguments.length === 1) {
+      if (start < 0) step = -1
+      end = start
+      start = 0
+    }
+    if (end === start ||(end > start && step < 0) ||(end < start && step > 0)) return []
+    let times = Math.abs((end-start)/(step||1))
+    let res = []
+    for (let i = 0; i < times; i++) {
+      res.push(start)
+      start += step
+    } 
+    return res
+  }
+
+  function rangeRight(start = 0, end, step = 1) {
+    if (arguments.length === 1) {
+      if (start < 0) step = -1
+      end = start
+      start = 0
+    }
+    if (end === start ||(end > start && step < 0) ||(end < start && step > 0)) return []
+    let times = Math.abs((end-start)/(step||1))
+    let res = []
+    for (let i = 0; i < times; i++) {
+      res.unshift(start)
+      start += step
+    } 
+    return res
+  }
+
+  function times(n, f) {
+    let res = []
+    for (let i = 0; i < n; i++) {
+      res.push(f(i))
+    }
+    return res
+  }
+
+  function uniqueIdPre() {
+    let n = 0
+    return function(prefix="") {
+      return prefix+(++n)
+    }
+  }
+
+  uniqueId = uniqueIdPre()
+
+  function cloneDeep(obj, map = new Map()) {
+    if (obj === null) return null
+    if (obj instanceof RegExp) return new RegExp(obj)
+    if (obj instanceof Date) return new Date(obj)
+    if (typeof obj !== 'object') return obj
+    // 循环引用
+    if (map.has(obj)) return map.get(obj)
+    let t = new obj.constructor()
+    map.set(obj, t)
+    // map
+    if (obj instanceof Map) {
+      obj.forEach((val, key) => {
+        t.set(key, cloneDeep(val, map))    
+      })
+    }
+    // set
+    if (obj instanceof Set) {
+      obj.forEach((val, key) => {
+        t.add(cloneDeep(val, map))    
+      })
+    }
+    // obj、array
+    for (let key in obj) {
+      if (obj.hasOwnProperty(key)) {
+        t[key] = cloneDeep(obj[key], map)
+      }
+    }
+    return t
+  }
+
+  
+
+
+
+
 
 
 
@@ -2091,6 +2725,7 @@ var pky_imo = function () {
 
     get: get,
     has: has,
+    hasIn: hasIn,
 
     parseJson: parseJson,
     stringifyJson: stringifyJson,
@@ -2123,8 +2758,53 @@ var pky_imo = function () {
     findLastKey: findLastKey,
     forIn: forIn,
     forInRight: forInRight,
+    forOwn: forOwn,
+    forOwnRight: forOwnRight,
     functions: functions,
     functionsIn: functionsIn,
+    hasIn: hasIn,
+    invert: invert,
+    invertBy: invertBy,
+    invoke: invoke,
+    keysIn: keysIn,
+    mapKeys: mapKeys,
+    mapValues: mapValues,
+    merge: merge,
+    mergeWith: mergeWith,
+    omit: omit,
+    omitBy: omitBy,
+    pick: pick,
+    pickBy: pickBy,
+    result: result,
+    set: set,
+    setWith: setWith,
+    toPairs: toPairs,
+    toPairsIn: toPairsIn,
+    transform: transform,
+    unset: unset,
+    update: update,
+    updateWith: updateWith,
+    values: values,
+    valuesIn: valuesIn,
+    camelCase: camelCase,
+    capitalize: capitalize,
+    deburr: deburr,
+    endsWith: endsWith,
+    escape: escape,
+    escapeRegExp: escapeRegExp,
+    kebabCase: kebabCase,
+    lowerCase: lowerCase,
+    lowerFirst: lowerFirst,
+    pad: pad,
+    padEnd: padEnd,
+    padStart: padStart,
+    parseInt: parseInt,
+    repeat: repeat,
+    replace: replace,
+    snakeCase: snakeCase,
+    split: split,
+    startCase: startCase
+
 
   }
 
