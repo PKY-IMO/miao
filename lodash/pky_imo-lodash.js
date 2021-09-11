@@ -101,7 +101,7 @@ var pky_imo = function () {
 
   function dropWhile(arr, f) {
     let it = iterator(f)
-    for (let i = 0; i < arr.length; i++) {
+    for (var i = 0; i < arr.length; i++) {
       if (!it(arr[i], i, arr)) {
         break
       }
@@ -111,7 +111,7 @@ var pky_imo = function () {
 
   function dropRightWhile(arr, f) {
     let it = iterator(f)
-    for (var i = 0; i < arr.length; i++) {
+    for (var i = arr.length - 1; i >= 0; i--) {
       if (!it(arr[i], i, arr)) {
         break
       }
@@ -433,29 +433,21 @@ var pky_imo = function () {
   }
 
   function takeRightWhile(ary, predicate = identity) {
-    let res = []
     predicate = iteratee(predicate)
-    for (let i = ary.length - 1; i >= 0; i--) {
-      if(predicate(ary[i],i,ary)) {
-        res.unshift(ary[i])
-      }else {
+    for (var i = ary.length - 1; i >= 0; i--) {
+      if(!predicate(ary[i],i,ary)) 
         break
-      }
     }
-    return res
+    return ary.slice(0, i+1)
   }
 
   function takeWhile(ary, predicate = identity) {
-    let res = []
     predicate = iteratee(predicate)
-    for (let i = 0; i < ary.length; i++) {
-      if(predicate(ary[i],i,ary)) {
-        res.push(ary[i])
-      }else {
+    for (var i = 0; i < ary.length; i++) {
+      if(!predicate(ary[i],i,ary))
         break
-      }
     }
-    return res
+    return ary.slice(i)
   }
 
   function union(...args) {
@@ -2364,6 +2356,7 @@ var pky_imo = function () {
           }
       }
     }
+    str = ''+str
     let auto = new Auto(radix)
     for (let c of str) {
         auto.go(c)
@@ -3135,6 +3128,7 @@ var pky_imo = function () {
     property: property,
     propertyOf: propertyOf,
     nthArg: nthArg,
+    parseInt: parseInt
   }
 
 }()
