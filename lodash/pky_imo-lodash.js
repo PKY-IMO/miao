@@ -433,21 +433,21 @@ var pky_imo = function () {
   }
 
   function takeRightWhile(ary, predicate = identity) {
-    predicate = iteratee(predicate)
+    predicate = iterator(predicate)
     for (var i = ary.length - 1; i >= 0; i--) {
       if(!predicate(ary[i],i,ary)) 
         break
     }
-    return ary.slice(i)
+    return ary.slice(i+1)
   }
 
   function takeWhile(ary, predicate = identity) {
-    predicate = iteratee(predicate)
+    predicate = iterator(predicate)
     for (var i = 0; i < ary.length; i++) {
       if(!predicate(ary[i],i,ary))
         break
     }
-    return ary.slice(0, i+i)
+    return ary.slice(0, i-1)
   }
 
   function union(...args) {
@@ -2093,7 +2093,7 @@ var pky_imo = function () {
         if (key in tmp) {
           tmp = tmp[key]
         }else {
-          tmp[key] = {}
+          tmp[key] = isNaN(path[i+1]) ? {} : []
           tmp = tmp[key]
         }
       }else {
@@ -2466,18 +2466,15 @@ var pky_imo = function () {
     // 需要操作
     let omissLen = options.omission.length
     if (options.separator) {
-      let strArr = str.split(options.separator)
       let matchReg = new RegExp(options.separator, 'g')
-      let matchArr = str.match(matchReg)
-      let res = ''
-      for (let i = 0; i < strArr.length; i++) {
-        // 预期的长度
-        let tmp = res + strArr[i] + omissLen + matchArr[i]
-        if (tmp.length < options.length) {
-          res += strArr[i] + matchArr[i]
-        }else break
+      let end = 0
+      let match
+      while(match = matchReg.exec(str) ) {
+        if((match.index + omissLen) <= options.length) {
+          end = match.index
+        }else break;
       }
-      return res + options.omission
+      return str.slice(0, end) + options.omission
     }else {
       let reserve= options.lenth - omissLen
       return str.slice(0, reserve) + options.omission
