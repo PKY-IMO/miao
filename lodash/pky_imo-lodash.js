@@ -100,25 +100,23 @@ var pky_imo = function () {
   }
 
   function dropWhile(arr, f) {
-    let res = []
     let it = iterator(f)
     for (let i = 0; i < arr.length; i++) {
       if (!it(arr[i], i, arr)) {
-        res.push(arr[i])
+        break
       }
     }
-    return res
+    return arr.slice(i)
   }
 
   function dropRightWhile(arr, f) {
-    let res = []
     let it = iterator(f)
-    for (let i = 0; i < arr.length; i++) {
+    for (var i = 0; i < arr.length; i++) {
       if (!it(arr[i], i, arr)) {
-        res.push(arr[i])
+        break
       }
     }
-    return res
+    return arr.slice(0, i+1)
   }
 
   function findIndex(arr, f, idx = 0) {
@@ -136,10 +134,6 @@ var pky_imo = function () {
     }
     return -1
   }
-
-
-
-
 
   function flatten(arr) {
     return arr.reduce((prev,item) => {
@@ -1414,18 +1408,8 @@ var pky_imo = function () {
 
   function hasIn(object, path) {
     path = toPath(path)
-    
-    const allKeys = (obj) => {
-      let keys = []
-      for (let key in obj) {
-        keys.push(key)
-      }
-      return keys
-    }
-    let keys = allKeys(object)
-
     for (var i = 0; i < path.length; i++) {
-      if (!(path[i] in keys)) {
+      if (!(path[i] in obj)) {
         return false
       } else {
         object = object[path[i]]
@@ -1954,7 +1938,7 @@ var pky_imo = function () {
       if (obj.hasOwnProperty(key)) {
         let value = iter(obj[key])
         if (res[value]) {
-          res[value] = [].concat(key,res[value])
+          res[value] = [].concat(res[value], key)
         }else {
           res[value] = [key]
         }
@@ -1990,8 +1974,8 @@ var pky_imo = function () {
     let res = {}
     for (let key in obj) {
       if (obj.hasOwnProperty(key)) {
-        key = iter(obj[key],key,obj)
-        res[key] = obj[key]
+        key2 = iter(obj[key],key,obj)
+        res[key2] = obj[key]
       }
     }
     return res
@@ -2123,6 +2107,7 @@ var pky_imo = function () {
         obj[key] = value
       }
     }
+    return obj
   }
 
   function setWith(obj, path, value, f) {
@@ -2142,6 +2127,7 @@ var pky_imo = function () {
         obj[p] = value
       }
     }
+    return obj
   }
 
   function toPairs(obj) {
@@ -2340,7 +2326,49 @@ var pky_imo = function () {
   }
 
   function parseInt(str, radix = 10) {
-
+    class Auto{
+      constructor(radix) {
+          this.state = 'start'
+          this.answer = 0
+          this.sign = 1
+          this.radix = radix
+          this.maxPos = Math.pow(2, 31) - 1
+          this.maxNeg = Math.pow(2, 31)
+          this.map = new Map([// 空格 正负 数字 其它
+              ['start', ['start', 'signed', 'in_number', 'end']],
+              ['signed', ['end', 'end', 'in_number', 'end']],
+              ['in_number', ['end', 'end', 'in_number', 'end']],
+              ['end', ['end', 'end', 'end', 'end']]
+          ])
+      }
+      getTypeIndex(char) {
+          if (char === ' ') {
+              return 0
+          }else if (/[\+-]/.test(char)) {
+              return 1
+          }else if (/[0-9]/.test(char)) {
+              return 2
+          }else {
+              return 3
+          }
+      }
+      go(char) {
+          this.state = this.map.get(this.state)[this.getTypeIndex(char)]
+          if (this.state === 'signed') {
+              this.sign = char === '+' ? 1 : -1
+          }
+          if (this.state === 'in_number') {
+              this.answer = this.answer * this.radix + +char
+              this.answer = this.sign > 0 ? 
+                  Math.min(this.answer, this.maxPos) : Math.min(this.answer, this.maxNeg)
+          }
+      }
+    }
+    let auto = new Auto(radix)
+    for (let c of str) {
+        auto.go(c)
+    }
+    return auto.answer * auto.sign
   }
 
   function repeat(str='', n = 1) {
@@ -2393,10 +2421,11 @@ var pky_imo = function () {
               .join('')
   }
 
-  function trim(str, char = ' ') {
+  function trim(str, char) {
     // let regStr = `^${char}+|${char}+$`
     // let reg = new RegExp(regStr, 'g')
     // return str.replace(reg,'')
+    if (char === undefined) char = ' '
     let left = 0, right = str.length - 1
     let len = str.length
     while(left < len && char.includes(str[left])){
@@ -2408,7 +2437,8 @@ var pky_imo = function () {
     return str.slice(left, right + 1)
   }
 
-  function trimEnd(str, char = ' ') {
+  function trimEnd(str, char) {
+    if (char === undefined) char = ' '
     let right = str.length - 1
     while(right >= 0 && char.includes(str[right])) {
       right--
@@ -2416,7 +2446,8 @@ var pky_imo = function () {
     return str.slice(0, right + 1)
   }
 
-  function trimStart(str, char = ' ') {
+  function trimStart(str, char) {
+    if (char === undefined) char = ' '
     let left = 0
     let len = str.length
     while(left < len && char.includes(str[left])){
@@ -2598,7 +2629,7 @@ var pky_imo = function () {
     return function(...args) {
       if (!canRun) return 
       canRun = false
-      return func()
+      return func(...args)
     }
   }
 
@@ -2756,6 +2787,52 @@ var pky_imo = function () {
       let preArgs = args.splice(0, start)
       let resArgs = args
       return func(...preArgs, resArgs)
+    }
+  }
+
+  function negate(func) {
+    return function(...args) {
+      return !func(...args)
+    }
+  }
+
+  function constant(value) {
+    return () => value
+  }
+
+  function flow(funcs) {
+    funcs = [].concat(funcs)
+    return function(...args) {
+      let res
+      let flag = false
+      for (let func of funcs) {
+        if (flag) {
+          res = func(res)
+        }else {
+          flag = true
+          res = func(...args)
+        }
+      }
+      return res
+    }
+  }
+
+  function propertyOf(obj) {
+    return function(path) {
+      path = toPath(path)
+      let tmp = obj
+      for (let p of path) {
+        tmp = tmp[p]
+      }
+      return tmp
+    }
+  }
+
+  function nthArg(n = 0) {
+    return function(...args) {
+      let total = args.length
+      n = n >= 0 ? n : total - n
+      return args[n]
     }
   }
 
@@ -3051,7 +3128,13 @@ var pky_imo = function () {
     throttle: throttle,
     unary: unary,
     wrap: wrap,
-    pullAt: pullAt
+    pullAt: pullAt,
+    negate: negate,
+    constant: constant,
+    flow: flow,
+    property: property,
+    propertyOf: propertyOf,
+    nthArg: nthArg,
   }
 
 }()
