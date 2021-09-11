@@ -442,12 +442,12 @@ var pky_imo = function () {
   }
 
   function takeWhile(ary, predicate = identity) {
-    predicate = iterator(predicate)
+    predicate = iteratee(predicate)
     for (var i = 0; i < ary.length; i++) {
       if(!predicate(ary[i],i,ary))
         break
     }
-    return ary.slice(0, i-1)
+    return ary.slice(0, i)
   }
 
   function union(...args) {
