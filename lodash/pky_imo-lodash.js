@@ -438,7 +438,7 @@ var pky_imo = function () {
       if(!predicate(ary[i],i,ary)) 
         break
     }
-    return ary.slice(0, i+1)
+    return ary.slice(i)
   }
 
   function takeWhile(ary, predicate = identity) {
@@ -447,7 +447,7 @@ var pky_imo = function () {
       if(!predicate(ary[i],i,ary))
         break
     }
-    return ary.slice(i)
+    return ary.slice(0, i+i)
   }
 
   function union(...args) {
@@ -1401,7 +1401,7 @@ var pky_imo = function () {
   function hasIn(object, path) {
     path = toPath(path)
     for (var i = 0; i < path.length; i++) {
-      if (!(path[i] in obj)) {
+      if (!(path[i] in object)) {
         return false
       } else {
         object = object[path[i]]
@@ -2086,17 +2086,18 @@ var pky_imo = function () {
   function set(obj, path, value) {
     path = toPath(path)
     let n = path.length
+    let tmp = obj
     for (let i = 0; i < n; i++) {
       key = path[i]
       if (i < n-1) {
-        if (key in obj) {
-          obj = obj[key]
+        if (key in tmp) {
+          tmp = tmp[key]
         }else {
-          obj[key] = {}
-          obj = obj[key]
+          tmp[key] = {}
+          tmp = tmp[key]
         }
       }else {
-        obj[key] = value
+        tmp[key] = value
       }
     }
     return obj
@@ -2106,17 +2107,18 @@ var pky_imo = function () {
     //?
     path = toPath(path)
     let n = path.length
+    let tmp = obj
     for (let i = 0; i < n; i++) {
       p = path[i]
       if (i < n-1) {
-        if (p in obj) {
-          obj = obj[p]
+        if (p in tmp) {
+          tmp = tmp[p]
         }else {
-          obj[p] = new f
-          obj = obj[p]
+          tmp[p] = new f
+          tmp = tmp[p]
         }
       }else {
-        obj[p] = value
+        tmp[p] = value
       }
     }
     return obj
@@ -2167,36 +2169,40 @@ var pky_imo = function () {
   function update(obj, path, updater) {
     path = toPath(path)
     let n = path.length
+    let tmp = obj
     for (let i = 0; i < n - 1; i++) {
       let key = path[i]
-      if (key in obj) {
-        obj = obj[key]
+      if (key in tmp) {
+        tmp = tmp[key]
       }else {
         if (/^\d+$/g.test(path[i+1])) {
-          obj[key] = []
-          obj = obj[key]
+          tmp[key] = []
+          tmp = tmp[key]
         }else {
-          obj[key] = {}
-          obj = obj[key]
+          tmp[key] = {}
+          tmp = tmp[key]
         }
       }
     }
-    obj[path[n-1]] = updater(obj[path[n-1]])
+    tmp[path[n-1]] = updater(tmp[path[n-1]])
+    return obj
   }
 
   function updateWith(obj, path, updater, f) {
     path = toPath(path)
     let n = path.length
+    let tmp = obj
     for (let i = 0; i < n - 1; i++) {
       let key = path[i]
-      if (key in obj) {
-        obj = obj[key]
+      if (key in tmp) {
+        tmp = tmp[key]
       }else {
-        obj[key] = new f
-        obj = obj[key]
+        tmp[key] = new f
+        tmp = tmp[key]
       }
     }
-    obj[path[n-1]] = updater(obj[path[n-1]])
+    tmp[path[n-1]] = updater(tmp[path[n-1]])
+    return obj
   }
 
   function values(obj) {
@@ -2418,7 +2424,7 @@ var pky_imo = function () {
     // let regStr = `^${char}+|${char}+$`
     // let reg = new RegExp(regStr, 'g')
     // return str.replace(reg,'')
-    if (char === undefined) char = ' '
+    if (char === undefined) return str.replace(/^\s+|\s+$/g,'')
     let left = 0, right = str.length - 1
     let len = str.length
     while(left < len && char.includes(str[left])){
@@ -2431,7 +2437,7 @@ var pky_imo = function () {
   }
 
   function trimEnd(str, char) {
-    if (char === undefined) char = ' '
+    if (char === undefined) return str.replace(/\s+$/g,'')
     let right = str.length - 1
     while(right >= 0 && char.includes(str[right])) {
       right--
@@ -2440,7 +2446,7 @@ var pky_imo = function () {
   }
 
   function trimStart(str, char) {
-    if (char === undefined) char = ' '
+    if (char === undefined) return str.replace(/^\s+/g,'')
     let left = 0
     let len = str.length
     while(left < len && char.includes(str[left])){
@@ -2461,12 +2467,14 @@ var pky_imo = function () {
     let omissLen = options.omission.length
     if (options.separator) {
       let strArr = str.split(options.separator)
+      let matchReg = new RegExp(options.separator, 'g')
+      let matchArr = str.match(matchReg)
       let res = ''
       for (let i = 0; i < strArr.length; i++) {
         // 预期的长度
-        let tmp = res + strArr[i] + omissLen
+        let tmp = res + strArr[i] + omissLen + matchArr[i]
         if (tmp.length < options.length) {
-          res += strArr[i]
+          res += strArr[i] + matchArr[i]
         }else break
       }
       return res + options.omission
@@ -2486,7 +2494,10 @@ var pky_imo = function () {
   }
 
   function bindAll(obj, methodNames) {
-    obj.methodNames = obj.methodNames.bind(obj)
+    methodNames = [].concat(methodNames)
+    for (let method of methodNames) {
+      obj[method] = obj[method].bind(obj)
+    }
     return obj
   }
 
