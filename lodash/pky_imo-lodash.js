@@ -1,4 +1,7 @@
+const { unwatchFile } = require("node:fs")
+
 var pky_imo = function () {
+  let _ = Symbol.for('placeholder')
 
   function chunk(arr, size = 1) {
     if (arr.length <= size) return arr
@@ -2579,17 +2582,184 @@ var pky_imo = function () {
     }
   }
 
-  function ary() {
-
+  function ary(func, n = func.length) {
+    return function(...args){
+      let argsFinal = args.slice(0, n)
+      return func(...argsFinal)
+    }
   }
 
+  function unary(func) {
+    return function(...args) {
+      return func(args[0])
+    }
+  }
 
+  function once(func) {
+    let canRun = true 
+    return function(...args) {
+      if (!canRun) return 
+      canRun = false
+      return func()
+    }
+  }
 
+  function before(n, func) {
+    let count = 0
+    return function(...args) {
+      count++
+      if (count < n) {
+        return func(...args)
+      }
+    }
+  }
 
+  function after(n, func) {
+    let count = 0
+    return function(...args) {
+      count++
+      if (count > n) {
+        coun = n
+        return func(...args)
+      }
+    }
+  }
 
+  function bind(func, obj, ...fixedArgs) {
+    return function(...args) {
+      for (let i = 0; i < fixedArgs.length; i++ ) {
+        if (fixedArgs[i] === _) {
+          fixedArgs[i] = args.shift()
+        }
+      }
+      return func.call(obj, ...fixedArgs, ...args)
+    }
+  }
 
+  function bindKey(obj, key, ...fixedArgs) {
+    return function(...args) {
+      for (let i = 0; i < fixedArgs.length; i++ ) {
+        if (fixedArgs[i] === _) {
+          fixedArgs[i] = args.shift()
+        }
+      }
+      return obj[key].call(obj, ...fixedArgs, ...args)
+    }
+  }
 
+  function curry(func, ...fixedArgs) {
+    let tmp = fixedArgs.filter(i => i !== _)
+    if (tmp.length >= func.length) return func(...tmp)
+    return (...args) => {
+      for (let i = 0; i < fixedArgs.length; i++ ) {
+        if (fixedArgs[i] === _) {
+          fixedArgs[i] = args.shift()
+        }
+      }
+      return curry(func, ...fixedArgs, ...args)
+    } 
+  }
 
+  function curryRight(func, ...fixedArgs) {
+    let tmp = fixedArgs.filter(i => i !== _)
+    if (tmp.length >= func.length) return func(...tmp)
+    return (...args) => {
+      for (let i = 0; i < fixedArgs.length; i++ ) {
+        if (fixedArgs[i] === _) {
+          fixedArgs[i] = args.shift()
+        }
+      }
+      return curryRight(func, ...args, ...fixedArgs)
+    } 
+  }
+
+  function debounce(func, delay, options ={}) {
+    //fangdou 
+    let timer = null
+    return function() {
+      if (timer) clearTimeout(timer)
+      timer = setTimeout(func, delay)
+    }
+  }
+
+  function throttle(func, delay, options={}) {
+    let canRun = true
+    return function () {
+      if (!canRun) return
+      canRun = false
+      setTimeout(()=>{
+        func.apply(this, arguments)
+        canRun = true
+      }, delay)
+    }
+  }
+
+  function flip(func) {
+    return function(...args) {
+      return func(...args.reverse())
+    }
+  }
+
+  function overArgs(func, trans) {
+    return function(...args) {
+      if (typeof trans === 'function') trans = [trans]
+      args = args.map((arg, i) => trans[i](arg))
+      return func(...args)
+    }
+  }
+
+  function partial(func, ...fixedArgs) {
+    return function(...args) {
+      for (let i = 0; i < fixedArgs.length; i++ ) {
+        if (fixedArgs[i] === _) {
+          fixedArgs[i] = args.shift()
+        }
+      }
+      return func(...fixedArgs, ...args)
+    }
+  }
+
+  function partialRight(func, ...fixedArgs) {
+    return function(...args) {
+      for (let i = 0; i < fixedArgs.length; i++ ) {
+        if (fixedArgs[i] === _) {
+          fixedArgs[i] = args.shift()
+        }
+      }
+      return func(...args, ...fixedArgs)
+    }
+  }
+
+  function rearg(func, indexs) {
+    return function(...args) {
+      indexs = [].concat(indexs)
+      let newArgs = []
+      for (let i = 0; i< args.length;i++) {
+        newArgs[i] = args[indexs[i]]
+      }
+      return func(...newArgs)
+    }
+  }
+
+  function spread(func) {
+    return function(ary) {
+      return func(...ary)
+    }
+  }
+
+  function wrap(value, wrapper) {
+    return function(...args) {
+      return wrapper(value, ...args)
+    }
+  }
+
+  function rest(func, start = func.length-1) {
+    return function(...args) {
+      let preArgs = args.splice(0, start)
+      let resArgs = args
+      return func(...preArgs, resArgs)
+    }
+  }
 
 
 
@@ -2833,7 +3003,6 @@ var pky_imo = function () {
     pad: pad,
     padEnd: padEnd,
     padStart: padStart,
-    parseInt: parseInt,
     repeat: repeat,
     replace: replace,
     snakeCase: snakeCase,
@@ -2862,9 +3031,29 @@ var pky_imo = function () {
     concat: concat,
     pullAt: pullAll,
     matches: matches,
-    property: property
+    property: property,
 
-
+    ary: ary,
+    after: after,
+    before: before,
+    bind: bind,
+    bindKey: bindKey,
+    curry: curry,
+    curryRight: curryRight,
+    debounce: debounce,
+    defer: defer,
+    flip: flip,
+    once: once,
+    overArgs: overArgs,
+    partial: partial,
+    partialRight: partialRight,
+    rearg: rearg,
+    rest: rest,
+    spread: spread,
+    throttle: throttle,
+    unary: unary,
+    wrap: wrap,
+    pullAt: pullAt
   }
 
 }()
