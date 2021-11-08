@@ -405,3 +405,96 @@ new Promise(function(resolve){
 })
 
 console.log('script end')//5
+
+
+///
+async function async1() {
+  console.log('async1 start'); //2
+  await async2();
+  console.log('async1 end');//6
+}
+async function async2() {
+  console.log('async2'); //3
+}
+console.log('script start'); //1
+setTimeout(function () {
+  console.log('setTimeout');//8
+}, 0)
+async1()
+new Promise(function (resolve) {
+  console.log('promise1')//4
+  resolve()
+}).then(function () {
+  console.log('promise2')//7
+})
+
+console.log('script end')//5
+
+
+//////
+async function async1(){
+  console.log('async1 start')//2
+  await async2()
+  console.log('async1 end')//8
+}
+async function async2(){
+  console.log('async2')//3
+}
+console.log('script start')//1
+setTimeout(function(){
+  console.log('setTimeout0') //10
+},0)  
+setTimeout(function(){
+  console.log('setTimeout3') //11
+},3)  
+setImmediate(() => console.log('setImmediate'));//12------check阶段执行
+process.nextTick(() => console.log('nextTick'));//7
+async1();
+new Promise(function(resolve){
+  console.log('promise1')//4
+  resolve();
+  console.log('promise2')//5
+}).then(function(){
+  console.log('promise3')//9
+})
+console.log('script end')//6
+
+
+//////////
+setTimeout(()=>console.log('a'), 0)//12
+var p = new Promise((resolve)=>{
+    console.log('b');//1
+    resolve();
+}
+);
+p.then(()=>console.log('c'));//8
+p.then(()=>console.log('d'));//9
+
+console.log('e');//2
+
+async function async1() {
+    console.log("a");//4
+    await async2();
+    console.log("b");//10
+}
+async function async2() {
+    console.log('c');//5
+}
+
+console.log("d");//3
+
+setTimeout(function() {
+    console.log("e");//13
+}, 0);
+
+async1();
+
+new Promise(function(resolve) {
+    console.log("f");//6
+    resolve();
+}
+).then(function() {
+    console.log("g");//11
+});
+
+console.log('h');//7

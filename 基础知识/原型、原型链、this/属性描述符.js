@@ -1,3 +1,4 @@
+// Object.getOwnPropertyNames 可枚举不可枚举属性
 a = {}
 Object.defineProperty(a, 'foo', {
   value: 8,

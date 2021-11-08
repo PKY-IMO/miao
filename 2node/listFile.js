@@ -41,43 +41,17 @@ const listFileAsync= async (targetPath) => {
 // istFileAsync(targetPath).then((res)=>console.log(res))
 
 
-// promise
-const listFilePromise = (targetPath) => {
-  return new Promise((resolve, rej)=>{
-    fsp.readdir(targetPath)
-    .then(fileName => {
-      return fileName.map(i => path.join(targetPath, i)) // 绝对地址
-    })
-    .then(filePaths => {
-      let  res = []
-      let count = 0
-      let total = filePaths.length
-      for (let filePath of filePaths) {
-        fsp.stat(filePath).then((stat) => {
-          if (stat.isDirectory()) {
-            console.log(filePath)
-            listFilePromise(filePath).then((tmp) => {
-              //console.log(tmp)
-              res.push(...tmp)
-              count++
-              if (count >= total) {
-                resolve(res)
-              }
-            })
-          }else {
-            res.push(filePath)
-            count++
-            if (count >= total) {
-              resolve(res)
-            }
-          }
-        })
-      }
-    })
-  })
-}
 
-listFilePromise(targetPath).then(res=>console.log(res))
+let writeStream = fs.createWriteStream('./listFile.js')
+writeStream.write('11111111111')
+writeStream.end()
+writeStream.on('finish', ()=>{
+  console.log('finish')
+})
 
+// 复制 读的单工流
+let readStream1 = fs.createReadStream('./read')
+let writeStream1 = fs.createWriteStream('./target')
+readStream1.pipe(writeStream1) 
 
 

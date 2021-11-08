@@ -4,6 +4,17 @@
 //ajax请求默认会携带同源请求的cookie，
 //而跨域请求则不会携带cookie，
 //设置xhr的withCredentials的属性为true将允许携带跨域cookie。
+// readyState 状态码：
+
+// 0:请求未初始化
+
+// 1:服务器连接已建立
+
+// 2:请求已接受
+
+// 3:请求处理中  onprogress()
+
+// 4:请求已完成，且响应已就绪
 
 // xhr.onreadystatechange
 // 0 UNSENT 未初始化 new XMLHttpRequest 定义但是未初始化

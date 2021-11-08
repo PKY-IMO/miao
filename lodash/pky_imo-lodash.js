@@ -1655,7 +1655,7 @@ var pky_imo = function () {
     let timer = setTimeout(()=>{
       func.apply(self, args)
     },1)
-    return timer
+    return timer - 1
   }
 
   function delay(func, wait, ...args) {
@@ -1663,7 +1663,7 @@ var pky_imo = function () {
     let timer = setTimeout(()=>{
       func.apply(self, args)
     }, wait)
-    return timer
+    return timer - 1
   }
 
   function add(a,b){
