@@ -1,5 +1,5 @@
 function MyNew(fn, ...args) {
-  let obj = {}
+  let obj = Object.create(null)
   obj.__proto__ = fn.prototype
   // let obj = Object.create(fn.prototype)
   let res = fn.call(obj, ...args)
@@ -22,7 +22,7 @@ console.log(p)
 
 function instanceofObj(obj, constructor) {
   if (typeof constructor !== 'function') throw new TypeError('constructor is not callable')
-  if (typeof obj !== 'object' && typeof obj !== 'function') return false
+  if (typeof obj !== 'object' || typeof obj !== 'function') return false
   let prototype = constructor.prototype
   let proto = obj.__proto__
   while(true) {

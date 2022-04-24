@@ -9,11 +9,13 @@
 ARP协议的作用是：将网络层使用的IP地址解析为数据链路层使用的物理地址（MAC地址）
 
 DNS域名解析时使用UDP协议：客户端向DNS服务器查询域名，一般返回的内容都不超过512字节，用UDP传输即可。
-DNS区域传输的时候使用TCP协议。 端口号53
+    hosts文件+本地DNS解析器缓存+本地DNS服务器 ——》根、顶级、域名
+    DNS客户端和本地名称服务器是递归，而本地名称服务器和其他名称服务器之间是迭代。
+    DNS区域传输的时候使用TCP协议。 端口号53
 
-BGP 边界网关协议TCP HTTP FTP SMTP
-OSPF 开放最短路径 IP （ICMP,IGMP,）NAT（网络地址转换，内网外网）
-RIP 路由信息协议 UDP DHCP DNS NTP（时间同步）
+BGP 边界网关协议 --TCP HTTP FTP SMTP
+OSPF 开放最短路径 --IP （ICMP,IGMP,）NAT（网络地址转换，内网外网）
+RIP 路由信息协议 --UDP DHCP DNS NTP（时间同步）
 
 ICMP 网际层IP数据报，ping tracert
     tracert  发送icmp回送请求报文ttl和icmp差错报文（时间超时）

@@ -1,0 +1,35 @@
+// leetcode 464
+function canFirstPeopleWin( maxInt ,  totals ) {
+  // write code here
+  let res = []
+  // 只要存在能让对方输的路径就能稳赢 maxInt <= 20
+  const check = (max, total) => {
+      // 极端情况
+      if (max >= total) return true
+      if (max*(max+1)/2 < total) return false
+      let dp = {}
+      // left: 剩余的数量  state：抽过的状态
+      const canWin = (left, state) => {
+          if (dp[state]) return dp[state]
+          for (let i = 1; i <= max; i++) {
+              let cur = 1 << i;
+              if (cur & state) continue
+              if (i >= left) {
+                  dp[state] = true
+                  return true
+              }
+              if (!canWin(left - i, state | cur)) {
+                  dp[state] = true
+                  return true
+              }
+          }
+          dp[state] = false
+          return false
+      }
+      return canWin(total, 0)
+  }
+  for (let total of totals) {
+      res.push(check(maxInt, total))
+  }
+  return res
+}

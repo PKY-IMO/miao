@@ -1,0 +1,1 @@
+// setTimeout 实现 setInterval

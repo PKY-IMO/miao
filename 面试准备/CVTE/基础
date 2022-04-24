@@ -1,0 +1,687 @@
+双飞翼和圣杯布局（只讲了用 flex 实现的，浮动的真难记）如果中间内容宽度超过实际宽度怎么办
+手写左固定宽度，右自适应布局实现 
+手写一下flex相关布局
+flex 布局有哪些属性
+首屏加载速度可以怎么改善
+如何提高页面加载速度 （讲了缓存 代码压缩 ）
+图片的懒加载和预加载
+    图片懒加载的原理很简单，就是我们先设置图片的data-set属性
+    （当然也可以是其他任意的，只要不会发送http请求就行了，作用就是为了存取值）值为其图片路径
+    由于不是src，所以不会发送http请求。 
+    然后我们计算出页面scrollTop的高度和浏览器的高度之和， 
+    如果图片举例页面顶端的坐标Y（相对于整个页面，而不是浏览器窗口）小于前两者之和，就说明图片就要显示出来了
+    （合适的时机，当然也可以是其他情况），这时候我们再将 data-set 属性替换为 src 属性即可。
+如果有一个固定宽度, 分别设置 flex 1 和 2是怎么 分的.
+代码压缩是怎么配置
+文件传输怎么实现
+transition有了解吗？
+讲到了export和import，那么还有了解其他的模块化加载机制吗？他们之间有什么区别
+动画地实现改变border的值（keyframes）
+手写：上面两个元素固定值，下面铺满高度
+   1.felx-direction:column; 
+     下面一个 flex：1
+   2.calc
+长链接短链接
+图片懒加载：如何判断图片出现在可视区域；如何判断图片加载完毕；所有图片都加载完，页面卡顿，如何优化性能。
+服务端渲染优缺点
+如果有一个固定宽度, 分别设置 flex 1 和 2是怎么 分的.
+讲一下sticky定位
+说下常用的git命令，仓库地址改变，如何把文件推送过去
+导入execl的时候如果是大文件上传怎么办
+怎么实现三列布局，中间自适应
+实现大文件断点续传要考虑什么？怎么实现？
+websocket
+前端优化
+虚拟化长列表
+纯前端导出word怎么实现的
+你刚才提到diff，说一下diff算法
+场景题：用户发现使用页面滚动时卡顿和图片加载不出来，分析是什么原因，如何解决
+如何实现一个动画，从左边移动到右边
+在登录的时候，如何实现持久性登录
+重排和重绘
+spa了解吗
+长列表时，用户滑倒页面下面，没数据，过了一会，数据获取过来了，这时又可以滑动了，性能不好，解决这个问题
+2.实现一个布局，左侧宽300px，右侧占据剩余区域
+3.
+git回滚
+service work
+你CSS常用哪些布局？
+怎么使用flex实现圣杯布局？
+将一个“不定宽高的元素”设置水平垂直居中的方案有哪些？
+两栏布局（左侧自适应，右侧定宽）怎么优先渲染右侧的内容？
+CSS题： 上半部分：200px固定，下半部分填充
+6. 怎么实现三栏布局？中间撑开两边固定宽度？你能想出几种方法？
+Webpack中loader的原理？
+TS代码是怎么转换为普通的JS代码的？
+Less代码是怎么转换为普通的CSS代码的？
+为什么要用JWT做登录？
+关于 TreeShaking 知道多少？
+你说到了postMessage，具体说说如何用它实现页面与页面之间的通信？
+postMessage有什么安全性问题么？
+场景题，一个网页有许多图片，有三个问题，分别可能是因为什么
+（1、首页加载时间长。2、图片加载不出来。3、页面滚动卡顿）
+是怎么把数据渲染到view层
+两栏布局的方法有哪些
+水平垂直居中的方式有哪些
+padding: 50%设置为百分比是根据谁来的
+  **对于margin和padding，百分比按照父元素的宽计算**
+
+
+token一刷新页面就不见了，那怎么半
+   sessionStorage和localstorage + hash
+选择器，选择前三个
+   :nth-child(-n+3)
+ul里有很多个li，用多种方式拿到第一个li，怎么拿到所有奇数个li
+ 第一个li： ul li:first-child 
+          ul li:nth-child(1)
+          ul li:first-of-type
+          ul li:nth-of-type(1)
+ 奇数个：ul li:nth-child(2n+1)
+图片展示有哪几种实现方式：3
+  直接访问：<img src="XXX/123.png">
+  简介访问：<img src="./request.rsp?opt=capture"> 
+     content-type:image/jpeg
+     CGI配合
+  直接给数据: <img src="data:image/png:base64,ABKADHAJDKAS==">
+js数据类型 
+ string number boolean null undefined symbol
+ object function array
+怎么判断是基本类型还是引用类型
+  typeof、instanceof、constructor、Object.prototype.toString.call();
+es6新增
+  symbol const let proxy promise class for of ...
+  数组 indexof map reduce some 
+  字符串 repeat includes padstart
+js循环
+浏览器存储
+cookie的字段
+   name value domain path secure http samesite size expires
+   encodeURI（）
+强缓存和协商缓存
+看你有过echarts，让你自己实现一个echarts功能库，你会如何实现？
+  canvas
+如果你自己的类echarts库有一个饼图，如何判断你的鼠标在hover在饼图上，具体是哪些API
+  chartInstance.on('moseover')
+  1： echarts 框架原理：   数据可视化框架原理：
+    1.1： ECharts 是一个轻量级的 javascript 图形库， 纯 js 实现， mvc 框架， 数据驱动。
+    1.2： Svg 和 Canvas 是两个可以选择的类库之一，其中 svg 交互性更好，性能较弱，不适用于移动端，在绘制数万个点时会崩溃。
+        而 canvas 的渲染速度和性能更好，echarts 在 canvas 上构建一层 MVC层，使得它可以像 svg 一样交互。
+    1.3： ECharts 的特点：重要性和优先级依次递减，设计效果直观、生动，能够交互，可个性化定制。
+    1.4： ECharts 总体结构是基于 MVC 架构的，各部分的主要作用是：
+    Storage(M)：模型层，实现图形数据的CURD（增删改查）管理；
+    Painter(V)：  视图层，实现canvas 元素的生命周期管理，即：视图渲染、更新控制、绘图；
+    Handler(C)：控制层，事件交互处理，实现完整的dom事件模拟封装。
+
+
+有一个很大的原子化任务，如何不让其阻塞
+  webWorker
+如何实现刮刮乐效果（不知道，说了用n*n个格子...）
+localStroage大小，受同源策略限制吗？如果需要存储大的多得多的文件，如何实现（不知道呀）
+  存储大小一般为5M,受同源策略限制，indexDB
+html5 语义化标签 1.开发2.sep3.读屏软件
+label的作用 
+   为鼠标用户改进了可用性,当用户点击<label>标签中的文本时,浏览器就会自动将焦点转到和该标签相关联的控件上;”
+promise promise.all 和 promise.race 
+浏览器本地化存储 cookie sessionStorage localStorage indexDB
+箭头函数的 this
+     箭头函数的this相当于一个未在箭头函数内声明的普通变量，
+     即箭头函数的this看其外面的this，如果外面是一个函数，得先确定这个函数此时的this
+  1. 箭头函数不会创建自己的`this`只会从自己的作用链上一层继承`this`;
+  2. 箭头函数继承而来的`this`指向永远不变所以`.call()/.apply()/.bind()`无法改变箭头函数中`this`的指向;
+  3. 箭头函数不能作为构造函数使用; **从关键字new的角度去回答，this的指向会发生改变**
+对 JavaScript 里面的面向对象怎么理解
+强缓存的时候状态码是什么
+   200 disk cache
+怎么拿到 dom 节点 
+如何算出页面中所有节点的数目
+  document.querySelectorAll('*').length
+怎么改变 this 的指向
+   call apply bind
+session 是什么
+事件循环机制
+token和cookie的区别
+token的作用
+讲一下CSRF
+如何预防CSRF？
+sameSite cookie有哪一些值？
+var和let
+ES6中的全局函数？
+说说箭头函数？
+同源的页面可不可以访问cookie？
+   path  samesite  httponly（js拿不到） secure（只能https）
+浏览器安全
+vue生命周期
+  beforeCreate -> 使用 setup()
+  created -> 使用 setup()
+  beforeMount -> onBeforeMount
+  mounted -> onMounted
+  beforeUpdate -> onBeforeUpdate
+  updated -> onUpdated
+  beforeDestroy -> onBeforeUnmount
+  destroyed -> onUnmounted
+  errorCaptured -> onErrorCaptured
+聊天设计
+冒泡
+事件捕获
+let var const
+es6
+去重
+两栏布局
+水平垂直居中
+时间空间复杂度
+cookie在哪里
+  两种：设置过期事件Expires：硬盘
+       不设置过期事件：内存
+  sessionstorage存在哪：
+    它存储在一个名为“sessionstore.jsonlz4”的文件中
+  localStorage存在那：
+    C:\Users\你的计算机名\AppData\Local\Google\Chrome\User Data\\Default\Local Storage\leveldb
+缓存
+事件循环
+宏任务微任务
+箭头函数是
+盒模型
+
+
+*****************
+使用vue时怎样去创建一个工程 
+  vue-cli
+  vue create my-project
+webpack用到了哪些插件 loader 
+插件与loader有什么区别
+  Loader的作用是让webpack拥有加载和解析非js文件的能力。
+  1 .文档定义loader为在模块加载时的预处理文件【加载和解析非js文件】，故loader运行在打包文件之前。
+  2 . plugins的定义为处理loader无法处理的事物，例如loader只能在打包之前运行，但是plugins在整个编译周期都起作用。
+请说说vue的数据流向 
+  单向数据流
+说一说组件之间的通信
+  父子通信：
+      父向子传递数据是通过 props，子向父是通过 events（$emit）；
+      通过父链 / 子链也可以通信（$parent / $children）；
+      ref 也可以访问组件实例；provide / inject API；$attrs/$listeners
+  兄弟通信：
+    Bus(Event.$emit  Event.$on)
+    Vuex
+  跨级通信：
+    Bus；Vuex；provide / inject API、v-bind:$attrs/v-on:$listeners
+eventbus的原理
+  EventBus是消息传递的一种方式，基于一个消息中心，订阅和发布消息的模式，称为发布订阅者模式。
+双向数据绑定的原理
+  “双向数据绑定是通过数据劫持结合发布订阅者的模式和object.defineproprety()来劫持各个属性的
+  setter、getter,如果数据有变动,就发布消息给订阅者触发监听。”
+Object.defineproperty 的缺陷 Vue是怎么弥补的
+   Vue能对数组进行监听的原因是，把数组的方法重写了,不能对每一个数组项监听开销太大
+   vue.$set
+VUE3的了解
+强缓存与协商缓存
+虚拟Dom
+Http2和http1.1
+css布局
+eventloop
+事件冒泡和事件捕获 dom2
+css权重
+闭包
+  当函数可以记住并访问定义时的作用域时就产生了闭包，即使函数是在当前词法作用域之外执行。
+  实现：作用域链+垃圾回收
+  函数嵌套函数，内部函数引用外部函数变量，且存在全局变量是内部函数的引用，当外部函数一执行就产生闭包。
+    1）能够阻止词法作用域的回收
+    2）私有化变量
+    3）模块化
+react hooks解决了什么问题，为什么会有hooks
+koa和express的区别
+   express:回调地狱
+   koa通过generator 和 async/await 使用同步的写法来处理异步，明显好于 callback 和 promise。
+  1.启动方式不同
+    koa采用了new Koa()的方式，而express采用传统的函数形式
+  2.中间件形式二者不一样，这是由二者处理中间件的逻辑差异导致的，实际上这也是二者最根本的差别
+  3.koa没有回调，而express有回调。
+    Express 和 Koa 最明显的差别就是 Handler 的处理方法，一个是普通的回调函数，
+    一个是利用生成器函数（Generator Function）来作为响应器。
+    Express 是在同一线程上完成当前进程的所有 HTTP 请求，
+    而 Koa 利用 co 作为底层运行框架，利用 Generator 的特性，实现“协程响应”
+cookie,session登录鉴权和token相比优缺点
+https和http区别，使用对称和非对称加密的优缺点
+http2.0和http1.1有哪些区别，http3.0呢
+浏览器缓存
+冒泡排序和快速排序的时间复杂度
+使用第三方库的动画是怎么实现的(举了个例子，比如element-ui中button悬浮的颜色动画变化)
+   CSSTransitongroup
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+v-deep穿透原理
+  >>>
+  /deep/
+  ::v-deep
+  scope后的选择器会默认最后加上当前组件的标识比如[data-v-497899]
+  使用样式穿透后，在deep后的选择器最后就不会加上标识
+模块化的原理
+  AMD模块化时代，典型的代表requirejs，r.js
+     define
+  es6 import export
+  commonjs module.exports require
+跨域
+线上部署中如何解决跨域问题（不给用cors和proxy）使用ngnix
+代码打包后是怎样将不同的模块合并到一起的
+正向代理和反向代理
+  正向代理代理客户端，反向代理代理服务器
+  正向代理时，由客户端发送对某一个目标服务器的请求，代理服务器在中间将请求转发给该目标服务器，目标服务器将结果返回给代理服务器，代理服务器再将结果返回给客户端。
+        使用正向代理时，客户端是需要配置代理服务的地址、端口、账号密码（如有）等才可使用的。
+        客户端并没有直接与服务器相连。正向代理隐藏了真实的客户端地址。可以很好地保护客户端的安全性。
+      访问禁止的资源，隐藏客户端
+  服务器根据客户端的请求，从其关系的一组或多组后端服务器（如Web服务器）上获取资源，然后再将这些资源返回给客户端，客户端只会得知代理服务器的IP地址，而不知道在代理服务器后面的服务器集群的存在
+      负载均衡，权限控制，
+“防抖”的目的、实现原理
+TS中预设的类型演算有哪些？
+  partial required readonly exclude
+实现原理
+跨域的解决方案有哪些？JSONP原理？CORS原理？
+HTTP缓存（强缓存、协商缓存）
+如果判断资源是否过期使用的是 Last-Modified，那么相关资源在1秒变化了多次，会造成什么情况？
+看代码说输出？为什么？（宏队列、微队列）
+关于“性能优化”知道多少？
+XSS和CSRF的原理、预防机制
+设置Cookie时只SameSite能够生效吗？需不需要其他属性的配合？
+对“数据结构与算法”有了解多少？
+知道的“数组排序”方案有哪些？“快排”的实现原理？
+作用域链
+后端为什么要将token放到响应头的authoraztion字段中？
+  主要还是这几年前端开发涉及的范围越来越广吧，
+  小程序、hybrid、electron这些都不是纯粹的web 开发，
+  后端既要处理原生的http请求又要处理web的http请求原生不是browser
+  这意味着原生请求没有cookie，那么如果web和原生共用同一个api
+  ，这就意味着后端需要两套解析token的机制，何不直接就全放在header里面用同一套逻辑处理呢？
+  再一个，现在cors也已经普及，跨域请求现在都是通过配置cors头来实现，
+  但是ajax请求cookie是不能跨域的，header可以，
+  况且http的Authorization header就是为用户认证而生的，为什么不用呢？
+客户端为什么要将token存放到localStrage中？
+为什么不放直接放到Cookie中？
+  同源
+node.js是否了解
+强缓存，协商缓存
+HTTP缓存方式
+除了HTTP缓存之外，你还了解哪些优化请求的方式？
+你说到了用gzip压缩请求数据，那你还了解其他相关的content-encoding方式么？
+   gzip、compress 以及 deflate 编码都是无损压缩算法，
+   用于减少传输报文的大小，不 会导致信息损失。
+   这些算法中，gzip 通常是效率最高的，使用最为广泛。
+   identity：没有压缩
+你说到你的项目使用axios库进行请求，了解原生Ajax么？
+   xmlhttprequest
+怎样使用Ajax发起简单请求？
+  new open send onreadystatechange
+如何监听请求结束？
+   xhr.readyState === 4
+   xhr.status >= 200 && xhr.status < 300
+有了解过Nodejs么？是用的原生Node还是什么框架
+项目用什么写的？用了VueX么？为什么用VueX而不是EventBus呢？VueX是怎么把改变通知给组件的呢？
+前端怎么处理大量数据并将其展示到列表中？
+跨域相关，哪些标签可以跨域请求，为什么。
+  img link script
+  不受跨域请求限制
+vue proxy代理实现跨域的原理
+  node中间件
+CDN的原理
+CDN挂了，怎么办
+  判断需要访问的资源是否存在，不存在向页面写入新的script标签和地质
+img标签解析图片的过程，原理
+  浏览器会通过html中img 的src属性，获知图片的网址，然后再发送请求来专门图片。
+  从服务器来看，从浏览器收到2次html请求：一次是获取网页文本，另一次是获取图片。‘
+  图片按二进制传输。早期协议需要建2次tcp链接，新的html协议可以共用同一连接。
+TS泛型
+  ts基本类型：string、number、boolean、any、null、undefined、never、enum、void、数组、元组
+  可以把泛型理解为代表类型的参数，使接口，函数或类更加通用 T,K,V,E
+  泛型是指在定义函数、接口或类的时候，不预先指定具体的类型，使用时再去指定类型的一种特性。
+    泛型约束：泛型可以通过 extends 一个接口来实现泛型约束，写法如：<泛型变量 extends 接口>
+vue3和vue2的区别
+  1.ts支持
+  2.双向数据绑定
+  3.compositon api
+  4.虚拟dom的粒度
+  5.tree-shaking
+  6.teleport和suspense
+有序列表内容
+  ol li
+  属性：type start reverse
+你用到了axios，你是怎么处理响应结果的
+  promise  
+  data：实际响应回来的数据
+  headers：响应头信息
+  status：响应状态码
+  statusText：响应状态信息
+  axios.interceptors.response.use
+  二次封装
+webP的兼容性你怎么处理的
+  1.dom判断，生成canvas转换，重新发送请求
+  2.http头accept是否支持image/webpg,直接发送请求
+你是如何配置Gzip的
+  "CompressionWebpackPlugin"： 压缩gzip
+你的服务器是放在内网还是外网
+除了你简历上的性能优化， 你还了解哪些性能优化
+
+scroll是全局监听还是组件内监听
+scroll的时候会出现什么问题
+加个防抖
+防抖和节流的区别
+scroll应该使用防抖还是节流？ 节流
+你刚才说到了http缓存你能说一下吗
+在代码已经完成之后，如何去查看代码性能问题
+你刚才说到用http2，你能说下http2和http1的区别吗
+浏览器能同时发送多少个请求
+  Chrome最多允许对同一个Host建立六个TCP连接
+  ①同一域名下，同一GET请求的并发数是1，也就是说上一个请求结束，才会执行下一个请求，否则置入队列等待发送；
+  ②同一域名下，不同GET/POST请求的并发数量是6。
+    当发送的请求数量达到6个，并且都没有得到响应时，后面的请求会置入队列等待发送。
+你简历技术栈是Vue，说一下你对vue的理解
+说一下对虚拟DOM的理解
+如果不改变数据，但是就是想重新渲染，如何实现
+    ①location.reload() 
+    ②this.$router.go(0)
+     前面两种方法都有些简单粗暴，主要说一下第三种方法
+    ③provide 配合 inject v-if先设置成false再在nexttick中设置为true
+如果不用绝对定位去移动盒子的话会造成什么效果
+什么时候会触发重排和重绘
+给css加上transform会触发重绘还是重排
+sessionStorage和localStorage和cookie的区别
+说一下cookie的属性
+same-site：在什么时候才能设置none
+same-site是为了解决什么
+盒模型
+ 页面上任何一个元素我们都可以看成是一个盒子，盒子会占用一定的空间和位置，他们之间相互制约，就形成了网页的布局
+es6的新特性有哪些
+箭头函数和普通函数的区别
+  (1). 箭头函数不会创建自己的`this`只会从自己的作用链上一层继承`this`;
+  (2). 箭头函数继承而来的`this`指向永远不变所以`.call()/.apply()/.bind()`无法改变箭头函数中`this`的指向;
+  (3). 箭头函数不能作为构造函数使用; **从关键字new的角度去回答，this的指向会发生改变**
+  (4). 箭头函数没有自己的`arguments`和`prototype`
+事件循环。
+事件冒泡和事件捕获的区别
+tcp和udp的区别
+http和https的区别
+web的安全，场景和防范措施
+tcp为什么要三次握手，为什么要4次挥手。
+什么是闭包，以及常见的场景
+如何解决闭包内存泄漏的问题。
+  1，在退出函数之前，将不使用的局部变量赋值为null;
+  2. 组件卸载清除定时器能
+  3. 避免循环引用
+  4. 由于jQuery考虑到了内存泄漏的潜在危害，所以它会手动释放自己指定的所有事件处理程序。
+闭包，缺点
+你了解blob的内部的机制吗
+  Blob 对象表示一个不可变、原始数据的类文件对象。Blob 表示的不一定是JavaScript原生格式的数据。
+  Blob为一些JavaScript操作二进制数据的API提供了数据交换机制的支持。
+  比如我们比较熟系的File接口就是基于Blob实现的，也是我们使用的Blob最多的方式，
+  我们还可以借助Blob使用XMLHttpRequest从网络下载文件(二进制数据)，
+  并且Blob可以使用postMessage在窗口之间传递。
+实现图片懒加载思路
+事件循环
+防抖节流的引用场景
+实现点击某个元素变色有什么方法？哪个标签可以实现？
+用到过哪些单位，rem是什么，vw 、vh是什么？
+对哪些css3新特性比较熟悉(flex)，说下flex,还有其他吗？
+对哪些异步请求比较熟悉（Promise)，写个promise ,有几种状态？说下下面代码的打印顺序，为什么？
+TCPUDP
+前端性能优化
+TCP与UDP的区别
+HTTP与HTTPS的区别以及优缺点
+缓存、闭包、内存泄漏（场景+如何解决）
+ES6新特性
+事件冒泡、事件捕获
+网页加载方式
+事件循环模型
+前端安全XSS等
+如何构建网络即时通讯系统
+vue2与vue3性能差异了解
+水平垂直居中
+http缓存
+强缓存里expire和cacheControl区别
+协商缓存里，如果有一个网络请求资源反复变更的话怎么办
+同源策略，跨域
+promise题看输出
+flex布局
+垂直水平居中
+margin（忘了具体问的啥）
+箭头函数
+闭包，应用
+看一道题，说输出是什么，var改成let会怎样
+手写：防抖（问返回值是什么）
+xss和csrf是什么，怎么预防
+如何判断是否跨域
+cookie session localStorage sessionStorage是什么，有什么用，区别是什么
+解决跨域的方法，jsonp原理
+项目中的登录前端有没有做什么加密处理？MD5 sha1
+怎么让localStorage过期
+  添加data值，拿出来的时候判断一下，过期就删除
+强缓存的属性？cache-contrl和expires的优先级
+  例如cache-control设置了max-age, 浏览器则会先判断max-age,
+  如果cache-control没有设置max-age, 浏览器则会先判断expire, 再发送 Http 请求
+盒模型切换的方法
+token令牌怎么预防csrf
+  token 校验之所以能防御 csrf，是因为相信浏览器的同源策略。
+  为什么这么说？因为只有在同源的情况下，页面才能进行脚本操作和使用 js 获取 cookie 的操作，才能获取到 token。
+  也就是说第三方网站是没有办法拿到 token 的。
+  只有真正有权限的网站或页面才有办法取到 token，并将 token 传到服务端。
+  所以服务端默认带有相应 token 的请求都是合法的请求。
+  注：设置 http only，禁止通过 js 操作 cookie
+proxy
+map 和 weakMap 的区别
+JS 单线程，为什么能在 JS 编写异步代码
+答了事件循环
+宏任务和微任务的优先级
+讲一下了解的设计模式
+发布订阅举个例子
+举了 vue
+实现单例模式怎么做
+  class WebSocketService {
+    // 单例模式
+    static instance
+    static get Instance () {
+      if (!this.instance) {
+        this.instance = new WebSocketService()
+      }
+      return this.instance
+    }
+  }
+进程和线程是怎么理解的
+应该得引导浏览器的进程和线程的
+JS 单线程的好处
+答了防止同时处理同一个 DOM
+面试官：可以避免频繁的上下文切换（应该得从和多线程相比的角度答了，突然记不起来）
+  js是作为浏览器的脚本语言，主要是实现用户与浏览器的交互，以及操作dom；
+  这决定了它只能是单线程，否则会带来很复杂的同步问题。 
+  举个例子：如果js被设计了多线程，如果有一个线程要修改一个dom元素，
+  另一个线程要删除这个dom元素，此时浏览器就会一脸茫然，不知所措。
+  所以，为了避免复杂性，从一诞生，JavaScript就是单线程，
+  这已经成了这门语言的核心特征，将来也不会改变。
+  为了利用多核CPU的计算能力，HTML5提出Web Worker标准，
+  允许JavaScript脚本创建多个线程，但是子线程完全受主线程控制，且不得操作DOM。
+  所以，这个新标准并没有改变JavaScript单线程的本质。
+JS如何进行全局监控异常（window.onerror+try catch)
+想不出来，随便说到了 eventbus 、vuex 和 webWorker
+提到了 webWorker，讲一下
+怎么实现路由守卫
+用过vuex和redux吗
+vuex用来保存什么
+答全局变量
+从设计角度讲vuex的作用
+组件间通信的话用 eventbus 也可以啊，有没有其他的
+vuex是如何挂载到每一个组件上面
+  首先在项目中通过 Vue.use(Vuex);
+  Vue.use调用了vuex中的install方法，
+  在install方法中有一段核心代码，
+  *vue.mixin({beforeCreate,vuexInit})*, 
+  通过vue中的mixin机制，然后再借用生命周期钩子函数beforeCreate在组件实例化前调用vuexInit方法，
+  在vuexInit方法中有一段核心代码，
+  *this.$store = typeof  options.store === 'function'? options.store(): options.store*  ，
+  通过这段代码，将vuex中的store对象挂载到每一个对象当中，this指向的即是每一个组件实例，
+  这样就可以在每个组件内通过this.$store使用vuex来进行统一的数据管理
+有没有在vue自定义指令（不懂）
+v-if 和 v-show 的区别
+vue3 的 composition api（不懂，用的都是 vue2）
+vue2 不太好用的点
+答 Object.defineProperty 的缺陷，vue3 使用了 Proxy
+Vue3 相比 Vue2 的改进
+答 Vue3 和 Vue2 的区别
+有没有使用过 nodejs
+开发项目过程中有没有遇到性能问题
+答使用了防抖和节流
+float
+flex
+讲一下 BFC
+怎么让一个元素成为 BFC
+怎么给行内元素设置高度
+  1、行内元素转换为块级元素或行内块元素
+  2、给行内元素添加浮动
+  3. 设置定位absolute/fixed
+  设置了float为(left/right)或者
+  position为absolute/fixed的元素将自动变为块级元素，
+  可直接设置宽高，无需再添加：display:block;
+给一个排序好的字符串，都是数字，怎么计算有多少个不同的数字
+用map（应该用set的。。。）
+改进：遍历比较，不同+1
+最近了解什么新技术
+讲了最近在学 webpack（挖坑了）
+讲一下 webpack 的 loader
+讲一下 webpack 的 plugin
+浏览器关闭后再打开还在登录状态吗
+Localstorage
+token可以放在cookie里吗
+如何获取token的
+问了一个cookie的samesite
+cookie的大小（4k）
+axios的原理
+ajax有几种状态
+说一说每一种状态表示什么
+web安全
+面试官继续深入问我csrf怎么获取安全页面的cookie，能否读取cookie的信息（我就不知道了…）
+跨域有了解吗
+不同域之间post一个表单请求，能成功吗
+ 能
+跨域方法
+cors怎么设置
+ Access-Control-Request-Method Access-Control-Request-Headers
+事件循环
+宏任务有哪些
+原型链，哪里用到原型链
+作用域链
+跨域实现方式
+说一下jsonp怎么实现跨域
+同源策略的作用
+浏览器url输入到展示过程（浏览一定会创建DOM树吗？）
+dns解析过程
+cookie了解，设置cookie，cookie可以跨服务端吗？怎么禁用cookie
+垂直水平居中
+问了项目,  了解一下  css , 在页面实现一个 宽高不固定,  宽度是高度一半的 div. (答不出来....)
+flex: 1; 代表着什么
+如果有一个固定宽度, 分别设置 flex 1 和 2是怎么 分的.
+ 有一个很长的列表, 列表每一项是 内容和 button, 要实现点击 button, 告诉打印是第几个?
+csrf 了解吗?  如果你是攻击者, 你怎样设计.
+你刚才说的,是通过b网站请求a网站服务端携带cookie, 那么请求b网站服务端是否会携带 cookie.
+前端点击劫持说一下(这个是我自己提到的)
+TCP 有三次握手 ,为什么需要三次
+TCP 和 UDP 有什么区别, 应用场景是什么?
+  HTTP1的网站能够发起多少个tcp连接?
+  你说的一个域名6个TCP连接,  这6个连接是串行的还是并行的?
+  怎样使得并发6个连接?
+说出来了继续问, 如果有很多重复的元素, 要找到这个 target的 最后一个.
+  如果要实现一个错误监控日志上报,监听网站的错误应该怎么做? (说实在,没想明白考点是什么 ,但面试官一点一点给我提示, 勉勉强强说了一点点.)
+问了项目,  了解一下  css , 在页面实现一个 宽高不固定,  宽度是高度一半的 div. (答不出来....)
+flex: 1; 代表着什么
+ 有一个很长的列表, 列表每一项是 内容和 button, 要实现点击 button, 告诉打印是第几个?setAttribute('idx',) getAttribute()
+csrf 了解吗?  如果你是攻击者, 你怎样设计.
+你刚才说的,是通过b网站请求a网站服务端携带cookie, 那么请求b网站服务端是否会携带 cookie.
+前端点击劫持说一下(这个是我自己提到的)
+TCP 有三次握手 ,为什么需要三次
+ TCP 和 UDP 有什么区别, 应用场景是什么?
+  HTTP1的网站能够发起多少个tcp连接?
+  你说的一个域名6个TCP连接,  这6个连接是串行的还是并行的?
+  怎样使得并发6个连接?
+说出来了继续问, 如果有很多重复的元素, 要找到这个 target的 最后一个.
+  如果要实现一个错误监控日志上报,监听网站的错误应该怎么做? (说实在,没想明白考点是什么 ,但面试官一点一点给我提示, 勉勉强强说了一点点.)
+垃圾回收机制
+前端安全 攻击的手段
+http缓存
+css实现宽高不确定，宽高1:2
+  padding-bottom:200%
+  height:0
+  width:100%
+解释一下盒模型
+说一下 ES6 的新特性。ES7、ES8 这些有了解过吗？
+bigInt 解决了什么问题，应用场景是什么？
+flex 布局和常用属性
+闭包和优缺点
+除了闭包之外，还有哪些场景会导致内存泄漏？如何检测？
+说一下事件循环。为什么要设计微任务这个东西？如果只是避免代码阻塞的话，宏任务不行吗？
+  插队
+说一下浏览器的事件流模型。怎么阻止事件冒泡？
+有了解过不同浏览器事件流模型的差异吗？为什么 Chrome89 之后修改了事件流模型？
+TCP 和 UDP 的区别，为什么 TCP 需要三次握手？
+说一下浏览器的缓存机制
+300 和 303 状态码是什么意思
+http/2 有哪些改进？
+有哪些方式可以实现实时通信？轮询和 websocket 各自有什么缺点？
+说一下页面渲染的过程，回流的话会从渲染流水线的哪个部分开始重新走一遍？
+说一下 XSS 攻击和 CSRF 攻击，分别是怎么防御的？
+CSRF token 要放在哪里？放在 cookie 里面可以吗？
+设计注册功能，如何在各个流程确保安全性？
+使用 webpack 做过哪些优化？
+客户端渲染和服务端渲染各有什么优缺点？
+说一下快速排序和冒泡排序的复杂度以及实现
+了解过 Nodejs 吗？
+vite 和 webpack 相比有什么区别？缺点是什么？
+说一下 webpack loader 的原理
+vue 子组件在设计上为什么不能修改父组件状态？
+如何解决输入框输入频繁触发请求的问题？
+手写题：写一个输入框，输入会进行防抖处理
+改进1：可以打印输入的值
+改进2：可以接受并打印其它参数
+项目（问我硬件与软件通讯协议？（mqtt、蓝牙）、蓝牙是什么版本？、软件与硬件通讯？）
+登陆的时候token为什么不保存在cookie（我项目存的是sessionstorage）
+怎么保证别人拿不到你的token？
+计网了解哪些？（嘴贱提了一嘴了解一点udp）
+udp应用场景（又嘴贱说了视频会议）
+怼了十几分钟为什么视频会议用udp（我真的不会，完全没把udp快和延迟低联系在一起，也说了udp传输比较快，但是就是不满意，一直问，无语）
+洗牌算法（js bin，没用过这个系统，都没搞懂要输出什么，结果告诉我直接console.log出来，然后脑子抽了导致函数闭包了，太难受了）
+BFC是什么？怎么生成一个BFC？
+说说闭包？闭包有什么作用？
+ES6有什么新特性？ES7有什么新特性？
+箭头函数和普通函数的区别？
+promise和 async await的区别？
+说一下事件循环
+说下TCP和UDP的区别？
+为什么TCP连接要三次握手？
+http2.0和http1.x的区别？
+说说浏览器的缓存机制
+直到service worker吗？
+从浏览器输入一个url到用户看到的过程
+知道浏览器渲染时的分层吗？
+CSRF攻击说一下。怎么防御？
+说下cookie，cookie的优点和缺点
+说下https,https怎么保证安全的？非对称加密用在哪里?
+说说服务端渲染和客户端渲染的区别。服务端渲染的优点是？
+手写个冒泡排序。怎么再优化？
+冒泡排序的稳定性和时间复杂度。快排的时间复杂度和稳定性
+说说vue的数据双向绑定
+vue3用proxy的好处？
+除了这个，vue3还有什么升级的点？CompositionAPI是为了解决什么问题
+react函数组件和类组件的区别
+react的diff算法？和vue diff算法的比较？
+koa和express的区别
+ts的泛型和函数重载
+100个http请求建立多少个tcp连接
+  若是在http/2的情况下，会进行多路复用，只会建立一个；
+   但是在http/1.1的话，那就看浏览器的最大连接数，拿chrome来说，最多建立6个tcp连接，然后需要一个一个发送，
+   其他未发送的只能排队；所以说chrome是六个，其他浏览器看自身情况
+跨域安全问题 策略
+两个vue场景题
+一个洗牌算法
+
+
+有没有学过js等其他语言
+面向对象有了解过？说说面向对象三大特性(我一懵)
+说说多态的理解
+有了解过什么设计模式吗？(我二懵)
+说了几个，然后问工厂模式能想到什么应用场景吗？(我三懵)
+   有用过node js 吗？
+说说express 中间件，(太久没用忘了)
+ 前端性能
+布局题，布局个九宫格
+

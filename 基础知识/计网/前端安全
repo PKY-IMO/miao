@@ -1,0 +1,21 @@
+XSS跨站脚本攻击：反射、存储、dom
+  通用解决方案：React、vue框架自带 csp白名单
+    csp白名单：响应头或者meat标签设置content-Security-policy：script-src 'slef';
+  dom解决方案：字符转义、禁止js开头的a链接
+  存储反射：纯前端渲染，过滤用户输入数据、禁止js访问cookie：HttpOnly
+
+CSRF跨站请求伪造：
+  一般在第三方网站发生，冒用受害者cookie信息骗取服务器信任
+  解决方案：
+    （csrf已死）cookie samesite：strict lax可get none必须secure
+    验证码、token、referer域名校验
+
+中间人攻击：
+  https降级为http
+
+
+我刚刚登录的银行网站假如这家银行用以运行转账操作的URL地址如下：
+http://www.examplebank.com/withdraw?account=AccoutName&amount=1000&for=PayeeName
+然后我转完账 就去了某些网站那么这个网站使坏，给你放了一个让你欲罢不能的广告(划掉)你不小心就上当了 ，
+js给你跳转到了这个地址(由于刚刚登录 这个域内的cookies会自动带上)http://www.examplebank.com/withdraw?account=Alice&amount=1000&for=Badman
+哦豁，钱就直接别拐走了。

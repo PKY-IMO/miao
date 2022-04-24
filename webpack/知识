@@ -1,0 +1,54 @@
+执行过程：
+  webpack 的运行流程是一个串行的过程，它的工作流程就是将各个插件串联起来
+  在运行过程中会广播事件，插件只需要监听它所关心的事件，就能加入到这条webpack机制中，
+  去改变webpack的运作，使得整个系统扩展性良好
+  从启动到结束会依次执行以下三大步骤：
+  初始化流程：从配置文件和 Shell 语句中读取与合并参数，并初始化需要使用的插件和配置插件等执行环境所需要的参数
+  编译构建流程：从 Entry 发出，针对每个 Module 串行调用对应的 Loader 去翻译文件内容，再找到该 Module 依赖的 Module，递归地进行编译处理,AST语法树
+  输出流程：对编译后的 Module 组合成 Chunk，把 Chunk 转换成文件，输出到文件系统
+
+  初始化参数阶段。
+    这一步会从我们配置的webpack.config.js中读取到对应的配置参数和shell命令中传入的参数进行合并得到最终打包配置参数。
+  开始编译准备阶段
+    这一步我们会通过调用webpack()方法返回一个compiler方法，创建我们的compiler对象，并且注册各个Webpack Plugin。找到配置入口中的entry代码，调用compiler.run()方法进行编译。
+  模块编译阶段
+    从入口模块进行分析，调用匹配文件的loaders对文件进行处理。同时分析模块依赖的模块，递归进行模块编译工作。
+  完成编译阶段
+    在递归完成后，每个引用模块通过loaders处理完成同时得到模块之间的相互依赖关系。
+  输出文件阶段
+    整理模块依赖关系，同时将处理后的文件输出到ouput的磁盘目录中。
+
+loader：
+  css：use: ['style-loader', 'css-loader', 'less-loader']
+  babel： loader: 'babel-loader',
+                options: {
+                    presets: ['@babel/preset-env']
+                }
+          *不属于babel-polyfill: promise map set Proxy
+  url-loder: 路径加载器，用于文件抽离
+  'img-loader',//配置图片资源加载器，用于图片压缩
+  'imagemin-pngquant' 用于图片压缩的imagemin-pngquant，还有一个隐式调用的加载器imagemin-loader
+
+
+plugin：
+  "CompressionWebpackPlugin"： 压缩gzip
+  "HotModuleReplacementPlugin"：热更新
+  "uglifyjs-webpack-plugin"： js压缩 ：optimize-css-assets-webpack-plugin压缩css的同时会破坏原有的js压缩
+  "happypack"：多进程
+  "html-webpack-plugin"： //用来抽离html文件
+
+
+tree-shaking:
+  ES6 Module引入进行静态分析，故而编译的时候正确判断到底加载了那些模块
+  静态分析程序流，判断那些模块和变量未被使用或者引用，进而删除对应代码
+  optimizer 的 sideEffects
+
+如何导入整个模块：import * as example from ...
+
+热更新：
+  webpack(watch文件修改--编译内存) ---middleware--  服务器dev 《- websocket（hash:json+js） -》浏览器
+  大概流程是我们用webpack-dev-server启动一个服务之后，浏览器和服务端是通过websocket进行长连接，
+  webpack内部实现的watch就会监听文件修改，只要有修改就webpack会重新打包编译到内存中，
+  然后webpack-dev-server 依赖中间件webpack-dev-middleware和webpack之间进行交互，
+  每次热更新都会请求一个携带hash值的json文件和一个js，websocket传递的也是hash值，
+  内部机制通过hash值检查进行热更新，至于内部原理，因为水平限制，目前还看不懂。

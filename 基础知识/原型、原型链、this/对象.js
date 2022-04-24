@@ -1,3 +1,14 @@
+```
+标记对象为不可扩展：Object.isExtensible都为false
+Object.preventExtensions(obj)  obj：要配置为不可扩展的对象，可删不可加
+Object.seal(obj)  不能给对象添加新的属性和方法，也不能删除现有的属性和方法、不能修改现有属性和方法的配置。
+Object.freeze(obj)
+Object.keys 方法 返回可枚举的实例属性的数组。
+Object.getOwnPropertyNames 返回的是所有实例属性（包括不可枚举的）
+// 静态多态-编译时,重载  
+// 动态多态-运行时,类型不同
+// js可以实现多态
+```
 function Vector(x, y) {
   if (new.target !== Vector) {
     return new Vector(x, y)
@@ -477,3 +488,4 @@ class MyMap2 {
     return this.entries.length
   }
 }
+

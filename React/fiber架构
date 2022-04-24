@@ -1,0 +1,22 @@
+fiber: window.requestIdleCallback() 
+  把渲染更新过程拆分为多个子任务，其中优先级高的先执行，并且每次只做其中的一小部分，
+  做在完成一部分任务之后，将控制权交回给浏览器，让浏览器有时间进行页面的渲染。
+  等浏览器忙完之后有剩余时间，再继续之前 React 未完成的任务，是一种合作式调度。
+
+上述实现的方式是window.requestIdleCallback() 方法，该方法在浏览器空闲时段内调用排队的函数
+会导致多次调用某些生命周期钩子
+
+react把更新分为两个阶段 reconciliation
+
+这个阶段的更新是可以被打断的，主要涉及的生命周期：
+  componentWillMount
+  componentWillReceiveProps
+  shouldComponentUpdate
+  componentWillUpdate
+  commit
+
+这个阶段的更新是不能被打断的
+  componentDidUpdate
+  componentDidMount
+  componentWillUnmount
+

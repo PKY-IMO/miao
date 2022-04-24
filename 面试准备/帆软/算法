@@ -1,0 +1,55 @@
+// 二叉树的前序遍历
+var preorderTraversal = function(root) {
+    if (root == null) return []
+    let res = []
+    let stack = []
+    let cur = root
+    while (stack.length || cur) {
+        while (cur) {
+            stack.push(cur)
+            res.push(cur.val) //
+            cur = cur.left
+        }
+        cur = stack.pop()
+        cur = cur.right
+    }
+    return res
+};
+
+// 二叉树的层序遍历
+var levelOrder = function(root) {
+    if (root == null) return []
+    let res = []
+    let queue = []
+    let cur = root
+    queue.push(cur)
+    while(queue.length) {
+        let size = queue.length
+        let tmp = []
+        for (let i = 0; i < size; i++) {
+            let node = queue.shift()
+            tmp.push(node.val)
+            if (node.left) queue.push(node.left)
+            if (node.right) queue.push(node.right)
+        }
+        res.push(tmp)
+    }
+    return res
+};
+
+// 数组转0
+function list2tree(list) {
+  let res = []
+  let map = {}
+  list.forEach(node=> {
+    map[node.id] = node
+  })
+  list.forEach(node=> {
+    if(map[node.prevId]) {
+      map[node.prevId].children = node
+    }else {
+      res.push(node)
+    }
+  })
+  return res
+}

@@ -2,6 +2,7 @@
 /**
  * 时间复杂度：O(n * n)
  * 空间复杂度：O(1)
+ * 最好：O(n)
  */
 function bubbleSort(array) {
   for (var j = 0; j < array.length - 1; j++) {
@@ -47,6 +48,7 @@ function selectSort(array) {
  * 插入排序：将无序部分的第一个数插入到有序部分的正确位置
  * 时间复杂度：O(n*n)
  * 空间复杂度：O(1)
+ * 最好：O(n)
  */
 function insertSort(array) {
   for (var i = 1; i < array.length; i++) {
@@ -124,6 +126,42 @@ function mergeSort(array) {
 
   return array
 }
+
+
+/**
+ * 快速排序：将数组一分为二分别排序，再将两个有序数组合并
+ * 时间复杂度：n*log(n)  最差：n方  
+ * 空间复杂度：log(n)
+ */
+
+// 1、先从数列中取出一个数作为基准数
+// 2、分区过程，将比这个数大的数全放到它的右边，小于或等于它的数全放到它的左边
+// 3、再对左右区间重复第二步，直到各区间只有一个数
+function quickSort(ary, start, end) {
+  if (start >= end) {
+      return
+  }
+  let l= start, r = end;
+  let pivot = ary[(start + end) >>1]
+  while (l <= r) {
+      while (l <= r  && ary[l] < pivot) {
+          l++
+      }
+      while (l <= r && ary[r] > pivot) {
+          r--
+      }
+      if (l <= r) {
+          let t = ary[l]
+          ary[l] = ary[r]
+          ary[r] = t
+          l++
+          r--
+      }
+  }
+  quickSort(ary, start, r)
+  quickSort(ary, l, end)
+  return ary
+} 
 
 
 function quickSort2(array) {
@@ -209,7 +247,7 @@ function isSorted(array) {
   return true
 }
 
-//不稳定的排序算法 ： 选择，快速,堆排
+//不稳定的排序算法 ： 选择，快速,希尔排序，堆排
 
 function countSort(array) {
   let max = array.reduce((prev,item) => item > prev ? item : prev)

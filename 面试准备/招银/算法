@@ -1,0 +1,272 @@
+//实现数组map()方法
+Array.prototype.myMap = function (callback, thisArg) {
+  let length = this.length
+  let res = []
+  if (!Array.isArray(this)) throw new TypeError('this is not an array')
+  if (typeof callback !== 'function') throw new TypeError(callback + 'is not a function')
+  if (length === 0) {
+    return res
+  }
+  for (let i = 0; i < length; i++) {
+    res[i] = callback.call(thisArg, this[i], i, this)
+  }
+  return res
+}
+//防抖
+function debounce(f, delay) {
+  let timer = null
+  return function () {
+    if(timer) clearTimeout(timer)
+    timer = setTimeout(f, delay)
+  }
+}
+
+//二分查找
+function sortedIndex(arr, value) {
+  // arr是已排序的数组
+  if (arr.length == 0) return 0
+  if (arr[arr.length-1] < value) return arr.length
+  // 在[left, right]中找到大于等于value的第一个元素的位置
+  let l = 0, r = arr.length - 1
+  while(l < r) {
+    let mid = (l + r) >> 1
+    if (arr[mid] < value) l = mid + 1
+    else r = mid
+  }
+  return l
+}
+圆环/冒泡
+
+拼接字符串和排序的题
+
+
+
+//将两个有序数组合并成一个有序数组
+var merge = function(nums1, m, nums2, n) {
+    let k = m + n - 1, i = m - 1, j = n - 1
+    while (i >= 0 || j >= 0) {
+        if (i < 0) nums1[k--] = nums2[j--]
+        else if (j < 0) nums1[k--] = nums1[i--]
+        else if (nums1[i] > nums2[j]) nums1[k--] = nums1[i--]
+        else nums1[k--] = nums2[j--]
+    }
+};
+//快排
+function quickSort(arr, start=0, end=arr.length-1) {
+  if(start >= end) return 
+  let pivotIdx = Math.floor(Math.random()*(end - start + 1)) + start
+  let pivot = arr[pivotIdx]
+  let l = start, r = end
+  while(l <= r) {
+    while(l <= r && arr[l] < pivot) l++
+    while(l <= r && arr[r] > pivot) r--
+    if (l <= r) {
+      [arr[l],arr[r]] = [arr[r],arr[l]];
+      l++
+      r--
+    }
+  }
+  quickSort(arr, start, r)
+  quickSort(arr, l, end)
+  return arr
+}
+//求树的高度（递归和层次）
+var maxDepth = function(root) {
+    if (root == null) return 0
+    let left = maxDepth(root.left)
+    let right = maxDepth(root.right)
+    return Math.max(left, right) + 1
+};
+var maxDepth2 = function (root) {
+  if (root == null) return []
+  let res = []
+  let queue = []
+  let cur = root
+  queue.push(cur)
+  while(queue.length) {
+    let size = queue.length
+    let tmp = []
+    for (let i = 0; i < size; i++) {
+      let node = queue.shift()
+      tmp.push(node)
+      if (node.left) queue.push(node.left)
+      if (node.right) queue.push(node.right)
+    }
+    res.push(tmp)
+  }
+  return res.length
+}
+//两数之和
+var twoSum = function(nums, target) {
+    let map = new Map()
+    for (let i = 0; i < nums.length; i++) {
+        if (map.has(target - nums[i])) {
+            return [i,map.get(target - nums[i])]
+        }else {
+            map.set(nums[i], i)
+        }
+    }
+};
+//三叔之和
+var threeSum = function(nums) {
+    nums.sort((a,b)=>a-b)
+    let res = []
+    for (let i = 0; i < nums.length; i++) {
+        if(nums[i] > 0) break
+        if(i>0 && nums[i-1] === nums[i]) continue
+        let l = i+1, r = nums.length-1
+        while(l < r) {
+            let sum = nums[i] + nums[l] + nums[r]
+            if (sum === 0) {
+                res.push([nums[i],nums[l],nums[r]])
+                while(l < r && nums[l] === nums[++l]);
+                while(l < r && nums[r] === nums[--r]);
+            }else if (sum < 0) {
+                l++
+            }else {
+                r--
+            }
+        }
+    }
+    return res
+ 
+};
+//findKtop
+var findKthLargest = function(nums, k) {
+  function quickSort(arr, k, start) {
+    if (arr.length <= 1) return arr[0]
+    let pivotIdx = arr.length >> 1
+    let pivot = arr.splice(pivotIdx, 1)[0]//要把这个数去掉
+    let left = []
+    let right = []
+    for (let i = 0; i < arr.length; i++) {
+      if (arr[i] < pivot) {
+        left.push(arr[i])
+      }else {
+        right.push(arr[i])
+      }
+    }
+    if ((left.length + start) == k) {
+      return pivot
+    }else if ((left.length + start) > k) {
+      return quickSort(left, k, start)
+    }else {
+      return quickSort(right, k, left.length + start + 1)
+    }
+  }
+  return quickSort(nums, nums.length - k, 0)
+}
+数组扁平化
+function flat3(arr) {
+  return arr.reduce((prev,item)=>prev.concat(Array.isArray(item) ? flat3(item) : item),[])
+}
+请用程序判断一个非空字符串是否是由所含的一个子串重复多次组成，字符串只包含小写字母且长度不超过5000。
+举例：abdeabdeabde，返回true，abdeabdeabd，返回false
+
+算法题：树形结构转数组结构
+//map 支持多个根节点 √
+function list2tree(list) {
+  let res = []
+  let map = {}
+  list.forEach(node=> {
+    node.children = []
+    map[node.id] = node
+  })
+  list.forEach(node=> {
+    if(map[node.pid]) {
+      map[node.pid].children.push(node)
+    }else {
+      res.push(node)
+    }
+  })
+  return res
+}
+中缀表达式转后缀表达式
+手写es5.ES6类的创造方法
+url 二级域名
+//([{}])括号匹配
+var isValid = function(s) {
+    let n = s.length
+    let stack = []
+    for(let i = 0; i < n; i++) {
+        switch (s[i]) {
+            case '(': 
+                stack.push(')')
+                break
+            case '[': 
+                stack.push(']')
+                break
+            case '{': 
+                stack.push('}')
+                break   
+            default:
+                if (stack.pop() != s[i])
+                return false         
+        }
+    }
+    return stack.length == 0
+};
+
+//
+format('aa{0}bbcc{1}','bb','cc') //aabbbbcccc
+function format(originStr, ...args) {
+  return originStr.replace(/\{(\d)\}/g, (match, i)=>args[i])
+}
+
+//对象展开
+function falttenObj(obj) {
+  const res = {}
+  const flatObj = (obj, preKey='') => {
+    if (typeof obj != 'object') {
+      res[preKey] == obj
+      return
+    }
+    let keys = Object.keys(obj)
+    for (let key of keys) {
+      let value = obj[key]
+      let newKey = key
+      if (preKey) {
+        newKey = preKey + '.' + key
+      }
+      if (typeof value === 'object') {
+        flatObj(value, newKey)
+      }
+      if (typeof value !== 'object') {
+        res[newKey] = value
+      }
+    }
+  }
+  flatObj(obj, '')
+  return res
+}
+
+
+
+function maxRequest(url = ``, times = 3) {
+  // 1. 闭包，保存私有属性
+  function autoRetry (url, times) {
+    console.log('times = ', times);
+    times--;
+    // 2. fetch 本身返回值就是 Promise，不需要再次使用 Promise 包裹
+    return fetch(url).then(value => {
+        if(value.status === 200) {
+          console.log(`✅ OK`, value);
+          // 3. 手动返回 Promise 的 value， 没有返回值 默认返回 undefined
+          return value;
+        } else {
+          throw new Error(`❌  http code error: ${value.status }`);
+        }
+      }).catch((err) => {
+        console.log(`❌  Error`, err);
+        if (times < 1) {
+          // 4. 方便后续的 thenable 处理 error
+          throw new Error('💩  over max request times!');
+        } else {
+          // 5. 返回递归方法 
+          return autoRetry(url, times);
+        }
+      });
+  }
+  // 6. 返回一个 Promise 的结果 （成功 Promise 或失败 Promise）
+  return autoRetry(url, times);
+}

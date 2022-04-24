@@ -1,4 +1,4 @@
-加载时的优化：http请求、缓存、静态资源cdn、图片优化、字体、服务端渲染
+加载时的优化：http请求、缓存、静态资源cdn、图片优化、字体、服务端渲染、gzip压缩
   1.减少http请求次数，将多个小文件合并成大文件（dns-tcp-http）
   2.使用服务器端渲染，返回html文件，客户端直接解析html即可
     客户端渲染：html-》下载js-》运行文件-》dom-》渲染。
@@ -49,3 +49,16 @@ css3不需要回流和重绘的属性：
 
 
 CDN：
+
+首页加载时间长：网络慢、数据量大、渲染时间长、js代码卡住了、dom节点太多
+
+图片加载不出来：图片挂了、css样式出现问题
+
+页面滚动卡帧：scroll组件没做节流、dom节点多
+
+TTFB (Time To First Byte)，是最初的网络请求被发起到从服务器接收到第一个字节这段时间，
+
+gzip：更牛逼的压缩，需要客户端服务器浏览器同时支持
+  Accept-Encoding
+  content-encoding：gzip
+  node端很简单，只要加上compress模块，过滤x-no-compression

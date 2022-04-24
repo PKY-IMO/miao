@@ -1,0 +1,8 @@
+不知宽高：
+（1）组合使用display:table-cell和vertical-align、text-align，
+    使父元素内的所有行内元素水平垂直居中（内部div设置display:inline-block即可）、
+（2）当使用：top:50%, left:50%，是以左上角为原点，故不处于中心位置。
+    translate(-50%, -50%)作用是，往上（X轴），左（Y轴）移动自身长度的50%，以使其居于中心位置。
+（3）display:flex; 设置.wrap为弹性布局
+    justify-content:center;定义项目在主轴(水平方向)上居中对齐
+    align-items:center;定义项目在交叉轴(垂直方向)上居中对齐

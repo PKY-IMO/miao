@@ -1,0 +1,29 @@
+React Diff算法：reconciliation
+tree Diff(层级)、component Diff、elementDiff
+*对比虚拟dom
+*从根元素对比，逐层往下递归比较每个元素
+  （1）如果根节点是普通元素*类型：相同递归对比子元素；不同则卸载旧的树，换新树
+  （2）如果根节点是组件，则组件比较 JSX.TYPE：组件相同则把新的属性传给构造函数（组件相等，同一内存地址，不会销毁组件）；不同则走组件销毁的生命周期；
+      更新的生命周期：(getDerivedStateFromProps,开发阶段调用两次检测是否是纯函数)->SCU->render->getSnapshotBeforeUpdate->componentDidMount()
+      销毁的生命周期：componentWillUnMount
+*Key：对于相同的兄弟节点，比如ul里的多个li需要添加key值，防止在头部增加或者删除时，进行额外的开销
+    当节点处于同一层级的时候，react diff 提供了三种节点操作，移动、删除、插入。
+    首先会初始化 lastIndex 和 nextIndex，两者都为 0.
+    遍历新的虚拟dom集合，找到新的集合中的每个节点在老集合中的位置 oldIndex，
+      如果 oldIndex >= lastIndex，则该节点保持不动，并更新 lastIndex = Math.max(lastIndex, oldIndex)，然后更新该节点的位置为 nextIndex，nextIndex ++
+      如果 oldIndex < lastIndex，则移动该节点至 nextIndex 的位置，同时更新 lastIndex = Math.max(lastIndex, oldIndex)，nextIndex ++
+      如果老集合中没有找到节点，说明节点是新增的，则会创建新节点插入到 nextIndex 的位置
+    当完成新集合中所有节点 diff 时，最后还需要对老集合进行遍历，判断是否存在新集合中没有但老集合中仍存在的节点，发现存在这样的节点 D，因此删除节点 D，到此 diff 全部完成。
+
+*componentWillMount的弊端： 
+  *fiber架构 发生在React更新DOM和refs过程
+  开发人员在此生命周期设置定时器等，此时组件由于用户交互还未渲染完成就卸载了
+  componentWillUnMount中清楚定时器无法完成：因为这个生命周期必须在挂载完成后才能调用
+  解决方案：必须在componentDidMount中设置定时器，副作用可以被取消
+
+vue和react的diff算法，都是忽略跨级比较，只做同级比较。
+  vue diff时调动patch函数，参数是vnode和oldVnode，分别代表新旧节点。
+  1.vue对比节点。当节点元素相同，但是classname不同，认为是不同类型的元素，删除重建，而react认为是同类型节点，只是修改节点属性。
+  2.vue的列表对比，采用的是两端到中间比对的方式，而react采用的是从左到右依次对比的方式。
+  当一个集合只是把最后一个节点移到了第一个，react会把前面的节点依次移动，而vue只会把最后一个节点移到第一个。
+  总体上，vue的方式比较高效。

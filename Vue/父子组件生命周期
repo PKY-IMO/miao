@@ -1,0 +1,14 @@
+加载渲染：
+  父beforeCreate -> 父created -> 父BeforeMount
+    -> 子bforecreate ->子creted -> 子BeforeMount -> 子Mounted
+  ->父Mounted
+
+子组件更新：
+  父beforeUpdate
+    ->子BeforeUpdate->子updated
+  ->父updated
+
+销毁：
+  父beforedestory
+     ->子BeforeDestory->子destoryed
+  ->父destoryed

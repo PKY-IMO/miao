@@ -1,0 +1,19 @@
+1.ts重构
+2.双向绑定更改-proxy实现响应式
+  vue2: 数据劫持和发布订阅模式相结合，Object.defineProperty实现劫持，
+        对data选项在渲染过程中，数据遍历添加getset。
+        得知属性变化后，再通过监听器 Observer 通知订阅者 Watcher更新视图
+  vue3通过函数reactive()给对象新增proxy对象监听内部属性变化
+3.虚拟dom
+  将vdom更新性能与模板大小解耦，变为与动态节点的数量相关
+  vue2：以组件为粒度，但单个组件部分变化需要遍历组件的整个dom树
+        与模板大小正相关，动态节点数量无关
+  vue3：利用AST把动态节点（if，for，slot）切割，更新块内节点不需要遍历整棵树
+        检测静态节点，提升到render之外，避免重复
+        给元素一个追踪标记，无论嵌套多深可直接遍历动态节点
+4.tree-shaking
+  vue3将多数全局api和内部组件es模板导出
+5.composition API
+  函数式风格的入口 setup()取代data()
+6.支持teleport 类似于React Portal，用于将组件的内容分布在不同地方
+7.新增suspense组件用于渲染异步组件加载过程时的内容

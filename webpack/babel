@@ -1,0 +1,8 @@
+babel原理：AST语法树+深度优先遍历
+  parse：
+    词法分析（Lexical Analysis, LA）和语法分析（Syntactic Analysis, SA）。
+    词法分析之后，代码就已经变成了一个 Tokens 数组了，现在需要通过语法分析把 Tokens 转化为上面提到过的 AST。
+  transform：
+    修改语法树，深度优先，将不符合的type替换掉
+  generate：
+    根据这个新的 AST 来输出代码。

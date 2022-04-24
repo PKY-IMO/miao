@@ -1,0 +1,48 @@
+Diff算法，组件相同，即使属性不变，也会调用render()更新
+  需求：props和state不变时子组件不更新
+
+*SCU
+  阻止组件更新，利用不可变数据结构高效的实现这一点
+  props只读不可变，所有需要传不可变数据，对象之间  结构共享 structure sharing
+  只需做指针的浅层对比
+  shouldComponentUpdate(nextProps, nextState) {
+    if (nextProps.color === this.props.color) {
+      return false
+    }
+    return true
+  }
+
+*React提供的简单的SCU
+  React,PureComponent 实现了SCU对props和state浅层次的对比
+  React.memo(Comp, areEqual)---函数式组件
+
+*immer
+  immer.produce(f)(obj) 等价于 immer.produce(obj, f)
+  immer.original(draft.a[0])
+
+  this.setState(
+    immer.produce(this.state, draft => {
+        daft.a[0] === 'abc'
+    })
+  )
+
+  // immer.produce(f) 返回一个函数，空余第一个参数准备接受
+  // this.setState正好给传入的函数，传this.state
+  this.setState(
+    immer.produce(draft => {
+        daft.a[0] === 'abc'
+    })
+  )
+
+  // 重新setState
+  // super.xxx()相当于调用父类方法 Father.prototype.xxx.call(this),调用时把this传进去了
+  setState(updater, callback) {
+    if (typeof updater === 'function') {
+      super.setState(immer.produce(updater),callback)
+    } else {
+      super.setState(updater, callback)
+    }
+  }
+  this.setState(daft =>{
+    daft.a[0] === 'abc'
+  })

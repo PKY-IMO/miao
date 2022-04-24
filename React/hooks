@@ -1,0 +1,115 @@
+React曾经函数组件没有状态，只能接受props
+  需求：给函数组件添加状态，以及其他class组件功能
+React遇到函数组件，会为其创建保存状态信息的对象
+
+如何区分函数组件还是class组件
+  通过原型和继承判断
+
+*useState
+  const [count, setCount] = useState(0)
+  *setCount的调用
+  问题：为什么只要调用setCount 组件就会更新？
+    原理：setCount和每个实例单独绑定，更改对应顺序的状态
+        setCount传新值，React知道这个实例更改了，就更新组件，
+        更新后useState()里的值变为传的值
+  *useState是全局函数，没有被绑定到某一个组件实例上
+  问题：useState怎么知道应该操作那个组件？
+     一般函数不能知道自己在哪里被调用
+     useState不仅知道自己在哪个函数，且知道自己在哪个对应的实例里面
+    原理：React将存储实例的状态信息，保存到外部全局变量上（一系列对象/栈），
+        然后useState从外部变量上读取到当前正在更新的组件的状态
+  问题：useState怎么知道要将返回值赋给谁
+      一般函数不知道自己的返回值赋给了谁
+    原理：通过顺序记，对状态记编号而不是key，每个函数对应到编号的状态
+         按顺序记录每个state的状态
+  注意：useState每次调用顺序一致
+      所有对于use的调用不能放入if和for中
+      hooks只能在函数组件的内部调用
+  第二个参数是更新后的回调
+
+*useContext：
+  class组件要么使用contextType静态属性+this.context
+      要么AgeContext.consumer 标签包裹 书写复杂
+  读取到传来的Context值
+  var age = useContext(AgeContext)
+
+
+*useRef
+  * 为函数使用ref，创建不变的ref对象
+      对于一个函数组件的一个实例来说useRef返回同一个ref
+  * useRef可以接受一个新的变量--初始值
+  var ref = useRef()
+
+
+*useReducer--高级useState
+  dispatch传一个action，然后将action和state传给reducer函数，结果由useReducer传给state
+  给一个action，使得dispatch根据action更新state的方式
+  function TestUseReducer() {
+    var [state, dispatch] = useReducer(countReducer, {count: 0})
+    return (
+      <div>
+        <button onClick={()=>dispatch({type:'add', value:2})}>-</button>
+        {state.count}
+        <button onClick={()=>dispatch({type:'sub', value:3})}>+</button>
+      </div>
+    )
+  }
+  function countReducer(state, action) { 
+    if (action.type === 'add') {
+      return {
+        count: state.count + action.value
+      }
+    }
+    if (action.type === 'sub') {
+      return {
+        count: state.count - action.value
+      }
+    }
+  }
+
+
+*useEffect：依赖数组
+  类似于函数组件的生命周期
+  function ClickLog() {
+    useEffect(() => { //第一次组件挂载成功componentDidMount时执行
+      f1() // 第一次运行+数组改变
+      
+      return () => { //componetWillUnmount 解绑此函数用于清除前一次effect
+        f2()
+      }
+    },[a,b,c])// 数组改变则执行里面的函数componentWillUpdate
+
+    return <div></div>
+  }
+
+*useCallback: 必须依赖于数组
+  解决函数组件更新时，绑定的函数反复创建的问题（class组件一般不会有这个问题）
+  * useCallback可以返回上次创建的函数
+    注意：不传数组，则每次创建新的函数，useCallback无意义
+  问题：
+    闭包陷阱、陈旧闭包：
+    数组中未传入依赖的state值，引起的useCallback返回第一次创建的函数，其作用域是最初的作用域
+    
+  * 如果是空数组，会被调用但是作用域是初次创建时的作用域，可能导致值不变且组件不更新
+  * 如果传入数组有值，在单个组件生命周期里，数组元素浅层对比
+      函数依赖的变量值改变，创建新的函数返回
+      函数依赖的变量值不变，返回上一次创建的函数
+
+  function Counter() {
+    const [count, setCount] = useState(0)
+    const inc = useCallback(() => {
+      ; setCount(count+1) // count是原来作用域的值  **闭包陷阱、陈旧闭包**
+      setCount(count => count+1) // count是最新的值
+    }，[])
+
+    return(
+      ; <button onClick={()=> setCount(count+1)}></button> // 反复创建函数
+      <button onClick={inc}></button> // 反复创建函数
+    )
+  }
+  
+*useMemo：依赖数组，节约性能的复杂运算
+   a,b,c 
+   d=a*c 运算复杂，当其他d不需要依赖的值更新，d也需要重新运算，消耗性能
+  var d = useMemo(() => a * c, [a, c]) 比较数组的值是否改变，不变放回上一次的值
+

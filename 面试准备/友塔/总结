@@ -1,0 +1,7 @@
+算法: 前缀和+同余定理，和可以整除k的连续子数组
+计网: HTTPS
+数据库：MongoDB取null  {$type:10}
+路由：hash 和 history（怕刷新，pushstate，replacestate）
+正则：/d 数字  /w [0-9A-Za-z_]
+
+算法：链表是否有环，二叉树右边视图

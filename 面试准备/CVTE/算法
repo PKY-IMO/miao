@@ -1,0 +1,367 @@
+输出最大的回文子串
+var longestPalindrome = function(s) {
+    //中心扩散法
+    var res = 0
+    var str = ''
+    function helper(s, i, j) {
+        while(s[i] == s[j] && i >= 0 && j < s.length) { // i+1 --- j-1
+            i--
+            j++
+        }
+        let len = j - i - 1
+        if (len > res) {
+            res = len
+            str = s.slice(i+1,j)
+        }
+    }
+    for (let i = 0; i < s.length; i++) {
+        helper(s, i, i)
+        helper(s, i, i + 1)
+    }
+    return str
+};
+
+
+冒泡
+//冒泡排序：每一趟冒泡都比较所有相邻的元素，如果是逆序就交换，重复n趟 O(n^2)
+function bubbleSort(array) {
+  for (let i = 0; i < array.length; i++) {
+    for (let j = 0; j < array.length - i - 1; j++) {
+      if (array[j] > array[j+1]) {
+        // let tmp = array[j+1]
+        // array[j+1] = array[j]
+        // array[j] = tmp
+        [arr[j+1], arr[j]] = [arr[j], arr[j+1]];
+      }
+    }
+  } 
+  return array
+}
+
+//冒泡排序优化
+function bubbleSort2(array) {
+  while (true) {
+    let cnt = 0
+    for (let j = 0; j < array.length - 1; j++) {
+      if (array[j] > array[j+1]) {
+        let tmp = array[j+1]
+        array[j+1] = array[j]
+        array[j] = tmp
+        cnt++
+      }
+    }
+    if (cnt == 0) return array
+  }
+}
+
+
+//实现一个链表，反转链表
+var reverseList = function(head) {
+    // let pre = null, cur = head
+    // while(cur) {
+    //     let tmp = cur.next
+    //     cur.next = pre
+    //     pre = cur
+    //     cur = tmp
+    // }
+    // return pre
+
+    if (head == null || head.next == null) return head
+    let rest = reverseList(head.next)
+    head.next.next = head
+    head.next = null
+    return rest
+};
+
+
+//手动实现一个 bind
+Function.prototype.myBind = function(obj, ...fixedArgs) {
+  let self = this
+  let resFn = function(...args) {
+    return self.call(this instanceof resFn ? this : obj, ...fixedArgs, ...args)
+  }
+  resFn.prototype = Object.create(self.prototype)
+  return resFn
+}
+
+
+//手撕螺旋矩阵Ⅱ
+var generateMatrix = function(n) {
+    const maxNum = n * n;
+    let curNum = 1;
+    const matrix = new Array(n).fill(0).map(() => new Array(n).fill(0));
+    let row = 0, column = 0;
+    const directions = [[0, 1], [1, 0], [0, -1], [-1, 0]]; // 右下左上
+    let directionIndex = 0;
+    while (curNum <= maxNum) {
+        matrix[row][column] = curNum;
+        curNum++;
+        const nextRow = row + directions[directionIndex][0], nextColumn = column + directions[directionIndex][1];
+        if (nextRow < 0 || nextRow >= n || nextColumn < 0 || nextColumn >= n || matrix[nextRow][nextColumn] !== 0) {
+            directionIndex = (directionIndex + 1) % 4; // 顺时针旋转至下一个方向
+        }
+        row = row + directions[directionIndex][0];
+        column = column + directions[directionIndex][1];
+    }
+    return matrix;
+};
+
+//螺旋矩阵1
+var spiralOrder = function(matrix) {
+  let top = 0, left = 0, bottom = matrix.length - 1, right = matrix[0].length - 1
+  let numEle = matrix.length * matrix[0].length
+  let res = []
+  while(numEle) {
+      for (let i = left; i <= right && numEle; i++) {
+          res.push(matrix[top][i])
+          numEle--
+      }
+      top++
+      for (let j = top; j <= bottom && numEle; j++) {
+          res.push(matrix[j][right])
+          numEle--
+      }
+      right--
+      for (let i = right; i >= left && numEle; i--) {
+          res.push(matrix[bottom][i])
+          numEle--
+      }
+      bottom--
+      for (let j = bottom; j >= top && numEle; j--) {
+          res.push(matrix[j][left])
+          numEle--
+      }
+      left++
+  }
+  return res
+}
+    
+
+
+
+promise，用catch方法实现then then实现catch
+Promise.prototype.catch = function(onRejected) {
+  return this.then(undefined, onRejected)
+}
+
+
+//实现promise的all方法
+Promise.all = function(promises) {
+  return new Promise((resolve, reject)=>{
+    let count = 0
+    let arr = []
+    // 遍历
+    for (let i = 0; i < promises.length; i++) {
+      promises[i].then(v => {
+        count++
+        arr[i] = v
+        if (count === promises.length) {
+          resolve(arr)
+        }
+      },r => {
+        reject(r)
+      })
+    }
+  })
+}
+
+compose 组合函数 高阶函数
+例子：compose(f1,f2)(f3)(f4)([1, 2, 3]) => f4(f3(f2(f1([1, 2, 3]))))
+function compose() {
+  const argArr = Array.from(arguments);
+  return function fn(args){
+    if(typeof args === 'function'){
+      argArr.push(args);
+      return fn;
+    }
+    let res = args;
+    argArr.forEach((item) => {
+      res = item(res);
+    });
+    return res;
+  }
+}
+
+
+
+实现一个20个请求的串行和并行 promise（我讲了链式调用 但是面试官并不太满意，更优雅的方式）
+
+编程题：计算给定tasks数组，返回所有请求中耗时最短的时间
+// 数组项为：对象，包含任务相关信息
+// 没有prevId 并行 
+// 有prevId 等待前置任务执行
+const tasks = [
+ {id: 1, time: 10},
+ {id: 2, time: 8, prevId: 1},
+ {id: 3, time: 6},
+ {id: 4, time: 3, prevId: 2},
+ {id: 5, time: 9, prevId: 4}
+];
+function clacTime(tasks) {
+  function list2tree(list) {
+    let res = []
+    let map = {}
+    list.forEach(node=> {
+      map[node.id] = node
+    })
+    list.forEach(node=> {
+      if(map[node.prevId]) {
+        map[node.prevId].children = node
+      }else {
+        res.push(node)
+      }
+    })
+    return res
+  }
+  function count(obj) {
+    let tmp = 0
+    tmp += obj.time
+    if (obj.children && obj.children.length > 0) {
+      tmp += count(obj.children)
+    }
+    return tmp
+  }
+  let treeArr = list2tree(tasks)
+  let time = 0
+  treeArr.forEach(task=> {
+    let tmp = count(task)
+    time = Math.max(tmp, time)
+  })
+  return time
+}
+
+
+let str1 = "download www.baidu.com";
+let str2 = "writetofile abcd";
+
+
+有一个数组，每一项是一个任务，sid是执行时所要依赖的任务，
+所以依赖的任务要先执行完才可以执行，请计算所有任务执行完
+let arr=[{id:'1',time:2,sid:''},{id:'3',time:3,sid:'2'},{id:'2',time:3,sid:'1'}]
+
+1
+1 1
+1 2 1
+...
+输入 n ,输出数组
+假设输入 3，输出数组 [[1],[1,1],[1,2,1]]
+
+手写readOnly
+type Readonly<T> = {
+   readonly [P in keyof T]: T[P]; 
+};
+
+计算耗时任务最长的
+interface Task {
+  // 任务id
+  id: string;
+  // 任务执行耗时
+  cost: number;
+  // 前置任务id，可选
+  dep?: string;
+}
+
+// 实例任务列表
+const tasks: Task[] = [
+  { id: "1", cost: 100 },
+  { id: "2", cost: 100, dep: "4" },
+  { id: "4", cost: 100, dep: "3" },
+  { id: "3", cost: 100 },
+];
+// 输出
+// 300
+// 3 4 2
+
+
+1、 从1~10按不同的 li 标签输出对应的值  
+2、快速排序 / 冒泡排序
+
+
+(有点类似于时间片轮转的算法？就是多任务同时执行，而有些有依赖的任务必须在依赖完成后再进行，求最短时间)
+(面试官说用链表和递归做，我写的是map。。)
+
+删除数组中重复数字，返回删除后数组长度，不能创建新数组、对象，时间复杂度O(n)
+function removeDuplicates(nums) {
+    let j = 0
+    let len = nums.length
+    for (let i = 0; i < len; i++) {
+        if (nums[i] !== nums[i-1]) {
+            nums[j] = nums[i]
+            j++
+        }
+    }
+    return j
+};
+
+
+
+
+//实现flat
+function flat3(arr) {
+  return arr.reduce((prev,item)=>prev.concat(Array.isArray(item) ? flat3(item) : item),[])
+}
+
+
+
+4. 算法题，简化文件路径，Leetcode原题 https://leetcode-cn.com/problems/simplify-path/
+var simplifyPath = function(path) {
+    let parts = path.split('/')
+    let stack = []
+    for (let i = 0; i < parts.length; i++) {
+        let part = parts[i]
+        if ( part == '..') {
+            stack.pop()
+        } else if (part == '.') {
+            continue
+        } else if (part == '') {
+            continue
+        } else {
+            stack.push(part)
+        }
+    }
+    return '/' + stack.join('/')
+};
+
+
+//手写防抖
+function debounce(f, delay) {
+  let timer = null
+  return function() {
+    if(timer) {
+      clearTimeout(timer)
+    }
+    timer = setTimeout(f, delay)
+  }
+}
+//节流
+// 高频事件触发，但在n秒内只会执行一次，所以节流会稀释函数的执行频率
+function throttle(f, delay) {
+  let canRun = true
+  return function() {
+    if(!canRun) return
+    canRun = false
+    setTimeout(() => {
+      f.apply(this, arguments)
+      canRun = true
+    }, delay)
+  }
+}
+
+有序数组中,给你一个目标值, 找到它的索引? 二分查找法, 时间复杂度多少?
+function sortedIndexOf(arr, value) {
+    // arr是已排序的数组
+    if (arr.length == 0) return 0
+    if (arr[arr.length-1] < value) return arr.length// 不存在大于等于value的值
+    // 在[left, right]中找到大于等于value的第一个元素的位置
+    let l = 0, r = arr.length - 1
+    while(l < r) {
+      let mid = (l + r) >> 1
+      if (arr[mid] < value) l = mid + 1
+      else r = mid
+    }
+    return arr[l] == value ? l : -1
+  }
+
+
+堆排序算法复杂度，问怎么计算的
+手撕第一道：给一个等待执行的任务队列和窗口数量，不同任务执行时间不一样，实现打印出完成顺序，(前面真的太懵，没思路了都)

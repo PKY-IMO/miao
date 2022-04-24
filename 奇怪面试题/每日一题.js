@@ -68,6 +68,8 @@ obj.say() // 10 箭头函数的this继承自它父级的this
 var anotherObj={a:30} 
 obj.say.apply(anotherObj) // 10 箭头函数的this不能被bind, apply, call改变
 
+
+////
 function Person(name) {
   this.name = name;
 }
@@ -79,6 +81,7 @@ Person('abc'); //普通函数this指向window ==> window.name='abc'
 const a = new Person('abc').print.call({});  //  (new Person('abc')).print.call({})
 console.log(a); // undefined
 
+///
 const fn = () => {
   this.x = 'z'; // this 指向 window
 };
@@ -240,7 +243,7 @@ new fn().getValue();//3   (new fn()).getValue() 这里的this指向实例对象
 
 
 3.
-[1,2,3,4].reduce((total,p,i) => {
+res = [1,2,3,4].reduce((total,p,i) => {
 	console.log(total,p,i)
 	return (total + i)} ); console.log(res); // 输出多少 
 const res1 = [1,2,3,4].reduce((total,p,i) => total + i, 0); console.log(res1); // 输出多少
@@ -604,3 +607,31 @@ console.log(a) // 1
 
 
 
+//虾皮
+function Foo() {
+  console.log(this)
+  this.getName = function () {
+    console.log('1')
+  }
+  return this
+}
+Foo.getName = function () {
+  console.log(2)
+}
+Foo.prototype.getName = function () {
+  console.log('3')
+}
+var getName = function () {
+  console.log('4')
+}
+
+function getName() {
+  console.log('5')
+}
+// 打印
+Foo.getName() //2
+getName() //'4'
+Foo().getName() //window, '1'
+getName() //'1'
+new Foo.getName() //2
+new Foo().getName() //Foo实例对象，'1'

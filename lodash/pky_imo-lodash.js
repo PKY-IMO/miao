@@ -160,7 +160,7 @@ var pky_imo = function () {
   }
 
   function fromPairs(arr) {
-    return arr.reduce((res,item) => (res[item[0]] = item[1],res),{})
+    return  arr.reduce((res,item) => (res[item[0]] = item[1],res),{})
   }
 
   function head(arr) {

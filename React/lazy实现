@@ -1,0 +1,23 @@
+function lazy(f) {
+  return class extends React.Component {
+    constructor() {
+      super()
+      this.state = {
+        loaded: false
+      }
+    }
+    async componentDidMount() {
+      this.comp = (await f()).default
+      this.setState({
+        loaded: true
+      })
+    }
+    render() {
+      if (this.state.loaded) {
+        return <this.comp {...this.props}/>
+      } else {
+        return null
+      }
+    }
+  }
+}

@@ -18,9 +18,10 @@ function bubbleSort(array) {
   for (let i = 0; i < array.length; i++) {
     for (let j = 0; j < array.length - i - 1; j++) {
       if (array[j] > array[j+1]) {
-        let tmp = array[j+1]
-        array[j+1] = array[j]
-        array[j] = tmp
+        // let tmp = array[j+1]
+        // array[j+1] = array[j]
+        // array[j] = tmp
+        [arr[j+1], arr[j]] = [arr[j], arr[j+1]];
       }
     }
   } 
@@ -45,21 +46,18 @@ function bubbleSort2(array) {
 
 //插入排序：从左到右依次将所有的元素插入到已经排好序的数组中
 function insertSort(array) {
-  for (let i = 0; i < array.length; i++) {
-    for (let j = i; j > 0; j--) {
-      if (array[j] < array[j+1]) {
-        let tmp = array[j+1]
-        array[j+1] = array[j]
-        array[j] = tmp
+  for (var i = 1; i < array.length; i++) {
+    var t = array[i]
+    for (var j = i - 1; j >= 0; j--) {
+      if (array[j] > t) {
+        array[j + 1] = array[j]
+      } else {
+        break
       }
     }
-    return array
+    array[j + 1] = t
   }
+  return array
 }
 
-function insertSort(array) {
-  for (let i = 0; i < array.length; i++) {
-    
-  }
-}
 

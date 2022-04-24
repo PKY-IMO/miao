@@ -1,0 +1,27 @@
+//1
+const a = { }
+const b = { c:2 } 
+a[b]= 3 
+console.log(a)
+
+//2
+function foo(){
+  console.log(this.bar);  
+} 
+var  bar ="bar1"; 
+var  o2 = { bar : "bar2" ,foo:foo}; 
+var  o3 = { bar : "bar3" ,foo:foo}; 
+
+foo();  //bar1
+o2.foo();//bar2
+
+//3
+let obj = { name: "Tyler",  
+            a: function () {  
+              let name = "Anderson"; 
+              let test = () => {  
+                console.log(this.name); };  
+                test();  
+              }, 
+          }; 
+obj.a();

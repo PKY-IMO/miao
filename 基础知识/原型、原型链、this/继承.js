@@ -1,3 +1,12 @@
+// js实现对象的方式就是原型链，原型链是一种链式关系，包含了对象的继承关系。
+// 在判断对象A是否是B的实例对象时，可以沿着对象A的原型链（__proto__）进行查找，能查找到B.prototype则是，原理与instanceof一致。
+// 函数有一个prototype属性，即显式原型，指向构造函数的原型对象。Foo -----prototype--->  Foo.prototype​
+// 构造函数的原型对象的construtor属性指向构造函数。Foo.prototype ----constructor--->   Foo ​​
+// 实例对象通过__proto__，即隐式原型访问它的原型。
+// 实例对象的隐式原型等于构造函数的显式原型。
+// Object对象也是函数，Object.__proto__===Function.prototype ，Function.prototype.__proto__===Object.prototype
+// 原型链的终点是Object.prototype，Object.prototype的再指向null,即Object.prototype.__ptoto__===null
+
 function Father(arg) {
   
 }

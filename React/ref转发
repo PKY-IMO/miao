@@ -1,0 +1,21 @@
+// 例：将ref属性指向组件内部的原生元素，ref透传
+const RefButton = React.forwardRef((props, ref)=>{
+  <button ref={ref}>
+  {props.children}
+  </button>
+})
+const ref = React.createRef()
+<RefButton ref={ref}></RefButton> // 此时ref指向函数的返回值
+
+// 常用案例
+class NumberInput extends React.component {
+  ...
+  render() {
+    <input ref={this.props.forwardedRef}/>
+  }
+}
+const RefInput = React.forwardRef((props, ref)=>{
+  return <NumberInput {props} forwardedRef={ref}/>  
+}
+使用： <RefInput ref={this.refInput}> 
+// 此时ref指向内部的input this.refInput.current.focus()

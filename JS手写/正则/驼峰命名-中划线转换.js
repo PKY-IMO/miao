@@ -2,13 +2,17 @@
  * 中划线转驼峰
  */
 let s1 = "get-element-by-id"; // 转化为 getElementById
-console.log(fn(s1));
+console.log(toCamelCaseVar(s1));
 
 function fn(str) {
   // 正则带g全局替换， -e -b -i
   return str.replace(/-(\w)/g, (_,e)=>e.toUpperCase())
 }
-
+function toCamelCaseVar( variable ) {
+  // write code here
+  let res = variable.toLowerCase().replace(/-(\w)/g, (_,e)=>e.toUpperCase())
+  return res
+}
 
 
 /**

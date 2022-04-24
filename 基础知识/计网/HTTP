@@ -11,58 +11,81 @@ HTTP是无状态：HTTP协议是无状态协议。无状态是指协议对于事
 HTTP 消息结构：请求报文和响应报文
   客户端发送一个HTTP请求到服务器的请求消息包括以下格式：
     请求行（request line）、请求头（header）、空行和请求体四个部分组成。（GET /hello.txt HTTP/1.1）
-    （get post区别） host，keep-alive，User-Agent，Accept-Endoding，Accept-Language，cookie
+    （get post区别） 
+    常用请求头： host，keep-alive，User-Agent，Accept-Endoding，Accept-Language，cookie （大小写不敏感）
   HTTP响应也由四个部分组成，分别是：状态行、响应头、空行和响应体。（HTTP/1.1 200 OK）
     （状态码） （消息报头的内容）（缓存）
 
+简单请求+非简单请求
+  非简单请求需要前端预检，浏览器主动发出OPTIONS请求（典型情况：cors跨域）
+  Access-Control-Request-Method Access-Control-Request-Headers
+  一旦服务器通过了"预检"请求，以后每次浏览器正常的CORS请求，就都跟简单请求一样，会有一个Origin头信息字段。
+  服务器的回应，也都会有一个Access-Control-Allow-Origin头信息字段。
+  服务器响应报文状态码为：204
+
+  跨域属于非简单请求：
+    跨域默认不携带cookie;   xhr.withCredentials = true  Access-Control-Allow-Credentials=true
+    如果要发送Cookie，服务器Access-Control-Allow-Origin就不能设为星号，必须指定明确的、与请求网页一致的域名。同时，Cookie依然遵循同源政策，只有用服务器域名设置的Cookie才会上传，其他域名的Cookie并不会上传。
 
 HTTP1.0 定义了三种请求方法： GET, POST 和 HEAD 方法。
-HTTP1.1 新增了六种请求方法：OPTIONS、PUT、PATCH、DELETE、TRACE 和 CONNECT 方法。
+HTTP1.1 新增了六种请求方法： OPTIONS(预检请求)、PUT、PATCH、DELETE、TRACE 和 CONNECT 方法。
+
 
 GET和POST是HTTP协议中的两种发送请求的方法，底层都是tcp连接
-get一般是用来获取数据，post提交数据
+  get一般是用来获取数据，post提交数据
   GET在浏览器回退时是无害的，而POST会再次提交请求。
   GET请求会被浏览器主动cache，而POST不会，除非手动设置。
   GET会被网络上的各种奇怪的中间节点（如CDN）缓存，POST不会
   GET产生的URL地址可以被Bookmark，而POST不可以。
   GET请求只能进行url编码，而POST支持多种编码方式。
   GET请求参数会被完整保留在浏览器历史记录里，而POST中的参数不会被保留。
-  GET比POST更不安全，因为参数直接暴露在URL上，所以不能用来传递敏感信息。
+  GET比POST更不安全，因为参数直接暴露在URL上，所以不能用来传递敏感信息，但都是http明文差，安全性都有隐患。
   GET参数通过URL传递，POST放在Request body中。
+  GET一个tcp包，POST两个tcp包，因为post可能会携带很多数据，
 
 
 HTTP状态码：
-1XX（临时响应）    100 继续  （505-101 HTTP版本协议）
-2XX（成功）        200 OK
-3XX（重定向）      301 永久重定向 300(multi choices)
+  1XX（临时响应）    100 继续  （505-101 HTTP版本协议）
+  2XX（成功）       200（disk-cache）命中强缓存  204 （预检请求） 206（断点续传）
+  3XX（重定向）     300(multi choices)
+                  301 永久重定向
                   302 303（使用get直接跳转） 307（不变） 临时重定向(Location)
-                  304 未修改(Last-Modified)  305(使用代理)
-4XX（客户端出错）  400（客户端语法错误） 401未授权 404未找到 408请求超时 403禁止访问 407（未代理授权）
-5XX（服务端出错）  500（服务端语法错误）503（停机维护）      504网关超时
+                  304 命中协商缓存(Last-Modified)  
+                  305(使用代理)
+  4XX（客户端出错）  400（客户端语法错误） 401未授权 404未找到 408请求超时 403禁止访问 407（未代理授权）405请求方式错误
+  5XX（服务端出错）  500（服务端语法错误）503（停机维护） 502网关错误      504网关超时
+  返回301、302拿到重定向的地址：响应的Location
+  0:对于失败的 XMLHttpRequest，其状态码 status === 0 被视为未定义的错误,请求取消，非法跨域，防火墙过滤拦截
 
 HTTP缓存
-强制缓存：浏览器判断命中强制缓存就直接返回请求响应，不用与服务器进行通信。
-  # 响应头设置【expires】 /绝对时间/  向下兼容 （客户端本地时间与服务器时间不同步）
-  # HTTP1.1【Cache-Control】max-age。
-      max-age  /滑动时间/ 单位是秒 s-maxage 代理服务器过期时间
-      no-store 不缓存 no-cache 强制进行协商缓存
-      private public 设置代理服务器公共缓存功能
-  ||浏览器强制刷新，请求会带上cache-Control :no-cache和pragma: no-cache||
-协商缓存：使用本地缓存之前，像服务器发送一次GET请求，协商当前缓存是否过期，解决强制缓存不更新的问题
-  # 响应头设置 Cache-Control: no-cache
-              last-modified: utc/时间戳/
-    请求头携带：If-Modified-Since：utc时间戳， 服务端判断时间一致则返回304，客户端使用本地缓存。
-    问题：单位是秒，无法根据时间戳来识别真正的更新
-  # HTTP1.1【ETag】服务器对不同资源进行hash运算，生成字符串 /文件指纹/ (补充方案)
-    响应头设置 Cache-Control: no-cache
-              etag: 字符串
-    请求头携带: if-none-match: 字符串 服务端判断时间一致则返回304，客户端使用本地缓存。
-    问题：计算开销大，ETag强验证（字节）和弱验证（部分属性）
+  强制缓存：浏览器判断命中强制缓存就直接返回请求响应，不用与服务器进行通信。
+    # 响应头设置【expires】 /绝对时间/  向下兼容 （客户端本地时间与服务器时间不同步）
+      例：Expires:Mon,18 Oct 2066 23:59:59 GMT
+    # HTTP1.1【Cache-Control】max-age。
+      例：res.setHeader('Cache-Control', 'public, max-age=xxx');
+        max-age  /滑动时间/ 单位是秒 s-maxage 代理服务器过期时间
+        no-store 不缓存 no-cache 强制进行协商缓存
+        private public 设置代理服务器公共缓存功能
+        # 设置强制缓存一小时：max
+    ||浏览器强制刷新，请求会带上cache-Control :no-cache和pragma: no-cache||
+  协商缓存：使用本地缓存之前，像服务器发送一次GET请求，协商当前缓存是否过期，解决强制缓存不更新的问题
+    # 响应头设置 Cache-Control: no-cache
+                last-modified: utc/时间戳/
+      请求头携带：If-Modified-Since：utc时间戳， 服务端判断时间一致则返回304，客户端使用本地缓存。
+      问题：单位是秒，无法根据时间戳来识别真正的更新
+    # HTTP1.1【ETag】服务器对不同资源进行hash运算，生成字符串 /文件指纹/ (补充方案)（优先级高）
+      例：ETag： “59e72c84-2404”
+      响应头设置 Cache-Control: no-cache
+                etag: 字符串
+      请求头携带: if-none-match: 字符串 服务端判断时间一致则返回304，客户端使用本地缓存。
+      问题：计算开销大，ETag强验证（字节）和弱验证（部分属性）
+      例：  res.setHeader('Cache-Control', 'public, max-age=0');
+           res.setHeader('Last-Modified', xxx);
+           res.setHeader('ETag', xxx);
 总结：根据资源类型不同设置不同的缓存策略，
       html文件等修改要及时更新：协商缓存
       图片（不修改）：强制缓存
       css，js文件（修改）：强制缓存，利用文件指纹，通过请求url变化获取更新
-
 客户端从服务器请求数据需要经历如下基本步骤: 
        1、如果请求命中本地缓存则从本地缓存中获取一个对应资源的"copy"； 
        2、检查这个"copy"是否fresh,是则直接返回，否则继续向服务器转发请求。
@@ -70,6 +93,11 @@ HTTP缓存
        4、客户端更新本地缓存。
   跳过2的方法：Cache-Control: no-cache，must-revalidate; Cache-Control:max-age: 0；Pragma: no-cache
   强制刷新的方法：ctrl—F5，
+  强制请求新的资源：Cache-control：no-store
+cache-contrl和expires的优先级：cache-contrl高
+  例如cache-control设置了max-age, 浏览器则会先判断max-age,
+  如果cache-control没有设置max-age, 浏览器则会先判断expire, 再发送 Http 请求
+etag和last-modified：etag高
 
 Connection：keep-alive  Connection: false
 HTTP1.1长连接，本质上是在一个tcp连接的基础上发送多个http请求和响应
@@ -81,39 +109,44 @@ HTTP1.0
   无状态：session
   无连接：无法复用连接 HTTP队头阻塞：下一个请求必须在前一个请求响应到达之前才能发送。
 HTTP1.1 
-  长连接：connection
+  长连接：connection keep-alive 允许我们建立一次 HTTP 连接，来返回多次请求数据。
   缓存：Cache-Control
   Host字段：使得一个服务器能够用来创建多个Web站点
   管道化：“并行”发送多个请求，但是响应依旧按顺序响应，还是无法解决队头阻塞
   断点续传：range content-range  ----206
   # 还是无法解决队头阻塞
 HTTP2.0
+  二进制编码：HTTP2请求头小写，没有view source
+    帧（frame）：HTTP2.0通信的最小单位，每个帧包含帧头部，至少也会标识出当前帧所属的流（stream id。
   二进制分帧：在应用层和传输层之间增加一个二进制分帧层，原来的、header和body部分用frame重新封装了一层
-  多路复用： 帧（frame）：HTTP2.0通信的最小单位，每个帧包含帧头部，至少也会标识出当前帧所属的流（stream id。
-  头部压缩：通讯双方各自cache一份header fields表，既避免了重复header的传输（cookie比较大且每次都重复发送）
+  多路复用： 完全多路复用的，而非有序并阻塞的——只需一个连接即可实现并行
+  头部压缩：HPACK算法，通讯双方各自cache一份header fields表，既避免了重复header的传输（cookie比较大且每次都重复发送）
   请求优先级： 数据帧的优先级
   服务器推送
+  实际必须跑在tls上
 HTTP3.0
-  基于UDP 协议的“QUIC”协议，让HTTP跑在QUIC上而不是TCP上。
+  基于UDP（300+1000个字节） 协议的“QUIC”传输层协议，让HTTP跑在QUIC上而不是TCP上。TCP握手消耗资源
+  第二次更服务器通信，请求响应
+  tls自身安全链接的cookie 加密算法，ip就两个包
+  在客户端非第一次链接服务器时，网络层只收发一个包就可以得到真实可靠的数据
 HTTP队头阻塞解决方案：
   HTTP2.0 多路复用；把消息拆分成帧，给帧分配序号，然后按序号组装消息
   增加任务队列： 并发连接：chrome可以支持6个
-                域名分片
+               域名分片
   HTTP3.0 基于udp解决tcp对头阻塞
 
-HTTPS 采用的加密方式: HTTPS 采用混合的加密机制。所有传输的内容都经过加密，加密采用对称加密，但对称加密的密钥用服务器方的证书进行了非对称加密。
+HTTPS 
+解决HTTP明文传输，从而被中间人恶意窃取篡改获取报文，所引起的安全性问题。
+采用的加密方式: HTTPS 采用混合的加密机制。所有传输的内容都经过加密，加密采用对称加密，但对称加密的密钥用服务器方的证书进行了非对称加密。
 
 请求头：大小写不敏感
-
-1. Host 描述请求将被发送的目的地，只含域名和端口号；
-2. Origin 请求是从哪里发起的，包括域名和端口号，这个参数一般存在于CORS跨域请求中，
-可以看到response有对应的header: Access-Control-Allow-Origin
-3. Referer 告知服务器请求的原始资源的URI,其用于所有类型的请求，包括：协议+域名+查询参数
+  1. Host 描述请求将被发送的目的地，只含域名和端口号；
+  2. Origin 请求是从哪里发起的，包括域名和端口号，这个参数一般存在于CORS跨域请求中，
+  可以看到response有对应的header: Access-Control-Allow-Origin
+  3. Referer 告知服务器请求的原始资源的URI,其用于所有类型的请求，包括：协议+域名+查询参数
 
 http:// 在js中是label可以跳转不报错
 
-HTTP 断点续传
-range:
 
 HTTPS握手
 第一步，爱丽丝给出协议版本号、一个客户端生成的随机数（Client random），以及客户端支持的加密方法。
@@ -136,3 +169,40 @@ HTTPS握手
 2. 浏览器使用CA机构声明的HASH算法，对拆解出来的资料进行运算，得出一个HASH值，即摘要；
 3. 浏览器使用CA机构的公钥（PKI体系会对外公布CA的公钥）对拆解出来的密文进行解密，得出摘要；
 4. 若第2步得出来的HASH值与第3步解密出来的值相等，则证明CA机构的身份验证是没有问题的；
+
+HTTP默认端口80，HTTPS默认端口443
+
+
+HTTP2.0服务器推送和websocket区别：
+  WebSocket是全双工通信，可以双向通信，功能更强；
+  SSE是单向通信，只能服务器想浏览器推送,需要轮询消耗资源。
+  SSE是一个轻量级协议，相对简单；WebSocket是一种较重的协议，相对复杂
+  SSE默认支持断线重连，WebSocket则需要额外部署
+  SSE支持自定义发送数据类型,WebSocket二进制。
+总结：HTTP1.1使用Connection:keep-alive进行长连接，并不是永久保持连接，只是维持一段时间。
+WebSocket是真正实现长连接、全双工的通信。
+如果你的浏览器支持HTTP2.0可以点击这个连接就可以体验到HTTP/1.1与HTTP/2在图片加载的速度上的明显不同
+
+HTTP2多路复用
+  *  HTTP 1.1 基于串行文件传输数据，因此这些请求必须是有序的，所以实际上我们只是节省了建立连接的时间，
+  而获取数据的时间并没有减少
+  *  HTTP/2 引入二进制数据帧和流的概念，其中帧对数据进行顺序标识，这样浏览器收到数据之后，
+  就可以按照序列对数据进行合并，而不会出现合并后数据错乱的情况。同样是因为有了序列，服务器就可以并行的传输数据。
+  HTTP/2 对同一域名下所有请求都是基于流，也就是说同一域名不管访问多少文件，也只建立一路连接。
+  同样Apache的最大连接数为300，因为有了这个新特性，最大的并发就可以提升到300，比原来提升了6倍。
+
+HTTP1vsHTTP2
+  HTTP1单个图片按顺序依次展现
+  HTTP2图片可散射状展现
+
+
+浏览器能同时发送多少个请求
+  Chrome最多允许对同一个Host建立六个TCP连接
+  ①同一域名下，同一GET请求的并发数是1，也就是说上一个请求结束，才会执行下一个请求，否则置入队列等待发送；
+  ②同一域名下，不同GET/POST请求的并发数量是6。
+    当发送的请求数量达到6个，并且都没有得到响应时，后面的请求会置入队列等待发送。
+  
+  100个http请求建立多少个tcp连接
+  若是在http/2的情况下，会进行多路复用，只会建立一个；
+   但是在http/1.1的话，那就看浏览器的最大连接数，拿chrome来说，最多建立6个tcp连接，然后需要一个一个发送，
+   其他未发送的只能排队；所以说chrome是六个，其他浏览器看自身情况

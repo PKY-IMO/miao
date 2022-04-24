@@ -498,3 +498,11 @@ new Promise(function(resolve) {
 });
 
 console.log('h');//7
+
+
+////
+obj = {
+  f1: function() {
+    console.log(f1)
+  }
+}

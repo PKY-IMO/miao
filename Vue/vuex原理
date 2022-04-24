@@ -1,0 +1,9 @@
+首先在项目中通过 Vue.use(Vuex);
+Vue.use调用了vuex中的install方法，
+在install方法中有一段核心代码，
+*vue.mixin({beforeCreate,vuexInit})*, 
+通过vue中的mixin机制，然后再借用生命周期钩子函数beforeCreate在组件实例化前调用vuexInit方法，
+在vuexInit方法中有一段核心代码，
+*this.$store = typeof  options.store === 'function'? options.store(): options.store*  ，
+通过这段代码，将vuex中的store对象挂载到每一个对象当中，this指向的即是每一个组件实例，
+这样就可以在每个组件内通过this.$store使用vuex来进行统一的数据管理

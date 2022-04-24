@@ -1,0 +1,26 @@
+// 在setup中
+
+setup(props) { // this不指向组件实例，因为setup最先执行
+  // props是响应式 不能直接解构会消除其响应式
+  // const user = props.user 这样写只是读值，不能实现响应式
+  const {user} = toRefs(props) // 把对象每个属性转为refs  user.value
+
+  // 创建ref对象
+  var ref1 = ref(0) //原始值 ref1.value   $(ref(0)) 可不用value得到值
+  var ref2 = reactive({name: 'a', age: 10}) // 创建响应式proxy对象
+
+  // 依赖不变不运行
+  var a = ref(0)
+  var b = ref(3)
+  var c = computed(() => a.value * b.value)
+
+  // watch 和 watchEffect 在DOM挂载或者更新之前运行副作用
+
+  // 生命周期可分开写
+  onMounted(f1)
+  onMounted(f2)
+  onMounted(f3)
+  return {
+
+  }
+}

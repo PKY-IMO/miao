@@ -1,0 +1,65 @@
+// React跨层级传递数据的工具  Vue是Provide 和 inject
+// 方式一（2）：class组件，static contextType和this.context 以及 consumer包裹
+// 子组件改变传值,利用state传递一个包括了修改函数的state
+    var AgeContext = React.createContext() //!!!!
+    class Foo extends React.Component {
+      render() {
+        return(
+          <AgeContext.Consumer>
+            {value => <div>{value}</div>}
+          </AgeContext.Consumer>
+        )
+      }
+    }
+    class Bar extends React.Component {
+      static contextType = AgeContext
+      render() {
+        return (
+          <div>
+            {this.context}
+          </div>
+        )
+      }
+    }
+    function A() {
+      return <div><Foo /></div>
+    }
+    function B() {
+      return <div><Bar /></div>
+    }
+    class App extends React.Component {
+      render() {
+        return(
+          <AgeContext.Provider value={8}>
+            <div>
+              <A/>
+              <B/>
+            </div>
+          </AgeContext.Provider>
+        )
+      }
+    }
+
+// 方式二：高阶组件
+  function withAge(Comp) {
+    return class extends Component {
+      static contextType = AgeContext
+      render() {
+        return <Comp {...this.props} age={this.context}/>
+      }
+    }
+  }
+  var Baz = withAge(class Baz extends Comment {
+    render() {
+      return <div> baz, {this.props.age}</div>
+    }
+  })
+
+// 方式三：函数组件
+*useContext：
+  class组件要么使用contextType静态属性+this.context
+      要么AgeContext.consumer 标签包裹 书写复杂
+  读取到传来的Context值
+  var age = useContext(AgeContext)
+
+  

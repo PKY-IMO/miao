@@ -1,0 +1,164 @@
+
+promise.all() 参数和返回，这个我就理解错了，问的的all的返回，我理解的是参数中的返回，最后返回的一个数组。
+事件委托事件代理。好处，确定目标元素event.target.
+项目的一些问题，用的什么技术。
+封装过组件没有
+Q：看什么书，A：es6，设计模式，Q:知道什么设计模式。
+连接两个数组，concat，解构赋值，遍历
+ [1,2,3].concat([4,5,6])
+ [1,2,3].splice(3,0,...[4,5,6])
+ [...[1,2,3],...[4,5,6]]
+排序方法，说说冒泡排序的实现
+捕获，冒泡
+原型链相关。
+常规八股：css，js，vue，浏览器。
+项目难点
+v-show和v-if
+数组去重
+数组排序 
+   排序依据：默认字典序，可传入函数，参数为前后两个元素，返回-1则不交换，返回1则交换
+   在V8引擎中，sort函数只给出了两种排序insertSort和quickSort，
+   数组长度小于等于22的用insertSort大于22的用quickSort
+vue-router属性。
+   to：router.push
+   replace: router.replace
+   append：追加path
+   tag: 渲染标签 tag="li"
+   exact: 固定的路由才会激活
+   active-class：激活样式
+      export default New Router({
+        linkActiveClass: 'active'
+      })
+vue-router传参方式及区别。可以通过query ,param两种方式
+  query通过url传参，刷新页面参数还在，
+    query的类型：
+    配置路由格式:/router,也就是普通配置
+    传递的方式:对象中使用query的key作为传递方式
+    传递后形成的路径:/route?id=123
+  
+  params刷新页面参数不在了。
+    param的类型：
+    配置路由格式:/router/:id
+    传递的方式:在path后面跟上对应的值
+    传递后形成的路径:/router/123
+vue导航守卫
+  全局：beforeEach afterEach
+  单个router：beforeRouteEnter beforeRouteUpdate beforeRouteLeave
+js基本类型
+  sting number boolean null undefined symbol
+computed 和watch
+  使用watch监听时，属性必须存在，没有该属性是监听不了的。
+  watch只能通过监听某一个属性来影响另一个属性，而不会通过影响了某个属性之后再去影响原来的属性，只能是单向的。
+  computed适用于一个数据被多个数据影响，而watch适用于一个数据影响多个数据。
+  watch:
+  (1)比computed更加灵活
+  (2)watch中可以执行任何逻辑，比如函数节流、Ajax异步数据获取，甚至操作DOM，监听功能等
+  (3)响应式数据依赖固定的数据类型
+垂直水平居中
+  1.absoulte+[margin auto+lrtb0]
+  2.absolute+[lr50%+transform translate(-50%,-50%)]
+  3.flex+[margin auto]
+  4.flex\justify-content\align-items
+  5.inline-block+text-align+[vertical-align]
+  6.table-cell+text-align+vertical-align
+组件通信方式
+
+
+vuex 
+  state getter mutation action module
+css预处理器 sass scss
+  less 基于js  变量名@  less只能循环数值 不支持条件
+  sass 基于ruby  变量名$  遍历任意类型  支持条件if 命名原则上需要以" _ "开头,否则就可能会编译出冗余的代码
+  scss 是sass升级，用{}取代缩进
+例举几个伪类选择器 如何实现 before after等
+  交互伪类、链接伪类、位置伪类
+keep-alive
+  keep-alive是Vue.js的一个内置组件。
+  它能够不活动的组件实例保存在内存中，而不是直接将其销毁，它是一个抽象组件，不会被渲染到真实DOM中，也不会出现在父组件链中。
+  它提供了include与exclude两个属性，允许组件有条件地进行缓存。
+  activate deactivate
+BFC
+vue生命周期
+项目中的难点 我讲了个bus总线传值问题
+flex圣杯布局
+nextTick
+  mutationobserver-》降级
+重绘回流
+
+
+
+
+5.nodejs的原理，Tomcat他的区别
+6.路由的原理，hash、history这些
+7.iframe的理解
+8.jsonp的原理
+9.MySQL与MongoDB的区别，在使用MongoDB的时候有什么体会？
+
+组件间的通信方式
+global定义的全局变量和vuex定义的变量的区别
+  响应式和变量名污染的问题
+跨域解决方式
+vue响应式原理  
+vue数据中为什么返回的是function
+v-if和v-show吗
+说说区别数据类型深拷贝
+1000个数据渲染到页面上
+监听列表项，如何拿到每个列表项
+  列表标签自定义属性 data-type
+判断数据类型
+instanceof实现
+语义化标签
+合同预览怎么做的（用 iframe ）
+使用 iframe 会造成什么问题
+既然会有这些问题为什么还要使用 iframe
+项目中下载功能是怎么实现的
+说一下 Vue 生命周期
+什么时候使用 updated 钩子函数
+销毁阶段应该干什么
+介绍一下 DOM Diff
+Vuex 熟吗?
+为什么在各个组件可以使用 this.$store
+    首先在项目中通过 Vue.use(Vuex);
+    Vue.use调用了vuex中的install方法，
+    在install方法中有一段核心代码，
+    *vue.mixin({beforeCreate,vuexInit})*, 
+    通过vue中的mixin机制，然后再借用生命周期钩子函数beforeCreate在组件实例化前调用vuexInit方法，
+    在vuexInit方法中有一段核心代码，
+    *this.$store = typeof  options.store === 'function'? options.store(): options.store*  ，
+    通过这段代码，将vuex中的store对象挂载到每一个对象当中，this指向的即是每一个组件实例，
+    这样就可以在每个组件内通过this.$store使用vuex来进行统一的数据管理
+一个变量如何在 Vue 各个实例中访问（多种方法）
+    vuex：通过Vue.use({}}  对象中写入install方法，在vue的原型上挂载
+    事件总线：发布订阅模式
+为什么 v-for 要配合 key 来使用
+    diff
+Jquery的$是怎么实现的，用到了原生js的哪些东西
+  $是一个函数
+  调用了jQuery原型链上的构造函数，又因为这个构造函数的原型实际上就是jQuery的原型，所以就相当于直接返回了jQuery的原型上的方法。
+  var $ = fucntion jQuery(){ 
+    return new jQuery.fn.init(selector);
+  };
+  jQuery.prototype = { 
+      init: function(){},
+      // ...jQuery的其他API
+  };
+
+  jQuery.fn = jQuery.prototype;
+  jQuery.fn.init.prototype = jQuery.fn;
+
+  $(selector);
+
+讲下你的项目，项目里登录是怎么实现的，
+密码加密md5
+你的优势在哪
+学习前端的途径
+vue-router
+常用的列表符号
+  ol ul dl
+java跟js的区别 
+js怎么实现java中private那种效果 
+  class fields #age
+  object.defineProperty
+闭包 
+倒计时的时候有人做了外挂怎么防止
+  值进行包装，返回一个更改它的方法，使得js不能直接获取到它的值，

@@ -1,0 +1,55 @@
+1.字符串ref
+  *React自身调度实现复杂 Foo实例的refs属性里面btn的值要指向button,需要两个实例
+  class Foo extends React.Component {
+    bar = () => {
+      console.log(this.refs.btn)
+    }
+    render() {
+      return (
+        <button ref="btn"/>
+      )
+    }
+  }
+
+2.函数ref，当ref属性是函数时，el指向实例对象
+  *Ref运行在消失时会再运行一次给 this.input 清空
+  *组件重新渲染时，运行两次，箭头函数就地书写，先置空后赋值，两次
+  *React实现简单,不用关心相关联的实例,只需要调用函数
+  class Foo extends React.Component {
+    bar = () => {
+      console.log(this.input)
+    }
+    render() {
+      return (
+        <input ref={el => this.input = el}/>
+      )
+    }
+  }
+  解决方案：不写箭头函数，但书写复杂
+  class Foo extends React.Component {
+    bar = () => {
+      console.log(this.input)
+    }
+    inputRef = el => {
+      this.input = el
+    }
+    render() {
+      return (
+        <input ref={this.input}/>
+      )
+    }
+  }
+
+3.React.createRef() 和 useRef
+  * 原理：创建出来后{current: null}，实例挂载在current属性上，并冻住对象
+  class Foo extends React.Component {
+    inputRef = React.createRef() // Object.seal冻住了
+    bar = () => {
+      console.log(this.inputRef.current)
+    }
+    render() {
+      return (
+        <input ref={this.inputRef}/>
+      )
+    }
+  }

@@ -1,0 +1,3 @@
+实现原理：XHR+promise
+请求拦截器添加token：config.headers.Authorization = localStorage.tokens
+配置公共请求前缀：axios.defaults.baseUrl

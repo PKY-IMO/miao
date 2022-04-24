@@ -1,0 +1,136 @@
+第一个只出现一次的字符
+/**
+ * @param {string} s
+ * @return {character}
+ */
+var firstUniqChar = function (s) {
+  // 这次我们利用有序哈希表的方式 这里value存的是只有出现次数为1的时候才会为true
+  let map = new Map();
+  for (let c of s) {
+    // 没有的话就存的是true  有了存的就是false
+    map.set(c, !map.has(c));
+  }
+  // 如果s很多的话  那么 利用有序哈希表的性质更快一些
+  for (let [key, val] of map.entries()) {
+    if (val) return key;
+  }
+  return " ";
+};
+单向链表反转
+//实现一个链表，反转链表
+var reverseList = function(head) {
+    // let pre = null, cur = head
+    // while(cur) {
+    //     let tmp = cur.next
+    //     cur.next = pre
+    //     pre = cur
+    //     cur = tmp
+    // }
+    // return pre
+
+    if (head == null || head.next == null) return head
+    let rest = reverseList(head.next)
+    head.next.next = head
+    head.next = null
+    return rest
+};
+1000个请求，每次最多请求5个
+
+// 二叉树的前序遍历
+var preorderTraversal = function(root) {
+    if (root == null) return []
+    let res = []
+    let stack = []
+    let cur = root
+    while (stack.length || cur) {
+        while (cur) {
+            stack.push(cur)
+            res.push(cur.val) //
+            cur = cur.left
+        }
+        cur = stack.pop()
+        cur = cur.right
+    }
+    return res
+};
+var inorderTraversal = function(root) {
+    if (root == null) return  []
+    let stack = []
+    let cur = root
+    let res = []
+    while (stack.length || cur) {
+        while(cur) {
+            stack.push(cur)
+            cur = cur.left
+        }
+        cur = stack.pop() //
+        res.push(cur.val)
+        cur = cur.right
+    }
+    return res
+};
+var postorderTraversal = function(root) {
+    if (!root) return []
+    let stack = []
+    let res = []
+    let cur = root
+    while (stack.length || cur) {
+        while(cur) {
+            stack.push(cur)
+            res.push(cur.val)
+            cur = cur.right //
+        }
+        cur = stack.pop()
+        cur = cur.left  //
+    }
+    return res.reverse() //
+};
+//
+
+// 递归
+  function preOrderTraverse(root, action) {
+    if (root) {
+      action(root.val)
+      preOrderTraverse(root.left, action)
+      preOrderTraverse(root.right, action)
+    }
+  }
+// 二叉树的层序遍历
+var levelOrder = function(root) {
+    if (root == null) return []
+    let res = []
+    let queue = []
+    let cur = root
+    queue.push(cur)
+    while(queue.length) {
+        let size = queue.length
+        let tmp = []
+        for (let i = 0; i < size; i++) {
+            let node = queue.shift()
+            tmp.push(node.val)
+            if (node.left) queue.push(node.left)
+            if (node.right) queue.push(node.right)
+        }
+        res.push(tmp)
+    }
+    return res
+};
+//快排
+function quickSort(arr, start=0, end=arr.length-1) {
+  if(start >= end) return 
+  let pivotIdx = Math.floor(Math.random()*(end - start + 1)) + start
+  let pivot = arr[pivotIdx]
+  let l = start, r = end
+  while(l <= r) {
+    while(l <= r && arr[l] < pivot) l++
+    while(l <= r && arr[r] > pivot) r--
+    if (l <= r) {
+      [arr[l],arr[r]] = [arr[r],arr[l]];
+      l++
+      r--
+    }
+  }
+  quickSort(arr, start, r)
+  quickSort(arr, l, end)
+  return arr
+}

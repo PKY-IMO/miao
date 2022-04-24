@@ -1,0 +1,76 @@
+1. vue 创建组件会对methods函数进行封装再挂载，bound foo；react不会封装，因此会有this的问题，未指向组件实例
+    在类式组件中：onClick内箭头函数（运行时）、bind（绑定时） 或者 constructor里绑定  class field  foo=()=>{}
+  * 早期 React.createclass 传一个配置对象也可以绑定
+2. vue 创建组件会把根节点覆盖，react则是在下面创建子元素
+3. react props只读  class组件会将实例绑定到props上  instance.props = props
+4. 自定义组件大写，原本的组件'div'
+5. setState 可异步可同步，批处理防止重复渲染，被react自己调用异步，不被react调用是同步的；
+  react事件处理函数异步会批量更新；在原生dom方法，回调函数内timer、ajax、callback是同步渲染，react中是异步渲染
+  从调用栈考虑，不是react调用的函数，不立刻更新的话没有调用的机会，因此必须同步
+  异步：enqueueUpdate  未使用宏、微任务，缓存下来等事件函数统一更新，利用调用栈
+  为什么不用宏任务微任务：考虑到不一定是浏览器环境
+
+受控组件：
+  1.表单只给value，不提供onChange事件，则不能编辑：建议使用defaultValue
+    原因：编辑后重新渲染，重新渲染value值不变；file等非受控
+    注意：当value为null和undefined会转为非受控组件
+    *vue则没有此限制，基于vue实现的组件库可能有此限制
+    *文本框原生onChange事件，光标拿出来触发
+非受控组件：
+  不定义value，通过ref取得值
+
+不用jsx和es6、babel
+  1.html库
+  2.React.createclass create-react-class ：mixins实现的方式
+
+无障碍：aria-* 读屏软件
+
+代码分割：①fragement ②<></> ③[,]
+
+懒加载：①import()  ②react.lazy  ③<Suspend fallback={<div>loading...</div>}></Suspend>
+
+JSX：React 标签名再作用域里面
+     小写标签 转换为字符串， 大写标签直接传
+     react.createElement 属性名再压缩时不会压缩
+     标签名不可以是需要运算的表达式[动态表达式]
+     * React17 可以不引入REACT 转换为_jsx 可以便于压缩
+
+严格模式： 废弃的生命周期、ref、context、检测意外的副作用、
+
+纯函数：返回结果只依赖于传参，且不修改传参，构造函数是纯函数，不执行副作用
+
+renderprops：组件可以接受一个render的props
+  const Repeat = (props) => {
+    var result = []
+    for (let i = 0; i < props.times; i++) {
+      result.push(props.render(i))
+    }
+    return result
+  }
+  <Repeat times={10} render={i => <span key={i}>{i}</span>}/>
+
+Profiler:测试react性能
+  <Profiler id='repeat' onRender={callback}>
+    <Repeat />
+  </Profiler>
+
+React顶层API
+  React.Component React.PureComponent
+  元素不可改，于是React.cloneElement(el,{props})
+  React.isValidElement 是否是合理的元素
+  React.createRef() 创建ref对象
+  React.forwardRef 传教一个用于转发Ref的组件
+  React.lazy() 懒加载 + React.Suspense组件
+  对象：React.Children  
+      子节点个数    React.Children.count() 
+      是否唯一子元素 React.Children.only()
+      扁平展开,为嵌套元素添加前缀 React.Children.toArray()
+      遍历 React.Children.forEach() React.Children.map()
+
+错误边界
+  getDerivedStateFromError(err) {}
+  componetDidCatch(err, errInfo) {}
+
+Portal 传送门 --vue teleport+to 渲染到不同位置
+
+css in js：vue是scope
