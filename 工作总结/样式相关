@@ -1,0 +1,14 @@
+因为display:none的元素转换为display:block之后没有transition动画需要的初始值,所以不触发动画。
+建议使用height:0与height:auto的切换来达到效果。
+渲染流程
+既然reflow没有问题,跟着浏览器渲染的路径上溯,可能问题出在了DOM Tree -> Render Tree这个过程中。
+display:none的节点和head节点不会被挂到render tree上。换句话说,attachment没做,在css文件中指定的css rules不会被附加到dom元素上。
+这就解释了为什么没有初始值,因为根本不存在css。而回过头来,内联样式因为在节点上,
+所以DOM parsing的时候就一并处理并附加了(推迟到attachment不合适吧?),这样transition动画才有了属性的初始值。
+https://www.cnblogs.com/against-perfect-cherry-blossom/p/14808227.html
+
+
+a标签disabled
+    a标签没有直接的disabled属性
+        实现trick: 使用css属性pointer-events: 'none'
+    不会触发点击事件
