@@ -1,0 +1,46 @@
+派工信息（客服技师）
+    1.dataCabin
+        数据集（责任技师为自己-服务中、已完成的数据）
+            **DispatchingForm->RepairForm**
+                param: repairCode、合同号？、客户、客服专员、status、createDate
+            **DispatchingForm-status的去重数据集**
+        本地变量
+            repairCode、合同号？、客户、客服专员、status、createDate
+    2.action
+        新建派工单
+            **新建派工单实体-关联（确定派工单号、创建日期）**
+            跳转页面，传新建的空派工单
+        查看（全部）
+        编辑（服务中）
+            跳转页面,到新建派工单,传Current
+            **修改Current**
+        现场签到（待服务）
+            **修改状态为服务中**
+
+
+新建/编辑派工单（客服技师）
+    TAB-信息记录
+        1.dataCabin
+            数据集  
+                **DispatchingForm关联的DispatchHistory**
+                 **DispatchingForm关联的MaintainTask**
+            本地变量
+                ？服务记录附件
+        2.action
+            刷新
+                刷新本地变量
+            保存
+            提交
+
+
+
+
+
+
+
+
+
+
+
+
+

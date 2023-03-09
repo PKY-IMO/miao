@@ -1,0 +1,161 @@
+路由容器
+    <BrowserRouter> history 模式
+    <HashRouter> hash模式
+    注： 最好置于顶层
+
+<Route>具体组件
+    <Route>定义具体的组件
+    <Route path="" element={<组件名/>} />
+    注： element 必须以标签的形式去引用
+
+<Routes>组件
+    <Route>必须包裹在<Routes>组件内
+    相当于老版本的<Switch>,强制只能匹配一个路由
+    老版本:
+        <Switch>作用
+        V5:
+        <Route path="/" component={ 组件名 } />
+        <Route path="/product" component={ 组件名 } />
+        存在问题: 当路由为 / 时，当前的路由会匹配到两个（老版本路由是模糊匹配）
+        解决方案: <Switch>组件包裹从上至下匹配，老版本路由讲究顺序
+        <Switch>
+            <Route path="/product" component={ 组件名 } />
+            <Route path="/" component={ 组件名 } />
+        </Switch>
+        exact 关键字: 模糊匹配改为精准匹配
+        <Route path="/" component={ 组件名 } />
+
+v6中 废弃exact属性
+    v6内部算法改变, 默认情况下就是精准匹配
+    如果想像旧版本一样：
+        在路径后面加"/*"
+        v6示例:
+            <Route path="/product/:id" component={ <ProductDetails/> } />
+            <Route path="/product/*" component={ <Product/> } />
+                path: /product         ->   <Product/> 
+                path: /product/4       ->   <ProductDetails/> 
+                path: /product/haha    ->   <ProductDetails/> 
+                path: /product/4/haha  ->   <Product/> 
+    404页面<Route path="*" component={ <404/> } />
+    Route能自动找出最优的匹配路径, Route先后顺序不重要
+
+<Link>、<NavLink> 类似于a
+    <NavLink>: 可以设置激活状态时的样式
+        老版本: NavLink 有一个activeClassName 或 activeStyle
+        新版本: 移除 activeClassName 和　activeStyle,
+            箭头函数
+            <NavLink className={({isActive}) => isActive ? "active" : "" } to="/product">商品</NavLink>
+            <NavLink className={({isActive}) => { return { color: isActice ? "green" : "black" } } } to="/product">商品</NavLink>
+    示例：
+    <Link to="/product">商品</Link>
+
+重定向 <Navigate> 组件
+    老版本: <Redirect />
+    新版本: Navigate 进行重定向
+        // push
+        <Route path="/" element={<Navigate to="/login" />}>
+        // replace
+        <Route path="/" element={<Navigate replace to="/login" />}>
+        // 不想维护两份路由，可以直接使用重定向
+        <Route path="/" element={<Home />}>
+        <Route path="/home" element={<Home />}>
+    replace 和 push 差别:
+        push 有历史记录
+        replace 没有历史记录
+
+
+V6 嵌套路由的路径，改为了相对路径
+    老版本：可相对、可绝对
+    示例：
+    <Route path="/about" element={<About/>}>
+        <Route index element={<JoinUs/>}/> //设置默认
+        <Route path="joinus" element={<JoinUs/>}/> //新版本只能是相对路径
+        <Route path="concat" element={<Concat/>}/>
+    </Route>
+
+    About：
+        <Link to="/about/joinus">加入我们</Link>
+        <Link to="/about/concat">联系我们</Link>
+        <Outlet/>
+Outlet 占位
+
+useRoutes 声明式路由配置方式
+    * 只能是组件方式使用,不能使用变量
+    import { useRoutes } from 'react-router-dom'
+    import Product from '../' //引入组件
+    const GetRoutes = () => {
+        useRoutes([{
+            path: '/product',
+            element: <Product/>,
+            children: 
+        },{
+            path: '/productdetails',
+            element: <ProductDetails/>,
+            children: 
+        },{
+            path: '/about',
+            element: <About/>,
+            children: [{
+                path: "",  //index 默认
+                element: <JoinUs/>
+            },{
+                path: "joinus",  
+                element: <JoinUs/>
+            },{
+                path: "concat",  
+                element: <Concat/>
+            }]
+        }])
+    }
+    可以动态生成数组 -》动态路由
+
+编程式导航
+    使用js代码跳转组件
+    老版本：
+        类组件： this.props.history.push("/home")
+        函数组件：useHistory
+    新版本：
+        useNavigate 
+    示例：  
+        const navigate = useNavigate()
+        const fn = () => {
+            navigate('/product') // push
+            navigate('/productdetails', { replace: true }) //replace
+            navigate(-1) //回退
+        }
+        <button onClick={fn}>跳转到商品详情</button>
+
+不同的跳转方式
+    参数三种类型：
+    params: 路由传参
+    search: url传参,以 ？的形式
+    state:
+    示例：
+    push+params
+    navigate(`/b/child1/${id}/${title}`)
+    push+search
+    navigate(`/b/child2/?id=${id}&title=${title}`)
+    push+state
+    navigate(`/b/child2`, { state: { id, title } })
+    replace+params
+    navigate(`/b/child1/${id}/${title}`, {replace: true})
+    replace+search
+    navigate(`/b/child2/?id=${id}&title=${title}`, {replace: true})
+    replace+state
+    navigate(`/b/child2`, { state: { id, title } }, {replace: true})
+
+三个hooks
+    useParams 获取路由参数
+    useSearchParams 获取url传参
+        const [searchParams, setSearchParams] = useSearchParams()
+        // 更改传过来的参数
+        setSearchParams({
+            id: 'hahah'
+        })
+    useLocation 获取state传参
+        const {state: {id}} = useLocation() // 解构赋值
+    
+    *类组件中，需要获取上面三种类型的参数，不行
+    *新版本两种方式：
+        1.类组件变成函数组件
+        2.高阶组件

@@ -1,0 +1,38 @@
+transition有些情况不生效
+    因为display:none的元素转换为display:block之后没有transition动画需要的初始值,所以不触发动画。
+    建议使用height:0与height:auto的切换来达到效果。
+    渲染流程
+    既然reflow没有问题,跟着浏览器渲染的路径上溯,可能问题出在了DOM Tree -> Render Tree这个过程中。
+    display:none的节点和head节点不会被挂到render tree上。换句话说,attachment没做,在css文件中指定的css rules不会被附加到dom元素上。
+    这就解释了为什么没有初始值,因为根本不存在css。而回过头来,内联样式因为在节点上,
+    所以DOM parsing的时候就一并处理并附加了(推迟到attachment不合适吧?),这样transition动画才有了属性的初始值。
+    https://www.cnblogs.com/against-perfect-cherry-blossom/p/14808227.html
+
+
+a标签disabled
+    a标签没有直接的disabled属性
+        实现trick:  
+            使用css属性   pointer-events: 'none'
+            移除href属性 removeAttribute
+            移除点击事件  removeEventListener
+    设置disabled后，就不会触发点击事件
+    *只有表单元素才有disabled属性
+
+键盘事件区别:
+    <input type="text" id="foo"
+    onkeydown="console.log('down')"
+    onkeypress="console.log('press')"
+    oninput="console.log('input')"
+    onkeyup="console.log('up')" >
+    ' down press input up', 故对应的事件触发顺序为 onkeydown > onkeypress > oninput > onkeyup
+    oninput vs onchange:
+    oninput 是input内内容改变时触发, onchange则在内容改变并且input失焦后触发
+
+触发键盘事件
+绑定到 类似div 非输入性质的元素上时,需要设置tabindex='0/1',且需要焦点聚集后,才会监听键盘
+
+display:none深度解析: https://segmentfault.com/a/1190000010032501
+    1. 设置了display:none属性的元素,图片不会渲染出来,但会加载。
+    2. 设置了display:none属性元素的子元素,样式表中的背景图片不会渲染出来,也不会加载；而<img>标签的图片不会渲染出来，但会加载.
+    3. 不存在元素的背景图片不会加载.
+    4. 当触发伪类的时候，伪类样式上的背景图片才会加载.

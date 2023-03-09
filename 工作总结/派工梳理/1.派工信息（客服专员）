@@ -1,0 +1,60 @@
+派工信息（客服专员）
+    1.dataCabin
+        数据集（自己的所有的数据）
+            **DispatchingForm->RepairForm**
+                param: repairCode、合同号？、客户、客服专员、status、createDate
+            **DispatchingForm-status的去重数据集**
+        本地变量
+            repairCode、合同号？、客户、客服专员、status、createDate
+    2.action
+        新建派工单
+            **新建派工单实体-关联（确定派工单号、创建日期）**
+            跳转页面，传新建的空派工单
+        重新派工（待服务、服务中）
+            跳转弹窗,传Current
+            **重新派工，状态不变**
+        编辑（未审核）
+            跳转页面,到新建派工单,传Current
+            **修改Current**
+        删除（未审核）
+            **删除Current**
+        任务下发（已审核）
+            **修改状态为待服务**
+        查看（全部）
+
+新建/编辑派工单（客服专员）
+    TAB-派工信息
+        1.dataCabin
+            页面传参
+                DispatchingForm的entity以及关联
+            数据集  
+                **RepairForm**
+                    param: repairCode
+                **RepairForm-repairCode的去重数据集**
+                **DispatchingForm-SONumber、客服工程师、同行技师、责任技师的去重数据集**
+                **DispatchingForm->PeerTechnician**
+            本地变量：
+                repairCode(RepairForm)、
+                SONumber、engineer、technician、name(PeerTechnician)
+                customerConContacto、contactorPhon、address、maintainContent、attachment
+                timeEstimated、maintenancePlan、planAttachment
+
+        2.action
+            **依据repairCode模糊查询RepairForm**
+            刷新
+                刷新本地变量
+            保存
+                **提交(attachment、planAttachment的文件属性，状态未审核)**
+            提交(?客服专员好像不支持)
+                **提交(attachment、planAttachment的文件属性，状态已审核)**
+    TAB-信息记录
+        1.dataCabin
+            数据集  
+                **DispatchingForm关联的DispatchHistory**
+                **DispatchingForm关联的MaintainTask**
+        ？开始信息
+        ？服务记录
+
+
+
+

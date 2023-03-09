@@ -1,0 +1,53 @@
+js: 动态 弱类型语言
+solidity: 
+    statically typed language
+    The concept of “undefined” or “null” values does not exist in Solidity, but newly declared variables always have a default value dependent on its type. 
+
+solidity数据类型分为以下几种：值类型、引用类型
+
+值类型：值类型变量是将数据直接存储在分配给自身的堆栈内存中的变量
+1、整型
+    int（有符号整型，有正有负）
+    uint（无符号整型，无负数）
+    以8位为区间，支持 int8，int16，int24 至 int256，uint 同理。 int 默认为 int256，uint 默认为 uint256
+2、布尔类型
+    true或者false
+3、字符数
+    字节数组的长度在字节的前面定义，如bytes1to bytes32
+3、地址类型
+    地址数据类型旨在存储以太坊地址，该地址通常以0x值开头。
+    地址大小为 20 个字节，包含 42 个字符。
+    address: 20 字节长度的值（以太坊的地址），地址类型有很多成员变量，是所有合约的基础。
+    地址分类: address、address payable
+    地址类型的成员
+    (1) balance & transfer
+        可以通过地址的balance属性来查看一个地址的余额，发送以太币（单位为：wei）到一个地址可以使用 transfer方法
+    (2) send
+        send方法和transfer很相似，但是比transfer更低级。如果send失败，当前的合约不会中断，也不会抛出异常，会返回一个false。
+        注意：使用send有一些风险：如果调用栈深度超过1024或是gas不够，所有的转让操作都会失败，为了更安全的以太币转移，如果用send就必须每次都要检查返回值，使用transfer方法会更好；
+    (3) call, callcode, delegatecall
+4、枚举类
+    enum WeekDays {
+        Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
+    }
+
+引用类型：字符串、结构、数组、映射
+    每个引用类型都有一个额外的属性，即 "数据位置"， 关于它的存储位置。有三个数据位置。 memory, storage 和 calldata。 Calldata是一个不可修改的、非持久性的区域，用于存储函数参数，其行为主要类似于memory。
+1、字节数组-定长字节数组
+    关键字有：bytes1， bytes2， bytes3， ...， bytes32。byte 是 bytes1 的别名。
+    5.1 运算符
+    5.2 可变字节数据
+        bytes: 动态大小byte数组，不是一个值类型
+        string：动态大小UTF-8编码string，不是一个值类型
+    作为一个经验法则，对于任意长度的raw数据，使用bytes。对于任意长度的string(UTF-8)数据，使用string。如果可以限定bytes到一定长度，优先使用byte1到byte32，这32个byte类型开销更小
+2、数组
+ 　　数组在编译期间固定大小或是声明为一个动态数组， 对于存储数组，数组里的元素类型是可以为任意的（可以是其他数组，mapping或是structs）.对于内存数组，如果是一个public方法的实参，元素不能是mapping，而且必须是ABI类型。
+    
+    如果数组的长度为x, 元素类型为T，则可以写成 T[x]，一个动态长度的数组，可以写成 T[]。例如，一个数组为5的动态数组，类型为uint，可以写成 uint[][5]。访问第二个uint中的第三个元素，可以使用 T[2][1] (数组下标从0开始)。bytes和string是特殊的数组，bytes类似于byte[]，但是它在calldata里是紧凑存放。string等于bytes，但是不允许根据长度或下标访问。所以从廉价程度来说，相对于byte[]，更优先使用bytes。
+3、结构
+    Solidity提供了一种用户自定义格式的新类型。
+    结构可以用在mapping和数组的内部，当然结构本身也可以包含mapping或是数组。
+    虽然结构本身可以作为mapping的成员值，但是结构不可以包含它本身类型。这个约束是有必要的，是为了防止出现结构套结构，无限的循环套用。
+    注意：结构是赋值给一个局部变量（默认为存储空间数据位置），不是拷贝结构，而是存储一个引用指向局部变量。
+4、Mapping
+    mapping(address => uint) public balances;

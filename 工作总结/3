@@ -1,0 +1,40 @@
+{
+  "status": 200,
+  "errorCode": null,
+  "errorMsg": null,
+  "data": {
+    "result": {
+      "return": {
+        "dataType": "structure|fe14b2c3-67a0-46a3-80a2-c555ea0fa250",
+        "data": {
+          "data": "<!DOCTYPE html>\n<html>\n<head>\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" />\n<script type=\"text/javascript\" src=\"http://192.168.7.226:8075/webroot/decision/view/report?op=emb&resource=finereport.js\"></script>\n<script type=\"text/javascript\" src=\"http://192.168.7.226:8075/webroot/decision/view/report?op=resource&resource=/com/fr/web/core/js/socket.io.js\"></script>\n</head>\n<body> \n<script type=\"text/javascript\">\nfunction button_onclick(){\nvar printurl = \"http://192.168.7.226:8075/webroot/decision/view/report\";\nvar reportlets = \"[{reportlet: 'code1.cpt', printParam1: '1SN0001'}]\";\nvar config = {\n\tprintUrl: printurl,\n\tisPopUp: false,\n\tdata: {\n\t\treportlets: reportlets\n\t},\n\tprintType: null,\n\tisQuietPrint : true,// IE静默打印设置 true为静默，false为不静默\n\tprinterName : 'printer1', // 打印机名\n\tpageType: 0,// 打印页码类型：0：所有页，1：当前页，2：指定页\n\tcopy: null,// 打印份数\n\t};\nFR.doURLPrint(config);\n}\nbutton_onclick()\n</script>\n</body>\n</html>",
+          "type": "furtherAction"
+        }
+      }
+    },
+    "objects": [],
+    "meta": {
+      "entityMeta": [],
+      "enumerationMeta": [],
+      "structureMeta": [
+        {
+          "attributeTypes": {
+            "data": {
+              "data": "string",
+              "dataType": "string"
+            },
+            "type": {
+              "data": "string",
+              "dataType": "string"
+            }
+          },
+          "structureType": "fe14b2c3-67a0-46a3-80a2-c555ea0fa250"
+        }
+      ]
+    },
+    "error": {
+      "error": false,
+      "message": ""
+    }
+  }
+}

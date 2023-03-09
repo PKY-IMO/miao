@@ -1,0 +1,48 @@
+派工信息（客服主管）
+    1.dataCabin
+        数据集（审核中、已审核、服务中、已完成的数据）
+            **DispatchingForm->RepairForm**
+                param: repairCode、合同号？、客户、客服专员、status、createDate
+            **DispatchingForm-status的去重数据集**
+        本地变量
+            repairCode、合同号？、客户、客服专员、status、createDate
+    2.action
+        新建派工单
+            **新建派工单实体-关联（确定派工单号、创建日期）**
+            跳转页面，传新建的空派工单
+        查看（全部）
+        编辑（审核中）
+            跳转页面,到新建派工单,传Current
+            **修改Current**
+
+
+新建/编辑派工单（客服主管）
+    TAB-派工信息
+        1.dataCabin
+            页面传参
+                DispatchingForm的entity以及关联
+            数据集  
+                **RepairForm**
+                    param: repairCode
+                **RepairForm-repairCode的去重数据集**
+                **DispatchingForm-SONumber、客服工程师、同行技师、责任技师的去重数据集**
+                **DispatchingForm->PeerTechnician**
+
+        2.action
+            通过
+                **修改状态为已审核**
+            驳回
+                **修改状态为未审核**
+
+
+
+
+
+
+
+
+
+
+
+
+

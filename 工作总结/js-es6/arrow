@@ -1,0 +1,106 @@
+/**
+ * 展开收起面板
+ * qcc
+ * 2019/11/8
+ */
+import { shortcut, store } from "../../../../typescript/core/decorator";
+// import { shortcut, store } from "@ts";
+import { ArrowUpModel } from "./arrow_up.model";
+
+@shortcut()
+@store(ArrowUpModel)
+export class Row extends BI.Widget {
+    static xtype = "bi.block.arrow.up";
+
+    props() {
+        return {
+            baseCls: "bi-block-arrow-up",
+        };
+    }
+
+    watch = {
+        isShow (v) {
+            this.arrowBtn.setSelected(v);
+            this.arrowPane.setVisible(v);
+        },
+    }
+
+    render () {
+        return {
+            type: "bi.vertical",
+            cls: "bi-card",
+            scrolly: false,
+            items: [
+                {
+                    type: "bi.vertical_adapt",
+                    items: [
+                        {
+                            type: "bi.icon_text_item",
+                            selected: this.model.isShow,
+                            cls: "arrow-btn trigger-triangle-font",
+                            height: 30,
+                            logic: {
+                                dynamic: true,
+                            },
+                            text: "更多设置",
+                            handler: () => {
+                                this.store.toggleArea();
+                            },
+                            ref: ref => {
+                                this.arrowBtn = ref;
+                            },
+                        }
+                    ],
+                },
+                {
+                    type: "bi.vertical",
+                    cls: "bi-background",
+                    vgap: 15,
+                    hgap: 10,
+                    invisible: !this.model.isShow,
+                    items: [
+                        {
+                            type: "bi.vertical_adapt",
+                            items: [
+                                {
+                                    type: "bi.label",
+                                    width: 80,
+                                    textAlign: "left",
+                                    text: "姓名",
+                                },
+                                {
+                                    type: "bi.text_editor",
+                                    watermark: "这个不允许为空",
+                                    allowBlank: false,
+                                    errorText: "非空!",
+                                    width: 300,
+                                }
+                            ],
+                        },
+                        {
+                            type: "bi.vertical_adapt",
+                            items: [
+                                {
+                                    type: "bi.label",
+                                    width: 80,
+                                    textAlign: "left",
+                                    text: "密码",
+                                },
+                                {
+                                    type: "bi.text_editor",
+                                    watermark: "这个不允许为空",
+                                    allowBlank: false,
+                                    errorText: "非空!",
+                                    width: 300,
+                                }
+                            ],
+                        }
+                    ],
+                    ref: ref => {
+                        this.arrowPane = ref;
+                    },
+                }
+            ],
+        };
+    }
+}

@@ -1,0 +1,811 @@
+import FormulaCheck from "./FormulaCheck";
+import { shortcut } from "@decorator";
+
+/**
+ * 公式编辑控件
+ * @class FormulaEditor
+ * @extends BI.Single
+ */
+@shortcut()
+export class FormulaEditor extends BI.Single {
+    static xtype = "bi.formula_editor"
+
+    static EVENT_CHANGE = "EVENT_CHANGE";
+    static EVENT_BLUR = "EVENT_BLUR";
+    static EVENT_FOCUS = "EVENT_FOCUS";
+    static EVENT_KEY_UP = "EVENT_KEY_UP";
+    static EVENT_CURSOR_ACTIVITY = "EVENT_CURSOR_ACTIVITY";
+
+    constants = {
+        paramRegex: /(\$[\{][^\}]*[\}])/,
+    }
+
+    props() {
+        return {
+            baseCls: "bi-formula-editor",
+            watermark: "",
+            value: "",
+            showHint: true,
+            showTip: true,
+            lineHeight: 2,
+            lineWrapping: true,
+            lineNumbers: false,
+            paramFormatter (v) {
+                return v;
+            },
+            valueGetter (text) {
+                return text;
+            },
+            keywordsGetter () {
+                return BI.FormulaCollections;
+            },
+            // 公式校验时用到的两个函数
+            formulaChecker: BI.emptyFn,
+            paramTypeGetter: BI.emptyFn,
+        };
+    }
+
+    render () {
+        var o = this.options,
+            self = this;
+        this.errorTipText = "";
+        this._isEditing = false;
+        this.formulaEditor = BI.createWidget({
+            type: "bi.default",
+        });
+        const formulaHint = BI.CodeMirror.hint.formula;
+        BI.CodeMirror.hint.formula = function (cm, options) {
+            const result = formulaHint(cm, options);
+            if (result) {
+                BI.CodeMirror.on(result, "shown", () => {
+                    self.fireEvent("EVENT_SHOW_HINT", BI.get(result, "list", []));
+                });
+
+                BI.CodeMirror.on(result, "select", comp => {
+                    self.fireEvent("EVENT_SELECT_HINT", comp);
+                });
+
+                BI.CodeMirror.on(result, "pick", comp => {
+                    self.fireEvent("EVENT_PICK_HINT", comp);
+                });
+            }
+
+            return result;
+        };
+        this.editor = BI.CodeMirror(this.formulaEditor.element[0], {
+            lineWrapping: o.lineWrapping,
+            lineNumbers: o.lineNumbers,
+            mode: "formula",
+            // 解决插入字段由括号或其他特殊字符包围时分裂的bug
+            specialChars: /[\u0000-\u001f\u007f\u00ad\u200c-\u200f\u2028\u2029\ufeff]/,
+            // 光标旁的括号对高亮标记, 极限搜索范围2000个字符
+            // DEC-7094 IE下高亮括号会使得鼠标无法框选文本, 目前实在看不出来是为什么, 先在IE下取消使用了
+            matchBrackets: BI.isIE()
+                ? null
+                : {
+                      maxScanLines: 2e3,
+                      maxHighlightLineLength: 2e3,
+                  },
+            keywordsGetter () {
+                const keywords = o.keywordsGetter();
+                
+            return BI.map(keywords, (idx, obj) => {
+                    if (BI.isKey(obj)) {
+                        return {
+                            text: obj,
+                            value: obj,
+                            type: BICst.FORMULA_KEYWORD_TYPE.FUNCTION,
+                            iconCls: "formula-function-font",
+                            title: obj,
+                        };
+                    }
+                    
+                    return obj;
+                });
+            },
+            configureMouse () {
+                return {
+                    addNew: false,
+                };
+            },
+        });
+        o.lineHeight === 1
+            ? this.element.addClass("codemirror-low-line-height")
+            : this.element.addClass("codemirror-high-line-height");
+        const func = BI.debounce(() => {
+            BI.nextTick(() => {
+                self.fireEvent(FormulaEditor.EVENT_CHANGE);
+            });
+        }, 300);
+        this.editor.on("change", (cm, change) => {
+            self._checkWaterMark();
+            // 调用setValue也会触发change, 提示框只需要在编辑的时候触发
+            if (o.showHint && self.editor.hasFocus()) {
+                BI.CodeMirror.showHint(cm, BI.CodeMirror.formulaHint, { completeSingle: false });
+            }
+            // 与input一样, 防止抖动
+            func();
+        });
+
+        // 拦截ctrl + X, ctrl + C, 重新处理选中文本到剪贴板
+        this.editor.setOption("extraKeys", {
+            "Ctrl-X" (cm) {
+                self._getSelection(cm);
+                cm.replaceSelection("");
+                cm.focus();
+            },
+
+            "Cmd-X" (cm) {
+                self._getSelection(cm);
+                cm.replaceSelection("");
+                cm.focus();
+            },
+
+            "Cmd-C" (cm) {
+                self._getSelection(cm);
+            },
+
+            "Ctrl-C" (cm) {
+                self._getSelection(cm);
+            },
+        });
+
+        const KEYMAP = {
+            "（）": "()",
+            "【】": "[]",
+            "｛｝": "{}",
+            "「」": "{}",
+            "『』": "{}",
+            "，": ",",
+            "（": "(",
+            "【": "[",
+            "｛": "{",
+            "）": ")",
+            "】": "]",
+            "｝": "}",
+            "「": "{",
+            "」": "}",
+            "『": "{",
+            "』": "}",
+            "“”": '""',
+            "‘’": "''",
+            "“": '"',
+            "‘": "'",
+            "”": '"',
+            "’": "'",
+        };
+
+        // 不知道为啥copy和paste事件都触发不了
+        this.editor.on("inputRead", (cm, info) => {
+            if (info.origin === "*compose" || info.origin === "+input") {
+                if (KEYMAP[info.text[0]]) {
+                    const cur = cm.getCursor(),
+                        token = cm.getTokenAt(cur);
+                    if (/\b(?:string)\b/.test(token.type)) {
+                        const length = token.string.length;
+                        if (
+                            token.string.length > 2 &&
+                            token.string.charAt(0) === '"' &&
+                            token.string.charAt(length - 1) === '"'
+                        ) {
+                            return;
+                        }
+                    }
+
+                    var fromPos = BI.clone(info.from);
+                    BI.nextTick(() => {
+                        // 把默认粘贴进去的文本删除掉
+                        const endPos = self.editor.getDoc().getCursor();
+                        self.editor.getDoc().replaceRange("", fromPos, endPos);
+                        // 使用一般的方法重新插入value值
+                        self._setValue(KEYMAP[info.text[0]], fromPos);
+                        func();
+                    });
+                }
+            }
+            if (info.origin === "paste") {
+                var fromPos = BI.clone(info.from);
+                // TODO 因为无法阻止默认的文本粘贴，此处先把粘贴的文本删掉，再次插入format的文本
+                BI.nextTick(() => {
+                    // 把默认粘贴进去的文本删除掉
+                    const endPos = self.editor.getDoc().getCursor();
+                    self.editor.getDoc().replaceRange("", fromPos, endPos);
+                    // 使用一般的方法重新插入value值
+                    self._setValue(self._removeInvisibleChar(info.text.join("\n")), fromPos);
+                    func();
+                });
+            }
+        });
+
+        this.editor.on("focus", () => {
+            self._isEditing = true;
+            self._checkWaterMark();
+            self.fireEvent(FormulaEditor.EVENT_FOCUS);
+        });
+
+        this.editor.on("blur", () => {
+            self._isEditing = false;
+            self.fireEvent(FormulaEditor.EVENT_BLUR);
+        });
+
+        this.editor.on("keyup", (cm, keyboard) => {
+            self.fireEvent(FormulaEditor.EVENT_KEY_UP, keyboard.key);
+        });
+        this.editor.on("cursorActivity", cm => {
+            self.fireEvent(FormulaEditor.EVENT_CURSOR_ACTIVITY, cm);
+        });
+
+        const tips = [
+            {
+                el: {
+                    type: "bi.vertical",
+                    invisible: true,
+                    items: [
+                        {
+                            type: "bi.label",
+                            cls: "error-tip",
+                            hgap: 5,
+                            vgap: 2,
+                            ref (_ref) {
+                                self.errorText = _ref;
+                            },
+                            text: "",
+                        },
+                    ],
+                    ref (_ref) {
+                        self.errorTip = _ref;
+                    },
+                },
+                left: 0,
+                bottom: 0,
+            },
+            {
+                el: {
+                    type: "bi.vertical",
+                    invisible: !o.showTip,
+                    items: [
+                        {
+                            type: "bi.label",
+                            hgap: 5,
+                            vgap: 2,
+                            cls: "bi-tips",
+                            text: BI.i18nText("BI-Basic_Formula_Valid"),
+                        },
+                    ],
+                    ref (_ref) {
+                        self.normalTip = _ref;
+                    },
+                },
+                left: 0,
+                bottom: 0,
+            },
+        ];
+
+        if (BI.isKey(this.options.watermark)) {
+            var self = this;
+            this.watermark = BI.createWidget({
+                type: "bi.text",
+                cls: "bi-water-mark",
+                text: this.options.watermark,
+                whiteSpace: "normal",
+                textAlign: "left",
+            });
+            BI.createWidget({
+                type: "bi.absolute",
+                element: self,
+                items: [
+                    {
+                        el: this.formulaEditor,
+                        left: 0,
+                        right: 0,
+                        top: 0,
+                        bottom: o.showTip ? 24 : 0,
+                    },
+                    {
+                        el: self.watermark,
+                        left: 6,
+                        right: 6,
+                        top: 3,
+                    },
+                ].concat(tips),
+            });
+
+            this.watermark.element.bind("mousedown", e => {
+                self.insertString("");
+                self.editor.focus();
+                e.stopEvent();
+            });
+            this.watermark.element.bind("click", e => {
+                self.editor.focus();
+                e.stopEvent();
+            });
+        } else {
+            BI.createWidget({
+                type: "bi.absolute",
+                element: self,
+                items: [
+                    {
+                        el: this.formulaEditor,
+                        left: 0,
+                        right: 0,
+                        top: 0,
+                        bottom: o.showTip ? 24 : 0,
+                    },
+                ].concat(tips),
+            });
+        }
+    }
+
+    mounted () {
+        const o = this.options;
+        if (BI.isNotNull(o.value)) {
+            this.setValue(o.value);
+        }
+    }
+
+    _removeInvisibleChar (v) {
+        return BI.replaceAll(v || "", "\u200b", "");
+    }
+
+    _getSelection (cm) {
+        const self = this;
+        if (!this.clipboard) {
+            const adaptCopyWidget = BI.createWidget({
+                type: "bi.layout",
+                invisible: true,
+            });
+            this.clipboard = BI.createWidget({
+                type: "bi.clipboard",
+                el: adaptCopyWidget,
+                copy () {
+                    return selectString;
+                },
+                afterCopy () {
+                    self.clipboard.destroy();
+                    self.clipboard = null;
+                },
+            });
+            BI.createWidget({
+                type: "bi.absolute",
+                element: "body",
+                items: [
+                    {
+                        el: this.clipboard,
+                    },
+                ],
+            });
+        }
+        var selectString = cm.getDoc().getSelection() || "";
+
+        const allParams = BI.filter(selectString.split("\u200b"), idx => idx % 2 === 1);
+        // BI-79714 需要优先匹配最长的
+        let paramArray = allParams.sort((a, b) => b.length - a.length);
+        // BI-82911 转义正则的特殊字符
+        paramArray = BI.map(paramArray, (idx, param) => param.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&"));
+        selectString = selectString.replaceAll(BI.concat(paramArray, "\u200b").join("|"), (matchStr, index) => {
+            switch (matchStr) {
+                case "\u200b":
+                    return "";
+                default:
+                    return index === 0 || selectString[index - 1] !== "\u200b" ? matchStr : `\${${matchStr}}`;
+            }
+        });
+        this.clipboard.element.click();
+    }
+
+    _checkWaterMark () {
+        const o = this.options;
+        if (!this.disabledWaterMark && BI.isEmptyString(this.editor.getValue()) && BI.isKey(o.watermark)) {
+            this.watermark && this.watermark.visible();
+        } else {
+            this.watermark && this.watermark.invisible();
+        }
+    }
+
+    _setEnable (b) {
+        super._setEnable(...arguments);
+        this.editor.setOption("readOnly", b === true ? false : "nocursor");
+    }
+
+    _analyzeContent (v) {
+        // \w*\w 这是干啥呢, 至少匹配一次\w ? 那可以用\w+
+        const regx =
+            /\$[\{][^\}]*[\}]|(\w|\.)+|\$\{[^\$\(\)\+\-\*\/)\$,]*\w\}|\$\{[^\$\(\)\+\-\*\/]*\w\}|\$\{[^\$\(\)\+\-\*\/]*[\u4e00-\u9fa5]\}|\w|(.)|\n/g;
+
+        return v.match(regx);
+    }
+
+    selectAll () {
+        this.editor.execCommand("selectAll");
+        this._isEditing = true;
+    }
+
+    disableWaterMark () {
+        this.disabledWaterMark = true;
+        this._checkWaterMark();
+    }
+
+    focus () {
+        if (!this._isEditing === true) {
+            this.editor.focus();
+            this.selectAll();
+        }
+    }
+
+    showTip (v) {
+        this.normalTip.setVisible(false);
+        this.errorTip.setVisible(true);
+        v && this.errorText.setText(v);
+    }
+
+    hideTip () {
+        this.normalTip.setVisible(true);
+        this.errorTip.setVisible(false);
+    }
+
+    getTip () {
+        return this.errorTipText;
+    }
+
+    /**
+     * 添加字段
+     * @param fieldId
+     * @param force, 判断是否强制不标红
+     */
+    _insertField (fieldId, force) {
+        const value = fieldId;
+        const fieldFormattedName = this.options.paramFormatter(fieldId) || "undefined";
+        const from = BI.clone(this.editor.getCursor("from"));
+        // 解决插入字段由括号或其他特殊字符包围时分裂的bug,在两端以不可见字符包裹一下
+        const showName = fieldFormattedName.replaceAll("^<!.*!>$", str => str.substring(2, str.length - 2));
+        this.editor.replaceSelection(`\u200b${showName}\u200b`);
+        const to = this.editor.getCursor("to");
+        let className = "fieldName";
+        if (BI.isNotNull(fieldFormattedName.match("^<!.*!>$")) && !force) {
+            className = "error-field";
+        }
+        // handleMouseEvents和replacedWith需要搭配使用，让codemirror接管鼠标事件
+        this.editor.markText(from, to, {
+            className,
+            handleMouseEvents: true,
+            atomic: true,
+            startStyle: "start",
+            endStyle: "end",
+            value,
+            replacedWith: BI.$(`<span class='${className}  start end' />`).text(showName)[0],
+        });
+    }
+
+    insertField (fieldId, force) {
+        this._insertField(fieldId, force);
+        this.editor.focus();
+    }
+
+    _insertFunction (fn) {
+        const from = BI.clone(this.editor.getCursor("from"));
+        this.editor.replaceSelection(fn);
+        let to = this.editor.getCursor("to");
+        this.editor.markText(from, to, { className: "#function", atomic: true });
+        this.editor.replaceSelection("()");
+        to = this.editor.getCursor();
+        to.ch = to.ch - 1;
+        this.editor.setCursor(to);
+    }
+
+    _isFunction (str) {
+        return BI.some(this.options.keywordsGetter(), (idx, obj) => {
+            const text = obj.text || obj;
+            
+        return str === text.toLowerCase() || str === text.toUpperCase();
+        });
+    }
+
+    _setFunction (v) {
+        const from = this.editor.getCursor();
+        this.editor.replaceSelection(v);
+        const to = this.editor.getCursor();
+        this.editor.markText(from, to, { className: "#function", atomic: true });
+    }
+
+    insertFunction (fn) {
+        this._insertFunction(fn);
+        this.editor.focus();
+    }
+
+    _insertOperator (op) {
+        const from = this.editor.getCursor();
+        this.editor.replaceSelection(op);
+        const to = this.editor.getCursor();
+        this.editor.markText(from, to, { className: "%operator", atomic: true });
+    }
+
+    insertOperator (op) {
+        this._insertOperator(op);
+        this.editor.focus();
+    }
+
+    _insertString (str) {
+        this.editor.replaceSelection(str);
+    }
+
+    insertString (str) {
+        this._insertString(str);
+        this.editor.focus();
+    }
+
+    getFormulaString () {
+        return this.editor.getValue();
+    }
+
+    getUsedFields () {
+        const fields = [];
+        this.editor.getValue(true, line => {
+            _.forEach(line.markedSpans, (i, ms) => {
+                switch (i.marker.className) {
+                    case "fieldName":
+                    case "error-field":
+                        // 因为插入字段的时候首尾加了不可见字符，所以首尾缩进一个字符
+                        var dId = i.marker.value;
+                        if (!BI.contains(fields, dId)) {
+                            fields.push(dId);
+                        }
+                        break;
+                    default:
+                }
+            });
+        });
+        
+        return fields;
+    }
+
+    getCheckString () {
+        return this.editor
+            .getValue(true, line => {
+                let value = line.text,
+                    num = 0;
+                const markedSpans = _.clone(line.markedSpans) || [];
+                markedSpans.sort((a, b) => a.from - b.from);
+
+                _.forEach(markedSpans, (i, ms) => {
+                    switch (i.marker.className) {
+                        case "fieldName":
+                        case "error-field":
+                            var fieldNameLength = i.to - i.from;
+                            value = `${value.substr(0, i.from + num)}$a${value.substr(i.to + num, value.length)}`;
+                            num = num + 2 - fieldNameLength;
+                            break;
+                        default:
+                    }
+                });
+                
+            return value;
+            })
+            .replaceAll("(\\$\\{.*?\\})\\s*|\u200b", (matchStr, groupStr) => {
+                switch (matchStr) {
+                    case "\u200b":
+                        return "";
+                    default:
+                        return groupStr;
+                }
+            });
+    }
+
+    getValue () {
+        const v = this.editor.getValue("\n", line => {
+            let value = line.text,
+                num = 0;
+            const markedSpans = _.clone(line.markedSpans) || [];
+            markedSpans.sort((a, b) => a.from - b.from);
+
+            _.forEach(markedSpans, (i, ms) => {
+                switch (i.marker.className) {
+                    case "fieldName":
+                    case "error-field":
+                        var fieldNameLength = i.to - i.from;
+                        var fieldId = i.marker.value;
+                        // 这边直接跳过了不可见字符
+                        value =
+                            `${value.substr(0, i.from + num)
+                            }\${${
+                            fieldId
+                            }}${
+                            value.substr(i.to + num, value.length)}`;
+                        num += fieldId.length - fieldNameLength + 3;
+                        break;
+                    default:
+                }
+            });
+            
+            return value;
+        });
+        
+        return v.replaceAll("(\\$\\{.*?\\})\\s*|\u200b", (matchStr, groupStr) => {
+            switch (matchStr) {
+                case "\u200b":
+                    return "";
+                default:
+                    return groupStr;
+            }
+        });
+    }
+
+    markField (field) {
+        const className = field.invalid ? "error-field" : "fieldName";
+        this.editor.markText(field.from, field.to, {
+            handleMouseEvents: true,
+            className,
+            atomic: true,
+            startStyle: "start",
+            endStyle: "end",
+            value: field.value,
+            replacedWith: BI.$(`<span class='${className}  start end' />`).text(field.text)[0],
+        });
+    }
+
+    markFunction (func) {
+        this.editor.markText(func.from, func.to, {
+            className: "#function",
+            atomic: true,
+        });
+    }
+
+    getParamWrap () {
+        return "\u200b";
+    }
+
+    beautify () {
+        const self = this,
+            o = this.options;
+        const v = this.editor.beautify({
+            valueGetter (v) {
+                return `\${${o.valueGetter(self._removeInvisibleChar(v))}}`;
+            },
+        });
+        this.setValue(v);
+    }
+
+    /**
+     * 原来的setValue是按照编辑公式的模式, 循环插字符，插字段，插公式一个个步骤做的，在长公式的情况下性能很差
+     * 现在采用以下方式做优化:
+     *      1、整个公式当成字符串直接setValue进去
+     *      2、对其中的字段和函数进行标记
+     */
+    _setValue (val, position) {
+        const self = this,
+            c = this.constants,
+            o = this.options;
+        const value = val || "";
+        const result = this._analyzeContent(value);
+        const fieldArray = [],
+            functionArray = [];
+        let lineNum = 0;
+        let offset = 0;
+        let valueString = "";
+        if (BI.isNotNull(position)) {
+            lineNum = position.line;
+            offset = position.ch;
+        }
+        const wrapChar = self.getParamWrap();
+        BI.each(result, (i, str) => {
+            const nextStr = i === result.length - 1 ? "" : result[i + 1];
+            if (c.paramRegex.test(str)) {
+                let fieldId = str.substring(2, str.length - 1);
+                let fieldFormattedName = o.paramFormatter(fieldId);
+                // fieldId未匹配到报错字段和正常字段
+                if (BI.isNull(fieldFormattedName)) {
+                    // 尝试以fieldId作为显示值匹配
+                    if (o.valueGetter(fieldId)) {
+                        // 匹配到则转化为正常的字段参数格式
+                        fieldFormattedName = fieldId;
+                        fieldId = o.valueGetter(fieldFormattedName);
+                        fieldFormattedName = o.paramFormatter(fieldId);
+                    } else {
+                        // 未匹配到标红显示显示值字段
+                        fieldFormattedName = `<!${fieldId}!>`;
+                    }
+                }
+                let showName = fieldFormattedName.replaceAll("^<!.*!>$", str => str.substring(2, str.length - 2));
+                showName = wrapChar + showName + wrapChar;
+                var fromPos = BI.CodeMirror.Pos(lineNum, offset);
+                valueString += showName;
+                offset += showName.length;
+                var endPos = BI.CodeMirror.Pos(lineNum, offset);
+                fieldArray.push({
+                    from: fromPos,
+                    to: endPos,
+                    value: fieldId,
+                    invalid: /^<!.*!>$/.test(fieldFormattedName),
+                    text: showName,
+                });
+            } else {
+                // 是函数
+                if (nextStr[0] === "(" && self._isFunction(str)) {
+                    var fromPos = BI.CodeMirror.Pos(lineNum, offset);
+                    var endPos = BI.CodeMirror.Pos(lineNum, offset + str.length);
+                    functionArray.push({
+                        from: fromPos,
+                        to: endPos,
+                        value: str,
+                    });
+                }
+                if (str === "\n") {
+                    lineNum++;
+                    offset = 0;
+                }
+                valueString += str;
+                str !== "\n" && (offset += str.length);
+            }
+        });
+        this.insertString(valueString);
+        BI.each(fieldArray, (idx, field) => {
+            self.markField(field);
+        });
+        BI.each(functionArray, (idx, field) => {
+            self.markFunction(field);
+        });
+    }
+
+    setValue (v) {
+        this.editor.setValue("");
+        this._setValue(v);
+    }
+
+    refresh () {
+        const self = this;
+        BI.nextTick(() => {
+            self.editor.refresh();
+        });
+    }
+
+    setVisible (visible) {
+        super.setVisible(...arguments);
+        visible && this.refresh();
+    }
+
+    check (value) {
+        const formulaCheck = new FormulaCheck(this.options.formulaChecker());
+
+        const formula = value || this.getValue();
+        if (!formula) {
+            return;
+        }
+        let error;
+        try {
+            formulaCheck.parse(
+                formula.replace(/\$\{.*?\}/g, matchStr => {
+                    const field = matchStr.substring(2, matchStr.length - 1);
+                    const paramType = this.options.paramTypeGetter(field);
+                    switch (paramType) {
+                        case "number":
+                            return 1;
+                        case "boolean":
+                            return true;
+                        case "date":
+                            return '"bi-date-place-holder"';
+                        default:
+                            return `"${field}"`;
+                    }
+                }),
+            );
+        } catch (err) {
+            error = err;
+        }
+        
+        return error;
+    }
+}
+
+
+class Provider {
+    checkers = {};
+
+    addChecker(checker) {
+        BI.extend(this.checkers, checker);
+    }
+
+    $get() {
+        return () => this.checkers;
+    }
+}
+
+BI.provider("bi.formula_editor.checker", Provider);

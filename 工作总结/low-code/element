@@ -1,0 +1,77 @@
+s-select:
+    在第一个「列组件」中添加一个文本组件和单选下拉框组件，
+    文本组件设置文本为「起始地」，
+    文本输入组件绑定本地变量stockOrder.startLocation，
+        数据字典设置为ds1，
+        显示值设置name，可用性设置为false
+    {
+        "type": "s-container",
+        "id": "1c616e2e-39f1-4fab-b294-101cb89e3003",
+        "name": "容器组件1",
+        "version": "0.0.1",
+        "visible": true,
+        "props": {
+            "direction": "row"
+        },
+        "style": {
+            "marginBottom": "10px"
+        },
+        "children": [
+        {
+            "type": "s-text",
+            "id": "1c616e2e-39f5-4fab-b294-101cb89e3000",
+            "name": "文本1",
+            "version": "0.0.1",
+            "visible": true,
+            "props": {
+                "value": "起始地：" // 文本组件设置文本
+            },
+            "style": {
+                "width": "180px",
+                "textAlign": "right"
+            }
+        },
+        {
+            "type": "s-select",
+            "version": "0.0.1",
+            "visible": true,
+            "enable": false, // 可用性
+            "props": {
+                "options": ["shop", "storehouse"],
+                "value": {
+                    "type": "JSExpression",
+                    "value": "stockOrder.startLocation" // 组件绑定本地变量stockOrder.startLocation，
+                }
+            }
+        }
+        ]
+    }
+
+
+    {
+        "type": "s-grid",
+        "name": "行列组件1",
+        "children": [
+          {
+            "type": "s-grid-row",
+            "name": "行组件1",
+            "props": {
+              "gutter": "7.5px"
+            },
+            "children": [
+              {
+                "type": "s-grid-column",
+                "name": "列组件1.1",
+                "props": {
+                  "width": {
+                    "type": "fixed",
+                    "width": "3"
+                  }
+                },
+                "children": [
+                ]
+              }
+            ]
+          }
+        ]
+    }

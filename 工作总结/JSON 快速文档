@@ -1,0 +1,1380 @@
+JSON 快速文档
+
+1 整体结构概述: JSON 由 navigation 和 page 两大部分组成, 其中 navigation 相当于目录，主要用于配置页面路由以及对应的页面；page 则是对应的展示页面。
+    具体来说 navigation 数组中每个目录对象有唯一值 id, 标题 caption, 路由路径 path，isHome 设置首页， hidden 是否在目录栏上隐藏。
+    page 页面有唯一值 id，名称 name，标题 title，重点是配置页面数据 dataCabin 和 页面元素 children 两部分。
+    关联关系： navigation 的 pageId 需要与该路由展示的页面 page 的 id 一致。
+
+navigation 样例：（navigation.json）
+{
+  "navigation": [
+    {
+      "id": "1", 
+      "pid": "0",
+      "caption": "生产订单",                             // 目录名称
+      "path": "/productOrder",                          // 跳转到该页面，路由 path 显示的值
+      "pageId": "0c616e2e-39f5-4fab-b294-101cb89e0014", // **路由对应的 pageId
+      "isHome": true                                    // 是否是主页
+    },
+    {
+      "id": "2",
+      "pid": "0",
+      "caption": "生产订单待检（可报工订单）",
+      "path": "/productNeed/ready",
+      "pageId": "0c616e2e-39f5-4fab-b294-101cb89e0016",
+      "hidden": true                                    // 是否在目录栏上隐藏
+    }
+  ]
+}
+
+page 样例：（0c616e2e-39f5-4fab-b294-101cb89e0014.json）
+{
+  "id": "0c616e2e-39f5-4fab-b294-101cb89e0014",   // **该页面的 id，navigation 中的 pageId
+  "name": "Page1",                                // 页面名称
+  "title": "生产订单",                             // 页面标题
+  "dataCabin": [],                                // 此处配置页面数据
+  "children": []                                  // 此处配置页面内容
+}
+
+2 页面数据：（dataCabin）
+    name 变量名
+    type 页面数据有三种类型用于区分数据来源的不同：本地变量（variable）、输入参数（parameter）、数据集三类（aggregate）。
+    dataType 用于描述数据模型：包括 基本数据类型（basic）和 实体（entity）两大类，都可以用 list 配置是否是集合。
+        basic-value：string、number、datetime、boolean 等类型
+        entity-value： 前后台定义的 id，与后台返回数据实体 id 对应。
+    data 用于配置默认初始值，在没有指定值的情况下，一般为 null（list 的默认值为 []）
+    * source 当该数据需要从后台拿时，一般需要配置 source。包括 type（Query、CallActionflow）、parameters 等配置项。
+        source-Query：配置 queryId （前后台）
+        source-CallActionflow: 配置 actionId （前后台）
+
+2.1 本地变量（variable）一般用于该页面内部定义的变量，初始之后就存在，不需要从后台拿、从别的页面传入等操作。样例：
+{
+    "name": "porderNo",   // 变量名
+    "type": "variable",   // 本地变量
+    "dataType": {
+        "type": "basic",  // 基本数据类型
+        "value": "string" // 字符串
+    },
+    "data": null          // 初始值为 null
+}
+{
+    "name": "table1Selected",
+    "type": "variable",
+    "dataType": {
+        "type": "entity",                                 // 实体类型
+        "list": true,                                     // 是集合
+        "value": "19852694-2994-4d52-8a09-fa9563b8d691"   // 该数据类型对应的 id （前后台）
+    },
+    "data": []                                            // 初始值为 []
+}
+
+2.2 输入参数（parameter）一般用于定义跳转页面 jumpPage 时传递过来的值，或者需要向后台进行 CallActionflow 操作才能得到的变量，样例：
+{
+    "name": "problemInfo",
+    "type": "parameter",
+    "required": false,
+    "dataType": {
+        "type": "entity",
+        "list": false,
+        "value": "19852694-2994-4d52-8a09-fa9563b8d691"
+    },
+    "data": null
+}
+{
+    "name": "allocateOrder",
+    "type": "parameter",
+    "required": false,
+    "source": {
+        "type": "CallActionflow",
+        "actionId": "42f83e60-07a0-491e-b517-4db4687ec589",
+        "parameters": []                      // 对应接口的传惨
+    },
+    "dataType": {
+        "type": "entity",
+        "list": false,
+        "value": "68961628-52cd-40f9-b0e4-cdcba6c31edb"
+    },
+    "data": null
+}
+
+2.3 数据集（aggregate）一般用于定义需要向后台请求的数据集合，样例：
+{
+    "name": "ds1",
+    "type": "aggregate",
+    "source": {
+        "type": "Query",
+        "queryId": "b1a98c89-8bc8-462d-8ed4-9010ee700a1c",
+        "parameters": [                       // 对应查询需要的参数
+            {
+            "name": "vehicleCode",
+            "value": "vehicleCode"
+            }
+        ]
+    }
+}
+
+3 页面元素：（children）
+    页面用来显示前端页面，主要需要两部分逻辑：组件配置、事件绑定。
+
+3.1 组件
+    组件以 "s-" 开头，根据功能划分大致可以分为普通组件和布局组件以及一些复杂组件。
+        普通组件：s-text、s-button、s-image、s-link、s-select、s-multi-select、s-input、s-input-number、s-popup 等；
+        布局组件：s-container、s-grid、s-grid-column、s-grid-row；
+        *表格组件：s-table、s-table-column；
+        *Tab组件：s-tabs、s-tabs-pane；
+    组件的关键配置有：组件类型 type ，唯一值 id，名称 name，传给组件内部的属性 props，样式 style，事件 events，可见性 visible， 可用性 enable，版本 version。
+    部分组件可以通过 children 来配置组件内部的子组件。
+
+3.1.1 普通组件
+（1）文本组件
+{
+    "type": "s-text",                             // 指定类型
+    "id": "1c616e2e-39f5-4fab-b294-101cb89e3000", // 同层级下 id 必须唯一
+    "name": "文本1",                               // 组件名称
+    "version": "0.0.1",                           // 组件版本
+    "visible": true,                              // 可见性
+    "props": {                                    // 传递给组件内部的属性
+        "value": "显示值"
+    },
+    "style": {                                    //  样式
+        "width": "180px",
+        "textAlign": "right"
+    }
+}
+（2）按钮组件
+{
+    "type": "s-button",
+    "id": "1c616e2e-39f5-4fab-b294-101cb89e4010",
+    "name": "按钮1",
+    "version": "0.0.1",
+    "visible": true,
+    "enable": true,
+    "props": {
+        "value": "显示值"
+    },
+    "style": {},
+    "events": []                                  // 绑定的事件
+}
+（3）图像组件
+{
+    "type": "s-image",
+    "id": "1c616e2e-39f5-4fab-b294-101cb89e3729",
+    "name": "文本1",
+    "version": "0.0.1",
+    "visible": true,
+    "props": {
+        "src": "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
+        "sourceType": "url"
+    },
+    "style": {},
+    "events": []
+}
+（4）超链组件
+{
+    "type": "s-link",
+    "version": "0.0.1",
+    "visible": true,
+    "enable": true,
+    "props": {
+        "mode": "page",
+        "target": "_self",                       // 在当前页打开，也可为 _blank 在空白页打开等
+        "pageId": "0c616e2e-39f5-4fab-b294-101cb89e0023",
+        "params": [                              // 传递给新页面的参数，新页面设置 parameter 类型变量接收改值
+            {
+                "name": "stockOrder",
+                "value": "ds1.Current"
+            }
+        ],
+        "text": {                                // 显示值
+            "type": "JSExpression",              // 显示值不为简单的 string，是表达式
+            "value": "ds1.Current.stockCode"     // 显示值为当前数据行的 stockCode 属性值
+        }
+    }
+}
+（5）单选组件
+{
+    "type": "s-select",
+    "version": "0.0.1",
+    "visible": true,
+    "enable": true,
+    "style": {},
+    "props": {
+        "watermark": "请选择",                 // 水印
+        "optionLabel": "orgName",             // 选项显示值
+        "optionValue": "orgCode",             // 选项实际值
+        "options": {                          // 选项数据集
+            "type": "JSExpression",
+            "value": "ds2"
+        },
+        "value": {                            // 选中的实际值绑定对应变量
+            "type": "JSExpression",
+            "value": "problemInfo.orgCode"
+        }
+    }
+}
+{
+    "type": "s-select",
+    "version": "0.0.1",
+    "visible": true,
+    "enable": true,
+    "style": {},
+    "props": {
+        "optionLabel": "label",      
+        "optionValue": "value",
+        "options": [                        // 选项为自定义的值
+            {
+            "label": "生效",
+            "value": true
+            },
+            {
+            "label": "不生效",
+            "value": false
+            }
+        ],
+        "value": {
+            "type": "JSExpression",
+            "value": "isactive"
+        }
+    }
+}
+（6）多选组件
+{
+    "type": "s-multi-select",
+    "version": "0.0.1",
+    "visible": true,
+    "enable": true,
+    "props": {
+        "optionLabel": "materialCode",
+        "optionValue": "materialCode",
+        "watermark": "请选择",
+        "options": {
+            "type": "JSExpression",
+            "value": "ds3"
+        },
+        "value": {
+            "type": "JSExpression",
+            "value": "materialCodeList"
+        }
+    }
+}
+（7）文本输入组件
+{
+    "type": "s-input",
+    "version": "0.0.1",
+    "visible": true,
+    "props": {
+        "watermark": "水印",
+        "value": {
+            "type": "JSExpression",
+            "value": "stockOrder.receiverPlace"
+        }
+    }
+}
+{
+    "type": "s-input",
+    "version": "0.0.1",
+    "visible": true,
+    "enable": {                                       // 动态的可用性设置
+        "type": "JSExpression",
+        "value": "stockOrder.status === 'dispatch'"
+    },
+    "props": {
+        "watermark": "收货人城市", 
+        "rules": [                                   // 校验逻辑
+            {
+                "type": "string",
+                "required": true
+            }
+        ],
+        "value": { 
+            "type": "JSExpression",
+            "value": "stockOrder.receiverCity"
+        }
+    }
+}
+（8）数值输入组件
+{
+    "type": "s-input-number",
+    "version": "0.0.1",
+    "visible": true,
+    "enable": false,
+    "props": {
+    "watermark": "数量",
+    "value": {
+        "type": "JSExpression",
+        "value": "stockOrder.quantity"
+    }
+    }
+}
+（9）弹窗组件
+{
+    "type": "s-popup",
+    "name": "弹窗组件1",
+    "id": "k9gw2-39f1-4fab-b294-101cb89e5111",   // 弹窗组件 id 
+    "props": {
+        "title": "批量删除",                      // 弹窗标题
+        "width": "750px",
+        "show": false 
+    },
+    "visible": true,
+    "style": {
+        "top": "20px"
+    },
+    "children": [
+        {                                       // 一般弹窗主体的内容部分，可自定义
+            "type": "s-container",
+            "id": "1c616e2e-39f1-4fab-b294-101cb89e2006",
+            "name": "容器组件9",
+            "version": "0.0.1",
+            "visible": true,
+            "props": {
+            "direction": "row",
+            "contentAlign": "left"
+            },
+            "style": {
+            "color": "rgb(51, 51, 51)",
+            "marginBottom": "5px"
+            },
+            "children": []
+        },
+        {                                       // 弹窗下方的确定、取消按钮逻辑
+            "type": "s-container",
+            "id": "1c616e2e-39f1-4fab-b294-101cb89e2007",
+            "name": "容器组件4",
+            "version": "0.0.1",
+            "visible": true,
+            "props": {
+            "direction": "row",
+            "contentAlign": "right"
+            },
+            "style": {
+            "color": "rgb(51, 51, 51)",
+            "marginBottom": "5px"
+            },
+            "children": [
+            {
+                "type": "s-button",
+                "id": "1c616e2e-39f5-4fab-b294-101cb89e4015",
+                "name": "按钮1",
+                "version": "0.0.1",
+                "visible": true,
+                "enable": true,
+                "props": {
+                    "value": "确定"
+                },
+                "style": {
+                    "color": "rgb(255, 255, 255)",
+                    "backgroundColor": "rgb(64, 158, 255)",
+                    "borderColor": "rgb(64, 158, 255)"
+                },
+                "events": [
+                {
+                    "type": "click",
+                    "name": "clickEvent",
+                    "actions": [
+                        {
+                            "type": "serverAction",                         // 确定时触发的服务器事件
+                            "actionId": "xxxx-819f-417e-9ddd-d46f03eead3f", // 对应 id
+                            "name": "note",
+                            "parameters": [
+                                {
+                                    "name": "problemInfoList",
+                                    "value": "table1Selected"
+                                }
+                            ]
+                        },
+                        {                                                   // 一般都需要关闭弹窗
+                            "type": "popup",
+                            "name": "关闭批量删除弹窗",
+                            "operationType": "close",
+                            "popup": "k9gw2-39f1-4fab-b294-101cb89e5111"
+                        },
+                        {                                                   // 一般也需要刷新数据集
+                            "type": "refreshAggregate",
+                            "name": "刷新数据集ds1",
+                            "aggregate": "ds1"
+                        }
+                    ]
+                }
+                ]
+            },
+            {
+                "type": "s-button",                                         // 取消按钮时只需要关闭弹窗即可
+                "id": "1c616e2e-39f5-4fab-b294-101cb89e4011",
+                "name": "按钮1",
+                "version": "0.0.1",
+                "visible": true,
+                "enable": true,
+                "props": {
+                "value": "取消"
+                },
+                "style": {
+                "marginLeft": "10px",
+                "color": "rgb(255, 255, 255)",
+                "backgroundColor": "rgb(144, 147, 153)",
+                "borderColor": "rgb(144, 147, 153)"
+                },
+                "events": [
+                {
+                    "type": "click",
+                    "name": "clickEvent",
+                    "actions": [
+                        {
+                            "type": "popup",
+                            "name": "关闭批量删除弹窗",
+                            "operationType": "close",
+                            "popup": "k9gw2-39f1-4fab-b294-101cb89e5111"
+                        }
+                    ]
+                }
+                ]
+            }
+            ]
+        }
+    ]
+}
+
+3.1.2 布局组件
+  布局组件主要用于规划普通组件的排版位置，包括容器组件和行列组件。
+    容器组件 s-contanier 占满一行；
+    行列组件 s-grid 可以将一行划分为 12 个列，结合 s-grid-column 进行列的排版， s-grid-row 添加一整行，通过组合行列子组件的嵌套实现不同布局。
+（1）容器组件
+{
+    "type": "s-container",
+    "id": "1c616e2e-39f1-4fab-b294-101cb89e2004", // 同层级下 必须唯一
+    "name": "容器组件2",
+    "version": "0.0.1",
+    "visible": true,
+    "props": {                                   // 容器内部子元素的排列方式
+        "direction": "row",                      // 横向靠右对齐
+        "contentAlign": "right"
+    },
+    "style": {},
+    "children": []
+}
+（2）行列组件
+{
+    "type": "s-grid",
+    "name": "行列组件1",
+    "children": [
+    {
+        "type": "s-grid-row",
+        "name": "行组件1",
+        "props": {
+            "gutter": "7.5px"            // 内部元素的间隔值, 类似于 hgap
+        },
+        "children": [
+        {
+            "type": "s-grid-column",
+            "name": "列组件1.1",
+            "props": {
+                "width": {                // 固定占横行 12 格中的 4 格
+                    "type": "fixed",
+                    "width": "4"
+                }
+            },
+            "children": []
+        },
+        {
+            "type": "s-grid-column",
+            "name": "列组件1.1",
+            "props": {},
+            "children": []
+        },
+        ]
+    },
+    {
+        "type": "s-grid-row",
+        "name": "行组件1",
+        "props": {
+        "gutter": "7.5px"
+        },
+        "children": []
+    }
+    ]
+}
+
+3.1.3 表格组件
+  表格组件一般用于数据集的统一展示，可以实现 勾选、序号、排序 等功能。
+{
+    "type": "s-table",
+    "name": "table1",
+    "version": "0.0.1",
+    "visible": true,
+    "props": {
+        "source": "ds2",                        // 数据源
+        "bordered": true,                       // 边框
+        "showSerial": true,                     // 序号
+        "selectedRowsSource": "table1"          // 勾选，选中的值绑定 table1 变量
+    },
+    "children": [
+        {
+            "type": "s-table-column",
+            "version": "0.0.1",
+            "visible": true,
+            "props": {
+                "title": "状态",
+                "dataIndex": "status",           // 数据集的对应项
+                "sorter": true                   // 该列数据是否支持排序
+            },
+            "children": [
+            {
+                "type": "s-text",
+                "version": "0.0.1",
+                "visible": true,
+                "props": {
+                "value": {
+                    "type": "JSExpression",
+                    "value": "ds2.Current.status"  // ds2.Current 代表当前的单条数据数据
+                }
+                }
+            }
+            ]
+        },
+        {                                          // 一般表格最后列会是操作按钮的展示
+            "type": "s-table-column",
+            "version": "0.0.1",
+            "visible": true,
+            "props": {
+            "title": "操作",
+            "dataIndex": ""
+            },
+            "children": [
+                {
+                    "type": "s-button",
+                    "id": "1c616e2e-39f5-4fab-b294-101cb89e4014",
+                    "name": "按钮1",
+                    "version": "0.0.1",
+                    "visible": true,
+                    "enable": true,
+                    "props": {
+                        "value": "展示订单明细"
+                    },
+                    "style": {
+                        "marginLeft": "10px"
+                    },
+                    "events": [
+                    {
+                        "type": "click",
+                        "name": "clickEvent",
+                        "actions": [
+                            {
+                                "type": "assignment",
+                                "variable": "applyCode",
+                                "value": "ds2.Current.applyCode"
+                            },
+                            {
+                                "type": "refreshAggregate",
+                                "aggregate": "ds3"
+                            }
+                        ]
+                    }
+                    ]
+                }
+            ]
+        }
+    ]
+}
+{
+    "name": "table1",
+    "type": "variable",
+    "dataType": {
+        "type": "entity",
+        "list": true,
+        "value": "cdde71f6-ea96-477b-ab58-f78ee8613948"
+    },
+    "data": []
+}
+
+3.1.4 Tab组件
+  标签页组件一般设置几个标签，当点击时可以切换，标签页通过在 children 属性下添加组件 s-tabs-pane 实现。
+{
+    "type": "s-tabs",
+    "id": "1c616e2e-39f1-4fab-b294-101cb89e0235",
+    "visible": true,
+    "props": {
+        "defaultActiveKey": "1c616e2e-39f1-4fab-b294-101cb89e6744",  // **默认展开的 s-tabs-pane 的 id 值
+        "tabLayout": "left"                                          // 标签页的标签左对齐
+    },
+    "children": [                                                    // Tab组件内部只能为 s-tabs-pane 类型的组件
+        {
+            "type": "s-tabs-pane",
+            "id": "1c616e2e-39f1-4fab-b294-101cb89e6744",            // **单个标签页的 id
+            "props": {
+                "tab": "标签项1"                                      // 标签名
+            },
+            "children": []                                           // 具体内容
+        },
+        {
+            "type": "s-tabs-pane",
+            "id": "1c616e2e-39f1-4fab-b294-101cb89e2744",
+            "props": {
+                "tab": "标签项2"
+            },
+            "children": []
+        }
+    ],
+    "events": [
+        {                                                            // 可以监听 tab 切换事件
+            "type": "change",
+            "name": "changeTabs",
+            "actions": [
+            {
+                "type": "message",
+                "name": "showMessage",
+                "level": "info",
+                "content": "Tabs切换事件"
+            }
+            ]
+        }
+    ]
+},
+
+3.1.5 上传组件（分为两部分）
+   1.上传按钮，点击弹出文件选择框（props里可以设置accept属性定义接受文件类型）
+    {
+        "type": "s-upload",
+        "id": "1c616e2m-39f5-4fab-b294-181cb89e4013",
+        "name": "上传组件",
+        "version": "0.0.1",
+        "visible": true,
+        "enable": true,
+        "props": {
+            "fileName": {
+                "type": "JSExpression",
+                "value": "testFileName"  // 绑定变量-文件名
+            },
+            "value": {
+                "type": "JSExpression",
+                "value": "testFileContent" // 绑定变量-文件内容
+            },
+            "text": "上传组件(测试)", // 按钮文本
+            "maxSize": 1 // 最大文件大小 单位（Mb）
+        }
+    }
+    2.触发向后台传送
+    {
+        "type": "s-button",
+        "id": "1c616e2e-39f5-4fab-b294-101cb89e4000",
+        "name": "按钮1",
+        "version": "0.0.1",
+        "visible": true,
+        "enable": true,
+        "props": {
+        "value": "点击向后台上传"
+        },
+        "style": {
+        "color": "rgb(255, 255, 255)",
+        "backgroundColor": "rgb(64, 158, 255)",
+        "borderColor": "rgb(64, 158, 255)"
+        },
+        "events": [
+            {
+                "type": "click",
+                "name": "clickEvent",
+                "actions": [
+                {
+                    "type": "serverAction", 
+                    "actionId": "a838c074-40ca-4f30-b6bf-2c61d19008f6",
+                    "name": "returnList",
+                    "parameters": [                            
+                        {
+                            "name": "data",   
+                            "value": "testFileContent"  //这里不要再嵌一层JSExpression
+                        }
+                    ]
+                },
+                {
+                    "type": "message",
+                    "level": "success",
+                    "content": "xxx"
+                }
+                ]
+            }
+        ]
+    }
+
+3.2 事件
+    JSON 可以配置 events 顺序执行多种事件，例如：后台操作、弹窗操作、页面跳转、消息提醒、刷新数据集、赋值数据、修改数据集 等。
+    通常触发事件的前端监听的事件有 click、change等, 可以在 actions 配置点击时触发的一系列事件。
+    严格按照层级写，例如： events - click - message，不能在 click 内部重复定义 click 层级事件。
+
+3.2.1 后台操作
+{
+    "type": "click",
+    "name": "clickEvent",
+    "actions": [
+        {
+            "type": "serverAction", 
+            "actionId": "xxx-ec9b-404b-aa53-31ba61e534fc",  // 后台提供
+            "parameters": [                                 // 调用后台接口时需要的参数
+                {
+                    "name": "porder",                       // 操作结束后台返回的数据通过 name 配置的变量接收，可传递给后面的 actions
+                    "value": {
+                        "type": "JSExpression",
+                        "value": "ds1.Current"
+                    }
+                }
+            ]
+        }
+    ]
+}
+
+3.2.2 弹窗
+（1）打开弹窗
+{
+    "type": "click",
+    "name": "clickEvent",
+    "actions": [
+        {
+            "type": "popup",
+            "name": "打开不合格弹窗",
+            "operationType": "open",
+            "popup": "yyyyy-39f1-4fab-b294-101cb89e5111"
+        }
+    ]
+}
+（2）关闭弹窗
+{
+    "type": "click",
+    "name": "clickEvent",
+    "actions": [
+        {
+            "type": "popup",
+            "name": "关闭删除弹窗",
+            "operationType": "close",
+            "popup": "m8s2k-39f1-4fab-b294-101cb89e5111"
+        }
+    ]
+}
+
+3.2.3 跳转
+{
+    "type": "click",
+    "name": "clickEvent",
+    "actions": [
+        {
+            "type": "jumpPage",               // 事件
+            "name": "跳转详情子页面",
+            "mode": "page",                   // 模式为页面  -》 对应pageID
+            "target": "_self",
+            "pageId": "0c616e2e-39f5-4fab-b294-101cb89e0015",
+            "params": [                       // 跳转时携带的参数
+                {
+                "name": "allocateOrder",
+                "value": "ds1.Current"
+                }
+            ]
+        }
+    ]
+}
+
+3.2.4 消息提示
+    支持四种level的提示："info" | "warning" | "error" | "success"；
+    通常情况下展示后台操作返回的数据，可直接从 name 中将返回数据传递给 message，不用额外定义本地变量。
+{
+    "type": "click",
+    "name": "clickEvent",
+    "actions": [
+        {
+            "type": "serverAction",
+            "actionId": "e8e21d4b-5414-4465-8cb6-1f3609993042",
+            "name": "information",               // **后台操作返回的信息定义为 information 可直接传给后面的 message
+            "parameters": [
+            {
+                "name": "allocateOrderList",
+                "value": "table1Selected"
+            }
+            ]
+        },
+        {
+            "type": "message",                 // 消息类型 actions
+            "level": "info",                   // 消息级别
+            "content": {
+                "type": "JSExpression",
+                "value": "information"         // **与上个事件的 name 对应
+            }
+        }
+    ]
+}
+
+3.2.5 刷新数据集
+{
+    "type": "click",
+    "name": "clickEvent",
+    "actions": [
+        {
+            "type": "refreshAggregate",
+            "name": "刷新数据集ds1",
+            "aggregate": "ds1"
+        }
+    ]
+}
+
+3.2.6 赋值数据
+（1）赋值数据
+{
+    "type": "assignment",
+    "name": "enterOrderList赋值",
+    "variable": "enterOrderList",
+    "value": "action1"
+}
+（2）清空数据
+{
+    "type": "assignment",
+    "name": "清空materialSpec",
+    "variable": "materialSpec",
+    "value": "null"
+}
+
+3.2.7 修改数据集
+（1）增加一条数据
+{
+    "type": "modifyList",
+    "name": "添加transferOrderList",
+    "variable": "transferOrderList",
+    "operationType": "add",
+    "value": "transferOrder"
+}
+（2）清空数据
+{
+    "type": "modifyList",
+    "name": "清空checkStatus",
+    "variable": "checkStatus",
+    "operationType": "clear"
+}
+
+4 文档中的样例
+4.1 单纯跳转
+    「增加」按钮添加执行服务器逻辑操作、页面跳转操作
+    服务器逻辑操作执行「增加配货单」操作，
+        ？输入参数user设置为user，输出变量名称allocateCodeNew
+    页面跳转设置页面，选择配货单详情页，
+        ？输入参数，allocateOrder设置为allocateCodeNew ，user设置为user
+    {
+        "type": "s-button",
+        "id": "1c616e2e-39f5-4fab-b294-101cb89e4000",
+        "name": "按钮1",
+        "version": "0.0.1",
+        "visible": true,
+        "enable": true,
+        "props": {
+            "value": "新增"
+        },
+        "style": {
+            "color": "rgb(255, 255, 255)",
+            "backgroundColor": "rgb(64, 158, 255)",
+            "borderColor": "rgb(64, 158, 255)"
+        },
+        "events": [
+        {
+            "type": "click",
+            "name": "clickEvent",
+            "actions": [
+            {
+                "type": "jumpPage", // 事件
+                "name": "跳转详情子页面",
+                "mode": "page", //模式为页面  -》 对应pageID
+                "target": "_self",
+                "pageId": "0c616e2e-39f5-4fab-b294-101cb89e0015",
+                "params": []
+            }
+            ]
+        }
+        ]
+    }
+
+4.2 列表内部链接跳转详情页，同时携带参数
+    配货单编号：设置一个超链，文本内容设置为ds1.current.allocateCode，
+    模式选择为页面，页面设置为配货单详情页
+    输入参数，allocateOrder设置为 ds1.current
+    {
+        "type": "s-table-column",
+        "version": "0.0.1",
+        "visible": true,
+        "props": {
+        "title": "配货单编号",
+        "dataIndex": "allocateCode",
+        "sorter": true
+        },
+        "children": [
+        {
+            "type": "s-link",
+            "version": "0.0.1",
+            "visible": true,
+            "props": {
+                "mode": "page",
+                "target": "_self",
+                "pageId": "0c616e2e-39f5-4fab-b294-101cb89e0015", //页面
+                "params": [ //参数
+                    {
+                    "name": "allocateOrder",
+                    "value": "ds1.Current"
+                    }
+                ],
+                "text": {
+                    "type": "JSExpression",
+                    "value": "ds1.Current.allocateCode"
+                }
+            }
+        }
+        ]
+    }
+
+4.3 删除
+    给「删除」按钮添加执行服务器逻辑操作、消息提示
+    服务器逻辑操作执行「删除配货单逻辑」操作，
+        输入参数allocateOrderList设置为table1.selected，输出变量名称为information
+    消息提示，
+        提示类型设置为info，提示信息为 information
+    {
+        "type": "s-button",
+        "id": "1c616e2e-39f5-4fab-b294-101cb89e4013",
+        "name": "按钮1",
+        "version": "0.0.1",
+        "visible": true,
+        "enable": {
+        "type": "JSExpression",
+        "value": "table1Selected.length > 0" //自定义的本地变量 table1Selected
+        },
+        "props": {
+            "value": "删除"
+        },
+        "style": {
+        "marginLeft": "10px",
+        "color": "rgb(255, 255, 255)",
+        "backgroundColor": "red",
+        "borderColor": "red"
+        },
+        "events": [
+        {
+            "type": "click",
+            "name": "clickEvent",
+            "actions": [
+            {
+                "type": "serverAction",         // 删除操作
+                "actionId": "e8e21d4b-5414-4465-8cb6-1f3609993042",
+                "name": "information",          // 输出变量名称为information
+                "parameters": [                 // 输入参数allocateOrderList设置为table1.selected
+                    {
+                        "name": "allocateOrderList",
+                        "value": "table1Selected"   // table1Selected -> 本地变量
+                    }
+                ]
+            },
+            {
+                "type": "message",
+                "level": "info",
+                "content": {
+                    "type": "JSExpression",
+                    "value": "information"
+                }
+            }
+            ]
+        }
+        ]
+    }
+
+4.4 生成订单
+    按钮组件文本设置「生成出库单」，可用性if($allocateOrder.status = 配货单状态.commited,false,true)  and dropdown5.valid and dropdown6.valid and dropdown7.valid and inputNumber2.valid，
+    点击事件设置
+    执行「生成出库单逻辑」
+        输入参数：user设置为$user、transferOrderList设置为$transferOrderList、allocateOrder设置为$allocateOrder，
+        输出变量名称设置为note
+    设置一个消息提示操作，提示类型success，提示信息为$note
+    设置一个页面跳转操作，设置为页面，在当前页跳转到配货单查询页面
+    {
+        "type": "s-button",
+        "id": "1c616e2e-39f5-4fab-b294-101cb89e4011",
+        "name": "按钮1",
+        "version": "0.0.1",
+        "visible": true,
+        "enable": { // 可用性
+            "type": "JSExpression",
+            "value": "allocateOrder.status !== 'commited'"
+        },
+        "props": {
+            "value": "生成出库单"
+        },
+        "style": {
+            "marginLeft": "10px",
+            "color": "rgb(255, 255, 255)",
+            "backgroundColor": "rgb(64, 158, 255)",
+            "borderColor": "rgb(64, 158, 255)"
+        },
+        "events": [
+        {
+            "type": "serverAction", // 创建
+            "actionId": "a7334236-191e-40e4-a6ca-57b4d923f5e1",
+            "name": "note", // 输出变量
+            "parameters": [
+                {
+                    "name": "user",
+                    "value": "user"
+                },
+                {
+                    "name": "transferOrderList",
+                    "value": "transferOrderList"
+                },
+                {
+                    "name": "allocateOrder",
+                    "value": "allocateOrder"
+                }
+            ]
+        },
+        {
+            "type": "message",
+            "level": "success",
+            "content": {
+                "type": "JSExpression",
+                "value": "note"
+            }
+        },
+        {
+            "type": "jumpPage",
+            "name": "跳转查询页面",
+            "mode": "page",
+            "target": "_self",
+            "pageId": "0c616e2e-39f5-4fab-b294-101cb89e0014",
+            "params": []
+        }
+        ]
+    }
+
+4.5 保存
+    按钮组件文本设置「保存」，
+    点击事件设置执行「保存配货单」，
+        输入参数设置为allocateOrder = $allocateOrder 、 transferOrderList = $transferOrderList
+    {
+        "type": "s-button",
+        "id": "1c616e2e-39f5-4fab-b294-101cb89e4010",
+        "name": "按钮1",
+        "version": "0.0.1",
+        "visible": true,
+        "enable": true,
+        "props": {
+            "value": "保存"
+        },
+        "style": {
+            "color": "rgb(255, 255, 255)",
+            "backgroundColor": "rgb(64, 158, 255)",
+            "borderColor": "rgb(64, 158, 255)"
+        },
+        "events": [
+        {
+            "type": "click",
+            "name": "clickEvent",
+            "actions": [
+            {
+                "type": "serverAction", // 保存
+                "actionId": "f6c9b8c9-12ca-4ecd-93a1-53143eb054e0",
+                "name": "action1",
+                "parameters": [
+                {
+                    "name": "allocateOrder",
+                    "value": "allocateOrder"
+                },
+                {
+                    "name": "transferOrderList",
+                    "value": "transferOrderList"
+                }
+                ]
+            }
+            ]
+        }
+        ]
+    }
+
+4.6 转出到库 
+    设置「按钮1」的文本属性为「转到出库」，设置一个点击事件
+    执行「批量转入出库状态」逻辑，
+        输入参数stockOrderList设置为table1.selected，
+        返回值设置为note
+    设置消息提示操作，类型为success，信息为$note
+    页面跳转事件，跳转至「出库单维护管理（商控部）
+    {
+        "type": "s-button",
+        "id": "1c616e2e-39f5-4fab-b294-101cb89e4112",
+        "name": "按钮1",
+        "version": "0.0.1",
+        "visible": true,
+        "enable": true,
+        "props": {
+            "value": "转出到库"
+        },
+        "style": {
+            "color": "rgb(255, 255, 255)",
+            "backgroundColor": "rgb(64, 158, 255)",
+            "borderColor": "rgb(64, 158, 255)"
+        },
+        "events": [
+        {
+            "type": "click",
+            "name": "clickEvent",
+            "actions": [
+            {
+                "type": "serverAction", // 更改
+                "actionId": "ef457025-a479-4e26-b650-29f26ef42b31",
+                "name": "note", //返回值
+                "parameters": [
+                {
+                    "name": "stockOrderList",
+                    "value": "table1Selected" //table.selected
+                }
+                ]
+            },
+            {
+                "type": "message",
+                "name": "showMessage",
+                "level": "success",
+                "content": {
+                "type": "JSExpression",
+                "value": "note.result.return.data"
+                }
+            },
+            {
+                "type": "jumpPage",
+                "name": "jumpPage",
+                "mode": "page",
+                "target": "_self",
+                "pageId": "0c616e2e-39f5-4fab-b294-101cb89e0018"
+            }
+            ]
+        }
+        ]
+    }
+
+4.7 出库单号
+    设置一个超链，文本内容设置为ds1.current.stockCode，模式选择为页面，页面设置为维护详情（商控部）
+    输入参数，stockOrder设置为 ds1.current
+        {
+          "type": "s-table-column",
+          "version": "0.0.1",
+          "visible": true,
+          "props": {
+            "title": "出库单号",
+            "dataIndex": "stockCode" // 文本
+          },
+          "children": [
+            {
+              "type": "s-link",
+              "version": "0.0.1",
+              "visible": true,
+              "props": {
+                "mode": "page",
+                "pageId": "0c616e2e-39f5-4fab-b294-101cb89e0019",
+                "params": [
+                  {
+                    "name": "stockOrder",
+                    "value": "ds1.Current"
+                  }
+                ],
+                "text": {
+                  "type": "JSExpression",
+                  "value": "ds1.Current.stockCode"
+                }
+              }
+            }
+          ]
+        }
+
+4.8 搜索：根据输入过滤数据
+    搜索按钮
+    查询按钮的点击事件，设置一个数据集刷新操作，刷新ds1
+    {
+        "type": "s-button",
+        "id": "1c616e2e-39f5-4fab-b294-101cb89e4010",
+        "name": "按钮1",
+        "version": "0.0.1",
+        "visible": true,
+        "enable": true,
+        "props": {
+            "value": "搜索"
+        },
+        "style": {
+            "color": "rgb(255, 255, 255)",
+            "backgroundColor": "rgb(64, 158, 255)",
+            "borderColor": "rgb(64, 158, 255)",
+            "paddingLeft": "15px",
+            "paddingRight": "15px"
+        },
+        "events": [
+            {
+                "type": "click",
+                "name": "clickEvent",
+                "actions": [
+                    {
+                        "type": "refreshAggregate", // 数据集刷新操作
+                        "name": "刷新数据集ds1",
+                        "aggregate": "ds1"
+                    }
+                ]
+            }
+        ]
+    }
+    过滤组件
+    在「列组件1」中添加一个文本组件和文本输入组件，文本组件设置文本为「单号」，文本输入组件绑定本地变量code
+    {
+        "type": "s-container",
+        "id": "1c616e2e-39f1-4fab-b294-101cb89e3003",
+        "name": "容器组件1",
+        "version": "0.0.1",
+        "visible": true,
+        "props": {
+            "direction": "row"
+        },
+        "style": {
+            "marginBottom": "10px"
+        },
+        "children": [
+        {
+            "type": "s-text",
+            "id": "1c616e2e-39f5-4fab-b294-101cb89e3000",
+            "name": "文本1",
+            "version": "0.0.1",
+            "visible": true,
+            "props": {
+                "value": "单号："
+            },
+            "style": {
+                "width": "120px",
+                "textAlign": "right"
+            }
+        },
+        {
+            "type": "s-input",
+            "version": "0.0.1",
+            "visible": true,
+            "enable": true,
+            "props": {
+                "watermark": "单号",
+                "value": {
+                    "type": "JSExpression",
+                    "value": "code"
+                }
+            }
+        }
+        ]
+    }
+
+4.9 弹窗ESC清除等逻辑
+    {
+      "type": "s-popup",
+      "name": "弹窗组件1",
+      "id": "k9gw2-39f1-4fab-b294-101cb89e5111",
+      "props": {
+        "title": "操作失败",
+        "width": "750px",
+        "show": false
+      },
+      "visible": true,
+      "style": {
+        "top": "20px"
+      },
+      "children": [
+        {
+          "type": "s-container",
+          "id": "1c616e2e-39f1-4fab-b294-101cb89e2006",
+          "name": "容器组件9",
+          "version": "0.0.1",
+          "visible": true,
+          "props": {
+            "direction": "row",
+            "contentAlign": "left"
+          },
+          "style": {
+            "color": "rgb(51, 51, 51)",
+            "marginBottom": "5px"
+          },
+          "children": [
+            {
+              "type": "s-text",
+              "id": "1c616e2e-39f5-4fab-b294-101cb89e3011",
+              "name": "文本1",
+              "version": "0.0.1",
+              "visible": true,
+              "props": {
+                "value": {
+                  "type": "JSExpression",
+                  "value": "note.data"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "s-container",
+          "id": "1c616e2e-39f1-4fab-b294-101cb89e2007",
+          "name": "容器组件4",
+          "version": "0.0.1",
+          "visible": true,
+          "props": {
+            "direction": "row",
+            "contentAlign": "right"
+          },
+          "style": {
+            "color": "rgb(51, 51, 51)",
+            "marginBottom": "5px"
+          },
+          "children": [
+            {
+              "type": "s-button",
+              "id": "1c616e2e-39f5-4fab-b294-101cb89e4015",
+              "name": "按钮1",
+              "version": "0.0.1",
+              "visible": true,
+              "enable": true,
+              "props": {
+                "value": "确定"
+              },
+              "events": [
+                {
+                  "type": "click",
+                  "name": "clickEvent",
+                  "actions": [
+                    {
+                      "type": "assignment",
+                      "name": "SN赋值",
+                      "variable": "SN",
+                      "value": "null"
+                    },
+                    {
+                      "type": "popup",
+                      "name": "关闭弹窗",
+                      "operationType": "close",
+                      "popup": "k9gw2-39f1-4fab-b294-101cb89e5111"
+                    },
+                    {
+                      "type": "eventEmitter",
+                      "name": "自动聚焦",
+                      "event": "focus",
+                      "widget": "1c616e2e-39f5-4fab-b294-101cb89ec111"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "events": [
+        {
+          "type": "change",
+          "name": "changePopup",
+          "actions": [
+            {
+              "type": "assignment",
+              "name": "SN赋值",
+              "variable": "SN",
+              "value": "null"
+            },
+            {
+              "type": "eventEmitter",
+              "name": "自动聚焦",
+              "event": "focus",
+              "widget": "1c616e2e-39f5-4fab-b294-101cb89ec111"
+            }
+          ]
+        }
+      ]
+    },

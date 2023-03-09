@@ -1,0 +1,18 @@
+{
+  "navigation": [
+    {
+      "id": "1",
+      "pid": "0",
+      "caption": "生产订单",
+      "path": "/productOrder",
+      "pageId": "0c616e2e-39f5-4fab-b294-101cb89e0014"
+    },
+    {
+      "id": "2",
+      "pid": "0",
+      "caption": "生产订单待检",
+      "path": "/productNeed",
+      "pageId": "0c616e2e-39f5-4fab-b294-101cb89e0015"
+    }
+  ]
+}

@@ -1,0 +1,92 @@
+生产订单：
+    1. itemName（列表-文本）
+    {
+        "name": "itemName",
+        "type": "variable",
+        "dataType": {
+          "type": "basic",
+          "list": true,
+          "value": "string"
+        },
+        "data": null 
+    }
+    2. s-select 实际值 显示值
+      单选下拉框组件绑定本地变量porderTypeCode，
+      数据字典设置自定义
+        实际值：ds1.porderTypeCode
+        显示值：ds1.porderTypeName
+      {
+        "type": "s-select",
+        "version": "0.0.1",
+        "visible": true,
+        "props": {
+          "optionLabel": "ds1.porderTypeName",
+          "optionValue": "ds1.porderTypeCode",
+          "value": {
+            "type": "JSExpression",
+            "value": "porderTypeCode"
+          }
+        }
+      }
+    3. s-select 单选下拉框组件绑定本地变量specs，数据字典设ds1.specs
+      {
+        "type": "s-select",
+        "version": "0.0.1",
+        "visible": true,
+        "props": {
+          "options": {
+            "type": "JSExpression",
+            "value": "ds1.specs"
+          },
+          "value": {
+            "type": "JSExpression",
+            "value": "specs"
+          }
+        }
+      }
+    4. 生产订单 表格
+        1. 生产订单号 + 号下拉 // 不支持
+        2. 操作同步单个数据button json怎么写？ SAP？
+            刷新全部：
+            "events": [
+              {
+                "type": "click",
+                "name": "clickEvent",
+                "actions": [
+                  {
+                    "type": "refreshAggregate",
+                    "name": "刷新数据集ds1",
+                    "aggregate": "ds1"
+                  }
+                ]
+              }
+            ]
+            刷新单个？
+        3. 顺序号 requireNo
+
+生产订单待检：
+    1. 本地变量  proder(proder)?
+      {
+        "name": "proder",
+        "type": "variable",
+        "dataType": {
+          "type": "entity",
+          "value": "xxxxxx-2057-4584-b711-4c9ebbbfd8a9"
+        },
+        "source": {
+          "type": "action",
+          "actionId": "xxxxxx-30ee-443f-8d55-ee3b066c3841",
+          "parameters": [
+            {
+              "name": "orgCode",
+              "value": "orgCode"
+            },
+            {
+              "name": "orgName",
+              "value": "orgName"
+            }
+          ]
+        }
+      },
+    2. s-tabs？ 写对没----------
+    3. 这咋写？ 3.2批量报工合格逻辑？

@@ -1,0 +1,52 @@
+// 文件类型二进制转换
+// file -> arrayBuffer -> base64
+await file.arrayBuffer().then((data) => {
+    const base64 = window.btoa(
+      String.fromCharCode(...new Uint8Array(data))
+    );
+});
+
+// base64 -> arrayBuffer
+function base64ToArrayBuffer(base64) {
+  const binaryStr = window.atob(base64);
+  const bytes = new Uint8Array(binaryStr.length);
+  for (let i = 0; i < binaryStr.length; i++) {
+    bytes[i] = binaryStr.charCodeAt(i);
+  }
+  return bytes.buffer;
+}
+
+
+
+/**
+ * arrayBuffer to base64
+ * @param data
+ * @param buffer
+ * @returns
+ */
+export function arrayBufferToBase64(data: ArrayBuffer) {
+  return window.btoa(String.fromCharCode(...new Uint8Array(data)));
+export function arrayBufferToBase64(buffer: ArrayBuffer) {
+  let binary = "";
+  const bytes = new Uint8Array(buffer);
+  const len = bytes.byteLength;
+  for (let i = 0; i < len; i++) {
+    binary += String.fromCharCode(bytes[i]);
+  }
+  return window.btoa(binary);
+}
+
+/**
+ * base64 to arrayBuffer
+ * @param data
+ * @returns
+ */
+export function base64ToArrayBuffer(data: string) {
+  const binary = window.atob(data);
+  const len = binary.length;
+  const bytes = new Uint8Array(len);
+  for (let i = 0; i < len; i++) {
+    bytes[i] = binary.charCodeAt(i);
+  }
+  return bytes.buffer;
+}

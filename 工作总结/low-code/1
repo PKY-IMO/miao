@@ -1,0 +1,143 @@
+{
+    "type": "click",
+    "name": "clickEvent",
+    "actions": [
+      {
+        "type": "jumpPage",
+        "name": "jumpPage2",
+        "mode": "page",
+        "target": "_self",
+        "pageId": "0c616e2e-39f5-4fab-b294-101cb89e37f4",
+        "params": [
+          {
+            "name": "In1",
+            "value": "'Today'"
+          }
+        ]
+      }
+    ]
+}
+{
+    "name": "proder",
+    "type": "variable",
+    "dataType": {
+      "type": "entity",
+      "value": "9adb77b2-2057-4584-b711-4c9ebbbfd8a9"
+    }
+}
+
+{
+    "name": "proder",
+    "type": "variable",
+    "dataType": {
+      "type": "entity",
+      "value": "9adb77b2-2057-4584-b711-4c9ebbbfd8a9"
+    },
+    "source": {
+      "type": "action",
+      "actionId": "f9a0bc34-30ee-443f-8d55-ee3b066c3841",
+      "parameters": [
+        {
+          "name": "orgCode",
+          "value": "orgCode"
+        },
+        {
+          "name": "orgName",
+          "value": "orgName"
+        }
+      ]
+    }
+  }
+
+
+
+  "events": [
+    {
+      "type": "click",
+      "name": "clickEvent",
+      "actions": [
+        {
+          "type": "serverAction",
+          "actionId": "f3125a1f-96b1-4fb2-b275-a91c18826fc9",
+          "name": "note",
+          "parameters": [
+            {
+                "name": "porder",
+                "value": "table1Selected"
+            }
+          ]
+        },
+        {
+          "type": "popup",
+          "name": "关闭合格弹窗",
+          "operationType": "close",
+          "popup": "zzzzz-39f1-4fab-b294-101cb89e5111"
+        },
+        {
+          "type": "message",
+          "name": "showMessage",
+          "level": "success",
+          "content": {
+          "type": "JSExpression",
+          "value": "note"
+          }
+        },
+        {
+          "type": "click",
+          "name": "clickEvent",
+          "actions": [
+            {
+              "type": "refreshAggregate",
+              "name": "刷新数据集ds1",
+              "aggregate": "ds1"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+
+9-17
+  ？1.顺序号拿不到 -> 先不做
+  -2.品名颜色等枚举？拿不到值 ok
+  ？3.表格选中问题 
+      列表不能选中
+      tableSelected无值 -> 批量无值
+      -当前列porder未赋值 -> tab列表无效
+  ？4.tab问题 
+    当前方案：
+      跳转问题 不能切换默认key
+      tab切换事件怎么拿到当前键值->确定跳转页面（写给link？）
+    新方案：
+      重新构建tab实现
+  ？5.批量按钮是否在未选中时可用？
+  -6.弹窗拿不到订单号 -> 拿到了
+  ？7.tab页面单订单状态不在查询语句中 -> lenny
+  -8.succed 拼错应该改为 succeed -> 不管
+
+9-18
+    -可报工->报工逻辑成功（订单状态的流转顺序？）
+  TODO：
+    1.disreason 文档中变量未定义，实际逻辑是否传给后台？
+    2.批量里的list的订单号遍历展示
+    3.table不能选中
+  待沟通：
+    1.顺序号 2.tab前端方案 3.tab和订单状态后台业务逻辑 3.批量按钮未选中时是否可用
+
+9-19
+  刷新不生效-"null"-重新载入页面
+
+9-20
+  1.成车质量问题
+    工厂单独返回数据集-orgName
+    是否启用的过滤-boolean和string
+    筛选条件 -> 展示不全 -> 查询条件
+  2.成车质量问题/新增
+    默认值: 工厂-0  失效日期-9999
+    提交没反应 -> 1.质量问题筛选条件
+  3.成车质量问题/新增
+    编辑后为删除 -> 编辑成功了但不显示 -> 1.质量问题筛选条件
+  4.成车质量检测
+    操作员 -> session
+  5.成车质量检测/详情
+    TOOD: 三个过检逻辑没有写

@@ -1,0 +1,87 @@
+hash: 
+    unique fixed length string to identify a piece of data
+
+hash Algorithm
+    a function that computes data into a unique hash
+
+mining:
+    the process of finding the "solution" to the blockchain "problem"
+    in our example, the "problem" was to find a hash that starts with four zeros
+    nodes get paid for mining blocks
+
+block:
+    a list of transactions mined together
+
+decentralized:
+    having no single point of authority
+
+nonce:
+    a "number used once" to find the "solution" to the blockchain problem
+    it's also used to defined the transaction number for an account/address
+
+私钥加签，公钥验签
+private key:
+    only known to the key holder, is's used to "sign" transactions
+
+public key:
+    is derived from your private key
+    anyone can "see" it, and use it to verify that a transaction came from you
+
+signing a transaction:
+    a "one way" process
+    someone with a private key signs a transaction by their private key being hashed with their transactions data
+    anyone can then verify this new transaction hash with your public key
+
+private key ||| > public key > address
+
+node:
+    a single instance in a decentralized network
+
+blockchains are resilient
+
+链选择算法
+    chain selection
+公民抵抗机制
+    sybil resistance
+        * poW: proof of Work （防止攻击，耗电大）
+            miners
+            ETH & BTC
+        * poS: proof of Stake (耗电小)
+            poS nodes put up collateral as a sybil resistance mechanism
+            validators
+            ETH2
+
+consensus is the mechanism used to agree on the state of a blockchain (mechanism: 方法）
+    * Nakamoto Consensus : 中本协议
+consensus is how blockchains decide what the state of the chain is
+
+blockchain nodes keep lists of the transactions that occur
+
+block confirmations
+
+Sybil Attack
+51% Attack
+
+scalablity -> sharding
+
+rollup
+
+sharding and rollups are scalablity solutions on layer 1
+
+gas prices are how much it costs to perform executions on-chain
+
+
+-------------------
+
+Smart Contracts have addresses just like our wallet accounts do
+Any time you change something on-chain, including making a new contract, it happens in a transaction.
+
+view and pure functions, when called alone, don't spend gas
+
+只有更改区块链的状态才会需要消耗gas
+if a gas calling function calls a view or pure function - only then will it cost gas
+
+Blockchain Oracle: 
+    Any device that interacts with the off-chain world to provide external data or computation to smart contracts.
+
+upwork

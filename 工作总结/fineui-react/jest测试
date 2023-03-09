@@ -1,0 +1,251 @@
+1.  snapshot一般只渲染dom结构, css文件需要导入
+    (例如css里面写了pointer-event: none, 测试fireEvent出错)
+    # 导入样式文件
+        import 'weui/dist/style/weui.min.css';
+    # 配置jest.config.js
+        moduleNameMapper: {
+            "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/test/__mocks__/fileMock.js", // 配置这一行主要是担心css文件中有.png等其他文件的引入
+            "\\.(css|less)$": "<rootDir>/test/__mocks__/styleMock.js",
+        },
+        moduleNameMapper: {
+            "\\.(css|less)$": "identity-obj-proxy"
+        }
+        moduleNameMapper: {
+            "\\.(css|less|scss|sss|styl)$": "jest-css-modules"
+        }
+
+2.  绕过类型校验: 先转换为unknown再转换为对应类型
+    const testProps = {
+        level: 9,
+    } as unknown as TitleProps;
+
+3.  umi-test 评估覆盖率指令
+    "test:coverage": "umi-test --coverage"
+    指标：% Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s 
+
+4. Editor onEnter测试不出来
+
+5. moseOver和click不一样,click是瞬时的mouseOver是hover持续状态
+    对于hover弹出框时的情景,需要区分
+
+6. input:
+    fireEvent.change(inputEle, { target: { value: 'a' } }) 生效
+    fireEvent.keyDown 不生效
+    oninput vs onchange:
+    oninput 是input内内容改变时触发, onchange则在内容改变并且input失焦后触发
+
+
+web前端测试与集成-金鑫
+前端要学的测试课-dell
+
+测试框架
+    jasmine
+    MOCHA
+    Jest* 
+        新颖、
+        基础好（性能高、简单、功能全）、
+        速度快、
+        API简单、
+        隔离性好、
+        IDE整合、
+        多项目运行、
+        覆盖率
+
+单元测试：unit testing 最小可测试单元进行验证
+            前端必须是模块
+集成测试：组装、联合测试
+        在单元测试的基础上，将所有模块安装设计要求组装成一个子系统或完整系统进行测试
+
+jest 初始化配置：
+  npx jest --init
+  jest.config.js
+    module
+        browser: false --node环境
+        coverage: true --代码覆盖率 终端/coverage文件
+    jest --watchAll 热更新监测
+    
+匹配器: 
+    toBe: 绝对相等
+        const a = {number: '1'}
+        expect(a).toBe({number: '1'}) // false
+
+    toEqual: 内容匹配
+        const a = {number: '1'}
+        expect(a).toBe({number: '1'}) // true
+
+    toBeNull: null
+        const a = null
+        expect(a).toBeNull() // true
+
+    toBeUndefined: undefined  -- toBeDefined 
+        const a = undefined
+        expect(a).toBeUndefined() // true
+
+    toBeTruthy
+    toBeFalsy
+    toBeLessThan toBeLessThanOrEqual
+    toBeGreaterhan toBeGreaterhanOrEqual
+    
+    toBeCloseTo: 浮点
+
+    toMatch: 字符串
+        const str = "abc"
+        expect(str).toMatch('a');
+
+    toContain: 数组/集合
+        const arr = ['a', 'b', 'c']
+        expect(arr).toContain('a');
+        const arr = ['a', 'b', 'c']
+        const data = new Set(arr)
+        expect(data).toContain('a');
+    
+    toThrow: 抛出异常
+
+jest 不支持es6 --> import
+    只支持require
+    需要配置babel转换器
+
+babel-jest 
+yarn test 
+    先去检测根目录开发环境中，是否有babel核心包，有 -> babelrc文件进行转换 -> 检测
+
+异步回调
+    1.done() // 返回结果
+        //普通测试只能执行到get. 不能执行到then 
+        fetchData = (fn) => {
+            axios.get('http://cccc').then((res) => {
+                fn(res.data)
+            })
+        }
+        test('fetchData', (done) => {
+            fetchData((data) => {
+                expect(data).toEqual({
+                    success: true
+                })
+                done()// 这样才能走到异步方法结束
+            })
+        })
+
+    2.加return // 返回promise
+        fetch2data = () => {
+            return axios.get('http://xxx')
+        }
+        test('fetch2Data', () => {
+            return fetch2Data().then((res) => { // 必须加return!!!
+                expect(res.data).toEqual({
+                    success: true
+                })
+            })
+        })
+    3. catch解决方法 //404 
+        test('fetch3Data', () => {
+            expect.assertions(1) // 断言必须执行1次expect,可解决不走catch的问题
+            return fetch2Data().catch((e) => {  // 必须走到catch才能走后面逻辑,即使不报错也不会有问题
+                expect(e.toString().indexOf('404')>-1).toBe(true)
+            })
+        })
+    4. 比对response的两种方法
+        test('fetch4Data', async () => {
+            // response
+            await expect(fetch4Data()).resolves.toMatchObject({
+                data: {
+                    success: true
+                }
+            })
+        })
+        test('fetch4Data', async () => {
+            // response
+            const res = await fetch4Data()
+            expect(res.data).toEqual({
+                success: true
+            })
+        })
+
+四个钩子函数
+    beforeAll(() => {
+        // 所有测试用例执行之前
+    })
+    afterAll(() => {
+        // 所有测试用例执行之后
+    })
+    beforeEach(() => {
+        // 每个测试用例执行之前
+    })
+    afterEach(() => {
+        // 每个测试用例执行之后
+    })
+
+
+userEvent和fireEvent区别
+    fireEvent.click() 
+        只会发出onClick
+    userEvent.click() 
+        会发出所有类型的事件,当用户clicks时就会发生这些事件
+        function clickLabel(label, init, {clickCount}) {
+            if (isLabelWithInternallyDisabledControl(label)) return
+          
+            fireEvent.pointerDown(label, init)
+            fireEvent.mouseDown(
+              label,
+              getMouseEventOptions('mousedown', init, clickCount),
+            )
+            fireEvent.pointerUp(label, init)
+            fireEvent.mouseUp(label, getMouseEventOptions('mouseup', init, clickCount))
+            fireEvent.click(label, getMouseEventOptions('click', init, clickCount))
+            // clicking the label will trigger a click of the label.control
+            // however, it will not focus the label.control so we have to do it
+            // ourselves.
+            if (label.control) focus(label.control)
+          }
+    userEvent源码
+        function clickElement(element, init, {clickCount}) {
+            const previousElement = getPreviouslyFocusedElement(element)
+            fireEvent.pointerDown(element, init)
+            if (!element.disabled) {
+            const continueDefaultHandling = fireEvent.mouseDown(
+                element,
+                getMouseEventOptions('mousedown', init, clickCount),
+            )
+            if (
+                continueDefaultHandling &&
+                element !== element.ownerDocument.activeElement
+            ) {
+                if (previousElement && !isFocusable(element)) {
+                blur(previousElement, init)
+                } else {
+                focus(element, init)
+                }
+            }
+            }
+            fireEvent.pointerUp(element, init)
+            if (!element.disabled) {
+            fireEvent.mouseUp(
+                element,
+                getMouseEventOptions('mouseup', init, clickCount),
+            )
+            fireEvent.click(element, getMouseEventOptions('click', init, clickCount))
+            const parentLabel = element.closest('label')
+            if (parentLabel?.control) focus(parentLabel.control, init)
+            }
+        }
+
+jest.runOnlyPendingTimers();
+    虽然我们在测试里能够使用setTimeout, setIntervel等定时器,
+    但是可能会遇到缓慢,不稳定等情况,
+    故此,官方给出的解决方法为:
+        使用假定时器jest.useFakeTimers() 
+        在测试运行后,为了防止测试结束后运行第三方库,
+        需要运行jest.useRealTimers()
+        恢复,经常的用法是:
+    beforeEach(() => {
+        jest.useFakeTimers();
+    })
+    afterEach(() => {
+        jest.runOnlyPendingTimers();
+        jest.useRealTimers();
+    })
+
+
+
+
+

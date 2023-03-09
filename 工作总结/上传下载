@@ -1,0 +1,314 @@
+//dataCabin
+{
+  "name": "recordFile",
+  "type": "variable",
+  "source": {
+    "type": "CallActionflow",
+    "actionId": "54a23be0-db45-4d18-aa2e-203e6d1cde20",
+    "parameters": [],
+    "$modelType": "Application/Page/SourceType"
+  },
+  "dataType": {
+    "value": "5e010461-7953-4a76-9dad-271c7911c3b1",
+    "type": "entity",
+    "list": false,
+    "$modelType": "Application/DataType"
+  },
+  "data": null,
+  "id": "c86c755b-5900-4f4d-a2dc-34f63f931909",
+  "$modelType": "Application/Page/LocalVariable"
+},
+{
+  "name": "recordFileList",
+  "type": "variable",
+  "source": {
+    "type": "CallActionflow",
+    "parameters": [
+      {
+        "name": "dispatchForm",
+        "value": "dispatchForm"
+      }
+    ],
+    "actionId": "a12e9413-c353-4ca3-9a9d-8cdc3c66f1de",
+    "$modelType": "Application/Page/SourceType"
+  },
+  "dataType": {
+    "value": "5e010461-7953-4a76-9dad-271c7911c3b1",
+    "type": "entity",
+    "list": true,
+    "$modelType": "Application/DataType"
+  },
+  "data": null,
+  "id": "4173cfb8-b5da-4373-b761-ed6108064636",
+  "$modelType": "Application/Page/LocalVariable"
+}
+// 上传组件
+{
+  "type": "s-upload",
+  "version": "0.0.1",
+  "name": "上传组件",
+  "props": {
+    "text": "+ 点击上传附件",
+    "accept": ".png",
+    "value": {
+      "type": "JSExpression",
+      "value": "recordFile"
+    },
+    "maxSize": 4
+  },
+  "controlProps": {
+    "showLabel": true,
+    "labelContent": "服务记录附件：",
+    "layout": "vertical",
+    "rules": []
+  },
+  "visible": true,
+  "enable": {
+    "type": "JSExpression",
+    "value": "editable && (currentUser.roles.includes('客服专员') || currentUser.roles.includes('客服主管') ||  currentUser.roles.includes('客服经理') || dispatchForm.major === currentUser.realName)"
+  },
+  "style": {
+    "margin": {},
+    "padding": {}
+  },
+  "events": [
+    {
+      "type": "change",
+      "name": "event",
+      "actions": [
+        {
+          "id": "338e2b71-8715-4112-b408-9d0adbe304ab",
+          "type": "assignment",
+          "name": "assignment",
+          "variable": "recordFile.dispatchForm",
+          "value": "dispatchForm"
+        },
+        {
+          "id": "0d6fe1c0-7c80-487e-a27a-c5077ad294e5",
+          "type": "modifyList",
+          "name": "modifyList",
+          "operationType": "add",
+          "variable": "recordFileList",
+          "value": "recordFile"
+        },
+        {
+          "id": "37dad65f-5f30-4ec7-83d9-12546617646c",
+          "type": "serverAction",
+          "name": "serverAction",
+          "parameters": [],
+          "actionId": "54a23be0-db45-4d18-aa2e-203e6d1cde20",
+          "returnName": "newFile"
+        },
+        {
+          "id": "337e2b71-8715-4112-b408-9d0adbe304ab",
+          "type": "assignment",
+          "name": "assignment",
+          "variable": "recordFile",
+          "value": "newFile"
+        }
+      ],
+      "id": "cd60915f-8c1d-4f16-bd6e-e15723a59c36",
+      "$modelType": "Application/Widget/Event"
+    }
+  ],
+  "id": "2ddd4793-6581-412d-8418-c4753e25d6a9",
+  "$modelType": "Application/Widget/UploadModel"
+},
+{
+  "type": "s-list",
+  "version": "0.0.1",
+  "name": "列表1",
+  "props": {
+    "source": "recordFileList"
+  },
+  "children": [
+    {
+      "type": "s-grid",
+      "version": "0.0.1",
+      "name": "行列组件8",
+      "props": {},
+      "children": [
+        {
+          "type": "s-grid-row",
+          "version": "0.0.1",
+          "name": "行8",
+          "props": {},
+          "children": [
+            {
+              "type": "s-grid-column",
+              "version": "0.0.1",
+              "name": "列39",
+              "props": {},
+              "children": [
+                {
+                  "type": "s-container",
+                  "version": "0.0.1",
+                  "name": "容器5",
+                  "props": {
+                    "direction": "row",
+                    "contentAlign": "left"
+                  },
+                  "children": [
+                    // 文件展示
+                    {
+                      "type": "s-button",
+                      "version": "0.0.1",
+                      "name": "按钮8",
+                      "props": {
+                        "value": {
+                          "type": "JSExpression",
+                          "value": "recordFileList.Current.name"
+                        },
+                        "buttonType": "link"
+                      },
+                      "visible": true,
+                      "enable": true,
+                      "style": {
+                        "margin": {},
+                        "padding": {},
+                        "width": {
+                          "value": 150,
+                          "unit": "px"
+                        }
+                      },
+                      "events": [
+                        {
+                          "type": "click",
+                          "name": "event",
+                          "actions": [
+                            {
+                              "id": "28c966d7-2187-43fb-953c-2c30d82b2221",
+                              "type": "download",
+                              "name": "download",
+                              "filename": "recordFileList.Current.name",
+                              "variable": "recordFileList.Current"
+                            }
+                          ],
+                          "id": "a99e98b6-e270-4c91-ad96-71a55a64a2bd",
+                          "$modelType": "Application/Widget/Event"
+                        }
+                      ],
+                      "id": "df4b0e79-f25a-4913-ad6d-f3be08e9bc7d",
+                      "$modelType": "Application/Widget/ButtonModel"
+                    }
+                  ],
+                  "visible": true,
+                  "enable": true,
+                  "style": {
+                    "margin": {},
+                    "padding": {},
+                    "width": {
+                      "value": 150,
+                      "unit": "px"
+                    }
+                  },
+                  "events": [],
+                  "id": "6279c1cc-9f66-4394-a50a-28324a176b2b",
+                  "$modelType": "Application/Widget/ContainerModel"
+                }
+              ],
+              "visible": true,
+              "enable": true,
+              "style": {
+                "margin": {
+                  "right": {
+                    "value": 16,
+                    "unit": "px"
+                  }
+                },
+                "padding": {}
+              },
+              "events": [],
+              "id": "b1d957fe-cd42-45cf-a78c-3aea64a0bd87",
+              "$modelType": "Application/Widget/GridColumnModel"
+            },
+            {
+              "type": "s-grid-column",
+              "version": "0.0.1",
+              "name": "列38",
+              "props": {},
+              "children": [
+                {
+                  "type": "s-button",
+                  "version": "0.0.1",
+                  "name": "按钮17",
+                  "props": {
+                    "value": "删除",
+                    "level": "danger",
+                    "buttonType": "link"
+                  },
+                  "visible": {
+                    "type": "JSExpression",
+                    "value": "editable && (currentUser.roles.includes('客服专员') || currentUser.roles.includes('客服主管') ||  currentUser.roles.includes('客服经理') || dispatchForm.major === currentUser.realName)"
+                  },
+                  "enable": true,
+                  "style": {
+                    "margin": {},
+                    "padding": {}
+                  },
+                  "events": [
+                    {
+                      "type": "click",
+                      "name": "event",
+                      "actions": [
+                        {
+                          "id": "338e2b71-8715-4112-b408-9d0adbe304ab",
+                          "type": "assignment",
+                          "name": "assignment",
+                          "variable": "recordFileList.Current.dispatchForm",
+                          "value": "null"
+                        },
+                        {
+                          "id": "1fa87c2b-498c-4683-90e3-7279c4c6daa0",
+                          "type": "modifyList",
+                          "name": "modifyList",
+                          "operationType": "delete",
+                          "variable": "recordFileList",
+                          "value": "recordFileList.Current"
+                        }
+                      ],
+                      "id": "fb6fe56a-ae21-41bc-83dd-e75c9be44479",
+                      "$modelType": "Application/Widget/Event"
+                    }
+                  ],
+                  "id": "daac9ff9-8511-4ccd-82f5-0f9fba5bfb4c",
+                  "$modelType": "Application/Widget/ButtonModel"
+                }
+              ],
+              "visible": true,
+              "enable": true,
+              "style": {},
+              "events": [],
+              "id": "4859a06b-59d6-4454-acc1-ba5876666e70",
+              "$modelType": "Application/Widget/GridColumnModel"
+            }
+          ],
+          "visible": true,
+          "enable": true,
+          "style": {},
+          "events": [],
+          "id": "69398b5c-654e-46fb-a5e4-42c0bc80766a",
+          "$modelType": "Application/Widget/GridRowModel"
+        }
+      ],
+      "visible": true,
+      "enable": true,
+      "style": {},
+      "events": [],
+      "id": "7233bdf2-88bc-4031-bdbf-4bccfbcfc6dd",
+      "$modelType": "Application/Widget/GridModel"
+    }
+  ],
+  "visible": {
+    "type": "JSExpression",
+    "value": "!!recordFileList.length "
+  },
+  "enable": true,
+  "style": {
+    "margin": {},
+    "padding": {}
+  },
+  "events": [],
+  "id": "bf2e2c70-3d80-4e2d-ab04-bc4ea476b775",
+  "$modelType": "Application/Widget/ListModel"
+}

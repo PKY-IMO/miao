@@ -1,0 +1,1383 @@
+{
+  "ds1": {
+    "result": {
+      "dataset": {
+        "dataType": "list|entity|03bbb19c-7d08-4717-915c-5a43a697d673",
+        "data": [
+          "325743969067732992",
+          "325678180876816384",
+          "325532210713202688",
+          "325532210612539392",
+          "325532210490904576",
+          "325464696784293888"
+        ]
+      }
+    },
+    "objects": [
+      {
+        "entityType": "03bbb19c-7d08-4717-915c-5a43a697d673",
+        "id": "325743969067732992",
+        "lastModified": 0,
+        "state": "NON_MODIFIED",
+        "attributes": {
+          "note": null,
+          "quantity": "1",
+          "receiverName": null,
+          "expressType": null,
+          "inReturnReason": null,
+          "receiverProvince": null,
+          "receiverCounty": null,
+          "type": "normalOutboundStorage",
+          "receiverCity": null,
+          "makedate": "1663307683145",
+          "outReturnReason": null,
+          "picture": null,
+          "stockCode": "11122ST8492",
+          "statusdate": "1663307683145",
+          "receiverPhone": null,
+          "requirementSource": "onlineChannels",
+          "receiverPlace": null,
+          "expressCompany": null,
+          "expressCode": null,
+          "productType": "generalGoods",
+          "status": "preserve",
+          "receiverCellphone": null
+        },
+        "references": [
+          {
+            "referenceType": "reference",
+            "name": "startLocation",
+            "oppositeName": "stockOrder_storeStorage",
+            "fetched": true,
+            "entityType": "97259cf1-c99d-40d8-bfc0-55b27fa8e464",
+            "value": "325419942990188544"
+          },
+          {
+            "referenceType": "reference",
+            "name": "endLocation",
+            "oppositeName": "stockOrder_storeStorage2",
+            "fetched": true,
+            "entityType": "97259cf1-c99d-40d8-bfc0-55b27fa8e464",
+            "value": "325419942990188544"
+          },
+          {
+            "referenceType": "reference",
+            "name": "allocateOrder",
+            "oppositeName": "stockOrder_allocateOrder",
+            "fetched": true,
+            "entityType": "68961628-52cd-40f9-b0e4-cdcba6c31edb",
+            "value": "325743892622348288"
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "stockOrderDetail",
+            "oppositeName": "stockOrder",
+            "fetched": true,
+            "entityType": "55933fe3-f2f1-4839-afca-173f2e701601",
+            "value": [
+              "325743969076121600"
+            ]
+          }
+        ]
+      },
+      {
+        "entityType": "03bbb19c-7d08-4717-915c-5a43a697d673",
+        "id": "325678180876816384",
+        "lastModified": 0,
+        "state": "NON_MODIFIED",
+        "attributes": {
+          "note": null,
+          "quantity": "1",
+          "receiverName": null,
+          "expressType": null,
+          "inReturnReason": null,
+          "receiverProvince": null,
+          "receiverCounty": null,
+          "type": "normalOutboundStorage",
+          "receiverCity": null,
+          "makedate": "1663291998018",
+          "outReturnReason": null,
+          "picture": null,
+          "stockCode": "11122ST1985",
+          "statusdate": "1663291998018",
+          "receiverPhone": null,
+          "requirementSource": "onlineChannels",
+          "receiverPlace": null,
+          "expressCompany": null,
+          "expressCode": null,
+          "productType": "generalGoods",
+          "status": "preserve",
+          "receiverCellphone": null
+        },
+        "references": [
+          {
+            "referenceType": "reference",
+            "name": "startLocation",
+            "oppositeName": "stockOrder_storeStorage",
+            "fetched": true,
+            "entityType": "97259cf1-c99d-40d8-bfc0-55b27fa8e464",
+            "value": "325419942759501824"
+          },
+          {
+            "referenceType": "reference",
+            "name": "endLocation",
+            "oppositeName": "stockOrder_storeStorage2",
+            "fetched": true,
+            "entityType": "97259cf1-c99d-40d8-bfc0-55b27fa8e464",
+            "value": "325419942977605632"
+          },
+          {
+            "referenceType": "reference",
+            "name": "allocateOrder",
+            "oppositeName": "stockOrder_allocateOrder",
+            "fetched": true,
+            "entityType": "68961628-52cd-40f9-b0e4-cdcba6c31edb",
+            "value": "325677861014999040"
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "stockOrderDetail",
+            "oppositeName": "stockOrder",
+            "fetched": true,
+            "entityType": "55933fe3-f2f1-4839-afca-173f2e701601",
+            "value": [
+              "325678180885204992"
+            ]
+          }
+        ]
+      },
+      {
+        "entityType": "03bbb19c-7d08-4717-915c-5a43a697d673",
+        "id": "325532210713202688",
+        "lastModified": 0,
+        "state": "NON_MODIFIED",
+        "attributes": {
+          "note": null,
+          "quantity": "1",
+          "receiverName": null,
+          "expressType": null,
+          "inReturnReason": null,
+          "receiverProvince": null,
+          "receiverCounty": null,
+          "type": "normalOutboundStorage",
+          "receiverCity": null,
+          "makedate": "1663257196023",
+          "outReturnReason": null,
+          "picture": null,
+          "stockCode": "11122ST4773",
+          "statusdate": "1663257196023",
+          "receiverPhone": null,
+          "requirementSource": "onlineChannels",
+          "receiverPlace": null,
+          "expressCompany": null,
+          "expressCode": null,
+          "productType": "generalGoods",
+          "status": "preserve",
+          "receiverCellphone": null
+        },
+        "references": [
+          {
+            "referenceType": "reference",
+            "name": "startLocation",
+            "oppositeName": "stockOrder_storeStorage",
+            "fetched": true,
+            "entityType": "97259cf1-c99d-40d8-bfc0-55b27fa8e464",
+            "value": "325419942985994240"
+          },
+          {
+            "referenceType": "reference",
+            "name": "endLocation",
+            "oppositeName": "stockOrder_storeStorage2",
+            "fetched": true,
+            "entityType": "97259cf1-c99d-40d8-bfc0-55b27fa8e464",
+            "value": "325419942977605632"
+          },
+          {
+            "referenceType": "reference",
+            "name": "allocateOrder",
+            "oppositeName": "stockOrder_allocateOrder",
+            "fetched": true,
+            "entityType": "68961628-52cd-40f9-b0e4-cdcba6c31edb",
+            "value": "325531997403484160"
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "stockOrderDetail",
+            "oppositeName": "stockOrder",
+            "fetched": true,
+            "entityType": "55933fe3-f2f1-4839-afca-173f2e701601",
+            "value": [
+              "325532210721591296"
+            ]
+          }
+        ]
+      },
+      {
+        "entityType": "03bbb19c-7d08-4717-915c-5a43a697d673",
+        "id": "325532210612539392",
+        "lastModified": 0,
+        "state": "NON_MODIFIED",
+        "attributes": {
+          "note": null,
+          "quantity": "1",
+          "receiverName": null,
+          "expressType": null,
+          "inReturnReason": null,
+          "receiverProvince": null,
+          "receiverCounty": null,
+          "type": "normalOutboundStorage",
+          "receiverCity": null,
+          "makedate": "1663257196004",
+          "outReturnReason": null,
+          "picture": null,
+          "stockCode": "11122ST5805",
+          "statusdate": "1663257196004",
+          "receiverPhone": null,
+          "requirementSource": "onlineChannels",
+          "receiverPlace": null,
+          "expressCompany": null,
+          "expressCode": null,
+          "productType": "generalGoods",
+          "status": "preserve",
+          "receiverCellphone": null
+        },
+        "references": [
+          {
+            "referenceType": "reference",
+            "name": "startLocation",
+            "oppositeName": "stockOrder_storeStorage",
+            "fetched": true,
+            "entityType": "97259cf1-c99d-40d8-bfc0-55b27fa8e464",
+            "value": "325419942759501824"
+          },
+          {
+            "referenceType": "reference",
+            "name": "endLocation",
+            "oppositeName": "stockOrder_storeStorage2",
+            "fetched": true,
+            "entityType": "97259cf1-c99d-40d8-bfc0-55b27fa8e464",
+            "value": "325419942985994240"
+          },
+          {
+            "referenceType": "reference",
+            "name": "allocateOrder",
+            "oppositeName": "stockOrder_allocateOrder",
+            "fetched": true,
+            "entityType": "68961628-52cd-40f9-b0e4-cdcba6c31edb",
+            "value": "325531997403484160"
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "stockOrderDetail",
+            "oppositeName": "stockOrder",
+            "fetched": true,
+            "entityType": "55933fe3-f2f1-4839-afca-173f2e701601",
+            "value": [
+              "325532210629316608"
+            ]
+          }
+        ]
+      },
+      {
+        "entityType": "03bbb19c-7d08-4717-915c-5a43a697d673",
+        "id": "325532210490904576",
+        "lastModified": 0,
+        "state": "NON_MODIFIED",
+        "attributes": {
+          "note": null,
+          "quantity": "2",
+          "receiverName": null,
+          "expressType": null,
+          "inReturnReason": null,
+          "receiverProvince": null,
+          "receiverCounty": null,
+          "type": "normalOutboundStorage",
+          "receiverCity": null,
+          "makedate": "1663257195966",
+          "outReturnReason": null,
+          "picture": null,
+          "stockCode": "11122ST5205",
+          "statusdate": "1663257195966",
+          "receiverPhone": null,
+          "requirementSource": "onlineChannels",
+          "receiverPlace": null,
+          "expressCompany": null,
+          "expressCode": null,
+          "productType": "generalGoods",
+          "status": "preserve",
+          "receiverCellphone": null
+        },
+        "references": [
+          {
+            "referenceType": "reference",
+            "name": "startLocation",
+            "oppositeName": "stockOrder_storeStorage",
+            "fetched": true,
+            "entityType": "97259cf1-c99d-40d8-bfc0-55b27fa8e464",
+            "value": "325419942759501824"
+          },
+          {
+            "referenceType": "reference",
+            "name": "endLocation",
+            "oppositeName": "stockOrder_storeStorage2",
+            "fetched": true,
+            "entityType": "97259cf1-c99d-40d8-bfc0-55b27fa8e464",
+            "value": "325419942977605632"
+          },
+          {
+            "referenceType": "reference",
+            "name": "allocateOrder",
+            "oppositeName": "stockOrder_allocateOrder",
+            "fetched": true,
+            "entityType": "68961628-52cd-40f9-b0e4-cdcba6c31edb",
+            "value": "325531997403484160"
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "stockOrderDetail",
+            "oppositeName": "stockOrder",
+            "fetched": true,
+            "entityType": "55933fe3-f2f1-4839-afca-173f2e701601",
+            "value": [
+              "325532210507681792",
+              "325532210503487488"
+            ]
+          }
+        ]
+      },
+      {
+        "entityType": "03bbb19c-7d08-4717-915c-5a43a697d673",
+        "id": "325464696784293888",
+        "lastModified": 0,
+        "state": "NON_MODIFIED",
+        "attributes": {
+          "note": null,
+          "quantity": "102",
+          "receiverName": null,
+          "expressType": null,
+          "inReturnReason": null,
+          "receiverProvince": null,
+          "receiverCounty": null,
+          "type": "normalOutboundStorage",
+          "receiverCity": null,
+          "makedate": "1663241099458",
+          "outReturnReason": null,
+          "picture": null,
+          "stockCode": "11122ST9818",
+          "statusdate": "1663241099458",
+          "receiverPhone": null,
+          "requirementSource": "onlineChannels",
+          "receiverPlace": null,
+          "expressCompany": null,
+          "expressCode": null,
+          "productType": "generalGoods",
+          "status": "preserve",
+          "receiverCellphone": null
+        },
+        "references": [
+          {
+            "referenceType": "reference",
+            "name": "startLocation",
+            "oppositeName": "stockOrder_storeStorage",
+            "fetched": true,
+            "entityType": "97259cf1-c99d-40d8-bfc0-55b27fa8e464",
+            "value": "325419942990188544"
+          },
+          {
+            "referenceType": "reference",
+            "name": "endLocation",
+            "oppositeName": "stockOrder_storeStorage2",
+            "fetched": true,
+            "entityType": "97259cf1-c99d-40d8-bfc0-55b27fa8e464",
+            "value": "325419942994382848"
+          },
+          {
+            "referenceType": "reference",
+            "name": "allocateOrder",
+            "oppositeName": "stockOrder_allocateOrder",
+            "fetched": true,
+            "entityType": "68961628-52cd-40f9-b0e4-cdcba6c31edb",
+            "value": "325464393959739392"
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "stockOrderDetail",
+            "oppositeName": "stockOrder",
+            "fetched": true,
+            "entityType": "55933fe3-f2f1-4839-afca-173f2e701601",
+            "value": [
+              "325464696817848320",
+              "325464696805265408"
+            ]
+          }
+        ]
+      },
+      {
+        "entityType": "55933fe3-f2f1-4839-afca-173f2e701601",
+        "id": "325743969076121600",
+        "lastModified": 0,
+        "state": "NON_MODIFIED",
+        "attributes": {
+          "note": null,
+          "reason": null,
+          "planOutQuantity": "1",
+          "outQuantity": "0",
+          "inQuantity": "0"
+        },
+        "references": [
+          {
+            "referenceType": "reference",
+            "name": "product",
+            "oppositeName": "stockOrderDetail",
+            "fetched": true,
+            "entityType": "5b447dd1-ea08-4ebc-a433-a5682b665373",
+            "value": "325419943002771456"
+          },
+          {
+            "referenceType": "reference",
+            "name": "stockOrder",
+            "oppositeName": "stockOrderDetail",
+            "fetched": true,
+            "entityType": "03bbb19c-7d08-4717-915c-5a43a697d673",
+            "value": "325743969067732992"
+          }
+        ]
+      },
+      {
+        "entityType": "97259cf1-c99d-40d8-bfc0-55b27fa8e464",
+        "id": "325419942990188544",
+        "lastModified": 0,
+        "state": "NON_MODIFIED",
+        "attributes": {
+          "name": "江镇仓库",
+          "type": "storehouse",
+          "placeCode": "2"
+        },
+        "references": [
+          {
+            "referenceType": "reference",
+            "name": "user",
+            "oppositeName": "storeStorage",
+            "fetched": true,
+            "entityType": "c9aa482a-c65a-4924-96ec-3bc2e68fcad6",
+            "value": null
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "storeStorage_transferOrder",
+            "oppositeName": "startLocation",
+            "fetched": false,
+            "entityType": "04784e19-7354-43b1-bff1-a0113a13189c",
+            "value": null
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "storeStorage_transferOrder2",
+            "oppositeName": "endLocation",
+            "fetched": false,
+            "entityType": "04784e19-7354-43b1-bff1-a0113a13189c",
+            "value": null
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "stockOrder_storeStorage2",
+            "oppositeName": "endLocation",
+            "fetched": false,
+            "entityType": "03bbb19c-7d08-4717-915c-5a43a697d673",
+            "value": null
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "stockOrder_storeStorage",
+            "oppositeName": "startLocation",
+            "fetched": false,
+            "entityType": "03bbb19c-7d08-4717-915c-5a43a697d673",
+            "value": null
+          }
+        ]
+      },
+      {
+        "entityType": "68961628-52cd-40f9-b0e4-cdcba6c31edb",
+        "id": "325743892622348288",
+        "lastModified": 0,
+        "state": "NON_MODIFIED",
+        "attributes": {
+          "note": null,
+          "allocateType": "allocation",
+          "makedate": "1663307664919",
+          "status": "commited",
+          "statusdate": "1663307683162",
+          "allocateCode": "11122AL1098"
+        },
+        "references": [
+          {
+            "referenceType": "reference",
+            "name": "user",
+            "oppositeName": "allocateOrder",
+            "fetched": false,
+            "entityType": "c9aa482a-c65a-4924-96ec-3bc2e68fcad6",
+            "value": null
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "transferOrder",
+            "oppositeName": "allocateOrder",
+            "fetched": false,
+            "entityType": "04784e19-7354-43b1-bff1-a0113a13189c",
+            "value": null
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "stockOrder_allocateOrder",
+            "oppositeName": "allocateOrder",
+            "fetched": false,
+            "entityType": "03bbb19c-7d08-4717-915c-5a43a697d673",
+            "value": null
+          }
+        ]
+      },
+      {
+        "entityType": "55933fe3-f2f1-4839-afca-173f2e701601",
+        "id": "325678180885204992",
+        "lastModified": 0,
+        "state": "NON_MODIFIED",
+        "attributes": {
+          "note": null,
+          "reason": null,
+          "planOutQuantity": "1",
+          "outQuantity": "0",
+          "inQuantity": "0"
+        },
+        "references": [
+          {
+            "referenceType": "reference",
+            "name": "product",
+            "oppositeName": "stockOrderDetail",
+            "fetched": true,
+            "entityType": "5b447dd1-ea08-4ebc-a433-a5682b665373",
+            "value": "325419943002771456"
+          },
+          {
+            "referenceType": "reference",
+            "name": "stockOrder",
+            "oppositeName": "stockOrderDetail",
+            "fetched": true,
+            "entityType": "03bbb19c-7d08-4717-915c-5a43a697d673",
+            "value": "325678180876816384"
+          }
+        ]
+      },
+      {
+        "entityType": "97259cf1-c99d-40d8-bfc0-55b27fa8e464",
+        "id": "325419942759501824",
+        "lastModified": 0,
+        "state": "NON_MODIFIED",
+        "attributes": {
+          "name": "上海淮海百盛",
+          "type": "shop",
+          "placeCode": "12"
+        },
+        "references": [
+          {
+            "referenceType": "reference",
+            "name": "user",
+            "oppositeName": "storeStorage",
+            "fetched": false,
+            "entityType": "c9aa482a-c65a-4924-96ec-3bc2e68fcad6",
+            "value": null
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "storeStorage_transferOrder",
+            "oppositeName": "startLocation",
+            "fetched": false,
+            "entityType": "04784e19-7354-43b1-bff1-a0113a13189c",
+            "value": null
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "storeStorage_transferOrder2",
+            "oppositeName": "endLocation",
+            "fetched": false,
+            "entityType": "04784e19-7354-43b1-bff1-a0113a13189c",
+            "value": null
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "stockOrder_storeStorage2",
+            "oppositeName": "endLocation",
+            "fetched": false,
+            "entityType": "03bbb19c-7d08-4717-915c-5a43a697d673",
+            "value": null
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "stockOrder_storeStorage",
+            "oppositeName": "startLocation",
+            "fetched": false,
+            "entityType": "03bbb19c-7d08-4717-915c-5a43a697d673",
+            "value": null
+          }
+        ]
+      },
+      {
+        "entityType": "97259cf1-c99d-40d8-bfc0-55b27fa8e464",
+        "id": "325419942977605632",
+        "lastModified": 0,
+        "state": "NON_MODIFIED",
+        "attributes": {
+          "name": "上海月星环球港",
+          "type": "shop",
+          "placeCode": "22"
+        },
+        "references": [
+          {
+            "referenceType": "reference",
+            "name": "user",
+            "oppositeName": "storeStorage",
+            "fetched": false,
+            "entityType": "c9aa482a-c65a-4924-96ec-3bc2e68fcad6",
+            "value": null
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "storeStorage_transferOrder",
+            "oppositeName": "startLocation",
+            "fetched": false,
+            "entityType": "04784e19-7354-43b1-bff1-a0113a13189c",
+            "value": null
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "storeStorage_transferOrder2",
+            "oppositeName": "endLocation",
+            "fetched": false,
+            "entityType": "04784e19-7354-43b1-bff1-a0113a13189c",
+            "value": null
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "stockOrder_storeStorage2",
+            "oppositeName": "endLocation",
+            "fetched": false,
+            "entityType": "03bbb19c-7d08-4717-915c-5a43a697d673",
+            "value": null
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "stockOrder_storeStorage",
+            "oppositeName": "startLocation",
+            "fetched": false,
+            "entityType": "03bbb19c-7d08-4717-915c-5a43a697d673",
+            "value": null
+          }
+        ]
+      },
+      {
+        "entityType": "68961628-52cd-40f9-b0e4-cdcba6c31edb",
+        "id": "325677861014999040",
+        "lastModified": 0,
+        "state": "NON_MODIFIED",
+        "attributes": {
+          "note": null,
+          "allocateType": "transfer",
+          "makedate": "1663291921757",
+          "status": "commited",
+          "statusdate": "1663291998059",
+          "allocateCode": "11122AL7559"
+        },
+        "references": [
+          {
+            "referenceType": "reference",
+            "name": "user",
+            "oppositeName": "allocateOrder",
+            "fetched": false,
+            "entityType": "c9aa482a-c65a-4924-96ec-3bc2e68fcad6",
+            "value": null
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "transferOrder",
+            "oppositeName": "allocateOrder",
+            "fetched": false,
+            "entityType": "04784e19-7354-43b1-bff1-a0113a13189c",
+            "value": null
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "stockOrder_allocateOrder",
+            "oppositeName": "allocateOrder",
+            "fetched": false,
+            "entityType": "03bbb19c-7d08-4717-915c-5a43a697d673",
+            "value": null
+          }
+        ]
+      },
+      {
+        "entityType": "55933fe3-f2f1-4839-afca-173f2e701601",
+        "id": "325532210721591296",
+        "lastModified": 0,
+        "state": "NON_MODIFIED",
+        "attributes": {
+          "note": null,
+          "reason": null,
+          "planOutQuantity": "1",
+          "outQuantity": "0",
+          "inQuantity": "0"
+        },
+        "references": [
+          {
+            "referenceType": "reference",
+            "name": "product",
+            "oppositeName": "stockOrderDetail",
+            "fetched": true,
+            "entityType": "5b447dd1-ea08-4ebc-a433-a5682b665373",
+            "value": "325419943053103104"
+          },
+          {
+            "referenceType": "reference",
+            "name": "stockOrder",
+            "oppositeName": "stockOrderDetail",
+            "fetched": true,
+            "entityType": "03bbb19c-7d08-4717-915c-5a43a697d673",
+            "value": "325532210713202688"
+          }
+        ]
+      },
+      {
+        "entityType": "97259cf1-c99d-40d8-bfc0-55b27fa8e464",
+        "id": "325419942985994240",
+        "lastModified": 0,
+        "state": "NON_MODIFIED",
+        "attributes": {
+          "name": "上海杨浦合生",
+          "type": "shop",
+          "placeCode": "99"
+        },
+        "references": [
+          {
+            "referenceType": "reference",
+            "name": "user",
+            "oppositeName": "storeStorage",
+            "fetched": true,
+            "entityType": "c9aa482a-c65a-4924-96ec-3bc2e68fcad6",
+            "value": null
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "storeStorage_transferOrder",
+            "oppositeName": "startLocation",
+            "fetched": false,
+            "entityType": "04784e19-7354-43b1-bff1-a0113a13189c",
+            "value": null
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "storeStorage_transferOrder2",
+            "oppositeName": "endLocation",
+            "fetched": false,
+            "entityType": "04784e19-7354-43b1-bff1-a0113a13189c",
+            "value": null
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "stockOrder_storeStorage2",
+            "oppositeName": "endLocation",
+            "fetched": false,
+            "entityType": "03bbb19c-7d08-4717-915c-5a43a697d673",
+            "value": null
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "stockOrder_storeStorage",
+            "oppositeName": "startLocation",
+            "fetched": false,
+            "entityType": "03bbb19c-7d08-4717-915c-5a43a697d673",
+            "value": null
+          }
+        ]
+      },
+      {
+        "entityType": "68961628-52cd-40f9-b0e4-cdcba6c31edb",
+        "id": "325531997403484160",
+        "lastModified": 0,
+        "state": "NON_MODIFIED",
+        "attributes": {
+          "note": null,
+          "allocateType": "transfer",
+          "makedate": "1663257145163",
+          "status": "commited",
+          "statusdate": "1663257196034",
+          "allocateCode": "11122AL6410"
+        },
+        "references": [
+          {
+            "referenceType": "reference",
+            "name": "user",
+            "oppositeName": "allocateOrder",
+            "fetched": false,
+            "entityType": "c9aa482a-c65a-4924-96ec-3bc2e68fcad6",
+            "value": null
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "transferOrder",
+            "oppositeName": "allocateOrder",
+            "fetched": false,
+            "entityType": "04784e19-7354-43b1-bff1-a0113a13189c",
+            "value": null
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "stockOrder_allocateOrder",
+            "oppositeName": "allocateOrder",
+            "fetched": false,
+            "entityType": "03bbb19c-7d08-4717-915c-5a43a697d673",
+            "value": null
+          }
+        ]
+      },
+      {
+        "entityType": "55933fe3-f2f1-4839-afca-173f2e701601",
+        "id": "325532210629316608",
+        "lastModified": 0,
+        "state": "NON_MODIFIED",
+        "attributes": {
+          "note": null,
+          "reason": null,
+          "planOutQuantity": "1",
+          "outQuantity": "0",
+          "inQuantity": "0"
+        },
+        "references": [
+          {
+            "referenceType": "reference",
+            "name": "product",
+            "oppositeName": "stockOrderDetail",
+            "fetched": true,
+            "entityType": "5b447dd1-ea08-4ebc-a433-a5682b665373",
+            "value": "325419943103434752"
+          },
+          {
+            "referenceType": "reference",
+            "name": "stockOrder",
+            "oppositeName": "stockOrderDetail",
+            "fetched": true,
+            "entityType": "03bbb19c-7d08-4717-915c-5a43a697d673",
+            "value": "325532210612539392"
+          }
+        ]
+      },
+      {
+        "entityType": "55933fe3-f2f1-4839-afca-173f2e701601",
+        "id": "325532210507681792",
+        "lastModified": 0,
+        "state": "NON_MODIFIED",
+        "attributes": {
+          "note": null,
+          "reason": null,
+          "planOutQuantity": "1",
+          "outQuantity": "0",
+          "inQuantity": "0"
+        },
+        "references": [
+          {
+            "referenceType": "reference",
+            "name": "product",
+            "oppositeName": "stockOrderDetail",
+            "fetched": true,
+            "entityType": "5b447dd1-ea08-4ebc-a433-a5682b665373",
+            "value": "325419943053103104"
+          },
+          {
+            "referenceType": "reference",
+            "name": "stockOrder",
+            "oppositeName": "stockOrderDetail",
+            "fetched": true,
+            "entityType": "03bbb19c-7d08-4717-915c-5a43a697d673",
+            "value": "325532210490904576"
+          }
+        ]
+      },
+      {
+        "entityType": "55933fe3-f2f1-4839-afca-173f2e701601",
+        "id": "325532210503487488",
+        "lastModified": 0,
+        "state": "NON_MODIFIED",
+        "attributes": {
+          "note": null,
+          "reason": null,
+          "planOutQuantity": "1",
+          "outQuantity": "0",
+          "inQuantity": "0"
+        },
+        "references": [
+          {
+            "referenceType": "reference",
+            "name": "product",
+            "oppositeName": "stockOrderDetail",
+            "fetched": true,
+            "entityType": "5b447dd1-ea08-4ebc-a433-a5682b665373",
+            "value": "325419943002771456"
+          },
+          {
+            "referenceType": "reference",
+            "name": "stockOrder",
+            "oppositeName": "stockOrderDetail",
+            "fetched": true,
+            "entityType": "03bbb19c-7d08-4717-915c-5a43a697d673",
+            "value": "325532210490904576"
+          }
+        ]
+      },
+      {
+        "entityType": "55933fe3-f2f1-4839-afca-173f2e701601",
+        "id": "325464696817848320",
+        "lastModified": 0,
+        "state": "NON_MODIFIED",
+        "attributes": {
+          "note": null,
+          "reason": null,
+          "planOutQuantity": "101",
+          "outQuantity": "0",
+          "inQuantity": "0"
+        },
+        "references": [
+          {
+            "referenceType": "reference",
+            "name": "product",
+            "oppositeName": "stockOrderDetail",
+            "fetched": true,
+            "entityType": "5b447dd1-ea08-4ebc-a433-a5682b665373",
+            "value": "325419943053103104"
+          },
+          {
+            "referenceType": "reference",
+            "name": "stockOrder",
+            "oppositeName": "stockOrderDetail",
+            "fetched": true,
+            "entityType": "03bbb19c-7d08-4717-915c-5a43a697d673",
+            "value": "325464696784293888"
+          }
+        ]
+      },
+      {
+        "entityType": "55933fe3-f2f1-4839-afca-173f2e701601",
+        "id": "325464696805265408",
+        "lastModified": 0,
+        "state": "NON_MODIFIED",
+        "attributes": {
+          "note": null,
+          "reason": null,
+          "planOutQuantity": "1",
+          "outQuantity": "0",
+          "inQuantity": "0"
+        },
+        "references": [
+          {
+            "referenceType": "reference",
+            "name": "product",
+            "oppositeName": "stockOrderDetail",
+            "fetched": true,
+            "entityType": "5b447dd1-ea08-4ebc-a433-a5682b665373",
+            "value": "325419943036325888"
+          },
+          {
+            "referenceType": "reference",
+            "name": "stockOrder",
+            "oppositeName": "stockOrderDetail",
+            "fetched": true,
+            "entityType": "03bbb19c-7d08-4717-915c-5a43a697d673",
+            "value": "325464696784293888"
+          }
+        ]
+      },
+      {
+        "entityType": "97259cf1-c99d-40d8-bfc0-55b27fa8e464",
+        "id": "325419942994382848",
+        "lastModified": 0,
+        "state": "NON_MODIFIED",
+        "attributes": {
+          "name": "昆山仓库",
+          "type": "storehouse",
+          "placeCode": "1"
+        },
+        "references": [
+          {
+            "referenceType": "reference",
+            "name": "user",
+            "oppositeName": "storeStorage",
+            "fetched": true,
+            "entityType": "c9aa482a-c65a-4924-96ec-3bc2e68fcad6",
+            "value": null
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "storeStorage_transferOrder",
+            "oppositeName": "startLocation",
+            "fetched": false,
+            "entityType": "04784e19-7354-43b1-bff1-a0113a13189c",
+            "value": null
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "storeStorage_transferOrder2",
+            "oppositeName": "endLocation",
+            "fetched": false,
+            "entityType": "04784e19-7354-43b1-bff1-a0113a13189c",
+            "value": null
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "stockOrder_storeStorage2",
+            "oppositeName": "endLocation",
+            "fetched": false,
+            "entityType": "03bbb19c-7d08-4717-915c-5a43a697d673",
+            "value": null
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "stockOrder_storeStorage",
+            "oppositeName": "startLocation",
+            "fetched": false,
+            "entityType": "03bbb19c-7d08-4717-915c-5a43a697d673",
+            "value": null
+          }
+        ]
+      },
+      {
+        "entityType": "68961628-52cd-40f9-b0e4-cdcba6c31edb",
+        "id": "325464393959739392",
+        "lastModified": 0,
+        "state": "NON_MODIFIED",
+        "attributes": {
+          "note": null,
+          "allocateType": "allocation",
+          "makedate": "1663241028784",
+          "status": "commited",
+          "statusdate": "1663241099475",
+          "allocateCode": "11122AL3980"
+        },
+        "references": [
+          {
+            "referenceType": "reference",
+            "name": "user",
+            "oppositeName": "allocateOrder",
+            "fetched": false,
+            "entityType": "c9aa482a-c65a-4924-96ec-3bc2e68fcad6",
+            "value": null
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "transferOrder",
+            "oppositeName": "allocateOrder",
+            "fetched": false,
+            "entityType": "04784e19-7354-43b1-bff1-a0113a13189c",
+            "value": null
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "stockOrder_allocateOrder",
+            "oppositeName": "allocateOrder",
+            "fetched": false,
+            "entityType": "03bbb19c-7d08-4717-915c-5a43a697d673",
+            "value": null
+          }
+        ]
+      },
+      {
+        "entityType": "5b447dd1-ea08-4ebc-a433-a5682b665373",
+        "id": "325419943002771456",
+        "lastModified": 0,
+        "state": "NON_MODIFIED",
+        "attributes": {
+          "color": "松柏蓝",
+          "size": "小号",
+          "SKUCode": "104008P0560B441",
+          "year": "2020",
+          "pattern": "裤子",
+          "SKCCode": "104008P0560B44",
+          "description": "104008P0560，松柏蓝，小号，裤子，2020，秋季，08B",
+          "season": "秋季",
+          "styleCode": "104008P0560"
+        },
+        "references": [
+          {
+            "referenceType": "referenceSet",
+            "name": "transferOrder",
+            "oppositeName": "product",
+            "fetched": false,
+            "entityType": "04784e19-7354-43b1-bff1-a0113a13189c",
+            "value": null
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "stockOrderDetail",
+            "oppositeName": "product",
+            "fetched": false,
+            "entityType": "55933fe3-f2f1-4839-afca-173f2e701601",
+            "value": null
+          }
+        ]
+      },
+      {
+        "entityType": "5b447dd1-ea08-4ebc-a433-a5682b665373",
+        "id": "325419943053103104",
+        "lastModified": 0,
+        "state": "NON_MODIFIED",
+        "attributes": {
+          "color": "纯黑",
+          "size": "特小号",
+          "SKUCode": "104010P0604C070",
+          "year": "2020",
+          "pattern": "裤子",
+          "SKCCode": "104010P0604C07",
+          "description": "104010P0604，纯黑，特小号，裤子，2020，冬季，10B",
+          "season": "冬季",
+          "styleCode": "104010P0604"
+        },
+        "references": [
+          {
+            "referenceType": "referenceSet",
+            "name": "transferOrder",
+            "oppositeName": "product",
+            "fetched": false,
+            "entityType": "04784e19-7354-43b1-bff1-a0113a13189c",
+            "value": null
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "stockOrderDetail",
+            "oppositeName": "product",
+            "fetched": false,
+            "entityType": "55933fe3-f2f1-4839-afca-173f2e701601",
+            "value": null
+          }
+        ]
+      },
+      {
+        "entityType": "5b447dd1-ea08-4ebc-a433-a5682b665373",
+        "id": "325419943103434752",
+        "lastModified": 0,
+        "state": "NON_MODIFIED",
+        "attributes": {
+          "color": "纯黑",
+          "size": "特小号",
+          "SKUCode": "104009P0775C070",
+          "year": "2020",
+          "pattern": "裤子",
+          "SKCCode": "104009P0775C07",
+          "description": "104009P0775，纯黑，特小号，裤子，2020，冬季，09B",
+          "season": "冬季",
+          "styleCode": "104009P0775"
+        },
+        "references": [
+          {
+            "referenceType": "referenceSet",
+            "name": "transferOrder",
+            "oppositeName": "product",
+            "fetched": false,
+            "entityType": "04784e19-7354-43b1-bff1-a0113a13189c",
+            "value": null
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "stockOrderDetail",
+            "oppositeName": "product",
+            "fetched": false,
+            "entityType": "55933fe3-f2f1-4839-afca-173f2e701601",
+            "value": null
+          }
+        ]
+      },
+      {
+        "entityType": "5b447dd1-ea08-4ebc-a433-a5682b665373",
+        "id": "325419943036325888",
+        "lastModified": 0,
+        "state": "NON_MODIFIED",
+        "attributes": {
+          "color": "松柏蓝",
+          "size": "大号",
+          "SKUCode": "104008P0560B443",
+          "year": "2020",
+          "pattern": "裤子",
+          "SKCCode": "104008P0560B44",
+          "description": "104008P0560，松柏蓝，大号，裤子，2020，秋季，08B",
+          "season": "秋季",
+          "styleCode": "104008P0560"
+        },
+        "references": [
+          {
+            "referenceType": "referenceSet",
+            "name": "transferOrder",
+            "oppositeName": "product",
+            "fetched": false,
+            "entityType": "04784e19-7354-43b1-bff1-a0113a13189c",
+            "value": null
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "stockOrderDetail",
+            "oppositeName": "product",
+            "fetched": false,
+            "entityType": "55933fe3-f2f1-4839-afca-173f2e701601",
+            "value": null
+          }
+        ]
+      }
+    ],
+    "meta": {
+      "entityMeta": [
+        {
+          "attributeTypes": {
+            "note": "string",
+            "quantity": "integer",
+            "receiverName": "string",
+            "expressType": "string",
+            "inReturnReason": "string",
+            "receiverProvince": "string",
+            "receiverCounty": "string",
+            "type": "enumeration|afc239de-679d-463e-94b7-cbe0c04e85fe",
+            "receiverCity": "string",
+            "makedate": "datetime",
+            "outReturnReason": "string",
+            "picture": "binary",
+            "stockCode": "string",
+            "statusdate": "datetime",
+            "receiverPhone": "string",
+            "requirementSource": "enumeration|38230115-e578-4e49-93f6-7465c0e3873b",
+            "receiverPlace": "string",
+            "expressCompany": "string",
+            "expressCode": "string",
+            "productType": "enumeration|ba647eeb-691a-4021-84e2-e9a110f0a8ee",
+            "status": "enumeration|2338fda7-fa7a-43a4-9e4c-0da85b04a627",
+            "receiverCellphone": "string"
+          },
+          "entityType": "03bbb19c-7d08-4717-915c-5a43a697d673"
+        },
+        {
+          "attributeTypes": {
+            "note": "string",
+            "reason": "string",
+            "planOutQuantity": "integer",
+            "outQuantity": "integer",
+            "inQuantity": "integer"
+          },
+          "entityType": "55933fe3-f2f1-4839-afca-173f2e701601"
+        },
+        {
+          "attributeTypes": {
+            "name": "string",
+            "type": "enumeration|ebb2ac95-0971-486a-9a9e-c8c15a32fcd1",
+            "placeCode": "integer"
+          },
+          "entityType": "97259cf1-c99d-40d8-bfc0-55b27fa8e464"
+        },
+        {
+          "attributeTypes": {
+            "note": "string",
+            "allocateType": "enumeration|7a03fb50-fb3c-47ee-b7db-946cb0ef0cb5",
+            "makedate": "datetime",
+            "status": "enumeration|ac310601-22e6-40fa-895b-4aedf8682035",
+            "statusdate": "datetime",
+            "allocateCode": "string"
+          },
+          "entityType": "68961628-52cd-40f9-b0e4-cdcba6c31edb"
+        },
+        {
+          "attributeTypes": {
+            "color": "string",
+            "size": "enumeration|a60f4860-033a-4c52-89b5-25c3e506a4cb",
+            "SKUCode": "string",
+            "year": "integer",
+            "pattern": "string",
+            "SKCCode": "string",
+            "description": "string",
+            "season": "enumeration|5c7dbd6e-3a2f-4615-9eb5-47ba74f22396",
+            "styleCode": "string"
+          },
+          "entityType": "5b447dd1-ea08-4ebc-a433-a5682b665373"
+        }
+      ],
+      "enumerationMeta": [
+        {
+          "enumerationType": "afc239de-679d-463e-94b7-cbe0c04e85fe",
+          "items": [
+            "normalOutboundStorage",
+            "exception"
+          ]
+        },
+        {
+          "enumerationType": "38230115-e578-4e49-93f6-7465c0e3873b",
+          "items": [
+            "onlineChannels"
+          ]
+        },
+        {
+          "enumerationType": "ba647eeb-691a-4021-84e2-e9a110f0a8ee",
+          "items": [
+            "generalGoods"
+          ]
+        },
+        {
+          "enumerationType": "2338fda7-fa7a-43a4-9e4c-0da85b04a627",
+          "items": [
+            "preserve",
+            "dispatch",
+            "receive",
+            "close",
+            "finish"
+          ]
+        },
+        {
+          "enumerationType": "ebb2ac95-0971-486a-9a9e-c8c15a32fcd1",
+          "items": [
+            "shop",
+            "storehouse"
+          ]
+        },
+        {
+          "enumerationType": "7a03fb50-fb3c-47ee-b7db-946cb0ef0cb5",
+          "items": [
+            "allocation",
+            "add",
+            "returns",
+            "transfer",
+            "move"
+          ]
+        },
+        {
+          "enumerationType": "ac310601-22e6-40fa-895b-4aedf8682035",
+          "items": [
+            "maintain",
+            "commited"
+          ]
+        },
+        {
+          "enumerationType": "a60f4860-033a-4c52-89b5-25c3e506a4cb",
+          "items": [
+            "小号",
+            "中号",
+            "大号",
+            "特大号",
+            "特小号"
+          ]
+        },
+        {
+          "enumerationType": "5c7dbd6e-3a2f-4615-9eb5-47ba74f22396",
+          "items": [
+            "春季",
+            "夏季",
+            "秋季",
+            "冬季"
+          ]
+        }
+      ],
+      "structureMeta": []
+    },
+    "error": {
+      "error": false,
+      "message": ""
+    }
+  }
+}

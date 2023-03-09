@@ -16,8 +16,8 @@ HTTP 消息结构：请求报文和响应报文
     （状态码） （消息报头的内容）（缓存）
 
 
-HTTP1.0 定义了三种请求方法： GET, POST 和 HEAD 方法。
-HTTP1.1 新增了六种请求方法：OPTIONS、PUT、PATCH、DELETE、TRACE 和 CONNECT 方法。
+HTTP1.0 定义了三种请求方法: GET, POST 和 HEAD 方法。
+HTTP1.1 新增了六种请求方法: OPTIONS、PUT、PATCH、DELETE、TRACE 和 CONNECT 方法。
 
 GET和POST是HTTP协议中的两种发送请求的方法，底层都是tcp连接
 get一般是用来获取数据，post提交数据
@@ -32,11 +32,11 @@ get一般是用来获取数据，post提交数据
 
 
 HTTP状态码：
-1XX（临时响应）    100 继续  （505-101 HTTP版本协议）
+1XX（临时响应）     100 继续  （505-101 HTTP版本协议）
 2XX（成功）        200 OK
 3XX（重定向）      301 永久重定向 300(multi choices)
-                  302 303（使用get直接跳转） 307（不变） 临时重定向(Location)
-                  304 未修改(Last-Modified)  305(使用代理)
+                 302 303（使用get直接跳转） 307（不变） 临时重定向(Location)
+                 304 未修改(Last-Modified)  305(使用代理)
 4XX（客户端出错）  400（客户端语法错误） 401未授权 404未找到 408请求超时 403禁止访问 407（未代理授权）
 5XX（服务端出错）  500（服务端语法错误）503（停机维护）      504网关超时
 

@@ -1,0 +1,929 @@
+    {
+      "type": "s-container",
+      "id": "1c616e2e-39f1-4fab-b294-101cb89e2204",
+      "name": "容器组件2",
+      "version": "0.0.1",
+      "visible": true,
+      "props": {
+        "direction": "row",
+        "contentAlign": "left"
+      },
+      "style": {
+        "backgroundColor": "rgb(237, 237, 237)",
+        "color": "rgb(51, 51, 51)",
+        "marginBottom": "5px"
+      },
+      "children": [
+        {
+          "type": "s-button",
+          "id": "1c616e2e-39f5-4fab-b294-101cb89e4011",
+          "name": "按钮1",
+          "version": "0.0.1",
+          "visible": true,
+          "enable": true,
+          "props": {
+            "value": "A"
+          },
+          "style": {
+            "color": "rgb(64, 158, 255)",
+            "borderColor": "rgb(64, 158, 255)",
+            "marginLeft": "10px",
+            "marginRight": "10px"
+          },
+          "events": [
+            {
+              "type": "click",
+              "name": "clickEvent",
+              "actions": [
+                {
+                  "type": "assignment",
+                  "name": "alphabet赋值",
+                  "variable": "alphabet",
+                  "value": "'A'"
+                },
+                {
+                  "type": "refreshAggregate",
+                  "name": "刷新数据集ds3",
+                  "aggregate": "ds3"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "s-button",
+          "id": "1c616e2e-39f5-4fab-b294-101cb89e4012",
+          "name": "按钮1",
+          "version": "0.0.1",
+          "visible": true,
+          "enable": true,
+          "props": {
+            "value": "B"
+          },
+          "style": {
+            "color": "rgb(64, 158, 255)",
+            "borderColor": "rgb(64, 158, 255)",
+            "marginRight": "10px"
+          },
+          "events": [
+            {
+              "type": "click",
+              "name": "clickEvent",
+              "actions": [
+                {
+                  "type": "assignment",
+                  "name": "alphabet赋值",
+                  "variable": "alphabet",
+                  "value": "'B'"
+                },
+                {
+                  "type": "refreshAggregate",
+                  "name": "刷新数据集ds3",
+                  "aggregate": "ds3"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "s-button",
+          "id": "1c616e2e-39f5-4fab-b294-101cb89e4012",
+          "name": "按钮1",
+          "version": "0.0.1",
+          "visible": true,
+          "enable": true,
+          "props": {
+            "value": "C"
+          },
+          "style": {
+            "color": "rgb(64, 158, 255)",
+            "borderColor": "rgb(64, 158, 255)",
+            "marginRight": "10px"
+          },
+          "events": [
+            {
+              "type": "click",
+              "name": "clickEvent",
+              "actions": [
+                {
+                  "type": "assignment",
+                  "name": "alphabet赋值",
+                  "variable": "alphabet",
+                  "value": "'C'"
+                },
+                {
+                  "type": "refreshAggregate",
+                  "name": "刷新数据集ds3",
+                  "aggregate": "ds3"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "s-button",
+          "id": "1c616e2e-39f5-4fab-b294-101cb89e4012",
+          "name": "按钮1",
+          "version": "0.0.1",
+          "visible": true,
+          "enable": true,
+          "props": {
+            "value": "D"
+          },
+          "style": {
+            "color": "rgb(64, 158, 255)",
+            "borderColor": "rgb(64, 158, 255)",
+            "marginRight": "10px"
+          },
+          "events": [
+            {
+              "type": "click",
+              "name": "clickEvent",
+              "actions": [
+                {
+                  "type": "assignment",
+                  "name": "alphabet赋值",
+                  "variable": "alphabet",
+                  "value": "'D'"
+                },
+                {
+                  "type": "refreshAggregate",
+                  "name": "刷新数据集ds3",
+                  "aggregate": "ds3"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "s-button",
+          "id": "1c616e2e-39f5-4fab-b294-101cb89e4012",
+          "name": "按钮1",
+          "version": "0.0.1",
+          "visible": true,
+          "enable": true,
+          "props": {
+            "value": "E"
+          },
+          "style": {
+            "color": "rgb(64, 158, 255)",
+            "borderColor": "rgb(64, 158, 255)",
+            "marginRight": "10px"
+          },
+          "events": [
+            {
+              "type": "click",
+              "name": "clickEvent",
+              "actions": [
+                {
+                  "type": "assignment",
+                  "name": "alphabet赋值",
+                  "variable": "alphabet",
+                  "value": "'E'"
+                },
+                {
+                  "type": "refreshAggregate",
+                  "name": "刷新数据集ds3",
+                  "aggregate": "ds3"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "s-button",
+          "id": "1c616e2e-39f5-4fab-b294-101cb89e4012",
+          "name": "按钮1",
+          "version": "0.0.1",
+          "visible": true,
+          "enable": true,
+          "props": {
+            "value": "F"
+          },
+          "style": {
+            "color": "rgb(64, 158, 255)",
+            "borderColor": "rgb(64, 158, 255)",
+            "marginRight": "10px"
+          },
+          "events": [
+            {
+              "type": "click",
+              "name": "clickEvent",
+              "actions": [
+                {
+                  "type": "assignment",
+                  "name": "alphabet赋值",
+                  "variable": "alphabet",
+                  "value": "'F'"
+                },
+                {
+                  "type": "refreshAggregate",
+                  "name": "刷新数据集ds3",
+                  "aggregate": "ds3"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "s-button",
+          "id": "1c616e2e-39f5-4fab-b294-101cb89e4012",
+          "name": "按钮1",
+          "version": "0.0.1",
+          "visible": true,
+          "enable": true,
+          "props": {
+            "value": "G"
+          },
+          "style": {
+            "color": "rgb(64, 158, 255)",
+            "borderColor": "rgb(64, 158, 255)",
+            "marginRight": "10px"
+          },
+          "events": [
+            {
+              "type": "click",
+              "name": "clickEvent",
+              "actions": [
+                {
+                  "type": "assignment",
+                  "name": "alphabet赋值",
+                  "variable": "alphabet",
+                  "value": "'G'"
+                },
+                {
+                  "type": "refreshAggregate",
+                  "name": "刷新数据集ds3",
+                  "aggregate": "ds3"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "s-button",
+          "id": "1c616e2e-39f5-4fab-b294-101cb89e4012",
+          "name": "按钮1",
+          "version": "0.0.1",
+          "visible": true,
+          "enable": true,
+          "props": {
+            "value": "H"
+          },
+          "style": {
+            "color": "rgb(64, 158, 255)",
+            "borderColor": "rgb(64, 158, 255)",
+            "marginRight": "10px"
+          },
+          "events": [
+            {
+              "type": "click",
+              "name": "clickEvent",
+              "actions": [
+                {
+                  "type": "assignment",
+                  "name": "alphabet赋值",
+                  "variable": "alphabet",
+                  "value": "'H'"
+                },
+                {
+                  "type": "refreshAggregate",
+                  "name": "刷新数据集ds3",
+                  "aggregate": "ds3"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "s-button",
+          "id": "1c616e2e-39f5-4fab-b294-101cb89e4012",
+          "name": "按钮1",
+          "version": "0.0.1",
+          "visible": true,
+          "enable": true,
+          "props": {
+            "value": "I"
+          },
+          "style": {
+            "color": "rgb(64, 158, 255)",
+            "borderColor": "rgb(64, 158, 255)",
+            "marginRight": "10px"
+          },
+          "events": [
+            {
+              "type": "click",
+              "name": "clickEvent",
+              "actions": [
+                {
+                  "type": "assignment",
+                  "name": "alphabet赋值",
+                  "variable": "alphabet",
+                  "value": "'I'"
+                },
+                {
+                  "type": "refreshAggregate",
+                  "name": "刷新数据集ds3",
+                  "aggregate": "ds3"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "s-button",
+          "id": "1c616e2e-39f5-4fab-b294-101cb89e4012",
+          "name": "按钮1",
+          "version": "0.0.1",
+          "visible": true,
+          "enable": true,
+          "props": {
+            "value": "J"
+          },
+          "style": {
+            "color": "rgb(64, 158, 255)",
+            "borderColor": "rgb(64, 158, 255)",
+            "marginRight": "10px"
+          },
+          "events": [
+            {
+              "type": "click",
+              "name": "clickEvent",
+              "actions": [
+                {
+                  "type": "assignment",
+                  "name": "alphabet赋值",
+                  "variable": "alphabet",
+                  "value": "'J'"
+                },
+                {
+                  "type": "refreshAggregate",
+                  "name": "刷新数据集ds3",
+                  "aggregate": "ds3"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "s-button",
+          "id": "1c616e2e-39f5-4fab-b294-101cb89e4012",
+          "name": "按钮1",
+          "version": "0.0.1",
+          "visible": true,
+          "enable": true,
+          "props": {
+            "value": "K"
+          },
+          "style": {
+            "color": "rgb(64, 158, 255)",
+            "borderColor": "rgb(64, 158, 255)",
+            "marginRight": "10px"
+          },
+          "events": [
+            {
+              "type": "click",
+              "name": "clickEvent",
+              "actions": [
+                {
+                  "type": "assignment",
+                  "name": "alphabet赋值",
+                  "variable": "alphabet",
+                  "value": "'K'"
+                },
+                {
+                  "type": "refreshAggregate",
+                  "name": "刷新数据集ds3",
+                  "aggregate": "ds3"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "s-button",
+          "id": "1c616e2e-39f5-4fab-b294-101cb89e4012",
+          "name": "按钮1",
+          "version": "0.0.1",
+          "visible": true,
+          "enable": true,
+          "props": {
+            "value": "L"
+          },
+          "style": {
+            "color": "rgb(64, 158, 255)",
+            "borderColor": "rgb(64, 158, 255)",
+            "marginRight": "10px"
+          },
+          "events": [
+            {
+              "type": "click",
+              "name": "clickEvent",
+              "actions": [
+                {
+                  "type": "assignment",
+                  "name": "alphabet赋值",
+                  "variable": "alphabet",
+                  "value": "'L'"
+                },
+                {
+                  "type": "refreshAggregate",
+                  "name": "刷新数据集ds3",
+                  "aggregate": "ds3"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "s-button",
+          "id": "1c616e2e-39f5-4fab-b294-101cb89e4012",
+          "name": "按钮1",
+          "version": "0.0.1",
+          "visible": true,
+          "enable": true,
+          "props": {
+            "value": "M"
+          },
+          "style": {
+            "color": "rgb(64, 158, 255)",
+            "borderColor": "rgb(64, 158, 255)",
+            "marginRight": "10px"
+          },
+          "events": [
+            {
+              "type": "click",
+              "name": "clickEvent",
+              "actions": [
+                {
+                  "type": "assignment",
+                  "name": "alphabet赋值",
+                  "variable": "alphabet",
+                  "value": "'M'"
+                },
+                {
+                  "type": "refreshAggregate",
+                  "name": "刷新数据集ds3",
+                  "aggregate": "ds3"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "s-button",
+          "id": "1c616e2e-39f5-4fab-b294-101cb89e4012",
+          "name": "按钮1",
+          "version": "0.0.1",
+          "visible": true,
+          "enable": true,
+          "props": {
+            "value": "N"
+          },
+          "style": {
+            "color": "rgb(64, 158, 255)",
+            "borderColor": "rgb(64, 158, 255)",
+            "marginRight": "10px"
+          },
+          "events": [
+            {
+              "type": "click",
+              "name": "clickEvent",
+              "actions": [
+                {
+                  "type": "assignment",
+                  "name": "alphabet赋值",
+                  "variable": "alphabet",
+                  "value": "'N'"
+                },
+                {
+                  "type": "refreshAggregate",
+                  "name": "刷新数据集ds3",
+                  "aggregate": "ds3"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "s-button",
+          "id": "1c616e2e-39f5-4fab-b294-101cb89e4012",
+          "name": "按钮1",
+          "version": "0.0.1",
+          "visible": true,
+          "enable": true,
+          "props": {
+            "value": "O"
+          },
+          "style": {
+            "color": "rgb(64, 158, 255)",
+            "borderColor": "rgb(64, 158, 255)",
+            "marginRight": "10px"
+          },
+          "events": [
+            {
+              "type": "click",
+              "name": "clickEvent",
+              "actions": [
+                {
+                  "type": "assignment",
+                  "name": "alphabet赋值",
+                  "variable": "alphabet",
+                  "value": "'O'"
+                },
+                {
+                  "type": "refreshAggregate",
+                  "name": "刷新数据集ds3",
+                  "aggregate": "ds3"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "s-button",
+          "id": "1c616e2e-39f5-4fab-b294-101cb89e4012",
+          "name": "按钮1",
+          "version": "0.0.1",
+          "visible": true,
+          "enable": true,
+          "props": {
+            "value": "P"
+          },
+          "style": {
+            "color": "rgb(64, 158, 255)",
+            "borderColor": "rgb(64, 158, 255)",
+            "marginRight": "10px"
+          },
+          "events": [
+            {
+              "type": "click",
+              "name": "clickEvent",
+              "actions": [
+                {
+                  "type": "assignment",
+                  "name": "alphabet赋值",
+                  "variable": "alphabet",
+                  "value": "'P'"
+                },
+                {
+                  "type": "refreshAggregate",
+                  "name": "刷新数据集ds3",
+                  "aggregate": "ds3"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "s-button",
+          "id": "1c616e2e-39f5-4fab-b294-101cb89e4012",
+          "name": "按钮1",
+          "version": "0.0.1",
+          "visible": true,
+          "enable": true,
+          "props": {
+            "value": "Q"
+          },
+          "style": {
+            "color": "rgb(64, 158, 255)",
+            "borderColor": "rgb(64, 158, 255)",
+            "marginRight": "10px"
+          },
+          "events": [
+            {
+              "type": "click",
+              "name": "clickEvent",
+              "actions": [
+                {
+                  "type": "assignment",
+                  "name": "alphabet赋值",
+                  "variable": "alphabet",
+                  "value": "'Q'"
+                },
+                {
+                  "type": "refreshAggregate",
+                  "name": "刷新数据集ds3",
+                  "aggregate": "ds3"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "s-button",
+          "id": "1c616e2e-39f5-4fab-b294-101cb89e4012",
+          "name": "按钮1",
+          "version": "0.0.1",
+          "visible": true,
+          "enable": true,
+          "props": {
+            "value": "R"
+          },
+          "style": {
+            "color": "rgb(64, 158, 255)",
+            "borderColor": "rgb(64, 158, 255)",
+            "marginRight": "10px"
+          },
+          "events": [
+            {
+              "type": "click",
+              "name": "clickEvent",
+              "actions": [
+                {
+                  "type": "assignment",
+                  "name": "alphabet赋值",
+                  "variable": "alphabet",
+                  "value": "'R'"
+                },
+                {
+                  "type": "refreshAggregate",
+                  "name": "刷新数据集ds3",
+                  "aggregate": "ds3"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "s-button",
+          "id": "1c616e2e-39f5-4fab-b294-101cb89e4012",
+          "name": "按钮1",
+          "version": "0.0.1",
+          "visible": true,
+          "enable": true,
+          "props": {
+            "value": "S"
+          },
+          "style": {
+            "color": "rgb(64, 158, 255)",
+            "borderColor": "rgb(64, 158, 255)",
+            "marginRight": "10px"
+          },
+          "events": [
+            {
+              "type": "click",
+              "name": "clickEvent",
+              "actions": [
+                {
+                  "type": "assignment",
+                  "name": "alphabet赋值",
+                  "variable": "alphabet",
+                  "value": "'S'"
+                },
+                {
+                  "type": "refreshAggregate",
+                  "name": "刷新数据集ds3",
+                  "aggregate": "ds3"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "s-button",
+          "id": "1c616e2e-39f5-4fab-b294-101cb89e4012",
+          "name": "按钮1",
+          "version": "0.0.1",
+          "visible": true,
+          "enable": true,
+          "props": {
+            "value": "T"
+          },
+          "style": {
+            "color": "rgb(64, 158, 255)",
+            "borderColor": "rgb(64, 158, 255)",
+            "marginRight": "10px"
+          },
+          "events": [
+            {
+              "type": "click",
+              "name": "clickEvent",
+              "actions": [
+                {
+                  "type": "assignment",
+                  "name": "alphabet赋值",
+                  "variable": "alphabet",
+                  "value": "'T'"
+                },
+                {
+                  "type": "refreshAggregate",
+                  "name": "刷新数据集ds3",
+                  "aggregate": "ds3"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "s-button",
+          "id": "1c616e2e-39f5-4fab-b294-101cb89e4012",
+          "name": "按钮1",
+          "version": "0.0.1",
+          "visible": true,
+          "enable": true,
+          "props": {
+            "value": "U"
+          },
+          "style": {
+            "color": "rgb(64, 158, 255)",
+            "borderColor": "rgb(64, 158, 255)",
+            "marginRight": "10px"
+          },
+          "events": [
+            {
+              "type": "click",
+              "name": "clickEvent",
+              "actions": [
+                {
+                  "type": "assignment",
+                  "name": "alphabet赋值",
+                  "variable": "alphabet",
+                  "value": "'U'"
+                },
+                {
+                  "type": "refreshAggregate",
+                  "name": "刷新数据集ds3",
+                  "aggregate": "ds3"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "s-button",
+          "id": "1c616e2e-39f5-4fab-b294-101cb89e4012",
+          "name": "按钮1",
+          "version": "0.0.1",
+          "visible": true,
+          "enable": true,
+          "props": {
+            "value": "V"
+          },
+          "style": {
+            "color": "rgb(64, 158, 255)",
+            "borderColor": "rgb(64, 158, 255)",
+            "marginRight": "10px"
+          },
+          "events": [
+            {
+              "type": "click",
+              "name": "clickEvent",
+              "actions": [
+                {
+                  "type": "assignment",
+                  "name": "alphabet赋值",
+                  "variable": "alphabet",
+                  "value": "'V'"
+                },
+                {
+                  "type": "refreshAggregate",
+                  "name": "刷新数据集ds3",
+                  "aggregate": "ds3"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "s-button",
+          "id": "1c616e2e-39f5-4fab-b294-101cb89e4012",
+          "name": "按钮1",
+          "version": "0.0.1",
+          "visible": true,
+          "enable": true,
+          "props": {
+            "value": "W"
+          },
+          "style": {
+            "color": "rgb(64, 158, 255)",
+            "borderColor": "rgb(64, 158, 255)",
+            "marginRight": "10px"
+          },
+          "events": [
+            {
+              "type": "click",
+              "name": "clickEvent",
+              "actions": [
+                {
+                  "type": "assignment",
+                  "name": "alphabet赋值",
+                  "variable": "alphabet",
+                  "value": "'W'"
+                },
+                {
+                  "type": "refreshAggregate",
+                  "name": "刷新数据集ds3",
+                  "aggregate": "ds3"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "s-button",
+          "id": "1c616e2e-39f5-4fab-b294-101cb89e4012",
+          "name": "按钮1",
+          "version": "0.0.1",
+          "visible": true,
+          "enable": true,
+          "props": {
+            "value": "X"
+          },
+          "style": {
+            "color": "rgb(64, 158, 255)",
+            "borderColor": "rgb(64, 158, 255)",
+            "marginRight": "10px"
+          },
+          "events": [
+            {
+              "type": "click",
+              "name": "clickEvent",
+              "actions": [
+                {
+                  "type": "assignment",
+                  "name": "alphabet赋值",
+                  "variable": "alphabet",
+                  "value": "'X'"
+                },
+                {
+                  "type": "refreshAggregate",
+                  "name": "刷新数据集ds3",
+                  "aggregate": "ds3"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "s-button",
+          "id": "1c616e2e-39f5-4fab-b294-101cb89e4012",
+          "name": "按钮1",
+          "version": "0.0.1",
+          "visible": true,
+          "enable": true,
+          "props": {
+            "value": "Y"
+          },
+          "style": {
+            "color": "rgb(64, 158, 255)",
+            "borderColor": "rgb(64, 158, 255)",
+            "marginRight": "10px"
+          },
+          "events": [
+            {
+              "type": "click",
+              "name": "clickEvent",
+              "actions": [
+                {
+                  "type": "assignment",
+                  "name": "alphabet赋值",
+                  "variable": "alphabet",
+                  "value": "'Y'"
+                },
+                {
+                  "type": "refreshAggregate",
+                  "name": "刷新数据集ds3",
+                  "aggregate": "ds3"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "s-button",
+          "id": "1c616e2e-39f5-4fab-b294-101cb89e4012",
+          "name": "按钮1",
+          "version": "0.0.1",
+          "visible": true,
+          "enable": true,
+          "props": {
+            "value": "Z"
+          },
+          "style": {
+            "color": "rgb(64, 158, 255)",
+            "borderColor": "rgb(64, 158, 255)",
+            "marginRight": "10px"
+          },
+          "events": [
+            {
+              "type": "click",
+              "name": "clickEvent",
+              "actions": [
+                {
+                  "type": "assignment",
+                  "name": "alphabet赋值",
+                  "variable": "alphabet",
+                  "value": "'Z'"
+                },
+                {
+                  "type": "refreshAggregate",
+                  "name": "刷新数据集ds3",
+                  "aggregate": "ds3"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }

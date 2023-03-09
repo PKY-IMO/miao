@@ -1,0 +1,92 @@
+9-17
+  ？1.顺序号拿不到 -> 先不做
+  -2.品名颜色等枚举？拿不到值 ok
+  ？3.表格选中问题 
+      列表不能选中
+      tableSelected无值 -> 批量无值
+      -当前列porder未赋值 -> tab列表无效
+  ？4.tab问题 
+    当前方案：
+      跳转问题 不能切换默认key
+      tab切换事件怎么拿到当前键值->确定跳转页面（写给link？）
+    新方案：
+      重新构建tab实现
+  ？5.批量按钮是否在未选中时可用？
+  -6.弹窗拿不到订单号 -> 拿到了
+  ？7.tab页面单订单状态不在查询语句中 -> lenny
+  -8.succed 拼错应该改为 succeed -> 不管
+
+9-18
+    -可报工->报工逻辑成功（订单状态的流转顺序？）
+  TODO：
+    1.disreason 文档中变量未定义，实际逻辑是否传给后台？
+    2.批量里的list的订单号遍历展示
+    3.table不能选中
+  待沟通：
+    1.顺序号 2.tab前端方案 3.tab和订单状态后台业务逻辑 3.批量按钮未选中时是否可用
+
+9-19
+  刷新不生效-"null"-重新载入页面
+
+9-20
+  1.成车质量问题
+    工厂单独返回数据集-orgName
+    是否启用的过滤-boolean和string
+    筛选条件 -> 展示不全 -> 查询条件
+  2.成车质量问题/新增
+    默认值: 工厂-0  失效日期-9999
+    提交没反应 -> 1.质量问题筛选条件
+  3.成车质量问题/新增
+    编辑后为删除 -> 编辑成功了但不显示 -> 1.质量问题筛选条件
+  4.成车质量检测
+    操作员 -> session
+  5.成车质量检测/详情
+    TOOD: 三个过检逻辑没有写
+
+9-21
+  编辑无法修改工厂名称
+  编辑 -> 页面传参,带reference -> 改工厂名称 出问题， 
+    reference 固定了, 不应该固定reference, reference 由工厂id生成
+  新增无效
+  新增 -> 无效 后台创建reference
+
+9-22
+  解决新增和编辑的bug,解决工厂下拉框bug,增加后台过检的业务逻辑。
+
+9-26
+  box-sizing 不能继承
+  如何让文字与input垂直居中对齐: 设置input的style="vertical-align:middle;"
+
+
+
+APPS-130 feat:元数据枚举功能的实现以及entity的初步定义
+1.完成enum的功能。
+2.entity部分初步定义了一下类型和展示。
+TODO：
+1.entity的attribute和reference的定义以及交互。
+2.enum和entity整体的删除。
+3.draft 层解偶。
+
+
+EnumConfig
+Editor inline
+
+Domain
+findEntity 自动推断
+
+draf 针对openModal做
+
+Enumeration
+value -》 EnumerationItem
+
+modal index
+isEnumeration推断了modal.openModal的类型之后还需要as
+
+Entity IMetaAttribuType
+
+closeModal
+不需要返回值
+
+openModal 类型IModal
+
+Entity 运行时实现

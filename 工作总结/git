@@ -1,0 +1,25 @@
+git 回滚
+    还没push 撤回commit
+    git reset --soft HEAD^ 
+
+    撤回已经push的
+    git reset --soft HEAD^ //上一次commit
+    git push origin <分支名> --force
+
+
+git 合并 
+    --已经push的commit
+    1. 3代表最新的3条commit
+    git rebase -i HEAD~3
+
+    2. 修改要保留的commit和要合并的commit
+    i是修改 esc之后:wq退出编辑
+    pick
+    s
+    s
+
+    3. 修改commit的文字描述
+    i把不需要的commit文字注释掉
+
+    4. push到远程仓库
+    git push origin -f

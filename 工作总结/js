@@ -1,0 +1,67 @@
+const verifySuffix = (fileName: string, accept: string) => {
+    const suffix = fileName.substring(fileName.lastIndexOf("."));
+    // 用includes / include 代替
+    // accept.split(",").includes(suffix); 合理
+    return accept.split(",").findIndex((v) => v === suffix) >= 0;
+  };
+
+
+// absolute布局写在前面会被后面的兄弟元素覆盖，所以要写在后面
+
+// 媒体查询 max-width 和 min-width 带等号
+
+// icon用font-size调整大小
+
+// onClick 事件 支持移动端的 触摸事件吗？ 支持移动端，但是会延时响应，延时大概300ms,因为移动浏览器想要看看用户是否会进行双击操作（double tap）。
+
+// 检测是否是移动端： 
+    // 1.使用媒体查询的hooks useMediaPredicate("(min-width: 400px)"); 
+    // 2.navigator.userAgent.match
+
+// useOnClickOutside -- 库 use-onclickoutside
+// useMediaPredicate -- 库 react-media-hook
+
+// 写法： classNames(style.panel, {[style.contentItem]: isSub })
+
+React(组件中的onClick)
+// JSX的onClick事件处理方式和HTML的onclick有很大不同。
+// 在HTML中直接使用onclick很不专业，原因如下
+
+// onclick添加的事件处理函数是在全局环境下执行的，这污染了全局环境，很容易产生意料不到的后果；
+// 给很多DOM元素添加onclick事件，可能会影响网页的性能，毕竟，网页需要的事件处理函数越多，性能就会越低；
+// 对于使用onclick的DOM元素，如果要动态地从DOM树中删掉的话，需要把对应的时间处理器注销，假如忘了注销，就可能造成内存泄露，这样的bug很难被发现。
+// 上面说的这些问题，在JSX中都不存在。
+
+// onClick挂载的每个函数，都可以控制在组件范围内，不会污染全局空间。
+// 我们在JSX中看到一个组件使用了onClick，但并没有产生直接使用onclick（注意是onclick不是onClick）的HTML，而是使用了事件委托（eventdelegation）的方式处理点击事件，无论有多少个onClick出现，其实最后都只在DOM树上添加了一个事件处理函数，挂在最顶层的DOM节点上。所有的点击事件都被这个事件处理函数捕获，然后根据具体组件分配给特定函数，使用事件委托的性能当然要比为每个onClick都挂载一个事件处理函数要高。
+
+①我们在 jsx 中绑定的事件(demo中的handerClick，handerChange),根本就没有注册到真实的dom上。是绑定在document上统一管理的。
+②真实的dom上的click事件被单独处理,已经被react底层替换成空函数。
+③我们在react绑定的事件,比如onChange，在document上，可能有多个事件与之对应。
+④ react并不是一开始，把所有的事件都绑定在document上，而是采取了一种按需绑定，比如发现了onClick事件,再去绑定document click事件。
+
+XSS防御总体思路：对输入和URL进行过滤，对输出进行编码。
+
+
+
+
+react开发支持的事件中，onClick事件，部分标签不支持点击，
+只能onTouchEnd，但是在移动端，手指触碰到事件绑定元素上，滑动，也会触发该事件，
+解决办法：
+1.事件改为
+onClickCapture
+2.给绑定事件的元素添加：cursor: pointer;
+3.添加css样式
+*{
+    -webkit-tap-highlight-color: transparent;
+ }
+
+
+// 移动端解决方案：事件
+react-tappable
+react-hammerjs
+react-tap-event-plugin 
+
+
+// react实现移动端适配
+React中可以淘宝弹性布局方案lib-flexible和postcss-px2rem来实现移动端项目的适配方案。

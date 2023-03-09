@@ -1,0 +1,42 @@
+@s-upload-box-font-color: #3d4d66;
+@s-upload-box-hover-color: #3685f2;
+@s-upload-border-radius: 2px;
+@s-upload-box-border-weight: 1px;
+@s-upload-box-border-color: #e8eaed;
+@s-upload-error-color: red;
+@s-upload-success-color: #3685f2;
+@s-upload-border-color: #e8eaed;
+@s-upload-default-color: #3d4d66;
+@s-upload-uploading-color: #3d4d66;
+@s-upload-hover-color: #e8eaed;
+@s-upload-transition-item: all 0.3s ease-in-out;
+@s-upload-transition-box: all 0.15s ease-in-out;
+@s-upload-min-width: 200px;
+@s-upload-hgap: 5px;
+@s-upload-vgap: 12px;
+@s-upload-progress-bottom: -5px;
+@s-upload-progress-left: 5px;
+@s-file-margin-right: 40px;
+.s-upload-input {
+  display: inline-block;
+  border: none;
+}
+.s-upload-default-inner {
+  display: flex;
+  width: 100%;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: center;
+  padding: @s-upload-hgap @s-upload-vgap;
+  border: @s-upload-box-border-weight solid @s-upload-box-border-color;
+  border-radius: @s-upload-border-radius;
+  color: @s-upload-box-font-color;
+  transition: @s-upload-transition-box;
+  span {
+    padding-left: @s-upload-hgap;
+  }
+  &:hover {
+    border-color: @s-upload-box-hover-color;
+    color: @s-upload-box-hover-color;
+  }
+}

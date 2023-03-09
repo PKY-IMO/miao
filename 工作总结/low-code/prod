@@ -1,0 +1,1771 @@
+{
+  "ds1": {
+    "result": {
+      "dataset": {
+        "dataType": "list|entity|152043e8-8056-4f13-8bea-caa14ee8c42f",
+        "data": [
+          "325806448879734784",
+          "325806448871346176",
+          "325806448858763264",
+          "325806448846180352",
+          "325806448833597440",
+          "325806448804237312"
+        ]
+      }
+    },
+    "objects": [
+      {
+        "entityType": "152043e8-8056-4f13-8bea-caa14ee8c42f",
+        "id": "325806448879734784",
+        "lastModified": 0,
+        "state": "NON_MODIFIED",
+        "attributes": {
+          "sapNo": "sapNo6",
+          "oaresult": "oaresult6",
+          "line": "line6",
+          "isactive": "true",
+          "itemCode": "30003",
+          "isdeleted": "false",
+          "porderStatus": "failed",
+          "checkStatus": "ready",
+          "createdby": "hoky",
+          "orgCode": "10003",
+          "createdbikeno": "createdbikeno6",
+          "oadepreciate": "oadepreciate",
+          "disreason": "disreason6",
+          "startTime": "1663322580000",
+          "porderTypeName": "porderTypeName6",
+          "oastatus": "oastatus6",
+          "batchespa": "batchespa6",
+          "vehicleCode": "vehicleCode6",
+          "createdon": "1663322580000",
+          "qualifiedTime": "1663322580000",
+          "porderNo": "porderNo6",
+          "modifiedon": "1663322580000",
+          "fevor": "fevor6",
+          "demandNo": "demandNo6",
+          "modifiedby": "hoky",
+          "porderTypeCode": "porderTypeCode6",
+          "endTime": "1663322580000",
+          "dispo": "dispo"
+        },
+        "references": [
+          {
+            "referenceType": "reference",
+            "name": "productionMaterials",
+            "oppositeName": "porder",
+            "fetched": true,
+            "entityType": "90d4671b-d459-41db-867d-186aa18e62e0",
+            "value": "325806432932990976"
+          }
+        ]
+      },
+      {
+        "entityType": "152043e8-8056-4f13-8bea-caa14ee8c42f",
+        "id": "325806448871346176",
+        "lastModified": 0,
+        "state": "NON_MODIFIED",
+        "attributes": {
+          "sapNo": "sapNo5",
+          "oaresult": "oaresult",
+          "line": "line5",
+          "isactive": "true",
+          "itemCode": "30004",
+          "isdeleted": "false",
+          "porderStatus": "succed",
+          "checkStatus": "ready",
+          "createdby": "hoky",
+          "orgCode": "10004",
+          "createdbikeno": "createdbikeno5",
+          "oadepreciate": "oadepreciate",
+          "disreason": "disreason5",
+          "startTime": "1663322580000",
+          "porderTypeName": "porderTypeName5",
+          "oastatus": "oastatus",
+          "batchespa": "batchespa5",
+          "vehicleCode": "vehicleCode5",
+          "createdon": "1663322580000",
+          "qualifiedTime": "1663322580000",
+          "porderNo": "porderNo5",
+          "modifiedon": "1663322580000",
+          "fevor": "fevor5",
+          "demandNo": "demandNo5",
+          "modifiedby": "hoky",
+          "porderTypeCode": "porderTypeCode5",
+          "endTime": "1663322580000",
+          "dispo": "dispo"
+        },
+        "references": [
+          {
+            "referenceType": "reference",
+            "name": "productionMaterials",
+            "oppositeName": "porder",
+            "fetched": true,
+            "entityType": "90d4671b-d459-41db-867d-186aa18e62e0",
+            "value": "325806432916213760"
+          }
+        ]
+      },
+      {
+        "entityType": "152043e8-8056-4f13-8bea-caa14ee8c42f",
+        "id": "325806448858763264",
+        "lastModified": 0,
+        "state": "NON_MODIFIED",
+        "attributes": {
+          "sapNo": "sapNo4",
+          "oaresult": "oaresult4",
+          "line": "line4",
+          "isactive": "true",
+          "itemCode": "30004",
+          "isdeleted": "false",
+          "porderStatus": "unqualified",
+          "checkStatus": "progressing",
+          "createdby": "hoky",
+          "orgCode": "10004",
+          "createdbikeno": "createdbikeno4",
+          "oadepreciate": "oadepreciate4",
+          "disreason": "disreason4",
+          "startTime": "1663322580000",
+          "porderTypeName": "porderTypeName4",
+          "oastatus": "oastatus4",
+          "batchespa": "batchespa4",
+          "vehicleCode": "vehicleCode4",
+          "createdon": "1663322580000",
+          "qualifiedTime": "1663322580000",
+          "porderNo": "porderNo4",
+          "modifiedon": "1663322580000",
+          "fevor": "fevor4",
+          "demandNo": "demandNo4",
+          "modifiedby": "hoky",
+          "porderTypeCode": "porderTypeCode4",
+          "endTime": "1663322580000",
+          "dispo": "dispo4"
+        },
+        "references": [
+          {
+            "referenceType": "reference",
+            "name": "productionMaterials",
+            "oppositeName": "porder",
+            "fetched": true,
+            "entityType": "90d4671b-d459-41db-867d-186aa18e62e0",
+            "value": "325806432899436544"
+          }
+        ]
+      },
+      {
+        "entityType": "152043e8-8056-4f13-8bea-caa14ee8c42f",
+        "id": "325806448846180352",
+        "lastModified": 0,
+        "state": "NON_MODIFIED",
+        "attributes": {
+          "sapNo": "sapNo3",
+          "oaresult": "oaresult3",
+          "line": "line3",
+          "isactive": "true",
+          "itemCode": "30003",
+          "isdeleted": "false",
+          "porderStatus": "null",
+          "checkStatus": "ready",
+          "createdby": "hoky",
+          "orgCode": "10003",
+          "createdbikeno": "createdbikeno3",
+          "oadepreciate": "oadepreciate3",
+          "disreason": "disreason1",
+          "startTime": "1663322580000",
+          "porderTypeName": "porderTypeName3",
+          "oastatus": "oastatus3",
+          "batchespa": "batchespa3",
+          "vehicleCode": "vehicleCode3",
+          "createdon": "1663322580000",
+          "qualifiedTime": "1663322580000",
+          "porderNo": "porderNo3",
+          "modifiedon": "1663322580000",
+          "fevor": "fevor3",
+          "demandNo": "demandNo3",
+          "modifiedby": "hoky",
+          "porderTypeCode": "porderTypeCode3",
+          "endTime": "1663322580000",
+          "dispo": "dispo3"
+        },
+        "references": [
+          {
+            "referenceType": "reference",
+            "name": "productionMaterials",
+            "oppositeName": "porder",
+            "fetched": true,
+            "entityType": "90d4671b-d459-41db-867d-186aa18e62e0",
+            "value": "325806432886853632"
+          }
+        ]
+      },
+      {
+        "entityType": "152043e8-8056-4f13-8bea-caa14ee8c42f",
+        "id": "325806448833597440",
+        "lastModified": 0,
+        "state": "NON_MODIFIED",
+        "attributes": {
+          "sapNo": "sapNo2",
+          "oaresult": "oaresult2",
+          "line": "line2",
+          "isactive": "true",
+          "itemCode": "30002",
+          "isdeleted": "false",
+          "porderStatus": "null",
+          "checkStatus": "ready",
+          "createdby": "hoky",
+          "orgCode": "10002",
+          "createdbikeno": "createdbikeno2",
+          "oadepreciate": "oadepreciate2",
+          "disreason": "disreason2",
+          "startTime": "1663322580000",
+          "porderTypeName": "porderTypeName2",
+          "oastatus": "oastatus2",
+          "batchespa": "batchespa2",
+          "vehicleCode": "vehicleCode2",
+          "createdon": "1663322580000",
+          "qualifiedTime": "1663322580000",
+          "porderNo": "porderNo2",
+          "modifiedon": "1663322580000",
+          "fevor": "fevor2",
+          "demandNo": "demandNo2",
+          "modifiedby": "hoky",
+          "porderTypeCode": "porderTypeCode2",
+          "endTime": "1663322580000",
+          "dispo": "dispo2"
+        },
+        "references": [
+          {
+            "referenceType": "reference",
+            "name": "productionMaterials",
+            "oppositeName": "porder",
+            "fetched": true,
+            "entityType": "90d4671b-d459-41db-867d-186aa18e62e0",
+            "value": "325806432870076416"
+          }
+        ]
+      },
+      {
+        "entityType": "152043e8-8056-4f13-8bea-caa14ee8c42f",
+        "id": "325806448804237312",
+        "lastModified": 0,
+        "state": "NON_MODIFIED",
+        "attributes": {
+          "sapNo": "sapNo1",
+          "oaresult": "oaresult1",
+          "line": "line1",
+          "isactive": "true",
+          "itemCode": "30001",
+          "isdeleted": "false",
+          "porderStatus": "qualified",
+          "checkStatus": "finish",
+          "createdby": "hoky",
+          "orgCode": "10001",
+          "createdbikeno": "createdbikeno1",
+          "oadepreciate": "oadepreciate",
+          "disreason": "disreason1",
+          "startTime": "1663322580000",
+          "porderTypeName": "porderTypeName1",
+          "oastatus": "oastatus1",
+          "batchespa": "batchespa1",
+          "vehicleCode": "vehicleCode1",
+          "createdon": "1663322580000",
+          "qualifiedTime": "1663322580000",
+          "porderNo": "porderNo1",
+          "modifiedon": "1663322580000",
+          "fevor": "fevor1",
+          "demandNo": "demandNo1",
+          "modifiedby": "hoky",
+          "porderTypeCode": "porderTypeCode1",
+          "endTime": "1663322580000",
+          "dispo": "dispo"
+        },
+        "references": [
+          {
+            "referenceType": "reference",
+            "name": "productionMaterials",
+            "oppositeName": "porder",
+            "fetched": true,
+            "entityType": "90d4671b-d459-41db-867d-186aa18e62e0",
+            "value": "325806432647778304"
+          }
+        ]
+      },
+      {
+        "entityType": "90d4671b-d459-41db-867d-186aa18e62e0",
+        "id": "325806432932990976",
+        "lastModified": 0,
+        "state": "NON_MODIFIED",
+        "attributes": {
+          "shippingSpace": "shippingSpace6",
+          "moduleCertificate": "moduleCertificate6",
+          "color": "blue",
+          "proStorageSite": "proStorageSite6",
+          "vehicleCode": "vehicleCode6",
+          "storageSite": "storageSite6",
+          "createdon": "1663322576000",
+          "isdeleted": "false",
+          "plmNo": "plmNo6",
+          "wareHouse": "warehouse6",
+          "specs": "space6",
+          "modifiedon": "1663322576000",
+          "unit": "台",
+          "itemName": "item6",
+          "descriptionAttribute": "desc6",
+          "codeAttribute": "materialCode1Module6",
+          "createdby": "creator6",
+          "orgCode": "org6",
+          "qty": "200",
+          "modifiedby": "modifier6"
+        },
+        "references": [
+          {
+            "referenceType": "reference",
+            "name": "workOrder",
+            "oppositeName": "productionMaterials",
+            "fetched": true,
+            "entityType": "5225c3c4-4296-4995-bba0-d24862c06b52",
+            "value": null
+          },
+          {
+            "referenceType": "reference",
+            "name": "materialQuit",
+            "oppositeName": "productionMaterials",
+            "fetched": true,
+            "entityType": "68738181-45af-48e1-a162-9fd8139c3218",
+            "value": null
+          },
+          {
+            "referenceType": "reference",
+            "name": "materialBltInfo",
+            "oppositeName": "productionMaterials",
+            "fetched": true,
+            "entityType": "7210e555-4367-42d6-8284-311ea123bcf4",
+            "value": null
+          },
+          {
+            "referenceType": "reference",
+            "name": "materialSupplyment",
+            "oppositeName": "productionMaterials",
+            "fetched": true,
+            "entityType": "d96d55fe-c16d-4eb3-a690-19389e364fd0",
+            "value": null
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "porder",
+            "oppositeName": "productionMaterials",
+            "fetched": false,
+            "entityType": "152043e8-8056-4f13-8bea-caa14ee8c42f",
+            "value": null
+          }
+        ]
+      },
+      {
+        "entityType": "90d4671b-d459-41db-867d-186aa18e62e0",
+        "id": "325806432916213760",
+        "lastModified": 0,
+        "state": "NON_MODIFIED",
+        "attributes": {
+          "shippingSpace": "shippingSpace5",
+          "moduleCertificate": "moduleCertificate5",
+          "color": "red",
+          "proStorageSite": "proStorageSite5",
+          "vehicleCode": "vehicleCode5",
+          "storageSite": "storageSite5",
+          "createdon": "1663322576000",
+          "isdeleted": "false",
+          "plmNo": "plmNo5",
+          "wareHouse": "warehouse5",
+          "specs": "spaces5",
+          "modifiedon": "1663322576000",
+          "unit": "个",
+          "itemName": "item5",
+          "descriptionAttribute": "desc5",
+          "codeAttribute": "materialCode1Module5",
+          "createdby": "creator5",
+          "orgCode": "org5",
+          "qty": "100",
+          "modifiedby": "modifier5"
+        },
+        "references": [
+          {
+            "referenceType": "reference",
+            "name": "workOrder",
+            "oppositeName": "productionMaterials",
+            "fetched": true,
+            "entityType": "5225c3c4-4296-4995-bba0-d24862c06b52",
+            "value": null
+          },
+          {
+            "referenceType": "reference",
+            "name": "materialQuit",
+            "oppositeName": "productionMaterials",
+            "fetched": true,
+            "entityType": "68738181-45af-48e1-a162-9fd8139c3218",
+            "value": null
+          },
+          {
+            "referenceType": "reference",
+            "name": "materialBltInfo",
+            "oppositeName": "productionMaterials",
+            "fetched": true,
+            "entityType": "7210e555-4367-42d6-8284-311ea123bcf4",
+            "value": null
+          },
+          {
+            "referenceType": "reference",
+            "name": "materialSupplyment",
+            "oppositeName": "productionMaterials",
+            "fetched": true,
+            "entityType": "d96d55fe-c16d-4eb3-a690-19389e364fd0",
+            "value": null
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "porder",
+            "oppositeName": "productionMaterials",
+            "fetched": false,
+            "entityType": "152043e8-8056-4f13-8bea-caa14ee8c42f",
+            "value": null
+          }
+        ]
+      },
+      {
+        "entityType": "90d4671b-d459-41db-867d-186aa18e62e0",
+        "id": "325806432899436544",
+        "lastModified": 0,
+        "state": "NON_MODIFIED",
+        "attributes": {
+          "shippingSpace": "shippingSpace4",
+          "moduleCertificate": "moduleCertificate4",
+          "color": "white",
+          "proStorageSite": "proStorageSite4",
+          "vehicleCode": "vehicleCode4",
+          "storageSite": "storageSite4",
+          "createdon": "1663322576000",
+          "isdeleted": "false",
+          "plmNo": "plmNo1",
+          "wareHouse": "warehouse1",
+          "specs": "spaces4",
+          "modifiedon": "1663322576000",
+          "unit": "吨",
+          "itemName": "item4",
+          "descriptionAttribute": "desc1",
+          "codeAttribute": "materialCode1Module4",
+          "createdby": "creator1",
+          "orgCode": "org1",
+          "qty": "400",
+          "modifiedby": "modifier1"
+        },
+        "references": [
+          {
+            "referenceType": "reference",
+            "name": "workOrder",
+            "oppositeName": "productionMaterials",
+            "fetched": true,
+            "entityType": "5225c3c4-4296-4995-bba0-d24862c06b52",
+            "value": "325806433205620736"
+          },
+          {
+            "referenceType": "reference",
+            "name": "materialQuit",
+            "oppositeName": "productionMaterials",
+            "fetched": true,
+            "entityType": "68738181-45af-48e1-a162-9fd8139c3218",
+            "value": "325806433050431488"
+          },
+          {
+            "referenceType": "reference",
+            "name": "materialBltInfo",
+            "oppositeName": "productionMaterials",
+            "fetched": true,
+            "entityType": "7210e555-4367-42d6-8284-311ea123bcf4",
+            "value": null
+          },
+          {
+            "referenceType": "reference",
+            "name": "materialSupplyment",
+            "oppositeName": "productionMaterials",
+            "fetched": true,
+            "entityType": "d96d55fe-c16d-4eb3-a690-19389e364fd0",
+            "value": "325806433113346048"
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "porder",
+            "oppositeName": "productionMaterials",
+            "fetched": false,
+            "entityType": "152043e8-8056-4f13-8bea-caa14ee8c42f",
+            "value": null
+          }
+        ]
+      },
+      {
+        "entityType": "90d4671b-d459-41db-867d-186aa18e62e0",
+        "id": "325806432886853632",
+        "lastModified": 0,
+        "state": "NON_MODIFIED",
+        "attributes": {
+          "shippingSpace": "shippingSpace3",
+          "moduleCertificate": "moduleCertificate3",
+          "color": "black",
+          "proStorageSite": "proStorageSite3",
+          "vehicleCode": "vehicleCode3",
+          "storageSite": "storageSite3",
+          "createdon": "1663322576000",
+          "isdeleted": "false",
+          "plmNo": "plmNo1",
+          "wareHouse": "warehouse1",
+          "specs": "spaces3",
+          "modifiedon": "1663322576000",
+          "unit": "辆",
+          "itemName": "item3",
+          "descriptionAttribute": "desc1",
+          "codeAttribute": "materialCode1Module3",
+          "createdby": "creator1",
+          "orgCode": "org1",
+          "qty": "300",
+          "modifiedby": "modifier1"
+        },
+        "references": [
+          {
+            "referenceType": "reference",
+            "name": "workOrder",
+            "oppositeName": "productionMaterials",
+            "fetched": true,
+            "entityType": "5225c3c4-4296-4995-bba0-d24862c06b52",
+            "value": "325806433184649216"
+          },
+          {
+            "referenceType": "reference",
+            "name": "materialQuit",
+            "oppositeName": "productionMaterials",
+            "fetched": true,
+            "entityType": "68738181-45af-48e1-a162-9fd8139c3218",
+            "value": "325806433037848576"
+          },
+          {
+            "referenceType": "reference",
+            "name": "materialBltInfo",
+            "oppositeName": "productionMaterials",
+            "fetched": true,
+            "entityType": "7210e555-4367-42d6-8284-311ea123bcf4",
+            "value": null
+          },
+          {
+            "referenceType": "reference",
+            "name": "materialSupplyment",
+            "oppositeName": "productionMaterials",
+            "fetched": true,
+            "entityType": "d96d55fe-c16d-4eb3-a690-19389e364fd0",
+            "value": "325806433100763136"
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "porder",
+            "oppositeName": "productionMaterials",
+            "fetched": false,
+            "entityType": "152043e8-8056-4f13-8bea-caa14ee8c42f",
+            "value": null
+          }
+        ]
+      },
+      {
+        "entityType": "90d4671b-d459-41db-867d-186aa18e62e0",
+        "id": "325806432870076416",
+        "lastModified": 0,
+        "state": "NON_MODIFIED",
+        "attributes": {
+          "shippingSpace": "shippingSpace2",
+          "moduleCertificate": "moduleCertificate2",
+          "color": "blue",
+          "proStorageSite": "proStorageSite2",
+          "vehicleCode": "vehicleCode2",
+          "storageSite": "storageSite2",
+          "createdon": "1663322576000",
+          "isdeleted": "false",
+          "plmNo": "plmNo1",
+          "wareHouse": "warehouse1",
+          "specs": "spaces2",
+          "modifiedon": "1663322576000",
+          "unit": "台",
+          "itemName": "item2",
+          "descriptionAttribute": "desc1",
+          "codeAttribute": "materialCode1Module2",
+          "createdby": "creator1",
+          "orgCode": "org1",
+          "qty": "200",
+          "modifiedby": "modifier1"
+        },
+        "references": [
+          {
+            "referenceType": "reference",
+            "name": "workOrder",
+            "oppositeName": "productionMaterials",
+            "fetched": true,
+            "entityType": "5225c3c4-4296-4995-bba0-d24862c06b52",
+            "value": "325806433159483392"
+          },
+          {
+            "referenceType": "reference",
+            "name": "materialQuit",
+            "oppositeName": "productionMaterials",
+            "fetched": true,
+            "entityType": "68738181-45af-48e1-a162-9fd8139c3218",
+            "value": "325806433016877056"
+          },
+          {
+            "referenceType": "reference",
+            "name": "materialBltInfo",
+            "oppositeName": "productionMaterials",
+            "fetched": true,
+            "entityType": "7210e555-4367-42d6-8284-311ea123bcf4",
+            "value": "325806432974934016"
+          },
+          {
+            "referenceType": "reference",
+            "name": "materialSupplyment",
+            "oppositeName": "productionMaterials",
+            "fetched": true,
+            "entityType": "d96d55fe-c16d-4eb3-a690-19389e364fd0",
+            "value": "325806433088180224"
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "porder",
+            "oppositeName": "productionMaterials",
+            "fetched": false,
+            "entityType": "152043e8-8056-4f13-8bea-caa14ee8c42f",
+            "value": null
+          }
+        ]
+      },
+      {
+        "entityType": "90d4671b-d459-41db-867d-186aa18e62e0",
+        "id": "325806432647778304",
+        "lastModified": 0,
+        "state": "NON_MODIFIED",
+        "attributes": {
+          "shippingSpace": "shippingSpace1",
+          "moduleCertificate": "moduleCertificate1",
+          "color": "red",
+          "proStorageSite": "proStorageSite1",
+          "vehicleCode": "vehicleCode1",
+          "storageSite": "storageSite1",
+          "createdon": "1663322576000",
+          "isdeleted": "false",
+          "plmNo": "plmNo1",
+          "wareHouse": "warehouse1",
+          "specs": "spaces1",
+          "modifiedon": "1663322576000",
+          "unit": "个",
+          "itemName": "item1",
+          "descriptionAttribute": "desc1",
+          "codeAttribute": "materialCode1Module1",
+          "createdby": "creator1",
+          "orgCode": "org1",
+          "qty": "100",
+          "modifiedby": "modifier1"
+        },
+        "references": [
+          {
+            "referenceType": "reference",
+            "name": "workOrder",
+            "oppositeName": "productionMaterials",
+            "fetched": true,
+            "entityType": "5225c3c4-4296-4995-bba0-d24862c06b52",
+            "value": "325806433125928960"
+          },
+          {
+            "referenceType": "reference",
+            "name": "materialQuit",
+            "oppositeName": "productionMaterials",
+            "fetched": true,
+            "entityType": "68738181-45af-48e1-a162-9fd8139c3218",
+            "value": "325806432987516928"
+          },
+          {
+            "referenceType": "reference",
+            "name": "materialBltInfo",
+            "oppositeName": "productionMaterials",
+            "fetched": true,
+            "entityType": "7210e555-4367-42d6-8284-311ea123bcf4",
+            "value": "325806432945573888"
+          },
+          {
+            "referenceType": "reference",
+            "name": "materialSupplyment",
+            "oppositeName": "productionMaterials",
+            "fetched": true,
+            "entityType": "d96d55fe-c16d-4eb3-a690-19389e364fd0",
+            "value": "325806433063014400"
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "porder",
+            "oppositeName": "productionMaterials",
+            "fetched": false,
+            "entityType": "152043e8-8056-4f13-8bea-caa14ee8c42f",
+            "value": null
+          }
+        ]
+      },
+      {
+        "entityType": "5225c3c4-4296-4995-bba0-d24862c06b52",
+        "id": "325806433205620736",
+        "lastModified": 0,
+        "state": "NON_MODIFIED",
+        "attributes": {
+          "proVersion": "proVersion1",
+          "proOrderNo": "proOrderNo4",
+          "orderType": "orderType1",
+          "gsber": "gsber1",
+          "reportNum": "10",
+          "proLine": "proLine1",
+          "endDate": "1663257600000",
+          "interOrderNo": "interOrderNo1",
+          "proStorageSite": "proStorageSite1",
+          "planName": "planName1",
+          "storageStatus": "storageStatus1",
+          "isdeleted": "false",
+          "finishNum": "10",
+          "total": "40",
+          "requireNo": "requireNo4",
+          "reqDate": "1663257600000",
+          "createdby": "creator",
+          "synStatus": "0",
+          "orgCode": "orgCode1",
+          "startTime": "1663322576000",
+          "proPlanId": "proPlanId4",
+          "workStatus": "released",
+          "proPlanner": "proPlanner1",
+          "auditby": "auditor1",
+          "vehicleCode": "vehicleCode1",
+          "materialCode": "materialCode4",
+          "auditon": "1663322576000",
+          "createdon": "1663322576000",
+          "modifiedon": "1663322576000",
+          "unit": "片",
+          "auditStatus": "audited",
+          "modifiedby": "modifier1",
+          "auditDesc": "auditDesc1",
+          "endTime": "1663322576000",
+          "startDate": "1663257600000",
+          "remarks": "remarks1"
+        },
+        "references": [
+          {
+            "referenceType": "reference",
+            "name": "productionMaterials",
+            "oppositeName": "workOrder",
+            "fetched": true,
+            "entityType": "90d4671b-d459-41db-867d-186aa18e62e0",
+            "value": "325806432899436544"
+          },
+          {
+            "referenceType": "reference",
+            "name": "materialSupplyment",
+            "oppositeName": "workOrders",
+            "fetched": true,
+            "entityType": "d96d55fe-c16d-4eb3-a690-19389e364fd0",
+            "value": "325806433100763136"
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "materialSupplyments",
+            "oppositeName": "workOrder",
+            "fetched": false,
+            "entityType": "d96d55fe-c16d-4eb3-a690-19389e364fd0",
+            "value": null
+          }
+        ]
+      },
+      {
+        "entityType": "68738181-45af-48e1-a162-9fd8139c3218",
+        "id": "325806433050431488",
+        "lastModified": 0,
+        "state": "NON_MODIFIED",
+        "attributes": {
+          "moduleCertificate": "moduleCertificate1",
+          "batchNo": "batchNo1",
+          "inventoryType": "inventoryType4",
+          "reasonRemark": "reasonRemark1",
+          "shiftType": "shiftType1",
+          "year": "2022",
+          "storageSite": "storageSize4",
+          "returnItem": "returnItem4",
+          "createdon": "1663322576000",
+          "isdeleted": "false",
+          "postingOn": "1663257600000",
+          "modifiedon": "1663322576000",
+          "unit": "吨",
+          "backNum": "20",
+          "createdby": "creator1",
+          "requireNum": "40",
+          "returnCertificate": "returnCertificate1",
+          "retreatNum": "20",
+          "modifiedby": "modifier1",
+          "reasonCode": "reasonCode4",
+          "workOrderId": "workOrderId4",
+          "bltinfoId": "bltinfo4",
+          "status": "0"
+        },
+        "references": [
+          {
+            "referenceType": "reference",
+            "name": "materialBltInfo",
+            "oppositeName": "materialQuits",
+            "fetched": true,
+            "entityType": "7210e555-4367-42d6-8284-311ea123bcf4",
+            "value": "325806432974934016"
+          },
+          {
+            "referenceType": "reference",
+            "name": "productionMaterials",
+            "oppositeName": "materialQuit",
+            "fetched": true,
+            "entityType": "90d4671b-d459-41db-867d-186aa18e62e0",
+            "value": "325806432899436544"
+          }
+        ]
+      },
+      {
+        "entityType": "d96d55fe-c16d-4eb3-a690-19389e364fd0",
+        "id": "325806433113346048",
+        "lastModified": 0,
+        "state": "NON_MODIFIED",
+        "attributes": {
+          "moduleCertificate": "moduleCertificate1",
+          "shippingSpace": "shippingSpace4",
+          "batchNo": "batchNo1",
+          "infoId": "infoId1",
+          "year": "2022",
+          "storageSite": "storageSite4",
+          "surplusNum": "100",
+          "createdon": "1663322576000",
+          "isdeleted": "false",
+          "postingOn": "1663257600000",
+          "isbatch": "true",
+          "modifiedon": "1663322576000",
+          "unit": "片",
+          "createdby": "creator1",
+          "requireNum": "40",
+          "stockNum": "20",
+          "modifiedby": "modifier1",
+          "workOrderId": "workOrderId4",
+          "sendNum": "20",
+          "bltinfoId": "bltinfoId4",
+          "remarks": "remarks1"
+        },
+        "references": [
+          {
+            "referenceType": "reference",
+            "name": "workOrder",
+            "oppositeName": "materialSupplyments",
+            "fetched": true,
+            "entityType": "5225c3c4-4296-4995-bba0-d24862c06b52",
+            "value": "325806433205620736"
+          },
+          {
+            "referenceType": "reference",
+            "name": "materialBltInfo",
+            "oppositeName": "materialSupplyments",
+            "fetched": true,
+            "entityType": "7210e555-4367-42d6-8284-311ea123bcf4",
+            "value": "325806432974934016"
+          },
+          {
+            "referenceType": "reference",
+            "name": "productionMaterials",
+            "oppositeName": "materialSupplyment",
+            "fetched": true,
+            "entityType": "90d4671b-d459-41db-867d-186aa18e62e0",
+            "value": "325806432899436544"
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "workOrders",
+            "oppositeName": "materialSupplyment",
+            "fetched": false,
+            "entityType": "5225c3c4-4296-4995-bba0-d24862c06b52",
+            "value": null
+          }
+        ]
+      },
+      {
+        "entityType": "5225c3c4-4296-4995-bba0-d24862c06b52",
+        "id": "325806433184649216",
+        "lastModified": 0,
+        "state": "NON_MODIFIED",
+        "attributes": {
+          "proVersion": "proVersion1",
+          "proOrderNo": "proOrderNo3",
+          "orderType": "orderType1",
+          "gsber": "gsber1",
+          "reportNum": "10",
+          "proLine": "proLine1",
+          "endDate": "1663257600000",
+          "interOrderNo": "interOrderNo1",
+          "proStorageSite": "proStorageSite1",
+          "planName": "planName1",
+          "storageStatus": "storageStatus1",
+          "isdeleted": "false",
+          "finishNum": "10",
+          "total": "30",
+          "requireNo": "requireNo3",
+          "reqDate": "1663257600000",
+          "createdby": "creator",
+          "synStatus": "0",
+          "orgCode": "orgCode1",
+          "startTime": "1663322576000",
+          "proPlanId": "proPlanId3",
+          "workStatus": "released",
+          "proPlanner": "proPlanner1",
+          "auditby": "auditor1",
+          "vehicleCode": "vehicleCode1",
+          "materialCode": "materialCode3",
+          "auditon": "1663322576000",
+          "createdon": "1663322576000",
+          "modifiedon": "1663322576000",
+          "unit": "辆",
+          "auditStatus": "audited",
+          "modifiedby": "modifier1",
+          "auditDesc": "auditDesc1",
+          "endTime": "1663322576000",
+          "startDate": "1663257600000",
+          "remarks": "remarks1"
+        },
+        "references": [
+          {
+            "referenceType": "reference",
+            "name": "productionMaterials",
+            "oppositeName": "workOrder",
+            "fetched": true,
+            "entityType": "90d4671b-d459-41db-867d-186aa18e62e0",
+            "value": "325806432886853632"
+          },
+          {
+            "referenceType": "reference",
+            "name": "materialSupplyment",
+            "oppositeName": "workOrders",
+            "fetched": true,
+            "entityType": "d96d55fe-c16d-4eb3-a690-19389e364fd0",
+            "value": "325806433100763136"
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "materialSupplyments",
+            "oppositeName": "workOrder",
+            "fetched": false,
+            "entityType": "d96d55fe-c16d-4eb3-a690-19389e364fd0",
+            "value": null
+          }
+        ]
+      },
+      {
+        "entityType": "68738181-45af-48e1-a162-9fd8139c3218",
+        "id": "325806433037848576",
+        "lastModified": 0,
+        "state": "NON_MODIFIED",
+        "attributes": {
+          "moduleCertificate": "moduleCertificate1",
+          "batchNo": "batchNo1",
+          "inventoryType": "inventoryType3",
+          "reasonRemark": "reasonRemark1",
+          "shiftType": "shiftType1",
+          "year": "2022",
+          "storageSite": "storageSize4",
+          "returnItem": "returnItem3",
+          "createdon": "1663322576000",
+          "isdeleted": "false",
+          "postingOn": "1663257600000",
+          "modifiedon": "1663322576000",
+          "unit": "辆",
+          "backNum": "10",
+          "createdby": "creator1",
+          "requireNum": "30",
+          "returnCertificate": "returnCertificate1",
+          "retreatNum": "15",
+          "modifiedby": "modifier1",
+          "reasonCode": "reasonCode3",
+          "workOrderId": "workOrderId4",
+          "bltinfoId": "bltinfo4",
+          "status": "1"
+        },
+        "references": [
+          {
+            "referenceType": "reference",
+            "name": "materialBltInfo",
+            "oppositeName": "materialQuits",
+            "fetched": true,
+            "entityType": "7210e555-4367-42d6-8284-311ea123bcf4",
+            "value": "325806432945573888"
+          },
+          {
+            "referenceType": "reference",
+            "name": "productionMaterials",
+            "oppositeName": "materialQuit",
+            "fetched": true,
+            "entityType": "90d4671b-d459-41db-867d-186aa18e62e0",
+            "value": "325806432886853632"
+          }
+        ]
+      },
+      {
+        "entityType": "d96d55fe-c16d-4eb3-a690-19389e364fd0",
+        "id": "325806433100763136",
+        "lastModified": 0,
+        "state": "NON_MODIFIED",
+        "attributes": {
+          "moduleCertificate": "moduleCertificate1",
+          "shippingSpace": "shippingSpace3",
+          "batchNo": "batchNo1",
+          "infoId": "infoId1",
+          "year": "2022",
+          "storageSite": "storageSite3",
+          "surplusNum": "100",
+          "createdon": "1663322576000",
+          "isdeleted": "false",
+          "postingOn": "1663257600000",
+          "isbatch": "true",
+          "modifiedon": "1663322576000",
+          "unit": "辆",
+          "createdby": "creator1",
+          "requireNum": "30",
+          "stockNum": "15",
+          "modifiedby": "modifier1",
+          "workOrderId": "workOrderId3",
+          "sendNum": "10",
+          "bltinfoId": "bltinfoId3",
+          "remarks": "remarks1"
+        },
+        "references": [
+          {
+            "referenceType": "reference",
+            "name": "workOrder",
+            "oppositeName": "materialSupplyments",
+            "fetched": true,
+            "entityType": "5225c3c4-4296-4995-bba0-d24862c06b52",
+            "value": "325806433205620736"
+          },
+          {
+            "referenceType": "reference",
+            "name": "materialBltInfo",
+            "oppositeName": "materialSupplyments",
+            "fetched": true,
+            "entityType": "7210e555-4367-42d6-8284-311ea123bcf4",
+            "value": "325806432945573888"
+          },
+          {
+            "referenceType": "reference",
+            "name": "productionMaterials",
+            "oppositeName": "materialSupplyment",
+            "fetched": true,
+            "entityType": "90d4671b-d459-41db-867d-186aa18e62e0",
+            "value": "325806432886853632"
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "workOrders",
+            "oppositeName": "materialSupplyment",
+            "fetched": false,
+            "entityType": "5225c3c4-4296-4995-bba0-d24862c06b52",
+            "value": null
+          }
+        ]
+      },
+      {
+        "entityType": "5225c3c4-4296-4995-bba0-d24862c06b52",
+        "id": "325806433159483392",
+        "lastModified": 0,
+        "state": "NON_MODIFIED",
+        "attributes": {
+          "proVersion": "proVersion1",
+          "proOrderNo": "proOrderNo2",
+          "orderType": "orderType1",
+          "gsber": "gsber1",
+          "reportNum": "10",
+          "proLine": "proLine1",
+          "endDate": "1663257600000",
+          "interOrderNo": "interOrderNo1",
+          "proStorageSite": "proStorageSite1",
+          "planName": "planName1",
+          "storageStatus": "storageStatus1",
+          "isdeleted": "false",
+          "finishNum": "10",
+          "total": "20",
+          "requireNo": "requireNo2",
+          "reqDate": "1663257600000",
+          "createdby": "creator",
+          "synStatus": "0",
+          "orgCode": "orgCode1",
+          "startTime": "1663322576000",
+          "proPlanId": "proPlanId2",
+          "workStatus": "released",
+          "proPlanner": "proPlanner1",
+          "auditby": "auditor1",
+          "vehicleCode": "vehicleCode1",
+          "materialCode": "materialCode2",
+          "auditon": "1663322576000",
+          "createdon": "1663322576000",
+          "modifiedon": "1663322576000",
+          "unit": "台",
+          "auditStatus": "audited",
+          "modifiedby": "modifier1",
+          "auditDesc": "auditDesc1",
+          "endTime": "1663322576000",
+          "startDate": "1663257600000",
+          "remarks": "remarks1"
+        },
+        "references": [
+          {
+            "referenceType": "reference",
+            "name": "productionMaterials",
+            "oppositeName": "workOrder",
+            "fetched": true,
+            "entityType": "90d4671b-d459-41db-867d-186aa18e62e0",
+            "value": "325806432870076416"
+          },
+          {
+            "referenceType": "reference",
+            "name": "materialSupplyment",
+            "oppositeName": "workOrders",
+            "fetched": true,
+            "entityType": "d96d55fe-c16d-4eb3-a690-19389e364fd0",
+            "value": "325806433063014400"
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "materialSupplyments",
+            "oppositeName": "workOrder",
+            "fetched": false,
+            "entityType": "d96d55fe-c16d-4eb3-a690-19389e364fd0",
+            "value": null
+          }
+        ]
+      },
+      {
+        "entityType": "68738181-45af-48e1-a162-9fd8139c3218",
+        "id": "325806433016877056",
+        "lastModified": 0,
+        "state": "NON_MODIFIED",
+        "attributes": {
+          "moduleCertificate": "moduleCertificate1",
+          "batchNo": "batchNo1",
+          "inventoryType": "inventoryType2",
+          "reasonRemark": "reasonRemark1",
+          "shiftType": "shiftType1",
+          "year": "2022",
+          "storageSite": "storageSize2",
+          "returnItem": "returnItem2",
+          "createdon": "1663322576000",
+          "isdeleted": "false",
+          "postingOn": "1663257600000",
+          "modifiedon": "1663322576000",
+          "unit": "台",
+          "backNum": "8",
+          "createdby": "creator1",
+          "requireNum": "20",
+          "returnCertificate": "returnCertificate1",
+          "retreatNum": "10",
+          "modifiedby": "modifier1",
+          "reasonCode": "reasonCode2",
+          "workOrderId": "workOrderId2",
+          "bltinfoId": "bltinfo2",
+          "status": "0"
+        },
+        "references": [
+          {
+            "referenceType": "reference",
+            "name": "materialBltInfo",
+            "oppositeName": "materialQuits",
+            "fetched": true,
+            "entityType": "7210e555-4367-42d6-8284-311ea123bcf4",
+            "value": "325806432974934016"
+          },
+          {
+            "referenceType": "reference",
+            "name": "productionMaterials",
+            "oppositeName": "materialQuit",
+            "fetched": true,
+            "entityType": "90d4671b-d459-41db-867d-186aa18e62e0",
+            "value": "325806432870076416"
+          }
+        ]
+      },
+      {
+        "entityType": "7210e555-4367-42d6-8284-311ea123bcf4",
+        "id": "325806432974934016",
+        "lastModified": 0,
+        "state": "NON_MODIFIED",
+        "attributes": {
+          "proOrderNo": "proOrderNo2",
+          "orderNo": "orderNo2",
+          "module": "module2",
+          "type": "preservation",
+          "createdon": "1663322576000",
+          "isdeleted": "false",
+          "uuid": "uuid2",
+          "postingOn": "1663257600000",
+          "modifiedon": "1663322576000",
+          "requireNo": "requireNo2",
+          "storeroomKeeper": "storeroomKeeper2",
+          "createdby": "creator1",
+          "orgCode": "orgCode1",
+          "modifiedby": "modifier1",
+          "startTime": "1663322576000"
+        },
+        "references": [
+          {
+            "referenceType": "reference",
+            "name": "productionMaterials",
+            "oppositeName": "materialBltInfo",
+            "fetched": true,
+            "entityType": "90d4671b-d459-41db-867d-186aa18e62e0",
+            "value": "325806432870076416"
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "materialQuits",
+            "oppositeName": "materialBltInfo",
+            "fetched": false,
+            "entityType": "68738181-45af-48e1-a162-9fd8139c3218",
+            "value": null
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "materialSupplyments",
+            "oppositeName": "materialBltInfo",
+            "fetched": false,
+            "entityType": "d96d55fe-c16d-4eb3-a690-19389e364fd0",
+            "value": null
+          }
+        ]
+      },
+      {
+        "entityType": "d96d55fe-c16d-4eb3-a690-19389e364fd0",
+        "id": "325806433088180224",
+        "lastModified": 0,
+        "state": "NON_MODIFIED",
+        "attributes": {
+          "moduleCertificate": "moduleCertificate1",
+          "shippingSpace": "shippingSpace2",
+          "batchNo": "batchNo1",
+          "infoId": "infoId1",
+          "year": "2022",
+          "storageSite": "storageSite2",
+          "surplusNum": "100",
+          "createdon": "1663322576000",
+          "isdeleted": "false",
+          "postingOn": "1663257600000",
+          "isbatch": "true",
+          "modifiedon": "1663322576000",
+          "unit": "台",
+          "createdby": "creator1",
+          "requireNum": "20",
+          "stockNum": "10",
+          "modifiedby": "modifier1",
+          "workOrderId": "workOrderId2",
+          "sendNum": "8",
+          "bltinfoId": "bltinfoId2",
+          "remarks": "remarks1"
+        },
+        "references": [
+          {
+            "referenceType": "reference",
+            "name": "workOrder",
+            "oppositeName": "materialSupplyments",
+            "fetched": true,
+            "entityType": "5225c3c4-4296-4995-bba0-d24862c06b52",
+            "value": "325806433159483392"
+          },
+          {
+            "referenceType": "reference",
+            "name": "materialBltInfo",
+            "oppositeName": "materialSupplyments",
+            "fetched": true,
+            "entityType": "7210e555-4367-42d6-8284-311ea123bcf4",
+            "value": "325806432974934016"
+          },
+          {
+            "referenceType": "reference",
+            "name": "productionMaterials",
+            "oppositeName": "materialSupplyment",
+            "fetched": true,
+            "entityType": "90d4671b-d459-41db-867d-186aa18e62e0",
+            "value": "325806432870076416"
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "workOrders",
+            "oppositeName": "materialSupplyment",
+            "fetched": false,
+            "entityType": "5225c3c4-4296-4995-bba0-d24862c06b52",
+            "value": null
+          }
+        ]
+      },
+      {
+        "entityType": "5225c3c4-4296-4995-bba0-d24862c06b52",
+        "id": "325806433125928960",
+        "lastModified": 0,
+        "state": "NON_MODIFIED",
+        "attributes": {
+          "proVersion": "proVersion1",
+          "proOrderNo": "proOrderNo1",
+          "orderType": "orderType1",
+          "gsber": "gsber1",
+          "reportNum": "10",
+          "proLine": "proLine1",
+          "endDate": "1663257600000",
+          "interOrderNo": "interOrderNo1",
+          "proStorageSite": "proStorageSite1",
+          "planName": "planName1",
+          "storageStatus": "storageStatus1",
+          "isdeleted": "false",
+          "finishNum": "10",
+          "total": "10",
+          "requireNo": "requireNo1",
+          "reqDate": "1663257600000",
+          "createdby": "creator",
+          "synStatus": "0",
+          "orgCode": "orgCode1",
+          "startTime": "1663322576000",
+          "proPlanId": "proPlanId1",
+          "workStatus": "released",
+          "proPlanner": "proPlanner1",
+          "auditby": "auditor1",
+          "vehicleCode": "vehicleCode1",
+          "materialCode": "materialCode1",
+          "auditon": "1663322576000",
+          "createdon": "1663322576000",
+          "modifiedon": "1663322576000",
+          "unit": "个",
+          "auditStatus": "audited",
+          "modifiedby": "modifier1",
+          "auditDesc": "auditDesc1",
+          "endTime": "1663322576000",
+          "startDate": "1663257600000",
+          "remarks": "remarks1"
+        },
+        "references": [
+          {
+            "referenceType": "reference",
+            "name": "productionMaterials",
+            "oppositeName": "workOrder",
+            "fetched": true,
+            "entityType": "90d4671b-d459-41db-867d-186aa18e62e0",
+            "value": "325806432647778304"
+          },
+          {
+            "referenceType": "reference",
+            "name": "materialSupplyment",
+            "oppositeName": "workOrders",
+            "fetched": true,
+            "entityType": "d96d55fe-c16d-4eb3-a690-19389e364fd0",
+            "value": "325806433063014400"
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "materialSupplyments",
+            "oppositeName": "workOrder",
+            "fetched": false,
+            "entityType": "d96d55fe-c16d-4eb3-a690-19389e364fd0",
+            "value": null
+          }
+        ]
+      },
+      {
+        "entityType": "68738181-45af-48e1-a162-9fd8139c3218",
+        "id": "325806432987516928",
+        "lastModified": 0,
+        "state": "NON_MODIFIED",
+        "attributes": {
+          "moduleCertificate": "moduleCertificate1",
+          "batchNo": "batchNo1",
+          "inventoryType": "inventoryType1",
+          "reasonRemark": "reasonRemark1",
+          "shiftType": "shiftType1",
+          "year": "2022",
+          "storageSite": "storageSize1",
+          "returnItem": "returnItem1",
+          "createdon": "1663322576000",
+          "isdeleted": "false",
+          "postingOn": "1663257600000",
+          "modifiedon": "1663322576000",
+          "unit": "个",
+          "backNum": "5",
+          "createdby": "creator1",
+          "requireNum": "10",
+          "returnCertificate": "returnCertificate1",
+          "retreatNum": "5",
+          "modifiedby": "modifier1",
+          "reasonCode": "reasonCode1",
+          "workOrderId": "workOrderId1",
+          "bltinfoId": "bltinfo1",
+          "status": "1"
+        },
+        "references": [
+          {
+            "referenceType": "reference",
+            "name": "materialBltInfo",
+            "oppositeName": "materialQuits",
+            "fetched": true,
+            "entityType": "7210e555-4367-42d6-8284-311ea123bcf4",
+            "value": "325806432945573888"
+          },
+          {
+            "referenceType": "reference",
+            "name": "productionMaterials",
+            "oppositeName": "materialQuit",
+            "fetched": true,
+            "entityType": "90d4671b-d459-41db-867d-186aa18e62e0",
+            "value": "325806432647778304"
+          }
+        ]
+      },
+      {
+        "entityType": "7210e555-4367-42d6-8284-311ea123bcf4",
+        "id": "325806432945573888",
+        "lastModified": 0,
+        "state": "NON_MODIFIED",
+        "attributes": {
+          "proOrderNo": "proOrderNo1",
+          "orderNo": "orderNo1",
+          "module": "module1",
+          "type": "prep",
+          "createdon": "1663322576000",
+          "isdeleted": "false",
+          "uuid": "uuid1",
+          "postingOn": "1663257600000",
+          "modifiedon": "1663322576000",
+          "requireNo": "requireNo1",
+          "storeroomKeeper": "storeroomKeeper1",
+          "createdby": "creator1",
+          "orgCode": "orgCode1",
+          "modifiedby": "modifier1",
+          "startTime": "1663322576000"
+        },
+        "references": [
+          {
+            "referenceType": "reference",
+            "name": "productionMaterials",
+            "oppositeName": "materialBltInfo",
+            "fetched": true,
+            "entityType": "90d4671b-d459-41db-867d-186aa18e62e0",
+            "value": "325806432647778304"
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "materialQuits",
+            "oppositeName": "materialBltInfo",
+            "fetched": false,
+            "entityType": "68738181-45af-48e1-a162-9fd8139c3218",
+            "value": null
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "materialSupplyments",
+            "oppositeName": "materialBltInfo",
+            "fetched": false,
+            "entityType": "d96d55fe-c16d-4eb3-a690-19389e364fd0",
+            "value": null
+          }
+        ]
+      },
+      {
+        "entityType": "d96d55fe-c16d-4eb3-a690-19389e364fd0",
+        "id": "325806433063014400",
+        "lastModified": 0,
+        "state": "NON_MODIFIED",
+        "attributes": {
+          "moduleCertificate": "moduleCertificate1",
+          "shippingSpace": "shippingSpace1",
+          "batchNo": "batchNo1",
+          "infoId": "infoId1",
+          "year": "2022",
+          "storageSite": "storageSite1",
+          "surplusNum": "100",
+          "createdon": "1663322576000",
+          "isdeleted": "false",
+          "postingOn": "1663257600000",
+          "isbatch": "true",
+          "modifiedon": "1663322576000",
+          "unit": "个",
+          "createdby": "creator1",
+          "requireNum": "10",
+          "stockNum": "5",
+          "modifiedby": "modifier1",
+          "workOrderId": "workOrderId1",
+          "sendNum": "5",
+          "bltinfoId": "bltinfoId1",
+          "remarks": "remarks1"
+        },
+        "references": [
+          {
+            "referenceType": "reference",
+            "name": "workOrder",
+            "oppositeName": "materialSupplyments",
+            "fetched": true,
+            "entityType": "5225c3c4-4296-4995-bba0-d24862c06b52",
+            "value": "325806433159483392"
+          },
+          {
+            "referenceType": "reference",
+            "name": "materialBltInfo",
+            "oppositeName": "materialSupplyments",
+            "fetched": true,
+            "entityType": "7210e555-4367-42d6-8284-311ea123bcf4",
+            "value": "325806432945573888"
+          },
+          {
+            "referenceType": "reference",
+            "name": "productionMaterials",
+            "oppositeName": "materialSupplyment",
+            "fetched": true,
+            "entityType": "90d4671b-d459-41db-867d-186aa18e62e0",
+            "value": "325806432647778304"
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "workOrders",
+            "oppositeName": "materialSupplyment",
+            "fetched": false,
+            "entityType": "5225c3c4-4296-4995-bba0-d24862c06b52",
+            "value": null
+          }
+        ]
+      }
+    ],
+    "meta": {
+      "entityMeta": [
+        {
+          "attributeTypes": {
+            "sapNo": "string",
+            "oaresult": "string",
+            "line": "string",
+            "isactive": "boolean",
+            "itemCode": "long",
+            "isdeleted": "boolean",
+            "porderStatus": "enumeration|5739ca49-5dfc-4571-89ad-2b482aaa3e95",
+            "checkStatus": "enumeration|97280bfa-d22c-4ed2-888d-56b707e105ca",
+            "createdby": "string",
+            "orgCode": "long",
+            "createdbikeno": "string",
+            "oadepreciate": "string",
+            "disreason": "string",
+            "startTime": "datetime",
+            "porderTypeName": "string",
+            "oastatus": "string",
+            "batchespa": "string",
+            "vehicleCode": "string",
+            "createdon": "datetime",
+            "qualifiedTime": "datetime",
+            "porderNo": "string",
+            "modifiedon": "datetime",
+            "fevor": "string",
+            "demandNo": "string",
+            "modifiedby": "string",
+            "porderTypeCode": "string",
+            "endTime": "datetime",
+            "dispo": "string"
+          },
+          "entityType": "152043e8-8056-4f13-8bea-caa14ee8c42f"
+        },
+        {
+          "attributeTypes": {
+            "shippingSpace": "string",
+            "moduleCertificate": "string",
+            "color": "string",
+            "proStorageSite": "string",
+            "vehicleCode": "string",
+            "storageSite": "string",
+            "createdon": "datetime",
+            "isdeleted": "boolean",
+            "plmNo": "string",
+            "wareHouse": "string",
+            "specs": "string",
+            "modifiedon": "datetime",
+            "unit": "string",
+            "itemName": "string",
+            "descriptionAttribute": "string",
+            "codeAttribute": "string",
+            "createdby": "string",
+            "orgCode": "string",
+            "qty": "integer",
+            "modifiedby": "string"
+          },
+          "entityType": "90d4671b-d459-41db-867d-186aa18e62e0"
+        },
+        {
+          "attributeTypes": {
+            "proVersion": "string",
+            "proOrderNo": "string",
+            "orderType": "string",
+            "gsber": "string",
+            "reportNum": "integer",
+            "proLine": "string",
+            "endDate": "date",
+            "interOrderNo": "string",
+            "proStorageSite": "string",
+            "planName": "string",
+            "storageStatus": "string",
+            "isdeleted": "boolean",
+            "finishNum": "integer",
+            "total": "integer",
+            "requireNo": "string",
+            "reqDate": "date",
+            "createdby": "string",
+            "synStatus": "string",
+            "orgCode": "string",
+            "startTime": "datetime",
+            "proPlanId": "string",
+            "workStatus": "enumeration|9706ca7e-b368-4062-a930-f31ddb2b065b",
+            "proPlanner": "string",
+            "auditby": "string",
+            "vehicleCode": "string",
+            "materialCode": "string",
+            "auditon": "datetime",
+            "createdon": "datetime",
+            "modifiedon": "datetime",
+            "unit": "string",
+            "auditStatus": "enumeration|5a8efc06-a6d4-47e9-b317-67af9e987ce8",
+            "modifiedby": "string",
+            "auditDesc": "string",
+            "endTime": "datetime",
+            "startDate": "date",
+            "remarks": "string"
+          },
+          "entityType": "5225c3c4-4296-4995-bba0-d24862c06b52"
+        },
+        {
+          "attributeTypes": {
+            "moduleCertificate": "string",
+            "batchNo": "string",
+            "inventoryType": "string",
+            "reasonRemark": "string",
+            "shiftType": "string",
+            "year": "integer",
+            "storageSite": "string",
+            "returnItem": "string",
+            "createdon": "datetime",
+            "isdeleted": "boolean",
+            "postingOn": "date",
+            "modifiedon": "datetime",
+            "unit": "string",
+            "backNum": "integer",
+            "createdby": "string",
+            "requireNum": "integer",
+            "returnCertificate": "string",
+            "retreatNum": "integer",
+            "modifiedby": "string",
+            "reasonCode": "string",
+            "workOrderId": "string",
+            "bltinfoId": "string",
+            "status": "integer"
+          },
+          "entityType": "68738181-45af-48e1-a162-9fd8139c3218"
+        },
+        {
+          "attributeTypes": {
+            "moduleCertificate": "string",
+            "shippingSpace": "string",
+            "batchNo": "string",
+            "infoId": "string",
+            "year": "integer",
+            "storageSite": "string",
+            "surplusNum": "integer",
+            "createdon": "datetime",
+            "isdeleted": "boolean",
+            "postingOn": "date",
+            "isbatch": "boolean",
+            "modifiedon": "datetime",
+            "unit": "string",
+            "createdby": "string",
+            "requireNum": "integer",
+            "stockNum": "integer",
+            "modifiedby": "string",
+            "workOrderId": "string",
+            "sendNum": "integer",
+            "bltinfoId": "string",
+            "remarks": "string"
+          },
+          "entityType": "d96d55fe-c16d-4eb3-a690-19389e364fd0"
+        },
+        {
+          "attributeTypes": {
+            "proOrderNo": "string",
+            "orderNo": "string",
+            "module": "string",
+            "type": "enumeration|d53ff97a-0a1e-486b-ac08-ef775aecd769",
+            "createdon": "datetime",
+            "isdeleted": "boolean",
+            "uuid": "string",
+            "postingOn": "date",
+            "modifiedon": "datetime",
+            "requireNo": "string",
+            "storeroomKeeper": "string",
+            "createdby": "string",
+            "orgCode": "string",
+            "modifiedby": "string",
+            "startTime": "datetime"
+          },
+          "entityType": "7210e555-4367-42d6-8284-311ea123bcf4"
+        }
+      ],
+      "enumerationMeta": [
+        {
+          "enumerationType": "5739ca49-5dfc-4571-89ad-2b482aaa3e95",
+          "items": [
+            "qualified",
+            "unqualified",
+            "null",
+            "succed",
+            "failed"
+          ]
+        },
+        {
+          "enumerationType": "97280bfa-d22c-4ed2-888d-56b707e105ca",
+          "items": [
+            "ready",
+            "progressing",
+            "finish"
+          ]
+        },
+        {
+          "enumerationType": "9706ca7e-b368-4062-a930-f31ddb2b065b",
+          "items": [
+            "released",
+            "unreleased",
+            "closed",
+            "releasing",
+            "failed"
+          ]
+        },
+        {
+          "enumerationType": "5a8efc06-a6d4-47e9-b317-67af9e987ce8",
+          "items": [
+            "audited",
+            "unaudited",
+            "auditing",
+            "failed"
+          ]
+        },
+        {
+          "enumerationType": "d53ff97a-0a1e-486b-ac08-ef775aecd769",
+          "items": [
+            "prep",
+            "preservation",
+            "receive",
+            "returnMateria"
+          ]
+        }
+      ],
+      "structureMeta": []
+    },
+    "error": {
+      "error": false,
+      "message": ""
+    }
+  }
+}

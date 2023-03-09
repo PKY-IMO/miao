@@ -1,0 +1,52 @@
+现场服务
+    1.dataCabin
+        数据集（自己的所有的数据）
+            **DispatchingForm->RepairForm**
+                param: 维修任务？、repairCode、合同号？、客户、客服专员、status、createDate
+            **DispatchingForm-status的去重数据集**
+        本地变量
+            repairCode、合同号？、客户、客服专员、status、createDate
+    2.action
+        查看
+            跳转页面,到工单信息，传Current
+        编辑
+        开始
+        完成
+            **维修任务完成，系统核对是否签到，是否填写工作日志，否则则系统报错提示**
+            **修改状态为已完成**
+
+工单信息
+    TAB-维修信息
+        1.dataCabin
+            数据集-传入
+                **DispatchingForm->RepairForm**
+        2.action
+            刷新
+    TAB-工作记录
+        1.dataCabin
+            数据集-传入
+                **DispatchingForm->RepairForm**
+                **DispatchingForm->MaintainTask**
+                **DispatchingForm->MaintainTask->SignIn**
+                **DispatchingForm->MaintainTask->WorkLog**
+                交接信息？
+            本地变量
+                照片文件？
+                date、start、end、workingHours、logContent、服务对象？
+        2.action
+            刷新
+            保存
+            签到打卡
+                **新建SignIn（时间、任务、地点定位、客户地址、客服技师）**，跳转打卡弹窗
+                打卡弹窗
+                    取消
+                    提交
+                        提交SignIn
+            添加工作日志
+                **新建WorkLog**，跳转工作日志弹窗
+                    工作日志弹窗
+                        取消
+                        提交
+                            提交WorkLog
+
+            

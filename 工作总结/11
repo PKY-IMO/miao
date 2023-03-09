@@ -1,0 +1,205 @@
+{
+  "status": 200,
+  "errorCode": null,
+  "errorMsg": null,
+  "data": {
+    "maintainTask": {
+      "result": {
+        "dataset": {
+          "dataType": "list|entity|db2f2c98-b709-4f4d-bd5f-858ff795e715",
+          "data": [
+            "363101506490208256"
+          ]
+        }
+      },
+      "objects": [
+        {
+          "entityType": "03bbb19c-7d08-4717-915c-5a43a697d778",
+          "id": "363095990577795072",
+          "lastModified": 0,
+          "state": "NON_MODIFIED",
+          "attributes": {
+            "maintainProposal": null,
+            "customerAddress": "bug",
+            "finishTime": null,
+            "peers": "客服技师,客服技师2",
+            "dispatchCode": "PG0000366",
+            "isSurveyNeeded": "false",
+            "estimateHours": "1",
+            "finishSubmitter": null,
+            "engineer": "我是工程师",
+            "startSubmitter": "technician1",
+            "soCode": "1",
+            "maintainContent": "1",
+            "customerPhone": "bug",
+            "isDeleted": "false",
+            "major": "客服技师1",
+            "startLocation": null,
+            "createTime": "1672213112209",
+            "dealer": "",
+            "startTime": "1672217628906",
+            "evaluated": "false",
+            "status": "服务中",
+            "customer": "bug"
+          },
+          "references": [
+            {
+              "referenceType": "reference",
+              "name": "feedback",
+              "oppositeName": "dispatchForm",
+              "fetched": true,
+              "entityType": "49b08456-650c-4000-9da6-5a57ac43b29f",
+              "value": null
+            },
+            {
+              "referenceType": "reference",
+              "name": "maintainProposalAttachment",
+              "oppositeName": "dispatchForm",
+              "fetched": false,
+              "entityType": "6cf754be-1677-467f-a3b9-1e8c5527e98d",
+              "value": "363095991164997632"
+            },
+            {
+              "referenceType": "reference",
+              "name": "dispatchAttachment",
+              "oppositeName": "dispatchForm",
+              "fetched": false,
+              "entityType": "444f847d-3936-4cbe-9532-eec45e1e8932",
+              "value": "363095991152414720"
+            },
+            {
+              "referenceType": "reference",
+              "name": "repairForm",
+              "oppositeName": "dispatchingForms",
+              "fetched": false,
+              "entityType": "97259cf1-c99d-40d8-bfc0-55b27fa8e464",
+              "value": "1"
+            },
+            {
+              "referenceType": "referenceSet",
+              "name": "dispatchRecord",
+              "oppositeName": "dispatchForm",
+              "fetched": false,
+              "entityType": "aac57e15-5a02-4995-adc3-8ee501e2e87a",
+              "value": null
+            },
+            {
+              "referenceType": "referenceSet",
+              "name": "serviceAttachment",
+              "oppositeName": "dispatchForm",
+              "fetched": false,
+              "entityType": "5e010461-7953-4a76-9dad-271c7911c3b1",
+              "value": null
+            },
+            {
+              "referenceType": "referenceSet",
+              "name": "maintainTask",
+              "oppositeName": "dispatchForm",
+              "fetched": false,
+              "entityType": "db2f2c98-b709-4f4d-bd5f-858ff795e715",
+              "value": null
+            }
+          ]
+        },
+        {
+          "entityType": "db2f2c98-b709-4f4d-bd5f-858ff795e715",
+          "id": "363101506490208256",
+          "lastModified": 0,
+          "state": "NON_MODIFIED",
+          "attributes": {
+            "handoverContent": null,
+            "isDeleted": "false",
+            "inspectionItem": null,
+            "handoverStaff": null,
+            "workHoursSum": "0",
+            "technician": "客服技师1",
+            "isFrozen": "false",
+            "approvedWorkHoursSum": "0",
+            "maintainTaskCode": "PG0000366-WX01",
+            "status": "服务中"
+          },
+          "references": [
+            {
+              "referenceType": "reference",
+              "name": "dispatchForm",
+              "oppositeName": "maintainTask",
+              "fetched": true,
+              "entityType": "03bbb19c-7d08-4717-915c-5a43a697d778",
+              "value": "363095990577795072"
+            },
+            {
+              "referenceType": "referenceSet",
+              "name": "workLog",
+              "oppositeName": "maintainTask",
+              "fetched": false,
+              "entityType": "e49f5d8e-7c43-42cd-8867-bf062fa31ad7",
+              "value": null
+            },
+            {
+              "referenceType": "referenceSet",
+              "name": "signInInfo",
+              "oppositeName": "maintainTask",
+              "fetched": false,
+              "entityType": "b9c742ea-2fe8-48da-b89d-25b6b7a74268",
+              "value": null
+            }
+          ]
+        }
+      ],
+      "meta": {
+        "entityMeta": [
+          {
+            "attributeTypes": {
+              "maintainProposal": "string",
+              "customerAddress": "string",
+              "finishTime": "datetime",
+              "peers": "string",
+              "dispatchCode": "string",
+              "isSurveyNeeded": "boolean",
+              "estimateHours": "integer",
+              "finishSubmitter": "string",
+              "engineer": "string",
+              "startSubmitter": "string",
+              "soCode": "string",
+              "maintainContent": "string",
+              "customerPhone": "string",
+              "isDeleted": "boolean",
+              "major": "string",
+              "startLocation": "string",
+              "createTime": "datetime",
+              "dealer": "string",
+              "startTime": "datetime",
+              "evaluated": "boolean",
+              "status": "string",
+              "customer": "string"
+            },
+            "entityType": "03bbb19c-7d08-4717-915c-5a43a697d778",
+            "type": "NORMAL"
+          },
+          {
+            "attributeTypes": {
+              "handoverContent": "string",
+              "isDeleted": "boolean",
+              "inspectionItem": "string",
+              "handoverStaff": "string",
+              "workHoursSum": "integer",
+              "technician": "string",
+              "isFrozen": "boolean",
+              "approvedWorkHoursSum": "integer",
+              "maintainTaskCode": "string",
+              "status": "string"
+            },
+            "entityType": "db2f2c98-b709-4f4d-bd5f-858ff795e715",
+            "type": "NORMAL"
+          }
+        ],
+        "enumerationMeta": [],
+        "structureMeta": []
+      },
+      "error": {
+        "error": false,
+        "message": ""
+      }
+    }
+  }
+}

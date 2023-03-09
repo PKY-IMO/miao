@@ -1,0 +1,892 @@
+{
+  "ds2": {
+    "result": {
+      "dataset": {
+        "dataType": "list|entity|2e763401-ab2c-429f-9bce-18e931d4a1dd",
+        "data": [
+          "327499581971632128",
+          "327499582118432768",
+          "327499582168764416",
+          "327499582219096064",
+          "327499582282010624",
+          "327499582336536576",
+          "327499582386868224",
+          "327499582437199872",
+          "327499582491725824",
+          "327499582533668864"
+        ]
+      }
+    },
+    "objects": [
+      {
+        "entityType": "2e763401-ab2c-429f-9bce-18e931d4a1dd",
+        "id": "327499581971632128",
+        "lastModified": 0,
+        "state": "NON_MODIFIED",
+        "attributes": {
+          "modifiedon": "1663726254000",
+          "orgName": "f1",
+          "createdby": "hoky",
+          "recvLocationDesc": "street A",
+          "orgCode": "10001",
+          "recvLocation": "street A",
+          "modifiedby": "hoky",
+          "createdon": "1663726254000",
+          "isdeleted": "false"
+        },
+        "references": [
+          {
+            "referenceType": "referenceSet",
+            "name": "itemcheckmasters",
+            "oppositeName": "factory",
+            "fetched": false,
+            "entityType": "674888d6-3165-4c97-a088-811ea77101a8",
+            "value": null
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "problemInfo",
+            "oppositeName": "factory",
+            "fetched": false,
+            "entityType": "19852694-2994-4d52-8a09-fa9563b8d691",
+            "value": null
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "deliveryOrder",
+            "oppositeName": "factory",
+            "fetched": false,
+            "entityType": "826ac527-81ca-4511-864d-60d822778d69",
+            "value": null
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "exemptionInfos",
+            "oppositeName": "factory",
+            "fetched": false,
+            "entityType": "41e051b7-c7ea-40e5-a051-20188842e486",
+            "value": null
+          }
+        ]
+      },
+      {
+        "entityType": "2e763401-ab2c-429f-9bce-18e931d4a1dd",
+        "id": "327499582118432768",
+        "lastModified": 0,
+        "state": "NON_MODIFIED",
+        "attributes": {
+          "modifiedon": "1663726254000",
+          "orgName": "f2",
+          "createdby": "hoky",
+          "recvLocationDesc": "street A3",
+          "orgCode": "10002",
+          "recvLocation": "street A2",
+          "modifiedby": "hoky",
+          "createdon": "1663726254000",
+          "isdeleted": "false"
+        },
+        "references": [
+          {
+            "referenceType": "referenceSet",
+            "name": "itemcheckmasters",
+            "oppositeName": "factory",
+            "fetched": false,
+            "entityType": "674888d6-3165-4c97-a088-811ea77101a8",
+            "value": null
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "problemInfo",
+            "oppositeName": "factory",
+            "fetched": false,
+            "entityType": "19852694-2994-4d52-8a09-fa9563b8d691",
+            "value": null
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "deliveryOrder",
+            "oppositeName": "factory",
+            "fetched": false,
+            "entityType": "826ac527-81ca-4511-864d-60d822778d69",
+            "value": null
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "exemptionInfos",
+            "oppositeName": "factory",
+            "fetched": false,
+            "entityType": "41e051b7-c7ea-40e5-a051-20188842e486",
+            "value": null
+          }
+        ]
+      },
+      {
+        "entityType": "2e763401-ab2c-429f-9bce-18e931d4a1dd",
+        "id": "327499582168764416",
+        "lastModified": 0,
+        "state": "NON_MODIFIED",
+        "attributes": {
+          "modifiedon": "1663726254000",
+          "orgName": "f3",
+          "createdby": "hoky",
+          "recvLocationDesc": "street A3",
+          "orgCode": "10003",
+          "recvLocation": "street A3",
+          "modifiedby": "hoky",
+          "createdon": "1663726254000",
+          "isdeleted": "false"
+        },
+        "references": [
+          {
+            "referenceType": "referenceSet",
+            "name": "itemcheckmasters",
+            "oppositeName": "factory",
+            "fetched": false,
+            "entityType": "674888d6-3165-4c97-a088-811ea77101a8",
+            "value": null
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "problemInfo",
+            "oppositeName": "factory",
+            "fetched": false,
+            "entityType": "19852694-2994-4d52-8a09-fa9563b8d691",
+            "value": null
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "deliveryOrder",
+            "oppositeName": "factory",
+            "fetched": false,
+            "entityType": "826ac527-81ca-4511-864d-60d822778d69",
+            "value": null
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "exemptionInfos",
+            "oppositeName": "factory",
+            "fetched": false,
+            "entityType": "41e051b7-c7ea-40e5-a051-20188842e486",
+            "value": null
+          }
+        ]
+      },
+      {
+        "entityType": "2e763401-ab2c-429f-9bce-18e931d4a1dd",
+        "id": "327499582219096064",
+        "lastModified": 0,
+        "state": "NON_MODIFIED",
+        "attributes": {
+          "modifiedon": "1663726254000",
+          "orgName": "f4",
+          "createdby": "hoky",
+          "recvLocationDesc": "street A4",
+          "orgCode": "10004",
+          "recvLocation": "street A4",
+          "modifiedby": "hoky",
+          "createdon": "1663726254000",
+          "isdeleted": "false"
+        },
+        "references": [
+          {
+            "referenceType": "referenceSet",
+            "name": "itemcheckmasters",
+            "oppositeName": "factory",
+            "fetched": false,
+            "entityType": "674888d6-3165-4c97-a088-811ea77101a8",
+            "value": null
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "problemInfo",
+            "oppositeName": "factory",
+            "fetched": false,
+            "entityType": "19852694-2994-4d52-8a09-fa9563b8d691",
+            "value": null
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "deliveryOrder",
+            "oppositeName": "factory",
+            "fetched": false,
+            "entityType": "826ac527-81ca-4511-864d-60d822778d69",
+            "value": null
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "exemptionInfos",
+            "oppositeName": "factory",
+            "fetched": false,
+            "entityType": "41e051b7-c7ea-40e5-a051-20188842e486",
+            "value": null
+          }
+        ]
+      },
+      {
+        "entityType": "2e763401-ab2c-429f-9bce-18e931d4a1dd",
+        "id": "327499582282010624",
+        "lastModified": 0,
+        "state": "NON_MODIFIED",
+        "attributes": {
+          "modifiedon": "1663726254000",
+          "orgName": "f5",
+          "createdby": "hoky",
+          "recvLocationDesc": "street A5",
+          "orgCode": "10005",
+          "recvLocation": "street A5",
+          "modifiedby": "hoky",
+          "createdon": "1663726254000",
+          "isdeleted": "false"
+        },
+        "references": [
+          {
+            "referenceType": "referenceSet",
+            "name": "itemcheckmasters",
+            "oppositeName": "factory",
+            "fetched": false,
+            "entityType": "674888d6-3165-4c97-a088-811ea77101a8",
+            "value": null
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "problemInfo",
+            "oppositeName": "factory",
+            "fetched": false,
+            "entityType": "19852694-2994-4d52-8a09-fa9563b8d691",
+            "value": null
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "deliveryOrder",
+            "oppositeName": "factory",
+            "fetched": false,
+            "entityType": "826ac527-81ca-4511-864d-60d822778d69",
+            "value": null
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "exemptionInfos",
+            "oppositeName": "factory",
+            "fetched": false,
+            "entityType": "41e051b7-c7ea-40e5-a051-20188842e486",
+            "value": null
+          }
+        ]
+      },
+      {
+        "entityType": "2e763401-ab2c-429f-9bce-18e931d4a1dd",
+        "id": "327499582336536576",
+        "lastModified": 0,
+        "state": "NON_MODIFIED",
+        "attributes": {
+          "modifiedon": "1663726254000",
+          "orgName": "f6",
+          "createdby": "hoky",
+          "recvLocationDesc": "street A6",
+          "orgCode": "10006",
+          "recvLocation": "street A6",
+          "modifiedby": "hoky",
+          "createdon": "1663726254000",
+          "isdeleted": "false"
+        },
+        "references": [
+          {
+            "referenceType": "referenceSet",
+            "name": "itemcheckmasters",
+            "oppositeName": "factory",
+            "fetched": false,
+            "entityType": "674888d6-3165-4c97-a088-811ea77101a8",
+            "value": null
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "problemInfo",
+            "oppositeName": "factory",
+            "fetched": false,
+            "entityType": "19852694-2994-4d52-8a09-fa9563b8d691",
+            "value": null
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "deliveryOrder",
+            "oppositeName": "factory",
+            "fetched": false,
+            "entityType": "826ac527-81ca-4511-864d-60d822778d69",
+            "value": null
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "exemptionInfos",
+            "oppositeName": "factory",
+            "fetched": false,
+            "entityType": "41e051b7-c7ea-40e5-a051-20188842e486",
+            "value": null
+          }
+        ]
+      },
+      {
+        "entityType": "2e763401-ab2c-429f-9bce-18e931d4a1dd",
+        "id": "327499582386868224",
+        "lastModified": 0,
+        "state": "NON_MODIFIED",
+        "attributes": {
+          "modifiedon": "1663726254000",
+          "orgName": "f7",
+          "createdby": "hoky",
+          "recvLocationDesc": "street A7",
+          "orgCode": "10007",
+          "recvLocation": "street A7",
+          "modifiedby": "hoky",
+          "createdon": "1663726254000",
+          "isdeleted": "false"
+        },
+        "references": [
+          {
+            "referenceType": "referenceSet",
+            "name": "itemcheckmasters",
+            "oppositeName": "factory",
+            "fetched": false,
+            "entityType": "674888d6-3165-4c97-a088-811ea77101a8",
+            "value": null
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "problemInfo",
+            "oppositeName": "factory",
+            "fetched": false,
+            "entityType": "19852694-2994-4d52-8a09-fa9563b8d691",
+            "value": null
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "deliveryOrder",
+            "oppositeName": "factory",
+            "fetched": false,
+            "entityType": "826ac527-81ca-4511-864d-60d822778d69",
+            "value": null
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "exemptionInfos",
+            "oppositeName": "factory",
+            "fetched": false,
+            "entityType": "41e051b7-c7ea-40e5-a051-20188842e486",
+            "value": null
+          }
+        ]
+      },
+      {
+        "entityType": "2e763401-ab2c-429f-9bce-18e931d4a1dd",
+        "id": "327499582437199872",
+        "lastModified": 0,
+        "state": "NON_MODIFIED",
+        "attributes": {
+          "modifiedon": "1663726254000",
+          "orgName": "f8",
+          "createdby": "hoky",
+          "recvLocationDesc": "street A8",
+          "orgCode": "10008",
+          "recvLocation": "street A8",
+          "modifiedby": "hoky",
+          "createdon": "1663726254000",
+          "isdeleted": "false"
+        },
+        "references": [
+          {
+            "referenceType": "referenceSet",
+            "name": "itemcheckmasters",
+            "oppositeName": "factory",
+            "fetched": false,
+            "entityType": "674888d6-3165-4c97-a088-811ea77101a8",
+            "value": null
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "problemInfo",
+            "oppositeName": "factory",
+            "fetched": false,
+            "entityType": "19852694-2994-4d52-8a09-fa9563b8d691",
+            "value": null
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "deliveryOrder",
+            "oppositeName": "factory",
+            "fetched": false,
+            "entityType": "826ac527-81ca-4511-864d-60d822778d69",
+            "value": null
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "exemptionInfos",
+            "oppositeName": "factory",
+            "fetched": false,
+            "entityType": "41e051b7-c7ea-40e5-a051-20188842e486",
+            "value": null
+          }
+        ]
+      },
+      {
+        "entityType": "2e763401-ab2c-429f-9bce-18e931d4a1dd",
+        "id": "327499582491725824",
+        "lastModified": 0,
+        "state": "NON_MODIFIED",
+        "attributes": {
+          "modifiedon": "1663726254000",
+          "orgName": "f9",
+          "createdby": "hoky",
+          "recvLocationDesc": "street A9",
+          "orgCode": "10009",
+          "recvLocation": "street A9",
+          "modifiedby": "hoky",
+          "createdon": "1663726254000",
+          "isdeleted": "false"
+        },
+        "references": [
+          {
+            "referenceType": "referenceSet",
+            "name": "itemcheckmasters",
+            "oppositeName": "factory",
+            "fetched": false,
+            "entityType": "674888d6-3165-4c97-a088-811ea77101a8",
+            "value": null
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "problemInfo",
+            "oppositeName": "factory",
+            "fetched": false,
+            "entityType": "19852694-2994-4d52-8a09-fa9563b8d691",
+            "value": null
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "deliveryOrder",
+            "oppositeName": "factory",
+            "fetched": false,
+            "entityType": "826ac527-81ca-4511-864d-60d822778d69",
+            "value": null
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "exemptionInfos",
+            "oppositeName": "factory",
+            "fetched": false,
+            "entityType": "41e051b7-c7ea-40e5-a051-20188842e486",
+            "value": null
+          }
+        ]
+      },
+      {
+        "entityType": "2e763401-ab2c-429f-9bce-18e931d4a1dd",
+        "id": "327499582533668864",
+        "lastModified": 0,
+        "state": "NON_MODIFIED",
+        "attributes": {
+          "modifiedon": "1663726254000",
+          "orgName": "f10",
+          "createdby": "hoky",
+          "recvLocationDesc": "street A10",
+          "orgCode": "10010",
+          "recvLocation": "street A10",
+          "modifiedby": "hoky",
+          "createdon": "1663726254000",
+          "isdeleted": "false"
+        },
+        "references": [
+          {
+            "referenceType": "referenceSet",
+            "name": "itemcheckmasters",
+            "oppositeName": "factory",
+            "fetched": false,
+            "entityType": "674888d6-3165-4c97-a088-811ea77101a8",
+            "value": null
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "problemInfo",
+            "oppositeName": "factory",
+            "fetched": false,
+            "entityType": "19852694-2994-4d52-8a09-fa9563b8d691",
+            "value": null
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "deliveryOrder",
+            "oppositeName": "factory",
+            "fetched": false,
+            "entityType": "826ac527-81ca-4511-864d-60d822778d69",
+            "value": null
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "exemptionInfos",
+            "oppositeName": "factory",
+            "fetched": false,
+            "entityType": "41e051b7-c7ea-40e5-a051-20188842e486",
+            "value": null
+          }
+        ]
+      }
+    ],
+    "meta": {
+      "entityMeta": [
+        {
+          "attributeTypes": {
+            "modifiedon": "datetime",
+            "orgName": "string",
+            "createdby": "string",
+            "recvLocationDesc": "string",
+            "orgCode": "long",
+            "recvLocation": "string",
+            "modifiedby": "string",
+            "createdon": "datetime",
+            "isdeleted": "boolean"
+          },
+          "entityType": "2e763401-ab2c-429f-9bce-18e931d4a1dd"
+        }
+      ],
+      "enumerationMeta": [],
+      "structureMeta": []
+    },
+    "error": {
+      "error": false,
+      "message": ""
+    }
+  },
+  "ds1": {
+    "result": {
+      "dataset": {
+        "dataType": "list|entity|19852694-2994-4d52-8a09-fa9563b8d691",
+        "data": [
+          "327575549042102272",
+          "327575549033713664",
+          "327575549021130752",
+          "327575548991770624"
+        ]
+      }
+    },
+    "objects": [
+      {
+        "entityType": "19852694-2994-4d52-8a09-fa9563b8d691",
+        "id": "327575549042102272",
+        "lastModified": 0,
+        "state": "NON_MODIFIED",
+        "attributes": {
+          "level": "C",
+          "isactive": "true",
+          "validtime": "1663744366000",
+          "alphabet": "B",
+          "problemName": "少机电轴套",
+          "type": "物料",
+          "createdon": "1663744366000",
+          "isdeleted": "false",
+          "problemCode": "WT0604",
+          "modifiedon": "1663744366000",
+          "component": "附件",
+          "createdby": "hoky",
+          "orgCode": "10005",
+          "modifiedby": "hoky",
+          "invalidtime": "1663744366000",
+          "department": "生产",
+          "remarks": "备注"
+        },
+        "references": [
+          {
+            "referenceType": "reference",
+            "name": "factory",
+            "oppositeName": "problemInfo",
+            "fetched": true,
+            "entityType": "2e763401-ab2c-429f-9bce-18e931d4a1dd",
+            "value": "327499582118432768"
+          },
+          {
+            "referenceType": "reference",
+            "name": "vehicleCheck",
+            "oppositeName": "problemInfo",
+            "fetched": false,
+            "entityType": "21bdea3e-eae2-49dd-9aa3-917e7c76dd41",
+            "value": "327575548387790848"
+          }
+        ]
+      },
+      {
+        "entityType": "19852694-2994-4d52-8a09-fa9563b8d691",
+        "id": "327575549033713664",
+        "lastModified": 0,
+        "state": "NON_MODIFIED",
+        "attributes": {
+          "level": "C",
+          "isactive": "true",
+          "validtime": "1663744366000",
+          "alphabet": "S",
+          "problemName": "刹线保护环未卡好",
+          "type": "任务",
+          "createdon": "1663744366000",
+          "isdeleted": "false",
+          "problemCode": "WT0603",
+          "modifiedon": "1663744366000",
+          "component": "附件",
+          "createdby": "hoky",
+          "orgCode": "10001",
+          "modifiedby": "hoky",
+          "invalidtime": "1663744366000",
+          "department": "生产",
+          "remarks": "备注"
+        },
+        "references": [
+          {
+            "referenceType": "reference",
+            "name": "factory",
+            "oppositeName": "problemInfo",
+            "fetched": true,
+            "entityType": "2e763401-ab2c-429f-9bce-18e931d4a1dd",
+            "value": "327499582118432768"
+          },
+          {
+            "referenceType": "reference",
+            "name": "vehicleCheck",
+            "oppositeName": "problemInfo",
+            "fetched": false,
+            "entityType": "21bdea3e-eae2-49dd-9aa3-917e7c76dd41",
+            "value": "327575548387790848"
+          }
+        ]
+      },
+      {
+        "entityType": "19852694-2994-4d52-8a09-fa9563b8d691",
+        "id": "327575549021130752",
+        "lastModified": 0,
+        "state": "NON_MODIFIED",
+        "attributes": {
+          "level": "C",
+          "isactive": "true",
+          "validtime": "1663744366000",
+          "alphabet": "A",
+          "problemName": "曲柄打偏撑",
+          "type": "物料",
+          "createdon": "1663744366000",
+          "isdeleted": "false",
+          "problemCode": "WT0602",
+          "modifiedon": "1663744366000",
+          "component": "附件",
+          "createdby": "hoky",
+          "orgCode": "10002",
+          "modifiedby": "hoky",
+          "invalidtime": "1663744366000",
+          "department": "质量",
+          "remarks": "备注"
+        },
+        "references": [
+          {
+            "referenceType": "reference",
+            "name": "factory",
+            "oppositeName": "problemInfo",
+            "fetched": true,
+            "entityType": "2e763401-ab2c-429f-9bce-18e931d4a1dd",
+            "value": "327499581971632128"
+          },
+          {
+            "referenceType": "reference",
+            "name": "vehicleCheck",
+            "oppositeName": "problemInfo",
+            "fetched": false,
+            "entityType": "21bdea3e-eae2-49dd-9aa3-917e7c76dd41",
+            "value": "327575548178075648"
+          }
+        ]
+      },
+      {
+        "entityType": "19852694-2994-4d52-8a09-fa9563b8d691",
+        "id": "327575548991770624",
+        "lastModified": 0,
+        "state": "NON_MODIFIED",
+        "attributes": {
+          "level": "A",
+          "isactive": "true",
+          "validtime": "1663744366000",
+          "alphabet": "Q",
+          "problemName": "前叉限位角度大",
+          "type": "物料",
+          "createdon": "1663744366000",
+          "isdeleted": "false",
+          "problemCode": "WT0601",
+          "modifiedon": "1663744366000",
+          "component": "附件",
+          "createdby": "hoky",
+          "orgCode": "10001",
+          "modifiedby": "hoky",
+          "invalidtime": "1663744366000",
+          "department": "车架厂",
+          "remarks": "备注"
+        },
+        "references": [
+          {
+            "referenceType": "reference",
+            "name": "factory",
+            "oppositeName": "problemInfo",
+            "fetched": true,
+            "entityType": "2e763401-ab2c-429f-9bce-18e931d4a1dd",
+            "value": "327499581971632128"
+          },
+          {
+            "referenceType": "reference",
+            "name": "vehicleCheck",
+            "oppositeName": "problemInfo",
+            "fetched": false,
+            "entityType": "21bdea3e-eae2-49dd-9aa3-917e7c76dd41",
+            "value": "327575548178075648"
+          }
+        ]
+      },
+      {
+        "entityType": "2e763401-ab2c-429f-9bce-18e931d4a1dd",
+        "id": "327499582118432768",
+        "lastModified": 0,
+        "state": "NON_MODIFIED",
+        "attributes": {
+          "modifiedon": "1663726254000",
+          "orgName": "f2",
+          "createdby": "hoky",
+          "recvLocationDesc": "street A3",
+          "orgCode": "10002",
+          "recvLocation": "street A2",
+          "modifiedby": "hoky",
+          "createdon": "1663726254000",
+          "isdeleted": "false"
+        },
+        "references": [
+          {
+            "referenceType": "referenceSet",
+            "name": "itemcheckmasters",
+            "oppositeName": "factory",
+            "fetched": false,
+            "entityType": "674888d6-3165-4c97-a088-811ea77101a8",
+            "value": null
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "problemInfo",
+            "oppositeName": "factory",
+            "fetched": false,
+            "entityType": "19852694-2994-4d52-8a09-fa9563b8d691",
+            "value": null
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "deliveryOrder",
+            "oppositeName": "factory",
+            "fetched": false,
+            "entityType": "826ac527-81ca-4511-864d-60d822778d69",
+            "value": null
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "exemptionInfos",
+            "oppositeName": "factory",
+            "fetched": false,
+            "entityType": "41e051b7-c7ea-40e5-a051-20188842e486",
+            "value": null
+          }
+        ]
+      },
+      {
+        "entityType": "2e763401-ab2c-429f-9bce-18e931d4a1dd",
+        "id": "327499581971632128",
+        "lastModified": 0,
+        "state": "NON_MODIFIED",
+        "attributes": {
+          "modifiedon": "1663726254000",
+          "orgName": "f1",
+          "createdby": "hoky",
+          "recvLocationDesc": "street A",
+          "orgCode": "10001",
+          "recvLocation": "street A",
+          "modifiedby": "hoky",
+          "createdon": "1663726254000",
+          "isdeleted": "false"
+        },
+        "references": [
+          {
+            "referenceType": "referenceSet",
+            "name": "itemcheckmasters",
+            "oppositeName": "factory",
+            "fetched": false,
+            "entityType": "674888d6-3165-4c97-a088-811ea77101a8",
+            "value": null
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "problemInfo",
+            "oppositeName": "factory",
+            "fetched": false,
+            "entityType": "19852694-2994-4d52-8a09-fa9563b8d691",
+            "value": null
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "deliveryOrder",
+            "oppositeName": "factory",
+            "fetched": false,
+            "entityType": "826ac527-81ca-4511-864d-60d822778d69",
+            "value": null
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "exemptionInfos",
+            "oppositeName": "factory",
+            "fetched": false,
+            "entityType": "41e051b7-c7ea-40e5-a051-20188842e486",
+            "value": null
+          }
+        ]
+      }
+    ],
+    "meta": {
+      "entityMeta": [
+        {
+          "attributeTypes": {
+            "level": "string",
+            "isactive": "boolean",
+            "validtime": "datetime",
+            "alphabet": "string",
+            "problemName": "string",
+            "type": "string",
+            "createdon": "datetime",
+            "isdeleted": "boolean",
+            "problemCode": "string",
+            "modifiedon": "datetime",
+            "component": "string",
+            "createdby": "string",
+            "orgCode": "long",
+            "modifiedby": "string",
+            "invalidtime": "datetime",
+            "department": "string",
+            "remarks": "string"
+          },
+          "entityType": "19852694-2994-4d52-8a09-fa9563b8d691"
+        },
+        {
+          "attributeTypes": {
+            "modifiedon": "datetime",
+            "orgName": "string",
+            "createdby": "string",
+            "recvLocationDesc": "string",
+            "orgCode": "long",
+            "recvLocation": "string",
+            "modifiedby": "string",
+            "createdon": "datetime",
+            "isdeleted": "boolean"
+          },
+          "entityType": "2e763401-ab2c-429f-9bce-18e931d4a1dd"
+        }
+      ],
+      "enumerationMeta": [],
+      "structureMeta": []
+    },
+    "error": {
+      "error": false,
+      "message": ""
+    }
+  }
+}

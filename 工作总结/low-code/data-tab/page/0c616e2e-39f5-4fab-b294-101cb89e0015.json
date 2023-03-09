@@ -1,0 +1,3912 @@
+{
+  "id": "0c616e2e-39f5-4fab-b294-101cb89e0015",
+  "name": "Page2",
+  "title": "生产订单待检",
+  "dataCabin": [
+    {
+      "name": "ds",
+      "type": "aggregate",
+      "source": {
+        "type": "Query",
+        "queryId": "8f887251-32d3-414e-9528-c97b3bc7aeb0",
+        "parameters": [
+          {
+            "name": "orgCode",
+            "value": "orgCode"
+          },
+          {
+            "name": "porderNo",
+            "value": "porderNo"
+          },
+          {
+            "name": "itemName",
+            "value": "itemName"
+          },
+          {
+            "name": "specs",
+            "value": "specs"
+          },
+          {
+            "name": "color",
+            "value": "color"
+          },
+          {
+            "name": "status",
+            "value": "porderStatus"
+          },
+          {
+            "name": "porderTypeCode",
+            "value": "porderTypeCode"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ds1",
+      "type": "aggregate",
+      "source": {
+        "type": "Query",
+        "queryId": "2ee07def-df93-48ae-b417-3fea6e4825ba",
+        "parameters": [
+          {
+            "name": "orgCode",
+            "value": "orgCode"
+          },
+          {
+            "name": "porderNo",
+            "value": "porderNo"
+          },
+          {
+            "name": "demandNo",
+            "value": "demandNo"
+          },
+          {
+            "name": "itemName",
+            "value": "itemName"
+          },
+          {
+            "name": "specs",
+            "value": "specs"
+          },
+          {
+            "name": "color",
+            "value": "color"
+          },
+          {
+            "name": "startTime",
+            "value": "startTime"
+          },
+          {
+            "name": "endTime",
+            "value": "endTime"
+          },
+          {
+            "name": "status",
+            "value": "porderStatus"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ds2",
+      "type": "aggregate",
+      "source": {
+        "type": "Query",
+        "queryId": "39288f81-4265-4256-b28d-06a1f3e518e5",
+        "parameters": []
+      }
+    },
+    {
+      "name": "ds3",
+      "type": "aggregate",
+      "source": {
+        "type": "Query",
+        "queryId": "c2863b9a-8c21-47cf-8faa-e823f1083e57",
+        "parameters": [
+          {
+            "name": "orgCode",
+            "value": "orgCode"
+          },
+          {
+            "name": "porderNo",
+            "value": "porderNo"
+          },
+          {
+            "name": "demandNo",
+            "value": "demandNo"
+          },
+          {
+            "name": "itemName",
+            "value": "itemName"
+          },
+          {
+            "name": "specs",
+            "value": "specs"
+          },
+          {
+            "name": "color",
+            "value": "color"
+          },
+          {
+            "name": "startTime",
+            "value": "startTime"
+          },
+          {
+            "name": "endTime",
+            "value": "endTime"
+          },
+          {
+            "name": "status",
+            "value": "porderStatus"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ds4",
+      "type": "aggregate",
+      "source": {
+        "type": "Query",
+        "queryId": "83228d09-abac-4773-808d-1d20f5258b78",
+        "parameters": [
+          {
+            "name": "orgCode",
+            "value": "orgCode"
+          },
+          {
+            "name": "porderNo",
+            "value": "porderNo"
+          },
+          {
+            "name": "demandNo",
+            "value": "demandNo"
+          },
+          {
+            "name": "itemName",
+            "value": "itemName"
+          },
+          {
+            "name": "specs",
+            "value": "specs"
+          },
+          {
+            "name": "color",
+            "value": "color"
+          },
+          {
+            "name": "startTime",
+            "value": "startTime"
+          },
+          {
+            "name": "endTime",
+            "value": "endTime"
+          },
+          {
+            "name": "status",
+            "value": "porderStatus"
+          }
+        ]
+      }
+    },
+    {
+      "name": "orgCode",
+      "type": "variable",
+      "dataType": {
+        "type": "basic",
+        "value": "string"
+      },
+      "data": null
+    },
+    {
+      "name": "porderNo",
+      "type": "variable",
+      "dataType": {
+        "type": "basic",
+        "value": "string"
+      },
+      "data": null
+    },
+    {
+      "name": "demandNo",
+      "type": "variable",
+      "dataType": {
+        "type": "basic",
+        "value": "string"
+      },
+      "data": null
+    },
+    {
+      "name": "itemName",
+      "type": "variable",
+      "dataType": {
+        "type": "basic",
+        "value": "string"
+      },
+      "data": null
+    },
+    {
+      "name": "specs",
+      "type": "variable",
+      "dataType": {
+        "type": "basic",
+        "value": "string"
+      },
+      "data": null
+    },
+    {
+      "name": "color",
+      "type": "variable",
+      "dataType": {
+        "type": "basic",
+        "value": "string"
+      },
+      "data": null
+    },
+    {
+      "name": "startTime",
+      "type": "variable",
+      "dataType": {
+        "type": "basic",
+        "value": "datetime"
+      },
+      "data": null
+    },
+    {
+      "name": "endTime",
+      "type": "variable",
+      "dataType": {
+        "type": "basic",
+        "value": "datetime"
+      },
+      "data": null
+    },
+    {
+      "name": "porderTypeCode",
+      "type": "variable",
+      "dataType": {
+        "type": "basic",
+        "value": "string"
+      },
+      "data": null
+    },
+    {
+      "name": "porderStatus",
+      "type": "variable",
+      "dataType": {
+        "type": "basic",
+        "value": "string"
+      },
+      "data": null
+    },
+    {
+      "name": "porder",
+      "type": "parameter",
+      "required": false,
+      "dataType": {
+        "type": "entity",
+        "list": false,
+        "value": "152043e8-8056-4f13-8bea-caa14ee8c42f"
+      },
+      "data": null
+    },
+    {
+      "name": "table2Selected",
+      "type": "variable",
+      "dataType": {
+        "type": "entity",
+        "list": true,
+        "value": "152043e8-8056-4f13-8bea-caa14ee8c42f"
+      },
+      "data": []
+    },
+    {
+      "name": "table3Selected",
+      "type": "variable",
+      "dataType": {
+        "type": "entity",
+        "list": true,
+        "value": "152043e8-8056-4f13-8bea-caa14ee8c42f"
+      },
+      "data": []
+    },
+    {
+      "name": "table4Selected",
+      "type": "variable",
+      "dataType": {
+        "type": "entity",
+        "list": true,
+        "value": "152043e8-8056-4f13-8bea-caa14ee8c42f"
+      },
+      "data": []
+    }
+  ],
+  "children": [
+    {
+      "type": "s-container",
+      "id": "1c616e2e-39f1-4fab-b294-101cb89e2003",
+      "name": "容器组件1",
+      "version": "0.0.1",
+      "visible": true,
+      "children": [
+        {
+          "type": "s-grid",
+          "name": "行列组件1",
+          "children": [
+            {
+              "type": "s-grid-row",
+              "name": "行组件1",
+              "props": {
+                "gutter": "7.5px"
+              },
+              "children": [
+                {
+                  "type": "s-grid-column",
+                  "name": "列组件1.1",
+                  "props": {
+                    "width": {
+                      "type": "fixed",
+                      "width": "2"
+                    }
+                  },
+                  "children": [
+                    {
+                      "type": "s-container",
+                      "id": "1c616e2e-39f1-4fab-b294-101cb89e3009",
+                      "name": "容器组件1",
+                      "version": "0.0.1",
+                      "visible": true,
+                      "props": {
+                        "direction": "row"
+                      },
+                      "style": {
+                        "marginBottom": "10px"
+                      },
+                      "children": [
+                        {
+                          "type": "s-text",
+                          "id": "1c616e2e-39f5-4fab-b294-101cb89e3000",
+                          "name": "文本1",
+                          "version": "0.0.1",
+                          "visible": true,
+                          "props": {
+                            "value": "订单号："
+                          },
+                          "style": {
+                            "width": "100px",
+                            "textAlign": "right"
+                          }
+                        },
+                        {
+                          "type": "s-select",
+                          "version": "0.0.1",
+                          "visible": true,
+                          "style": {
+                            "minWidth": "120px"
+                          },
+                          "props": {
+                            "optionLabel": "porderNo",
+                            "optionValue": "porderNo",
+                            "options": {
+                              "type": "JSExpression",
+                              "value": "ds"
+                            },
+                            "value": {
+                              "type": "JSExpression",
+                              "value": "porderNo"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "s-grid-column",
+                  "name": "列组件1.1",
+                  "props": {
+                    "width": {
+                      "type": "fixed",
+                      "width": "2.5"
+                    }
+                  },
+                  "children": [
+                    {
+                      "type": "s-container",
+                      "id": "1c616e2e-39f1-4fab-b294-101cb89e3004",
+                      "name": "容器组件1",
+                      "version": "0.0.1",
+                      "visible": true,
+                      "props": {
+                        "direction": "row"
+                      },
+                      "style": {
+                        "marginBottom": "10px"
+                      },
+                      "children": [
+                        {
+                          "type": "s-text",
+                          "id": "1c616e2e-39f5-4fab-b294-101cb89e3000",
+                          "name": "文本1",
+                          "version": "0.0.1",
+                          "visible": true,
+                          "props": {
+                            "value": "需求分类号："
+                          },
+                          "style": {
+                            "width": "180px",
+                            "textAlign": "right"
+                          }
+                        },
+                        {
+                          "type": "s-select",
+                          "version": "0.0.1",
+                          "visible": true,
+                          "style": {
+                            "minWidth": "120px"
+                          },
+                          "props": {
+                            "optionLabel": "demandNo",
+                            "optionValue": "demandNo",
+                            "options": {
+                              "type": "JSExpression",
+                              "value": "ds"
+                            },
+                            "value": {
+                              "type": "JSExpression",
+                              "value": "demandNo"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "s-grid-column",
+                  "name": "列组件1.1",
+                  "props": {
+                    "width": {
+                      "type": "fixed",
+                      "width": "2.5"
+                    }
+                  },
+                  "children": [
+                    {
+                      "type": "s-container",
+                      "id": "1c616e2e-39f1-4fab-b294-101cb89e3004",
+                      "name": "容器组件1",
+                      "version": "0.0.1",
+                      "visible": true,
+                      "props": {
+                        "direction": "row"
+                      },
+                      "style": {
+                        "marginBottom": "10px"
+                      },
+                      "children": [
+                        {
+                          "type": "s-text",
+                          "id": "1c616e2e-39f5-4fab-b294-101cb89e3000",
+                          "name": "文本1",
+                          "version": "0.0.1",
+                          "visible": true,
+                          "props": {
+                            "value": "品名："
+                          },
+                          "style": {
+                            "width": "180px",
+                            "textAlign": "right"
+                          }
+                        },
+                        {
+                          "type": "s-select",
+                          "version": "0.0.1",
+                          "visible": true,
+                          "style": {
+                            "minWidth": "120px"
+                          },
+                          "props": {
+                            "optionLabel": "itemName",
+                            "optionValue": "itemName",
+                            "options": {
+                              "type": "JSExpression",
+                              "value": "ds2"
+                            },
+                            "value": {
+                              "type": "JSExpression",
+                              "value": "itemName"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "s-grid-column",
+                  "name": "col1",
+                  "props": {
+                    "width": {
+                      "type": "fixed",
+                      "width": "2"
+                    }
+                  },
+                  "children": [
+                    {
+                      "type": "s-container",
+                      "id": "1c616e2e-39f1-4fab-b294-101cb89e3005",
+                      "name": "容器组件1",
+                      "version": "0.0.1",
+                      "visible": true,
+                      "props": {
+                        "direction": "row"
+                      },
+                      "style": {
+                        "marginBottom": "10px"
+                      },
+                      "children": [
+                        {
+                          "type": "s-text",
+                          "id": "1c616e2e-39f5-4fab-b294-101cb89e3000",
+                          "name": "文本1",
+                          "version": "0.0.1",
+                          "visible": true,
+                          "props": {
+                            "value": "颜色："
+                          },
+                          "style": {
+                            "width": "180px",
+                            "textAlign": "right"
+                          }
+                        },
+                        {
+                          "type": "s-select",
+                          "version": "0.0.1",
+                          "visible": true,
+                          "style": {
+                            "minWidth": "120px"
+                          },
+                          "props": {
+                            "optionLabel": "color",
+                            "optionValue": "color",
+                            "options": {
+                              "type": "JSExpression",
+                              "value": "ds2"
+                            },
+                            "value": {
+                              "type": "JSExpression",
+                              "value": "color"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "s-grid-column",
+                  "name": "col1",
+                  "props": {
+                    "width": {
+                      "type": "fixed",
+                      "width": "2"
+                    }
+                  },
+                  "children": [
+                    {
+                      "type": "s-container",
+                      "id": "1c616e2e-39f1-4fab-b294-101cb89e3006",
+                      "name": "容器组件1",
+                      "version": "0.0.1",
+                      "visible": true,
+                      "props": {
+                        "direction": "row"
+                      },
+                      "style": {
+                        "marginBottom": "10px"
+                      },
+                      "children": [
+                        {
+                          "type": "s-text",
+                          "id": "1c616e2e-39f5-4fab-b294-101cb89e3000",
+                          "name": "文本1",
+                          "version": "0.0.1",
+                          "visible": true,
+                          "props": {
+                            "value": "规格："
+                          },
+                          "style": {
+                            "width": "180px",
+                            "textAlign": "right"
+                          }
+                        },
+                        {
+                          "type": "s-select",
+                          "version": "0.0.1",
+                          "visible": true,
+                          "style": {
+                            "minWidth": "120px"
+                          },
+                          "props": {
+                            "optionLabel": "specs",
+                            "optionValue": "specs",
+                            "options": {
+                              "type": "JSExpression",
+                              "value": "ds2"
+                            },
+                            "value": {
+                              "type": "JSExpression",
+                              "value": "specs"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "s-grid-row",
+              "name": "行组件1",
+              "props": {
+                "gutter": "7.5px"
+              },
+              "children": [
+                {
+                  "type": "s-grid-column",
+                  "name": "列组件1.1",
+                  "props": {
+                    "width": {
+                      "type": "fixed",
+                      "width": "2"
+                    }
+                  },
+                  "children": [
+                    {
+                      "type": "s-container",
+                      "id": "1c616e2e-39f1-4fab-b294-101cb89e3008",
+                      "name": "容器组件1",
+                      "version": "0.0.1",
+                      "visible": true,
+                      "props": {
+                        "direction": "row"
+                      },
+                      "style": {
+                        "marginBottom": "10px"
+                      },
+                      "children": [
+                        {
+                          "type": "s-text",
+                          "id": "1c616e2e-39f5-4fab-b294-101cb89e3000",
+                          "name": "文本1",
+                          "version": "0.0.1",
+                          "visible": true,
+                          "props": {
+                            "value": "订单状态："
+                          },
+                          "style": {
+                            "width": "100px",
+                            "textAlign": "right"
+                          }
+                        },
+                        {
+                          "type": "s-select",
+                          "version": "0.0.1",
+                          "visible": true,
+                          "style": {
+                            "minWidth": "120px"
+                          },
+                          "props": {
+                            "options": [
+                              "qualified",
+                              "unqualified",
+                              "null",
+                              "succed",
+                              "failed"
+                            ],
+                            "value": {
+                              "type": "JSExpression",
+                              "value": "porderStatus"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "s-grid-column",
+                  "name": "列组件1.1",
+                  "props": {
+                    "width": {
+                      "type": "fixed",
+                      "width": "2.5"
+                    }
+                  },
+                  "children": [
+                    {
+                      "type": "s-container",
+                      "id": "1c616e2e-39f1-4fab-b294-101cb89e3009",
+                      "name": "容器组件1",
+                      "version": "0.0.1",
+                      "visible": true,
+                      "props": {
+                        "direction": "row"
+                      },
+                      "style": {
+                        "marginBottom": "10px"
+                      },
+                      "children": [
+                        {
+                          "type": "s-text",
+                          "id": "1c616e2e-39f5-4fab-b294-101cb89e3000",
+                          "name": "文本1",
+                          "version": "0.0.1",
+                          "visible": true,
+                          "props": {
+                            "value": "订单开始日期："
+                          },
+                          "style": {
+                            "width": "180px",
+                            "textAlign": "right"
+                          }
+                        },
+                        {
+                          "type": "s-date-picker",
+                          "version": "0.0.1",
+                          "style": {
+                            "minWidth": "120px"
+                          },
+                          "visible": true,
+                          "enable": true,
+                          "props": {
+                            "type": "date",
+                            "value": {
+                              "type": "JSExpression",
+                              "value": "startTime"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "s-grid-column",
+                  "name": "列组件1.1",
+                  "props": {
+                    "width": {
+                      "type": "fixed",
+                      "width": "2.5"
+                    }
+                  },
+                  "children": [
+                    {
+                      "type": "s-container",
+                      "id": "1c616e2e-39f1-4fab-b294-101cb89e3009",
+                      "name": "容器组件1",
+                      "version": "0.0.1",
+                      "visible": true,
+                      "props": {
+                        "direction": "row"
+                      },
+                      "style": {
+                        "marginBottom": "10px"
+                      },
+                      "children": [
+                        {
+                          "type": "s-text",
+                          "id": "1c616e2e-39f5-4fab-b294-101cb89e3000",
+                          "name": "文本1",
+                          "version": "0.0.1",
+                          "visible": true,
+                          "props": {
+                            "value": "订单结束日期："
+                          },
+                          "style": {
+                            "width": "180px",
+                            "textAlign": "right"
+                          }
+                        },
+                        {
+                          "type": "s-date-picker",
+                          "version": "0.0.1",
+                          "style": {
+                            "minWidth": "120px"
+                          },
+                          "visible": true,
+                          "enable": true,
+                          "props": {
+                            "type": "date",
+                            "value": {
+                              "type": "JSExpression",
+                              "value": "endTime"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "s-grid-column",
+                  "name": "col1",
+                  "props": {
+                    "width": {
+                      "type": "fixed",
+                      "width": "2"
+                    }
+                  },
+                  "children": [
+                    {
+                      "type": "s-button",
+                      "id": "1c616e2e-39f5-4fab-b294-101cb89e4010",
+                      "name": "按钮1",
+                      "version": "0.0.1",
+                      "visible": true,
+                      "enable": true,
+                      "props": {
+                        "value": "搜索"
+                      },
+                      "style": {
+                        "color": "rgb(255, 255, 255)",
+                        "backgroundColor": "rgb(64, 158, 255)",
+                        "borderColor": "rgb(64, 158, 255)",
+                        "marginLeft": "80px"
+                      },
+                      "events": [
+                        {
+                          "type": "click",
+                          "name": "clickEvent",
+                          "actions": [
+                            {
+                              "type": "refreshAggregate",
+                              "name": "刷新数据集ds1",
+                              "aggregate": "ds1"
+                            },
+                            {
+                              "type": "refreshAggregate",
+                              "name": "刷新数据集ds3",
+                              "aggregate": "ds3"
+                            },
+                            {
+                              "type": "refreshAggregate",
+                              "name": "刷新数据集ds4",
+                              "aggregate": "ds4"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "s-grid-column",
+                  "name": "col1",
+                  "props": {
+                    "width": {
+                      "type": "fixed",
+                      "width": "2"
+                    }
+                  },
+                  "children": [
+                    {
+                      "type": "s-button",
+                      "id": "1c616e2e-39f5-4fab-b294-101cb89e4011",
+                      "name": "按钮1",
+                      "version": "0.0.1",
+                      "visible": true,
+                      "enable": true,
+                      "props": {
+                        "value": "重置"
+                      },
+                      "style": {
+                        "color": "rgb(255, 255, 255)",
+                        "backgroundColor": "rgb(144, 147, 153)",
+                        "borderColor": "rgb(144, 147, 153)",
+                        "marginLeft": "80px"
+                      },
+                      "events": [
+                        {
+                          "type": "click",
+                          "name": "clickEvent",
+                          "actions": [
+                            {
+                              "type": "assignment",
+                              "name": "清空porderNo",
+                              "variable": "porderNo",
+                              "value": "null"
+                            },
+                            {
+                              "type": "assignment",
+                              "name": "清空demandNo",
+                              "variable": "demandNo",
+                              "value": "null"
+                            },
+                            {
+                              "type": "assignment",
+                              "name": "清空itemName",
+                              "variable": "itemName",
+                              "value": "null"
+                            },
+                            {
+                              "type": "assignment",
+                              "name": "清空color",
+                              "variable": "color",
+                              "value": "null"
+                            },
+                            {
+                              "type": "assignment",
+                              "name": "清空specs",
+                              "variable": "specs",
+                              "value": "null"
+                            },
+                            {
+                              "type": "assignment",
+                              "name": "清空porderStatus",
+                              "variable": "porderStatus",
+                              "value": "null"
+                            },
+                            {
+                              "type": "assignment",
+                              "name": "清空startTime",
+                              "variable": "startTime",
+                              "value": "null"
+                            },
+                            {
+                              "type": "assignment",
+                              "name": "清空endTime",
+                              "variable": "endTime",
+                              "value": "null"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "s-container",
+      "id": "1c616e2e-39f1-4fab-b294-101cb89e2005",
+      "name": "容器组件3",
+      "version": "0.0.1",
+      "visible": true,
+      "style": {
+        "marginBottom": "5px"
+      },
+      "props": {},
+      "children": [
+        {
+          "type": "s-tabs",
+          "name": "tab1",
+          "id": "tab-xxxx-1",
+          "version": "0.0.1",
+          "visible": true,
+          "style": {
+            "width": "100%"
+          },
+          "props": {
+            "defaultActiveKey": "pane-xxxxx1",
+            "tabLayout": "left"
+          },
+          "children": [
+            {
+              "type": "s-tabs-pane",
+              "id": "pane-xxxxx1",
+              "version": "0.0.1",
+              "visible": true,
+              "style": {
+                "width": "100%"
+              },
+              "props": {
+                "tab": "待检"
+              },
+              "children": [
+                {
+                  "type": "s-container",
+                  "id": "1c616e2e-39f1-4fab-b294-101cb89e2004",
+                  "name": "容器组件2",
+                  "version": "0.0.1",
+                  "visible": true,
+                  "props": {
+                    "direction": "row",
+                    "contentAlign": "right"
+                  },
+                  "style": {
+                    "backgroundColor": "rgb(237, 237, 237)",
+                    "color": "rgb(51, 51, 51)",
+                    "marginBottom": "5px"
+                  },
+                  "children": [
+                    {
+                      "type": "s-button",
+                      "id": "1c616e2e-39f5-4fab-b294-101cb89e4011",
+                      "name": "按钮1",
+                      "version": "0.0.1",
+                      "visible": true,
+                      "enable": {
+                        "type": "JSExpression",
+                        "value": "table2Selected.length > 0"
+                      },
+                      "props": {
+                        "value": "批量合格"
+                      },
+                      "style": {
+                        "color": "rgb(255, 255, 255)",
+                        "backgroundColor": "rgb(64, 158, 255)",
+                        "borderColor": "rgb(64, 158, 255)",
+                        "paddingLeft": "15px",
+                        "paddingRight": "15px"
+                      },
+                      "events": [
+                        {
+                          "type": "click",
+                          "name": "clickEvent",
+                          "actions": [
+                            {
+                              "type": "popup",
+                              "name": "打开批量合格弹窗",
+                              "operationType": "open",
+                              "popup": "xxxx-39f1-4fab-b294-101cb89e5111"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "s-table",
+                  "name": "table2",
+                  "version": "0.0.1",
+                  "visible": true,
+                  "props": {
+                    "source": "ds1",
+                    "bordered": true,
+                    "selectedRowsSource": "table2Selected",
+                    "pagination": {
+                      "showQuickJumper": true,
+                      "showSizeChanger": true
+                    }
+                  },
+                  "children": [
+                    {
+                      "type": "s-table-column",
+                      "version": "0.0.1",
+                      "visible": true,
+                      "props": {
+                        "title": "生产订单号",
+                        "dataIndex": "porderNo",
+                        "sorter": true
+                      },
+                      "children": [
+                        {
+                          "type": "s-text",
+                          "version": "0.0.1",
+                          "visible": true,
+                          "props": {
+                            "value": {
+                              "type": "JSExpression",
+                              "value": "ds1.Current.porderNo"
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "s-table-column",
+                      "version": "0.0.1",
+                      "visible": true,
+                      "props": {
+                        "title": "料号",
+                        "dataIndex": "itemCode",
+                        "sorter": true
+                      },
+                      "children": [
+                        {
+                          "type": "s-text",
+                          "version": "0.0.1",
+                          "visible": true,
+                          "props": {
+                            "value": {
+                              "type": "JSExpression",
+                              "value": "ds1.Current.itemCode"
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "s-table-column",
+                      "version": "0.0.1",
+                      "visible": true,
+                      "props": {
+                        "title": "品名",
+                        "dataIndex": ["productionMaterials", "itemName"],
+                        "sorter": true
+                      },
+                      "children": [
+                        {
+                          "type": "s-text",
+                          "version": "0.0.1",
+                          "visible": true,
+                          "props": {
+                            "value": {
+                              "type": "JSExpression",
+                              "value": "ds1.Current.productionMaterials.itemName"
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "s-table-column",
+                      "version": "0.0.1",
+                      "visible": true,
+                      "props": {
+                        "title": "颜色",
+                        "dataIndex": ["productionMaterials", "color"],
+                        "sorter": true
+                      },
+                      "children": [
+                        {
+                          "type": "s-text",
+                          "version": "0.0.1",
+                          "visible": true,
+                          "props": {
+                            "value": {
+                              "type": "JSExpression",
+                              "value": "ds1.Current.productionMaterials.color"
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "s-table-column",
+                      "version": "0.0.1",
+                      "visible": true,
+                      "props": {
+                        "title": "数量",
+                        "dataIndex": ["productionMaterials", "qty"],
+                        "sorter": true
+                      },
+                      "children": [
+                        {
+                          "type": "s-text",
+                          "version": "0.0.1",
+                          "visible": true,
+                          "props": {
+                            "value": {
+                              "type": "JSExpression",
+                              "value": "ds1.Current.productionMaterials.qty"
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "s-table-column",
+                      "version": "0.0.1",
+                      "visible": true,
+                      "props": {
+                        "title": "工厂",
+                        "dataIndex": "orgCode",
+                        "sorter": true
+                      },
+                      "children": [
+                        {
+                          "type": "s-text",
+                          "version": "0.0.1",
+                          "visible": true,
+                          "props": {
+                            "value": {
+                              "type": "JSExpression",
+                              "value": "ds1.Current.orgCode"
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "s-table-column",
+                      "version": "0.0.1",
+                      "visible": true,
+                      "props": {
+                        "title": "产线",
+                        "dataIndex": "line",
+                        "sorter": true
+                      },
+                      "children": [
+                        {
+                          "type": "s-text",
+                          "version": "0.0.1",
+                          "visible": true,
+                          "props": {
+                            "value": {
+                              "type": "JSExpression",
+                              "value": "ds1.Current.line"
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "s-table-column",
+                      "version": "0.0.1",
+                      "visible": true,
+                      "props": {
+                        "title": "需求分类号",
+                        "dataIndex": "demandNo",
+                        "sorter": true
+                      },
+                      "children": [
+                        {
+                          "type": "s-text",
+                          "version": "0.0.1",
+                          "visible": true,
+                          "props": {
+                            "value": {
+                              "type": "JSExpression",
+                              "value": "ds1.Current.demandNo"
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "s-table-column",
+                      "version": "0.0.1",
+                      "visible": true,
+                      "props": {
+                        "title": "订单类型",
+                        "dataIndex": "porderTypeName",
+                        "sorter": true
+                      },
+                      "children": [
+                        {
+                          "type": "s-text",
+                          "version": "0.0.1",
+                          "visible": true,
+                          "props": {
+                            "value": {
+                              "type": "JSExpression",
+                              "value": "ds1.Current.porderTypeName"
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "s-table-column",
+                      "version": "0.0.1",
+                      "visible": true,
+                      "props": {
+                        "title": "状态",
+                        "dataIndex": "porderStatus",
+                        "sorter": true
+                      },
+                      "children": [
+                        {
+                          "type": "s-text",
+                          "version": "0.0.1",
+                          "visible": true,
+                          "props": {
+                            "value": {
+                              "type": "JSExpression",
+                              "value": "ds1.Current.porderStatus"
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "s-table-column",
+                      "version": "0.0.1",
+                      "visible": true,
+                      "props": {
+                        "title": "操作"
+                      },
+                      "children": [
+                        {
+                          "type": "s-button",
+                          "id": "1c616e2e-39f5-4fab-b294-101cb89e4012",
+                          "name": "按钮1",
+                          "version": "0.0.1",
+                          "visible": true,
+                          "enable": true,
+                          "props": {
+                            "value": "合格"
+                          },
+                          "style": {
+                            "color": "rgb(255, 255, 255)",
+                            "backgroundColor": "rgb(64, 158, 255)",
+                            "borderColor": "rgb(64, 158, 255)"
+                          },
+                          "events": [
+                            {
+                              "type": "click",
+                              "name": "clickEvent",
+                              "actions": [
+                                {
+                                  "type": "assignment",
+                                  "name": "porder赋值",
+                                  "variable": "porder",
+                                  "value": "ds1.Current"
+                                },
+                                {
+                                  "type": "popup",
+                                  "name": "打开合格弹窗",
+                                  "operationType": "open",
+                                  "popup": "zzzzz-39f1-4fab-b294-101cb89e5111"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "s-button",
+                          "id": "1c616e2e-39f5-4fab-b294-101cb89e4011",
+                          "name": "按钮1",
+                          "version": "0.0.1",
+                          "visible": true,
+                          "enable": true,
+                          "props": {
+                            "value": "不合格"
+                          },
+                          "style": {
+                            "marginLeft": "10px",
+                            "color": "rgb(255, 255, 255)",
+                            "backgroundColor": "rgb(144, 147, 153)",
+                            "borderColor": "rgb(144, 147, 153)"
+                          },
+                          "events": [
+                            {
+                              "type": "click",
+                              "name": "clickEvent",
+                              "actions": [
+                                {
+                                  "type": "assignment",
+                                  "name": "porder赋值",
+                                  "variable": "porder",
+                                  "value": "ds1.Current"
+                                },
+                                {
+                                  "type": "popup",
+                                  "name": "打开不合格弹窗",
+                                  "operationType": "open",
+                                  "popup": "yyyyy-39f1-4fab-b294-101cb89e5111"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "s-tabs-pane",
+              "id": "pane-xxxxx2",
+              "name": "pane2",
+              "version": "0.0.1",
+              "visible": true,
+              "tab": "tab2",
+              "props": {
+                "tab": "可报工订单"
+              },
+              "children": [
+                {
+                  "type": "s-container",
+                  "id": "1c616e2e-39f1-4fab-b294-101cb89e2004",
+                  "name": "容器组件2",
+                  "version": "0.0.1",
+                  "visible": true,
+                  "props": {
+                    "direction": "row",
+                    "contentAlign": "right"
+                  },
+                  "style": {
+                    "backgroundColor": "rgb(237, 237, 237)",
+                    "color": "rgb(51, 51, 51)",
+                    "marginBottom": "5px"
+                  },
+                  "children": [
+                    {
+                      "type": "s-button",
+                      "id": "1c616e2e-39f5-4fab-b294-101cb89e4010",
+                      "name": "按钮1",
+                      "version": "0.0.1",
+                      "visible": true,
+                      "enable": {
+                        "type": "JSExpression",
+                        "value": "table3Selected.length > 0"
+                      },
+                      "props": {
+                        "value": "批量生成报工单"
+                      },
+                      "style": {
+                        "color": "rgb(255, 255, 255)",
+                        "backgroundColor": "rgb(64, 158, 255)",
+                        "borderColor": "rgb(64, 158, 255)"
+                      },
+                      "events": [
+                        {
+                          "type": "click",
+                          "name": "clickEvent",
+                          "actions": [
+                            {
+                              "type": "popup",
+                              "name": "打开批量生成报工单弹窗",
+                              "operationType": "open",
+                              "popup": "abcd-39f1-4fab-b294-101cb89e5111"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "s-button",
+                      "id": "1c616e2e-39f5-4fab-b294-101cb89e4011",
+                      "name": "按钮1",
+                      "version": "0.0.1",
+                      "visible": true,
+                      "enable": {
+                        "type": "JSExpression",
+                        "value": "table3Selected.length > 0"
+                      },
+                      "props": {
+                        "value": "批量取消合格"
+                      },
+                      "style": {
+                        "marginLeft": "10px",
+                        "color": "rgb(255, 255, 255)",
+                        "backgroundColor": "rgb(144, 147, 153)",
+                        "borderColor": "rgb(144, 147, 153)"
+                      },
+                      "events": [
+                        {
+                          "type": "click",
+                          "name": "clickEvent",
+                          "actions": [
+                            {
+                              "type": "popup",
+                              "name": "打开批量取消合格弹窗",
+                              "operationType": "open",
+                              "popup": "q2er-39f1-4fab-b294-101cb89e5111"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "s-table",
+                  "name": "table3",
+                  "version": "0.0.1",
+                  "visible": true,
+                  "props": {
+                    "source": "ds3",
+                    "bordered": true,
+                    "selectedRowsSource": "table3Selected",
+                    "pagination": {
+                      "showQuickJumper": true,
+                      "showSizeChanger": true
+                    }
+                  },
+                  "children": [
+                    {
+                      "type": "s-table-column",
+                      "version": "0.0.1",
+                      "visible": true,
+                      "props": {
+                        "title": "生产订单号",
+                        "dataIndex": "porderNo",
+                        "sorter": true
+                      },
+                      "children": [
+                        {
+                          "type": "s-text",
+                          "version": "0.0.1",
+                          "visible": true,
+                          "props": {
+                            "value": {
+                              "type": "JSExpression",
+                              "value": "ds3.Current.porderNo"
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "s-table-column",
+                      "version": "0.0.1",
+                      "visible": true,
+                      "props": {
+                        "title": "料号",
+                        "dataIndex": "itemCode",
+                        "sorter": true
+                      },
+                      "children": [
+                        {
+                          "type": "s-text",
+                          "version": "0.0.1",
+                          "visible": true,
+                          "props": {
+                            "value": {
+                              "type": "JSExpression",
+                              "value": "ds3.Current.itemCode"
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "s-table-column",
+                      "version": "0.0.1",
+                      "visible": true,
+                      "props": {
+                        "title": "品名",
+                        "dataIndex": ["productionMaterials", "itemName"],
+                        "sorter": true
+                      },
+                      "children": [
+                        {
+                          "type": "s-text",
+                          "version": "0.0.1",
+                          "visible": true,
+                          "props": {
+                            "value": {
+                              "type": "JSExpression",
+                              "value": "ds3.Current.productionMaterials.itemName"
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "s-table-column",
+                      "version": "0.0.1",
+                      "visible": true,
+                      "props": {
+                        "title": "颜色",
+                        "dataIndex": ["productionMaterials", "color"],
+                        "sorter": true
+                      },
+                      "children": [
+                        {
+                          "type": "s-text",
+                          "version": "0.0.1",
+                          "visible": true,
+                          "props": {
+                            "value": {
+                              "type": "JSExpression",
+                              "value": "ds3.Current.productionMaterials.color"
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "s-table-column",
+                      "version": "0.0.1",
+                      "visible": true,
+                      "props": {
+                        "title": "数量",
+                        "dataIndex": ["productionMaterials", "qty"],
+                        "sorter": true
+                      },
+                      "children": [
+                        {
+                          "type": "s-text",
+                          "version": "0.0.1",
+                          "visible": true,
+                          "props": {
+                            "value": {
+                              "type": "JSExpression",
+                              "value": "ds3.Current.productionMaterials.qty"
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "s-table-column",
+                      "version": "0.0.1",
+                      "visible": true,
+                      "props": {
+                        "title": "工厂",
+                        "dataIndex": "orgCode",
+                        "sorter": true
+                      },
+                      "children": [
+                        {
+                          "type": "s-text",
+                          "version": "0.0.1",
+                          "visible": true,
+                          "props": {
+                            "value": {
+                              "type": "JSExpression",
+                              "value": "ds3.Current.orgCode"
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "s-table-column",
+                      "version": "0.0.1",
+                      "visible": true,
+                      "props": {
+                        "title": "产线",
+                        "dataIndex": "line",
+                        "sorter": true
+                      },
+                      "children": [
+                        {
+                          "type": "s-text",
+                          "version": "0.0.1",
+                          "visible": true,
+                          "props": {
+                            "value": {
+                              "type": "JSExpression",
+                              "value": "ds3.Current.line"
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "s-table-column",
+                      "version": "0.0.1",
+                      "visible": true,
+                      "props": {
+                        "title": "需求分类号",
+                        "dataIndex": "demandNo",
+                        "sorter": true
+                      },
+                      "children": [
+                        {
+                          "type": "s-text",
+                          "version": "0.0.1",
+                          "visible": true,
+                          "props": {
+                            "value": {
+                              "type": "JSExpression",
+                              "value": "ds3.Current.demandNo"
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "s-table-column",
+                      "version": "0.0.1",
+                      "visible": true,
+                      "props": {
+                        "title": "订单类型",
+                        "dataIndex": "porderTypeName",
+                        "sorter": true
+                      },
+                      "children": [
+                        {
+                          "type": "s-text",
+                          "version": "0.0.1",
+                          "visible": true,
+                          "props": {
+                            "value": {
+                              "type": "JSExpression",
+                              "value": "ds3.Current.porderTypeName"
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "s-table-column",
+                      "version": "0.0.1",
+                      "visible": true,
+                      "props": {
+                        "title": "状态",
+                        "dataIndex": "porderStatus",
+                        "sorter": true
+                      },
+                      "children": [
+                        {
+                          "type": "s-text",
+                          "version": "0.0.1",
+                          "visible": true,
+                          "props": {
+                            "value": {
+                              "type": "JSExpression",
+                              "value": "ds3.Current.porderStatus"
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "s-table-column",
+                      "version": "0.0.1",
+                      "visible": true,
+                      "props": {
+                        "title": "操作"
+                      },
+                      "children": [
+                        {
+                          "type": "s-button",
+                          "id": "1c616e2e-39f5-4fab-b294-101cb89e4013",
+                          "name": "按钮1",
+                          "version": "0.0.1",
+                          "visible": true,
+                          "enable": true,
+                          "props": {
+                            "value": "生成报工单"
+                          },
+                          "style": {
+                            "color": "rgb(255, 255, 255)",
+                            "backgroundColor": "rgb(64, 158, 255)",
+                            "borderColor": "rgb(64, 158, 255)",
+                            "paddingLeft": "15px",
+                            "paddingRight": "15px"
+                          },
+                          "events": [
+                            {
+                              "type": "click",
+                              "name": "clickEvent",
+                              "actions": [
+                                {
+                                  "type": "assignment",
+                                  "name": "porder赋值",
+                                  "variable": "porder",
+                                  "value": "ds3.Current"
+                                },
+                                {
+                                  "type": "popup",
+                                  "name": "打开生成报工单弹窗",
+                                  "operationType": "open",
+                                  "popup": "aaaaaa-39f1-4fab-b294-101cb89e5111"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "s-button",
+                          "id": "1c616e2e-39f5-4fab-b294-101cb89e4014",
+                          "name": "按钮1",
+                          "version": "0.0.1",
+                          "visible": true,
+                          "enable": true,
+                          "props": {
+                            "value": "取消合格"
+                          },
+                          "style": {
+                            "marginLeft": "10px",
+                            "color": "rgb(255, 255, 255)",
+                            "backgroundColor": "rgb(144, 147, 153)",
+                            "borderColor": "rgb(144, 147, 153)"
+                          },
+                          "events": [
+                            {
+                              "type": "click",
+                              "name": "clickEvent",
+                              "actions": [
+                                {
+                                  "type": "assignment",
+                                  "name": "porder赋值",
+                                  "variable": "porder",
+                                  "value": "ds3.Current"
+                                },
+                                {
+                                  "type": "popup",
+                                  "name": "打开取消合格弹窗",
+                                  "operationType": "open",
+                                  "popup": "bbbb-39f1-4fab-b294-101cb89e5111"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "s-tabs-pane",
+              "id": "pane-xxxxx3",
+              "name": "pane3",
+              "version": "0.0.1",
+              "visible": true,
+              "tab": "tab3",
+              "props": {
+                "tab": "已报工订单"
+              },
+              "children": [
+                {
+                  "type": "s-container",
+                  "id": "1c616e2e-39f1-4fab-b294-101cb89e2004",
+                  "name": "容器组件2",
+                  "version": "0.0.1",
+                  "visible": true,
+                  "props": {
+                    "direction": "row",
+                    "contentAlign": "right"
+                  },
+                  "style": {
+                    "backgroundColor": "rgb(237, 237, 237)",
+                    "color": "rgb(51, 51, 51)",
+                    "marginBottom": "5px"
+                  },
+                  "children": [
+                    {
+                      "type": "s-button",
+                      "id": "1c616e2e-39f5-4fab-b294-101cb89e4010",
+                      "name": "按钮1",
+                      "version": "0.0.1",
+                      "visible": true,
+                      "enable": {
+                        "type": "JSExpression",
+                        "value": "table4Selected.length > 0"
+                      },
+                      "props": {
+                        "value": "批量取消报工"
+                      },
+                      "style": {
+                        "color": "rgb(255, 255, 255)",
+                        "backgroundColor": "rgb(64, 158, 255)",
+                        "borderColor": "rgb(64, 158, 255)"
+                      },
+                      "events": [
+                        {
+                          "type": "click",
+                          "name": "clickEvent",
+                          "actions": [
+                            {
+                              "type": "popup",
+                              "name": "打开批量取消报工弹窗",
+                              "operationType": "open",
+                              "popup": "zzzzx-39f1-4fab-b294-101cb89e5111"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "s-table",
+                  "name": "table4",
+                  "version": "0.0.1",
+                  "visible": true,
+                  "props": {
+                    "source": "ds4",
+                    "bordered": true,
+                    "selectedRowsSource": "table4Selected",
+                    "pagination": {
+                      "showQuickJumper": true,
+                      "showSizeChanger": true
+                    }
+                  },
+                  "children": [
+                    {
+                      "type": "s-table-column",
+                      "version": "0.0.1",
+                      "visible": true,
+                      "props": {
+                        "title": "生产订单号",
+                        "dataIndex": "porderNo",
+                        "sorter": true
+                      },
+                      "children": [
+                        {
+                          "type": "s-text",
+                          "version": "0.0.1",
+                          "visible": true,
+                          "props": {
+                            "value": {
+                              "type": "JSExpression",
+                              "value": "ds4.Current.porderNo"
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "s-table-column",
+                      "version": "0.0.1",
+                      "visible": true,
+                      "props": {
+                        "title": "料号",
+                        "dataIndex": "itemCode",
+                        "sorter": true
+                      },
+                      "children": [
+                        {
+                          "type": "s-text",
+                          "version": "0.0.1",
+                          "visible": true,
+                          "props": {
+                            "value": {
+                              "type": "JSExpression",
+                              "value": "ds4.Current.itemCode"
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "s-table-column",
+                      "version": "0.0.1",
+                      "visible": true,
+                      "props": {
+                        "title": "品名",
+                        "dataIndex": ["productionMaterials", "itemName"],
+                        "sorter": true
+                      },
+                      "children": [
+                        {
+                          "type": "s-text",
+                          "version": "0.0.1",
+                          "visible": true,
+                          "props": {
+                            "value": {
+                              "type": "JSExpression",
+                              "value": "ds4.Current.productionMaterials.itemName"
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "s-table-column",
+                      "version": "0.0.1",
+                      "visible": true,
+                      "props": {
+                        "title": "颜色",
+                        "dataIndex": ["productionMaterials", "color"],
+                        "sorter": true
+                      },
+                      "children": [
+                        {
+                          "type": "s-text",
+                          "version": "0.0.1",
+                          "visible": true,
+                          "props": {
+                            "value": {
+                              "type": "JSExpression",
+                              "value": "ds4.Current.productionMaterials.color"
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "s-table-column",
+                      "version": "0.0.1",
+                      "visible": true,
+                      "props": {
+                        "title": "数量",
+                        "dataIndex": ["productionMaterials", "qty"],
+                        "sorter": true
+                      },
+                      "children": [
+                        {
+                          "type": "s-text",
+                          "version": "0.0.1",
+                          "visible": true,
+                          "props": {
+                            "value": {
+                              "type": "JSExpression",
+                              "value": "ds4.Current.productionMaterials.qty"
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "s-table-column",
+                      "version": "0.0.1",
+                      "visible": true,
+                      "props": {
+                        "title": "工厂",
+                        "dataIndex": "orgCode",
+                        "sorter": true
+                      },
+                      "children": [
+                        {
+                          "type": "s-text",
+                          "version": "0.0.1",
+                          "visible": true,
+                          "props": {
+                            "value": {
+                              "type": "JSExpression",
+                              "value": "ds4.Current.orgCode"
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "s-table-column",
+                      "version": "0.0.1",
+                      "visible": true,
+                      "props": {
+                        "title": "产线",
+                        "dataIndex": "line",
+                        "sorter": true
+                      },
+                      "children": [
+                        {
+                          "type": "s-text",
+                          "version": "0.0.1",
+                          "visible": true,
+                          "props": {
+                            "value": {
+                              "type": "JSExpression",
+                              "value": "ds4.Current.line"
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "s-table-column",
+                      "version": "0.0.1",
+                      "visible": true,
+                      "props": {
+                        "title": "需求分类号",
+                        "dataIndex": "demandNo",
+                        "sorter": true
+                      },
+                      "children": [
+                        {
+                          "type": "s-text",
+                          "version": "0.0.1",
+                          "visible": true,
+                          "props": {
+                            "value": {
+                              "type": "JSExpression",
+                              "value": "ds4.Current.demandNo"
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "s-table-column",
+                      "version": "0.0.1",
+                      "visible": true,
+                      "props": {
+                        "title": "订单类型",
+                        "dataIndex": "porderTypeName",
+                        "sorter": true
+                      },
+                      "children": [
+                        {
+                          "type": "s-text",
+                          "version": "0.0.1",
+                          "visible": true,
+                          "props": {
+                            "value": {
+                              "type": "JSExpression",
+                              "value": "ds4.Current.porderTypeName"
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "s-table-column",
+                      "version": "0.0.1",
+                      "visible": true,
+                      "props": {
+                        "title": "状态",
+                        "dataIndex": "porderStatus",
+                        "sorter": true
+                      },
+                      "children": [
+                        {
+                          "type": "s-text",
+                          "version": "0.0.1",
+                          "visible": true,
+                          "props": {
+                            "value": {
+                              "type": "JSExpression",
+                              "value": "ds4.Current.porderStatus"
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "s-table-column",
+                      "version": "0.0.1",
+                      "visible": true,
+                      "props": {
+                        "title": "操作"
+                      },
+                      "children": [
+                        {
+                          "type": "s-button",
+                          "id": "1c616e2e-39f5-4fab-b294-101cb89e4010",
+                          "name": "按钮1",
+                          "version": "0.0.1",
+                          "visible": true,
+                          "enable": true,
+                          "props": {
+                            "value": "取消报工"
+                          },
+                          "style": {
+                            "color": "rgb(255, 255, 255)",
+                            "backgroundColor": "rgb(64, 158, 255)",
+                            "borderColor": "rgb(64, 158, 255)",
+                            "paddingLeft": "15px",
+                            "paddingRight": "15px"
+                          },
+                          "events": [
+                            {
+                              "type": "click",
+                              "name": "clickEvent",
+                              "actions": [
+                                {
+                                  "type": "assignment",
+                                  "name": "porder赋值",
+                                  "variable": "porder",
+                                  "value": "ds4.Current"
+                                },
+                                {
+                                  "type": "popup",
+                                  "name": "打开取消报工弹窗",
+                                  "operationType": "open",
+                                  "popup": "kkkkkk-39f1-4fab-b294-101cb89e5111"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "s-popup",
+      "name": "弹窗组件1",
+      "id": "xxxx-39f1-4fab-b294-101cb89e5111",
+      "props": {
+        "title": "批量合格",
+        "width": "750px",
+        "show": false
+      },
+      "visible": true,
+      "style": {
+        "top": "20px"
+      },
+      "children": [
+        {
+          "type": "s-container",
+          "id": "1c616e2e-39f1-4fab-b294-101cb89e2006",
+          "name": "容器组件9",
+          "version": "0.0.1",
+          "visible": true,
+          "props": {
+            "direction": "row",
+            "contentAlign": "left"
+          },
+          "style": {
+            "color": "rgb(51, 51, 51)",
+            "marginBottom": "5px"
+          },
+          "children": [
+            {
+              "type": "s-text",
+              "id": "1c616e2e-39f5-4fab-b294-101cb89e3000",
+              "name": "文本1",
+              "version": "0.0.1",
+              "visible": true,
+              "props": {
+                "value": "您是否将选中的"
+              },
+              "style": {
+                "textAlign": "left"
+              }
+            },
+            {
+              "type": "s-text",
+              "id": "1c616e2e-39f5-4fab-b294-101cb89e3001",
+              "name": "文本1",
+              "version": "0.0.1",
+              "visible": true,
+              "props": {
+                "value": {
+                  "type": "JSExpression",
+                  "value": "table2Selected.length"
+                }
+              },
+              "style": {
+                "textAlign": "left",
+                "paddingLeft": "5px",
+                "paddingRight": "5px",
+                "fontWeight": "bold"
+              }
+            },
+            {
+              "type": "s-text",
+              "id": "1c616e2e-39f5-4fab-b294-101cb89e3002",
+              "name": "文本1",
+              "version": "0.0.1",
+              "visible": true,
+              "props": {
+                "value": " 个订单进行批量合格操作?"
+              },
+              "style": {
+                "textAlign": "left"
+              }
+            }
+          ]
+        },
+        {
+          "type": "s-container",
+          "id": "1c616e2e-39f1-4fab-b294-101cb89e2007",
+          "name": "容器组件4",
+          "version": "0.0.1",
+          "visible": true,
+          "props": {
+            "direction": "row",
+            "contentAlign": "right"
+          },
+          "style": {
+            "color": "rgb(51, 51, 51)",
+            "marginBottom": "5px"
+          },
+          "children": [
+            {
+              "type": "s-button",
+              "id": "1c616e2e-39f5-4fab-b294-101cb89e4015",
+              "name": "按钮1",
+              "version": "0.0.1",
+              "visible": true,
+              "enable": true,
+              "props": {
+                "value": "确定"
+              },
+              "style": {
+                "color": "rgb(255, 255, 255)",
+                "backgroundColor": "rgb(64, 158, 255)",
+                "borderColor": "rgb(64, 158, 255)"
+              },
+              "events": [
+                {
+                  "type": "click",
+                  "name": "clickEvent",
+                  "actions": [
+                    {
+                      "type": "serverAction",
+                      "actionId": "ad986564-94e8-4775-951a-bc43d624d082",
+                      "name": "note",
+                      "parameters": [
+                        {
+                          "name": "porderList",
+                          "value": "table2Selected"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "popup",
+                      "name": "关闭批量合格弹窗",
+                      "operationType": "close",
+                      "popup": "xxxx-39f1-4fab-b294-101cb89e5111"
+                    },
+                    {
+                      "type": "message",
+                      "name": "showMessage",
+                      "level": "success",
+                      "content": {
+                        "type": "JSExpression",
+                        "value": "note.error.error ? '操作失败!' : '操作成功!'"
+                      }
+                    },
+                    {
+                      "type": "refreshAggregate",
+                      "name": "刷新数据集ds1",
+                      "aggregate": "ds1"
+                    },
+                    {
+                      "type": "refreshAggregate",
+                      "name": "刷新数据集ds3",
+                      "aggregate": "ds3"
+                    },
+                    {
+                      "type": "refreshAggregate",
+                      "name": "刷新数据集ds4",
+                      "aggregate": "ds4"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "s-button",
+              "id": "1c616e2e-39f5-4fab-b294-101cb89e4011",
+              "name": "按钮1",
+              "version": "0.0.1",
+              "visible": true,
+              "enable": true,
+              "props": {
+                "value": "取消"
+              },
+              "style": {
+                "marginLeft": "10px",
+                "color": "rgb(255, 255, 255)",
+                "backgroundColor": "rgb(144, 147, 153)",
+                "borderColor": "rgb(144, 147, 153)"
+              },
+              "events": [
+                {
+                  "type": "click",
+                  "name": "clickEvent",
+                  "actions": [
+                    {
+                      "type": "popup",
+                      "name": "关闭批量合格弹窗",
+                      "operationType": "close",
+                      "popup": "xxxx-39f1-4fab-b294-101cb89e5111"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "s-popup",
+      "name": "弹窗组件1",
+      "id": "zzzzz-39f1-4fab-b294-101cb89e5111",
+      "props": {
+        "title": "合格",
+        "width": "750px",
+        "show": false
+      },
+      "visible": true,
+      "style": {
+        "top": "20px"
+      },
+      "children": [
+        {
+          "type": "s-container",
+          "id": "1c616e2e-39f1-4fab-b294-101cb89e2008",
+          "name": "容器组件9",
+          "version": "0.0.1",
+          "visible": true,
+          "props": {
+            "direction": "row",
+            "contentAlign": "left"
+          },
+          "style": {
+            "color": "rgb(51, 51, 51)",
+            "marginBottom": "5px"
+          },
+          "children": [
+            {
+              "type": "s-text",
+              "id": "1c616e2e-39f5-4fab-b294-101cb89e3000",
+              "name": "文本1",
+              "version": "0.0.1",
+              "visible": true,
+              "props": {
+                "value": "您是否将生产订单号为："
+              },
+              "style": {
+                "textAlign": "left"
+              }
+            },
+            {
+              "type": "s-text",
+              "id": "1c616e2e-39f5-4fab-b294-101cb89e3001",
+              "name": "文本1",
+              "version": "0.0.1",
+              "visible": true,
+              "props": {
+                "value": {
+                  "type": "JSExpression",
+                  "value": "porder.porderNo"
+                }
+              },
+              "style": {
+                "textAlign": "left"
+              }
+            },
+            {
+              "type": "s-text",
+              "id": "1c616e2e-39f5-4fab-b294-101cb89e3002",
+              "name": "文本1",
+              "version": "0.0.1",
+              "visible": true,
+              "props": {
+                "value": "进行合格操作?"
+              },
+              "style": {
+                "textAlign": "left"
+              }
+            }
+          ]
+        },
+        {
+          "type": "s-container",
+          "id": "1c616e2e-39f1-4fab-b294-101cb89e2009",
+          "name": "容器组件4",
+          "version": "0.0.1",
+          "visible": true,
+          "props": {
+            "direction": "row",
+            "contentAlign": "right"
+          },
+          "style": {
+            "color": "rgb(51, 51, 51)",
+            "marginBottom": "5px"
+          },
+          "children": [
+            {
+              "type": "s-button",
+              "id": "1c616e2e-39f5-4fab-b294-101cb89e4016",
+              "name": "按钮1",
+              "version": "0.0.1",
+              "visible": true,
+              "enable": true,
+              "props": {
+                "value": "确定"
+              },
+              "style": {
+                "color": "rgb(255, 255, 255)",
+                "backgroundColor": "rgb(64, 158, 255)",
+                "borderColor": "rgb(64, 158, 255)"
+              },
+              "events": [
+                {
+                  "type": "click",
+                  "name": "clickEvent",
+                  "actions": [
+                    {
+                      "type": "serverAction",
+                      "actionId": "f3125a1f-96b1-4fb2-b275-a91c18826fc9",
+                      "name": "note",
+                      "parameters": [
+                        {
+                          "name": "porder",
+                          "value": "porder"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "popup",
+                      "name": "关闭合格弹窗",
+                      "operationType": "close",
+                      "popup": "zzzzz-39f1-4fab-b294-101cb89e5111"
+                    },
+                    {
+                      "type": "message",
+                      "name": "showMessage",
+                      "level": "success",
+                      "content": {
+                        "type": "JSExpression",
+                        "value": "note.error.error ? '操作失败!' : '操作成功!'"
+                      }
+                    },
+                    {
+                      "type": "refreshAggregate",
+                      "name": "刷新数据集ds1",
+                      "aggregate": "ds1"
+                    },
+                    {
+                      "type": "refreshAggregate",
+                      "name": "刷新数据集ds3",
+                      "aggregate": "ds3"
+                    },
+                    {
+                      "type": "refreshAggregate",
+                      "name": "刷新数据集ds4",
+                      "aggregate": "ds4"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "s-button",
+              "id": "1c616e2e-39f5-4fab-b294-101cb89e4011",
+              "name": "按钮1",
+              "version": "0.0.1",
+              "visible": true,
+              "enable": true,
+              "props": {
+                "value": "取消"
+              },
+              "style": {
+                "marginLeft": "10px",
+                "color": "rgb(255, 255, 255)",
+                "backgroundColor": "rgb(144, 147, 153)",
+                "borderColor": "rgb(144, 147, 153)"
+              },
+              "events": [
+                {
+                  "type": "click",
+                  "name": "clickEvent",
+                  "actions": [
+                    {
+                      "type": "popup",
+                      "name": "关闭合格弹窗",
+                      "operationType": "close",
+                      "popup": "zzzzz-39f1-4fab-b294-101cb89e5111"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "s-popup",
+      "name": "弹窗组件1",
+      "id": "yyyyy-39f1-4fab-b294-101cb89e5111",
+      "props": {
+        "title": "不合格",
+        "width": "750px",
+        "show": false
+      },
+      "visible": true,
+      "style": {
+        "top": "20px"
+      },
+      "children": [
+        {
+          "type": "s-container",
+          "id": "1c616e2e-39f1-4fab-b294-101cb89e2010",
+          "name": "容器组件9",
+          "version": "0.0.1",
+          "visible": true,
+          "props": {
+            "direction": "row",
+            "contentAlign": "left"
+          },
+          "style": {
+            "color": "rgb(51, 51, 51)",
+            "marginBottom": "5px"
+          },
+          "children": [
+            {
+              "type": "s-text",
+              "id": "1c616e2e-39f5-4fab-b294-101cb89e3000",
+              "name": "文本1",
+              "version": "0.0.1",
+              "visible": true,
+              "props": {
+                "value": "您是否将生产订单号为："
+              },
+              "style": {
+                "textAlign": "left"
+              }
+            },
+            {
+              "type": "s-text",
+              "id": "1c616e2e-39f5-4fab-b294-101cb89e3001",
+              "name": "文本1",
+              "version": "0.0.1",
+              "visible": true,
+              "props": {
+                "value": {
+                  "type": "JSExpression",
+                  "value": "porder.porderNo"
+                }
+              },
+              "style": {
+                "textAlign": "left"
+              }
+            },
+            {
+              "type": "s-text",
+              "id": "1c616e2e-39f5-4fab-b294-101cb89e3002",
+              "name": "文本1",
+              "version": "0.0.1",
+              "visible": true,
+              "props": {
+                "value": "进行不合格操作!"
+              },
+              "style": {
+                "textAlign": "left"
+              }
+            }
+          ]
+        },
+        {
+          "type": "s-textarea",
+          "version": "0.0.1",
+          "visible": true,
+          "enable": true,
+          "style": {
+            "marginBottom": "5px"
+          },
+          "props": {
+            "watermark": "不合格理由",
+            "value": {
+              "type": "JSExpression",
+              "value": "porder.disreason"
+            },
+            "rows": 2
+          }
+        },
+        {
+          "type": "s-container",
+          "id": "1c616e2e-39f1-4fab-b294-101cb89e2003",
+          "name": "容器组件4",
+          "version": "0.0.1",
+          "visible": true,
+          "props": {
+            "direction": "row",
+            "contentAlign": "right"
+          },
+          "style": {
+            "color": "rgb(51, 51, 51)",
+            "marginBottom": "5px"
+          },
+          "children": [
+            {
+              "type": "s-button",
+              "id": "1c616e2e-39f5-4fab-b294-101cb89e4017",
+              "name": "按钮1",
+              "version": "0.0.1",
+              "visible": true,
+              "enable": true,
+              "props": {
+                "value": "确定"
+              },
+              "style": {
+                "color": "rgb(255, 255, 255)",
+                "backgroundColor": "rgb(64, 158, 255)",
+                "borderColor": "rgb(64, 158, 255)"
+              },
+              "events": [
+                {
+                  "type": "click",
+                  "name": "clickEvent",
+                  "actions": [
+                    {
+                      "type": "serverAction",
+                      "actionId": "56b89089-4f38-4318-82d7-7cb4ecd47f0f",
+                      "name": "note",
+                      "parameters": [
+                        {
+                          "name": "porder",
+                          "value": "porder"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "popup",
+                      "name": "关闭不合格弹窗",
+                      "operationType": "close",
+                      "popup": "yyyyy-39f1-4fab-b294-101cb89e5111"
+                    },
+                    {
+                      "type": "message",
+                      "name": "showMessage",
+                      "level": "success",
+                      "content": {
+                        "type": "JSExpression",
+                        "value": "note.error.error ? '操作失败!' : '操作成功!'"
+                      }
+                    },
+                    {
+                      "type": "refreshAggregate",
+                      "name": "刷新数据集ds1",
+                      "aggregate": "ds1"
+                    },
+                    {
+                      "type": "refreshAggregate",
+                      "name": "刷新数据集ds3",
+                      "aggregate": "ds3"
+                    },
+                    {
+                      "type": "refreshAggregate",
+                      "name": "刷新数据集ds4",
+                      "aggregate": "ds4"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "s-button",
+              "id": "1c616e2e-39f5-4fab-b294-101cb89e4011",
+              "name": "按钮1",
+              "version": "0.0.1",
+              "visible": true,
+              "enable": true,
+              "props": {
+                "value": "取消"
+              },
+              "style": {
+                "marginLeft": "10px",
+                "color": "rgb(255, 255, 255)",
+                "backgroundColor": "rgb(144, 147, 153)",
+                "borderColor": "rgb(144, 147, 153)"
+              },
+              "events": [
+                {
+                  "type": "click",
+                  "name": "clickEvent",
+                  "actions": [
+                    {
+                      "type": "popup",
+                      "name": "关闭不合格弹窗",
+                      "operationType": "close",
+                      "popup": "yyyyy-39f1-4fab-b294-101cb89e5111"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "s-popup",
+      "name": "弹窗组件1",
+      "id": "abcd-39f1-4fab-b294-101cb89e5111",
+      "props": {
+        "title": "批量生成报工单",
+        "width": "750px",
+        "show": false
+      },
+      "visible": true,
+      "style": {
+        "top": "20px"
+      },
+      "children": [
+        {
+          "type": "s-container",
+          "id": "1c616e2e-39f1-4fab-b294-101cb89e2003",
+          "name": "容器组件9",
+          "version": "0.0.1",
+          "visible": true,
+          "props": {
+            "direction": "row",
+            "contentAlign": "left"
+          },
+          "style": {
+            "color": "rgb(51, 51, 51)",
+            "marginBottom": "5px"
+          },
+          "children": [
+            {
+              "type": "s-text",
+              "id": "1c616e2e-39f5-4fab-b294-101cb89e3000",
+              "name": "文本1",
+              "version": "0.0.1",
+              "visible": true,
+              "props": {
+                "value": "您是否将选中的 "
+              },
+              "style": {
+                "textAlign": "left"
+              }
+            },
+            {
+              "type": "s-text",
+              "id": "1c616e2e-39f5-4fab-b294-101cb89e3000",
+              "name": "文本1",
+              "version": "0.0.1",
+              "visible": true,
+              "props": {
+                "value": {
+                  "type": "JSExpression",
+                  "value": "table3Selected.length"
+                }
+              },
+              "style": {
+                "textAlign": "left",
+                "paddingLeft": "5px",
+                "paddingRight": "5px",
+                "fontWeight": "bold"
+              }
+            },
+            {
+              "type": "s-text",
+              "id": "1c616e2e-39f5-4fab-b294-101cb89e3000",
+              "name": "文本1",
+              "version": "0.0.1",
+              "visible": true,
+              "props": {
+                "value": " 个订单进行批量报工操作?"
+              },
+              "style": {
+                "textAlign": "left"
+              }
+            }
+          ]
+        },
+        {
+          "type": "s-container",
+          "id": "1c616e2e-39f1-4fab-b294-101cb89e2003",
+          "name": "容器组件4",
+          "version": "0.0.1",
+          "visible": true,
+          "props": {
+            "direction": "row",
+            "contentAlign": "right"
+          },
+          "style": {
+            "color": "rgb(51, 51, 51)",
+            "marginBottom": "5px"
+          },
+          "children": [
+            {
+              "type": "s-button",
+              "id": "1c616e2e-39f5-4fab-b294-101cb89e4010",
+              "name": "按钮1",
+              "version": "0.0.1",
+              "visible": true,
+              "enable": true,
+              "props": {
+                "value": "确定"
+              },
+              "style": {
+                "color": "rgb(255, 255, 255)",
+                "backgroundColor": "rgb(64, 158, 255)",
+                "borderColor": "rgb(64, 158, 255)"
+              },
+              "events": [
+                {
+                  "type": "click",
+                  "name": "clickEvent",
+                  "actions": [
+                    {
+                      "type": "serverAction",
+                      "actionId": "6d35e6f6-2946-49d4-932e-b4e5d592cd86",
+                      "name": "note",
+                      "parameters": [
+                        {
+                          "name": "porderList",
+                          "value": "table3Selected"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "popup",
+                      "name": "关闭批量生成报工单弹窗",
+                      "operationType": "close",
+                      "popup": "abcd-39f1-4fab-b294-101cb89e5111"
+                    },
+                    {
+                      "type": "message",
+                      "name": "showMessage",
+                      "level": "success",
+                      "content": {
+                        "type": "JSExpression",
+                        "value": "note.error.error ? '操作失败!' : '操作成功!'"
+                      }
+                    },
+                    {
+                      "type": "refreshAggregate",
+                      "name": "刷新数据集ds1",
+                      "aggregate": "ds1"
+                    },
+                    {
+                      "type": "refreshAggregate",
+                      "name": "刷新数据集ds3",
+                      "aggregate": "ds3"
+                    },
+                    {
+                      "type": "refreshAggregate",
+                      "name": "刷新数据集ds4",
+                      "aggregate": "ds4"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "s-button",
+              "id": "1c616e2e-39f5-4fab-b294-101cb89e4011",
+              "name": "按钮1",
+              "version": "0.0.1",
+              "visible": true,
+              "enable": true,
+              "props": {
+                "value": "取消"
+              },
+              "style": {
+                "marginLeft": "10px",
+                "color": "rgb(255, 255, 255)",
+                "backgroundColor": "rgb(144, 147, 153)",
+                "borderColor": "rgb(144, 147, 153)"
+              },
+              "events": [
+                {
+                  "type": "click",
+                  "name": "clickEvent",
+                  "actions": [
+                    {
+                      "type": "popup",
+                      "name": "关闭批量生成报工单弹窗",
+                      "operationType": "close",
+                      "popup": "abcd-39f1-4fab-b294-101cb89e5111"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "s-popup",
+      "name": "弹窗组件1",
+      "id": "q2er-39f1-4fab-b294-101cb89e5111",
+      "props": {
+        "title": "批量取消合格",
+        "width": "750px",
+        "show": false
+      },
+      "visible": true,
+      "style": {
+        "top": "20px"
+      },
+      "children": [
+        {
+          "type": "s-container",
+          "id": "1c616e2e-39f1-4fab-b294-101cb89e2023",
+          "name": "容器组件9",
+          "version": "0.0.1",
+          "visible": true,
+          "props": {
+            "direction": "row",
+            "contentAlign": "left"
+          },
+          "style": {
+            "color": "rgb(51, 51, 51)",
+            "marginBottom": "5px"
+          },
+          "children": [
+            {
+              "type": "s-text",
+              "id": "1c616e2e-39f5-4fab-b294-101cb89e3000",
+              "name": "文本1",
+              "version": "0.0.1",
+              "visible": true,
+              "props": {
+                "value": "您是否将选中的 "
+              },
+              "style": {
+                "textAlign": "left"
+              }
+            },
+            {
+              "type": "s-text",
+              "id": "1c616e2e-39f5-4fab-b294-101cb89e3000",
+              "name": "文本1",
+              "version": "0.0.1",
+              "visible": true,
+              "props": {
+                "value": {
+                  "type": "JSExpression",
+                  "value": "table3Selected.length"
+                }
+              },
+              "style": {
+                "textAlign": "left",
+                "paddingLeft": "5px",
+                "paddingRight": "5px",
+                "fontWeight": "bold"
+              }
+            },
+            {
+              "type": "s-text",
+              "id": "1c616e2e-39f5-4fab-b294-101cb89e3000",
+              "name": "文本1",
+              "version": "0.0.1",
+              "visible": true,
+              "props": {
+                "value": " 个订单进行批量取消合格操作?"
+              },
+              "style": {
+                "textAlign": "left"
+              }
+            }
+          ]
+        },
+        {
+          "type": "s-container",
+          "id": "1c616e2e-39f1-4fab-b294-101cb89e2003",
+          "name": "容器组件4",
+          "version": "0.0.1",
+          "visible": true,
+          "props": {
+            "direction": "row",
+            "contentAlign": "right"
+          },
+          "style": {
+            "color": "rgb(51, 51, 51)",
+            "marginBottom": "5px"
+          },
+          "children": [
+            {
+              "type": "s-button",
+              "id": "1c616e2e-39f5-4fab-b294-101cb89e4010",
+              "name": "按钮1",
+              "version": "0.0.1",
+              "visible": true,
+              "enable": true,
+              "props": {
+                "value": "确定"
+              },
+              "style": {
+                "color": "rgb(255, 255, 255)",
+                "backgroundColor": "rgb(64, 158, 255)",
+                "borderColor": "rgb(64, 158, 255)"
+              },
+              "events": [
+                {
+                  "type": "click",
+                  "name": "clickEvent",
+                  "actions": [
+                    {
+                      "type": "serverAction",
+                      "actionId": "279c9ca4-2da9-437a-8590-5e31c35022e8",
+                      "name": "note",
+                      "parameters": [
+                        {
+                          "name": "porderList",
+                          "value": "table3Selected"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "popup",
+                      "name": "关闭批量取消合格弹窗",
+                      "operationType": "close",
+                      "popup": "q2er-39f1-4fab-b294-101cb89e5111"
+                    },
+                    {
+                      "type": "message",
+                      "name": "showMessage",
+                      "level": "success",
+                      "content": {
+                        "type": "JSExpression",
+                        "value": "note.error.error ? '操作失败!' : '操作成功!'"
+                      }
+                    },
+                    {
+                      "type": "refreshAggregate",
+                      "name": "刷新数据集ds1",
+                      "aggregate": "ds1"
+                    },
+                    {
+                      "type": "refreshAggregate",
+                      "name": "刷新数据集ds3",
+                      "aggregate": "ds3"
+                    },
+                    {
+                      "type": "refreshAggregate",
+                      "name": "刷新数据集ds4",
+                      "aggregate": "ds4"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "s-button",
+              "id": "1c616e2e-39f5-4fab-b294-101cb89e4011",
+              "name": "按钮1",
+              "version": "0.0.1",
+              "visible": true,
+              "enable": true,
+              "props": {
+                "value": "取消"
+              },
+              "style": {
+                "marginLeft": "10px",
+                "color": "rgb(255, 255, 255)",
+                "backgroundColor": "rgb(144, 147, 153)",
+                "borderColor": "rgb(144, 147, 153)"
+              },
+              "events": [
+                {
+                  "type": "click",
+                  "name": "clickEvent",
+                  "actions": [
+                    {
+                      "type": "popup",
+                      "name": "关闭批量取消合格弹窗",
+                      "operationType": "close",
+                      "popup": "q2er-39f1-4fab-b294-101cb89e5111"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "s-popup",
+      "name": "弹窗组件1",
+      "id": "aaaaaa-39f1-4fab-b294-101cb89e5111",
+      "props": {
+        "title": "生成报工单",
+        "width": "750px",
+        "show": false
+      },
+      "visible": true,
+      "style": {
+        "top": "20px"
+      },
+      "children": [
+        {
+          "type": "s-container",
+          "id": "1c616e2e-39f1-4fab-b294-101cb89e2003",
+          "name": "容器组件9",
+          "version": "0.0.1",
+          "visible": true,
+          "props": {
+            "direction": "row",
+            "contentAlign": "left"
+          },
+          "style": {
+            "color": "rgb(51, 51, 51)",
+            "marginBottom": "5px"
+          },
+          "children": [
+            {
+              "type": "s-text",
+              "id": "1c616e2e-39f5-4fab-b294-101cb89e3000",
+              "name": "文本1",
+              "version": "0.0.1",
+              "visible": true,
+              "props": {
+                "value": "您是否将生产订单号为："
+              },
+              "style": {
+                "textAlign": "left"
+              }
+            },
+            {
+              "type": "s-text",
+              "id": "1c616e2e-39f5-4fab-b294-101cb89e3000",
+              "name": "文本1",
+              "version": "0.0.1",
+              "visible": true,
+              "props": {
+                "value": {
+                  "type": "JSExpression",
+                  "value": "porder.porderNo"
+                }
+              },
+              "style": {
+                "textAlign": "left"
+              }
+            },
+            {
+              "type": "s-text",
+              "id": "1c616e2e-39f5-4fab-b294-101cb89e3000",
+              "name": "文本1",
+              "version": "0.0.1",
+              "visible": true,
+              "props": {
+                "value": "进行生成报工单操作?"
+              },
+              "style": {
+                "textAlign": "left"
+              }
+            }
+          ]
+        },
+        {
+          "type": "s-container",
+          "id": "1c616e2e-39f1-4fab-b294-101cb89e2003",
+          "name": "容器组件4",
+          "version": "0.0.1",
+          "visible": true,
+          "props": {
+            "direction": "row",
+            "contentAlign": "right"
+          },
+          "style": {
+            "color": "rgb(51, 51, 51)",
+            "marginBottom": "5px"
+          },
+          "children": [
+            {
+              "type": "s-button",
+              "id": "1c616e2e-39f5-4fab-b294-101cb89e4010",
+              "name": "按钮1",
+              "version": "0.0.1",
+              "visible": true,
+              "enable": true,
+              "props": {
+                "value": "确定"
+              },
+              "style": {
+                "color": "rgb(255, 255, 255)",
+                "backgroundColor": "rgb(64, 158, 255)",
+                "borderColor": "rgb(64, 158, 255)"
+              },
+              "events": [
+                {
+                  "type": "click",
+                  "name": "clickEvent",
+                  "actions": [
+                    {
+                      "type": "serverAction",
+                      "actionId": "7d38e587-5c3d-4518-88a0-335334ed425e",
+                      "name": "note",
+                      "parameters": [
+                        {
+                          "name": "porder",
+                          "value": "porder"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "popup",
+                      "name": "关闭生成报工单弹窗",
+                      "operationType": "close",
+                      "popup": "aaaaaa-39f1-4fab-b294-101cb89e5111"
+                    },
+                    {
+                      "type": "message",
+                      "name": "showMessage",
+                      "level": "success",
+                      "content": {
+                        "type": "JSExpression",
+                        "value": "note.error.error ? '操作失败!' : '操作成功!'"
+                      }
+                    },
+                    {
+                      "type": "refreshAggregate",
+                      "name": "刷新数据集ds1",
+                      "aggregate": "ds1"
+                    },
+                    {
+                      "type": "refreshAggregate",
+                      "name": "刷新数据集ds3",
+                      "aggregate": "ds3"
+                    },
+                    {
+                      "type": "refreshAggregate",
+                      "name": "刷新数据集ds4",
+                      "aggregate": "ds4"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "s-button",
+              "id": "1c616e2e-39f5-4fab-b294-101cb89e4011",
+              "name": "按钮1",
+              "version": "0.0.1",
+              "visible": true,
+              "enable": true,
+              "props": {
+                "value": "取消"
+              },
+              "style": {
+                "marginLeft": "10px",
+                "color": "rgb(255, 255, 255)",
+                "backgroundColor": "rgb(144, 147, 153)",
+                "borderColor": "rgb(144, 147, 153)"
+              },
+              "events": [
+                {
+                  "type": "click",
+                  "name": "clickEvent",
+                  "actions": [
+                    {
+                      "type": "popup",
+                      "name": "关闭生成报工单弹窗",
+                      "operationType": "close",
+                      "popup": "aaaaaa-39f1-4fab-b294-101cb89e5111"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "s-popup",
+      "name": "弹窗组件1",
+      "id": "bbbb-39f1-4fab-b294-101cb89e5111",
+      "props": {
+        "title": "取消合格",
+        "width": "750px",
+        "show": false
+      },
+      "visible": true,
+      "style": {
+        "top": "20px"
+      },
+      "children": [
+        {
+          "type": "s-container",
+          "id": "1c616e2e-39f1-4fab-b294-101cb89e2003",
+          "name": "容器组件9",
+          "version": "0.0.1",
+          "visible": true,
+          "props": {
+            "direction": "row",
+            "contentAlign": "left"
+          },
+          "style": {
+            "color": "rgb(51, 51, 51)",
+            "marginBottom": "5px"
+          },
+          "children": [
+            {
+              "type": "s-text",
+              "id": "1c616e2e-39f5-4fab-b294-101cb89e3000",
+              "name": "文本1",
+              "version": "0.0.1",
+              "visible": true,
+              "props": {
+                "value": "您是否将生产订单号为："
+              },
+              "style": {
+                "textAlign": "left"
+              }
+            },
+            {
+              "type": "s-text",
+              "id": "1c616e2e-39f5-4fab-b294-101cb89e3000",
+              "name": "文本1",
+              "version": "0.0.1",
+              "visible": true,
+              "props": {
+                "value": {
+                  "type": "JSExpression",
+                  "value": "porder.porderNo"
+                }
+              },
+              "style": {
+                "textAlign": "left"
+              }
+            },
+            {
+              "type": "s-text",
+              "id": "1c616e2e-39f5-4fab-b294-101cb89e3000",
+              "name": "文本1",
+              "version": "0.0.1",
+              "visible": true,
+              "props": {
+                "value": "进行取消合格操作?"
+              },
+              "style": {
+                "textAlign": "left"
+              }
+            }
+          ]
+        },
+        {
+          "type": "s-container",
+          "id": "1c616e2e-39f1-4fab-b294-101cb89e2003",
+          "name": "容器组件4",
+          "version": "0.0.1",
+          "visible": true,
+          "props": {
+            "direction": "row",
+            "contentAlign": "right"
+          },
+          "style": {
+            "color": "rgb(51, 51, 51)",
+            "marginBottom": "5px"
+          },
+          "children": [
+            {
+              "type": "s-button",
+              "id": "1c616e2e-39f5-4fab-b294-101cb89e4010",
+              "name": "按钮1",
+              "version": "0.0.1",
+              "visible": true,
+              "enable": true,
+              "props": {
+                "value": "确定"
+              },
+              "style": {
+                "color": "rgb(255, 255, 255)",
+                "backgroundColor": "rgb(64, 158, 255)",
+                "borderColor": "rgb(64, 158, 255)"
+              },
+              "events": [
+                {
+                  "type": "click",
+                  "name": "clickEvent",
+                  "actions": [
+                    {
+                      "type": "serverAction",
+                      "actionId": "6abddcaa-6fc8-4ee5-a634-67928fee594a",
+                      "name": "note",
+                      "parameters": [
+                        {
+                          "name": "porder",
+                          "value": "porder"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "popup",
+                      "name": "关闭取消合格弹窗",
+                      "operationType": "close",
+                      "popup": "bbbb-39f1-4fab-b294-101cb89e5111"
+                    },
+                    {
+                      "type": "message",
+                      "name": "showMessage",
+                      "level": "success",
+                      "content": {
+                        "type": "JSExpression",
+                        "value": "note.error.error ? '操作失败!' : '操作成功!'"
+                      }
+                    },
+                    {
+                      "type": "refreshAggregate",
+                      "name": "刷新数据集ds1",
+                      "aggregate": "ds1"
+                    },
+                    {
+                      "type": "refreshAggregate",
+                      "name": "刷新数据集ds3",
+                      "aggregate": "ds3"
+                    },
+                    {
+                      "type": "refreshAggregate",
+                      "name": "刷新数据集ds4",
+                      "aggregate": "ds4"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "s-button",
+              "id": "1c616e2e-39f5-4fab-b294-101cb89e4011",
+              "name": "按钮1",
+              "version": "0.0.1",
+              "visible": true,
+              "enable": true,
+              "props": {
+                "value": "取消"
+              },
+              "style": {
+                "marginLeft": "10px",
+                "color": "rgb(255, 255, 255)",
+                "backgroundColor": "rgb(144, 147, 153)",
+                "borderColor": "rgb(144, 147, 153)"
+              },
+              "events": [
+                {
+                  "type": "click",
+                  "name": "clickEvent",
+                  "actions": [
+                    {
+                      "type": "popup",
+                      "name": "关闭取消合格弹窗",
+                      "operationType": "close",
+                      "popup": "bbbb-39f1-4fab-b294-101cb89e5111"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "s-popup",
+      "name": "弹窗组件1",
+      "id": "zzzzx-39f1-4fab-b294-101cb89e5111",
+      "props": {
+        "title": "批量取消报工",
+        "width": "750px",
+        "show": false
+      },
+      "visible": true,
+      "style": {
+        "top": "20px"
+      },
+      "children": [
+        {
+          "type": "s-container",
+          "id": "1c616e2e-39f1-4fab-b294-101cb89e2103",
+          "name": "容器组件9",
+          "version": "0.0.1",
+          "visible": true,
+          "props": {
+            "direction": "row",
+            "contentAlign": "left"
+          },
+          "style": {
+            "color": "rgb(51, 51, 51)",
+            "marginBottom": "5px"
+          },
+          "children": [
+            {
+              "type": "s-text",
+              "id": "1c616e2e-39f5-4fab-b294-101cb89e3008",
+              "name": "文本1",
+              "version": "0.0.1",
+              "visible": true,
+              "props": {
+                "value": "您是否将选中的 "
+              },
+              "style": {
+                "textAlign": "left"
+              }
+            },
+            {
+              "type": "s-text",
+              "id": "1c616e2e-39f5-4fab-b294-101cb89e3009",
+              "name": "文本1",
+              "version": "0.0.1",
+              "visible": true,
+              "props": {
+                "value": {
+                  "type": "JSExpression",
+                  "value": "table4Selected.length"
+                }
+              },
+              "style": {
+                "textAlign": "left",
+                "paddingLeft": "5px",
+                "paddingRight": "5px",
+                "fontWeight": "bold"
+              }
+            },
+            {
+              "type": "s-text",
+              "id": "1c616e2e-39f5-4fab-b294-101cb89e3010",
+              "name": "文本1",
+              "version": "0.0.1",
+              "visible": true,
+              "props": {
+                "value": " 个订单进行批量取消报工操作?"
+              },
+              "style": {
+                "textAlign": "left"
+              }
+            }
+          ]
+        },
+        {
+          "type": "s-container",
+          "id": "1c616e2e-39f1-4fab-b294-101cb89e2203",
+          "name": "容器组件4",
+          "version": "0.0.1",
+          "visible": true,
+          "props": {
+            "direction": "row",
+            "contentAlign": "right"
+          },
+          "style": {
+            "color": "rgb(51, 51, 51)",
+            "marginBottom": "5px"
+          },
+          "children": [
+            {
+              "type": "s-button",
+              "id": "1c616e2e-39f5-4fab-b294-101cb89e4010",
+              "name": "按钮1",
+              "version": "0.0.1",
+              "visible": true,
+              "enable": true,
+              "props": {
+                "value": "确定"
+              },
+              "style": {
+                "color": "rgb(255, 255, 255)",
+                "backgroundColor": "rgb(64, 158, 255)",
+                "borderColor": "rgb(64, 158, 255)"
+              },
+              "events": [
+                {
+                  "type": "click",
+                  "name": "clickEvent",
+                  "actions": [
+                    {
+                      "type": "serverAction",
+                      "actionId": "6dba94dc-74df-4678-baa3-c3e75f5d020d",
+                      "name": "note",
+                      "parameters": [
+                        {
+                          "name": "porderList",
+                          "value": "table4Selected"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "popup",
+                      "name": "关闭批量取消报工弹窗",
+                      "operationType": "close",
+                      "popup": "zzzzx-39f1-4fab-b294-101cb89e5111"
+                    },
+                    {
+                      "type": "message",
+                      "name": "showMessage",
+                      "level": "success",
+                      "content": {
+                        "type": "JSExpression",
+                        "value": "note.error.error ? '操作失败!' : '操作成功!'"
+                      }
+                    },
+                    {
+                      "type": "refreshAggregate",
+                      "name": "刷新数据集ds1",
+                      "aggregate": "ds1"
+                    },
+                    {
+                      "type": "refreshAggregate",
+                      "name": "刷新数据集ds3",
+                      "aggregate": "ds3"
+                    },
+                    {
+                      "type": "refreshAggregate",
+                      "name": "刷新数据集ds4",
+                      "aggregate": "ds4"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "s-button",
+              "id": "1c616e2e-39f5-4fab-b294-101cb89e4011",
+              "name": "按钮1",
+              "version": "0.0.1",
+              "visible": true,
+              "enable": true,
+              "props": {
+                "value": "取消"
+              },
+              "style": {
+                "marginLeft": "10px",
+                "color": "rgb(255, 255, 255)",
+                "backgroundColor": "rgb(144, 147, 153)",
+                "borderColor": "rgb(144, 147, 153)"
+              },
+              "events": [
+                {
+                  "type": "click",
+                  "name": "clickEvent",
+                  "actions": [
+                    {
+                      "type": "popup",
+                      "name": "关闭批量取消报工弹窗",
+                      "operationType": "close",
+                      "popup": "zzzzx-39f1-4fab-b294-101cb89e5111"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "s-popup",
+      "name": "弹窗组件1",
+      "id": "kkkkkk-39f1-4fab-b294-101cb89e5111",
+      "props": {
+        "title": "取消报工",
+        "width": "750px",
+        "show": false
+      },
+      "visible": true,
+      "style": {
+        "top": "20px"
+      },
+      "children": [
+        {
+          "type": "s-container",
+          "id": "1c616e2e-39f1-4fab-b294-101cb89e2303",
+          "name": "容器组件9",
+          "version": "0.0.1",
+          "visible": true,
+          "props": {
+            "direction": "row",
+            "contentAlign": "left"
+          },
+          "style": {
+            "color": "rgb(51, 51, 51)",
+            "marginBottom": "5px"
+          },
+          "children": [
+            {
+              "type": "s-text",
+              "id": "1c616e2e-39f5-4fab-b294-101cb89e3011",
+              "name": "文本1",
+              "version": "0.0.1",
+              "visible": true,
+              "props": {
+                "value": "您是否将生产订单号为："
+              },
+              "style": {
+                "textAlign": "left"
+              }
+            },
+            {
+              "type": "s-text",
+              "id": "1c616e2e-39f5-4fab-b294-101cb89e3012",
+              "name": "文本1",
+              "version": "0.0.1",
+              "visible": true,
+              "props": {
+                "value": {
+                  "type": "JSExpression",
+                  "value": "porder.porderNo"
+                }
+              },
+              "style": {
+                "textAlign": "left"
+              }
+            },
+            {
+              "type": "s-text",
+              "id": "1c616e2e-39f5-4fab-b294-101cb89e3013",
+              "name": "文本1",
+              "version": "0.0.1",
+              "visible": true,
+              "props": {
+                "value": "进行取消报工操作?"
+              },
+              "style": {
+                "textAlign": "left"
+              }
+            }
+          ]
+        },
+        {
+          "type": "s-container",
+          "id": "1c616e2e-39f1-4fab-b294-101cb89e2403",
+          "name": "容器组件4",
+          "version": "0.0.1",
+          "visible": true,
+          "props": {
+            "direction": "row",
+            "contentAlign": "right"
+          },
+          "style": {
+            "color": "rgb(51, 51, 51)",
+            "marginBottom": "5px"
+          },
+          "children": [
+            {
+              "type": "s-button",
+              "id": "1c616e2e-39f5-4fab-b294-101cb89e4010",
+              "name": "按钮1",
+              "version": "0.0.1",
+              "visible": true,
+              "enable": true,
+              "props": {
+                "value": "确定"
+              },
+              "style": {
+                "color": "rgb(255, 255, 255)",
+                "backgroundColor": "rgb(64, 158, 255)",
+                "borderColor": "rgb(64, 158, 255)"
+              },
+              "events": [
+                {
+                  "type": "click",
+                  "name": "clickEvent",
+                  "actions": [
+                    {
+                      "type": "serverAction",
+                      "actionId": "d98c5241-31e9-443a-aa9b-530c8a13acd3",
+                      "name": "note",
+                      "parameters": [
+                        {
+                          "name": "porder",
+                          "value": "porder"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "popup",
+                      "name": "关闭取消报工弹窗",
+                      "operationType": "close",
+                      "popup": "kkkkkk-39f1-4fab-b294-101cb89e5111"
+                    },
+                    {
+                      "type": "message",
+                      "name": "showMessage",
+                      "level": "success",
+                      "content": {
+                        "type": "JSExpression",
+                        "value": "note.error.error ? '操作失败!' : '操作成功!'"
+                      }
+                    },
+                    {
+                      "type": "refreshAggregate",
+                      "name": "刷新数据集ds1",
+                      "aggregate": "ds1"
+                    },
+                    {
+                      "type": "refreshAggregate",
+                      "name": "刷新数据集ds3",
+                      "aggregate": "ds3"
+                    },
+                    {
+                      "type": "refreshAggregate",
+                      "name": "刷新数据集ds4",
+                      "aggregate": "ds4"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "s-button",
+              "id": "1c616e2e-39f5-4fab-b294-101cb89e4011",
+              "name": "按钮1",
+              "version": "0.0.1",
+              "visible": true,
+              "enable": true,
+              "props": {
+                "value": "取消"
+              },
+              "style": {
+                "marginLeft": "10px",
+                "color": "rgb(255, 255, 255)",
+                "backgroundColor": "rgb(144, 147, 153)",
+                "borderColor": "rgb(144, 147, 153)"
+              },
+              "events": [
+                {
+                  "type": "click",
+                  "name": "clickEvent",
+                  "actions": [
+                    {
+                      "type": "popup",
+                      "name": "关闭取消报工弹窗",
+                      "operationType": "close",
+                      "popup": "kkkkkk-39f1-4fab-b294-101cb89e5111"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

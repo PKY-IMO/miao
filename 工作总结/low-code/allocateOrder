@@ -1,0 +1,775 @@
+{
+  "ds1": {
+    "result": {
+      "dataset": {
+        "dataType": "list|entity|68961628-52cd-40f9-b0e4-cdcba6c31edb",
+        "data": [
+          "324730440193806336",
+          "324712810099642368",
+          "324711108709584896",
+          "324709323982901248",
+          "324708582891327488",
+          "324708325721772032",
+          "324706311474384896",
+          "324706239542071296",
+          "324705857482919936",
+          "324704240285126656",
+          "324704240272543744",
+          "324704240264155136",
+          "324704240209629184"
+        ]
+      }
+    },
+    "objects": [
+      {
+        // ds1.result.dataset.dataType
+        "entityType": "68961628-52cd-40f9-b0e4-cdcba6c31edb",
+        // ds1.result.dataset.data
+        "id": "324730440193806336",
+        "lastModified": 0,
+        "state": "NON_MODIFIED",
+        // attributes内部属性 对应json里具体的dataIndex 和 dataCabin 配置的 name
+        "attributes": {
+          "note": null,
+          "allocateType": "allocation",
+          "makedate": "1663094888439",
+          "status": "maintain",
+          "statusdate": "1663094888439",
+          // allocateCode -> s-table-column 同级目录的 props.dataIndex 
+          // -> s-table-column 同级目录的 children.text.value
+          // -> 配置了dataCabin ds1 source { "name": "allocateCode", "value": "allocateCode" },
+          "allocateCode": "11122AL4065"
+        },
+        "references": [
+          {
+            "referenceType": "reference",
+            "name": "user",
+            "oppositeName": "allocateOrder",
+            "fetched": true,
+            "entityType": "c9aa482a-c65a-4924-96ec-3bc2e68fcad6",
+            "value": "324704240473870336"
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "transferOrder",
+            "oppositeName": "allocateOrder",
+            "fetched": false,
+            "entityType": "04784e19-7354-43b1-bff1-a0113a13189c",
+            "value": null
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "stockOrder_allocateOrder",
+            "oppositeName": "allocateOrder",
+            "fetched": false,
+            "entityType": "03bbb19c-7d08-4717-915c-5a43a697d673",
+            "value": null
+          }
+        ]
+      },
+      {
+        "entityType": "68961628-52cd-40f9-b0e4-cdcba6c31edb",
+        "id": "324712810099642368",
+        "lastModified": 0,
+        "state": "NON_MODIFIED",
+        "attributes": {
+          "note": null,
+          "allocateType": "allocation",
+          "makedate": "1663090668754",
+          "status": "maintain",
+          "statusdate": "1663090668754",
+          "allocateCode": "11122AL5565"
+        },
+        "references": [
+          {
+            "referenceType": "reference",
+            "name": "user",
+            "oppositeName": "allocateOrder",
+            "fetched": true,
+            "entityType": "c9aa482a-c65a-4924-96ec-3bc2e68fcad6",
+            "value": "324704240473870336"
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "transferOrder",
+            "oppositeName": "allocateOrder",
+            "fetched": false,
+            "entityType": "04784e19-7354-43b1-bff1-a0113a13189c",
+            "value": null
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "stockOrder_allocateOrder",
+            "oppositeName": "allocateOrder",
+            "fetched": false,
+            "entityType": "03bbb19c-7d08-4717-915c-5a43a697d673",
+            "value": null
+          }
+        ]
+      },
+      {
+        "entityType": "68961628-52cd-40f9-b0e4-cdcba6c31edb",
+        "id": "324711108709584896",
+        "lastModified": 0,
+        "state": "NON_MODIFIED",
+        "attributes": {
+          "note": null,
+          "allocateType": "allocation",
+          "makedate": "1663090238662",
+          "status": "maintain",
+          "statusdate": "1663090238663",
+          "allocateCode": "11122AL2887"
+        },
+        "references": [
+          {
+            "referenceType": "reference",
+            "name": "user",
+            "oppositeName": "allocateOrder",
+            "fetched": true,
+            "entityType": "c9aa482a-c65a-4924-96ec-3bc2e68fcad6",
+            "value": "324704240473870336"
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "transferOrder",
+            "oppositeName": "allocateOrder",
+            "fetched": false,
+            "entityType": "04784e19-7354-43b1-bff1-a0113a13189c",
+            "value": null
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "stockOrder_allocateOrder",
+            "oppositeName": "allocateOrder",
+            "fetched": false,
+            "entityType": "03bbb19c-7d08-4717-915c-5a43a697d673",
+            "value": null
+          }
+        ]
+      },
+      {
+        "entityType": "68961628-52cd-40f9-b0e4-cdcba6c31edb",
+        "id": "324709323982901248",
+        "lastModified": 0,
+        "state": "NON_MODIFIED",
+        "attributes": {
+          "note": null,
+          "allocateType": "allocation",
+          "makedate": "1663089820955",
+          "status": "maintain",
+          "statusdate": "1663089820955",
+          "allocateCode": "11122AL2497"
+        },
+        "references": [
+          {
+            "referenceType": "reference",
+            "name": "user",
+            "oppositeName": "allocateOrder",
+            "fetched": true,
+            "entityType": "c9aa482a-c65a-4924-96ec-3bc2e68fcad6",
+            "value": "324704240473870336"
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "transferOrder",
+            "oppositeName": "allocateOrder",
+            "fetched": false,
+            "entityType": "04784e19-7354-43b1-bff1-a0113a13189c",
+            "value": null
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "stockOrder_allocateOrder",
+            "oppositeName": "allocateOrder",
+            "fetched": false,
+            "entityType": "03bbb19c-7d08-4717-915c-5a43a697d673",
+            "value": null
+          }
+        ]
+      },
+      {
+        "entityType": "68961628-52cd-40f9-b0e4-cdcba6c31edb",
+        "id": "324708582891327488",
+        "lastModified": 0,
+        "state": "NON_MODIFIED",
+        "attributes": {
+          "note": null,
+          "allocateType": "allocation",
+          "makedate": "1663089692361",
+          "status": "maintain",
+          "statusdate": "1663089692361",
+          "allocateCode": "11122AL6818"
+        },
+        "references": [
+          {
+            "referenceType": "reference",
+            "name": "user",
+            "oppositeName": "allocateOrder",
+            "fetched": true,
+            "entityType": "c9aa482a-c65a-4924-96ec-3bc2e68fcad6",
+            "value": "324704240473870336"
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "transferOrder",
+            "oppositeName": "allocateOrder",
+            "fetched": false,
+            "entityType": "04784e19-7354-43b1-bff1-a0113a13189c",
+            "value": null
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "stockOrder_allocateOrder",
+            "oppositeName": "allocateOrder",
+            "fetched": false,
+            "entityType": "03bbb19c-7d08-4717-915c-5a43a697d673",
+            "value": null
+          }
+        ]
+      },
+      {
+        "entityType": "68961628-52cd-40f9-b0e4-cdcba6c31edb",
+        "id": "324708325721772032",
+        "lastModified": 0,
+        "state": "NON_MODIFIED",
+        "attributes": {
+          "note": null,
+          "allocateType": "allocation",
+          "makedate": "1663089597822",
+          "status": "maintain",
+          "statusdate": "1663089597822",
+          "allocateCode": "11122AL1976"
+        },
+        "references": [
+          {
+            "referenceType": "reference",
+            "name": "user",
+            "oppositeName": "allocateOrder",
+            "fetched": true,
+            "entityType": "c9aa482a-c65a-4924-96ec-3bc2e68fcad6",
+            "value": "324704240473870336"
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "transferOrder",
+            "oppositeName": "allocateOrder",
+            "fetched": false,
+            "entityType": "04784e19-7354-43b1-bff1-a0113a13189c",
+            "value": null
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "stockOrder_allocateOrder",
+            "oppositeName": "allocateOrder",
+            "fetched": false,
+            "entityType": "03bbb19c-7d08-4717-915c-5a43a697d673",
+            "value": null
+          }
+        ]
+      },
+      {
+        "entityType": "68961628-52cd-40f9-b0e4-cdcba6c31edb",
+        "id": "324706311474384896",
+        "lastModified": 0,
+        "state": "NON_MODIFIED",
+        "attributes": {
+          "note": null,
+          "allocateType": "allocation",
+          "makedate": "1663089138428",
+          "status": "maintain",
+          "statusdate": "1663089138428",
+          "allocateCode": "11122AL1669"
+        },
+        "references": [
+          {
+            "referenceType": "reference",
+            "name": "user",
+            "oppositeName": "allocateOrder",
+            "fetched": true,
+            "entityType": "c9aa482a-c65a-4924-96ec-3bc2e68fcad6",
+            "value": "324704240473870336"
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "transferOrder",
+            "oppositeName": "allocateOrder",
+            "fetched": false,
+            "entityType": "04784e19-7354-43b1-bff1-a0113a13189c",
+            "value": null
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "stockOrder_allocateOrder",
+            "oppositeName": "allocateOrder",
+            "fetched": false,
+            "entityType": "03bbb19c-7d08-4717-915c-5a43a697d673",
+            "value": null
+          }
+        ]
+      },
+      {
+        "entityType": "68961628-52cd-40f9-b0e4-cdcba6c31edb",
+        "id": "324706239542071296",
+        "lastModified": 0,
+        "state": "NON_MODIFIED",
+        "attributes": {
+          "note": null,
+          "allocateType": "allocation",
+          "makedate": "1663089073643",
+          "status": "maintain",
+          "statusdate": "1663089073643",
+          "allocateCode": "11122AL8148"
+        },
+        "references": [
+          {
+            "referenceType": "reference",
+            "name": "user",
+            "oppositeName": "allocateOrder",
+            "fetched": true,
+            "entityType": "c9aa482a-c65a-4924-96ec-3bc2e68fcad6",
+            "value": "324704240473870336"
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "transferOrder",
+            "oppositeName": "allocateOrder",
+            "fetched": false,
+            "entityType": "04784e19-7354-43b1-bff1-a0113a13189c",
+            "value": null
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "stockOrder_allocateOrder",
+            "oppositeName": "allocateOrder",
+            "fetched": false,
+            "entityType": "03bbb19c-7d08-4717-915c-5a43a697d673",
+            "value": null
+          }
+        ]
+      },
+      {
+        "entityType": "68961628-52cd-40f9-b0e4-cdcba6c31edb",
+        "id": "324705857482919936",
+        "lastModified": 0,
+        "state": "NON_MODIFIED",
+        "attributes": {
+          "note": null,
+          "allocateType": "allocation",
+          "makedate": "1663089051737",
+          "status": "maintain",
+          "statusdate": "1663089051737",
+          "allocateCode": "11122AL9201"
+        },
+        "references": [
+          {
+            "referenceType": "reference",
+            "name": "user",
+            "oppositeName": "allocateOrder",
+            "fetched": true,
+            "entityType": "c9aa482a-c65a-4924-96ec-3bc2e68fcad6",
+            "value": "324704240473870336"
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "transferOrder",
+            "oppositeName": "allocateOrder",
+            "fetched": false,
+            "entityType": "04784e19-7354-43b1-bff1-a0113a13189c",
+            "value": null
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "stockOrder_allocateOrder",
+            "oppositeName": "allocateOrder",
+            "fetched": false,
+            "entityType": "03bbb19c-7d08-4717-915c-5a43a697d673",
+            "value": null
+          }
+        ]
+      },
+      {
+        "entityType": "68961628-52cd-40f9-b0e4-cdcba6c31edb",
+        "id": "324704240285126656",
+        "lastModified": 0,
+        "state": "NON_MODIFIED",
+        "attributes": {
+          "note": "ao4",
+          "allocateType": "returns",
+          "makedate": "1663088592686",
+          "status": "maintain",
+          "statusdate": "1663088592686",
+          "allocateCode": "allocate4"
+        },
+        "references": [
+          {
+            "referenceType": "reference",
+            "name": "user",
+            "oppositeName": "allocateOrder",
+            "fetched": true,
+            "entityType": "c9aa482a-c65a-4924-96ec-3bc2e68fcad6",
+            "value": "324704240490647552"
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "transferOrder",
+            "oppositeName": "allocateOrder",
+            "fetched": false,
+            "entityType": "04784e19-7354-43b1-bff1-a0113a13189c",
+            "value": null
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "stockOrder_allocateOrder",
+            "oppositeName": "allocateOrder",
+            "fetched": false,
+            "entityType": "03bbb19c-7d08-4717-915c-5a43a697d673",
+            "value": null
+          }
+        ]
+      },
+      {
+        "entityType": "68961628-52cd-40f9-b0e4-cdcba6c31edb",
+        "id": "324704240272543744",
+        "lastModified": 0,
+        "state": "NON_MODIFIED",
+        "attributes": {
+          "note": "ao3",
+          "allocateType": "transfer",
+          "makedate": "1663088592680",
+          "status": "commited",
+          "statusdate": "1663088592680",
+          "allocateCode": "allocate3"
+        },
+        "references": [
+          {
+            "referenceType": "reference",
+            "name": "user",
+            "oppositeName": "allocateOrder",
+            "fetched": true,
+            "entityType": "c9aa482a-c65a-4924-96ec-3bc2e68fcad6",
+            "value": "324704240490647552"
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "transferOrder",
+            "oppositeName": "allocateOrder",
+            "fetched": false,
+            "entityType": "04784e19-7354-43b1-bff1-a0113a13189c",
+            "value": null
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "stockOrder_allocateOrder",
+            "oppositeName": "allocateOrder",
+            "fetched": false,
+            "entityType": "03bbb19c-7d08-4717-915c-5a43a697d673",
+            "value": null
+          }
+        ]
+      },
+      {
+        "entityType": "68961628-52cd-40f9-b0e4-cdcba6c31edb",
+        "id": "324704240264155136",
+        "lastModified": 0,
+        "state": "NON_MODIFIED",
+        "attributes": {
+          "note": "ao2",
+          "allocateType": "allocation",
+          "makedate": "1663088592670",
+          "status": "commited",
+          "statusdate": "1663088592670",
+          "allocateCode": "allocate2"
+        },
+        "references": [
+          {
+            "referenceType": "reference",
+            "name": "user",
+            "oppositeName": "allocateOrder",
+            "fetched": true,
+            "entityType": "c9aa482a-c65a-4924-96ec-3bc2e68fcad6",
+            "value": "324704240473870336"
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "transferOrder",
+            "oppositeName": "allocateOrder",
+            "fetched": false,
+            "entityType": "04784e19-7354-43b1-bff1-a0113a13189c",
+            "value": null
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "stockOrder_allocateOrder",
+            "oppositeName": "allocateOrder",
+            "fetched": false,
+            "entityType": "03bbb19c-7d08-4717-915c-5a43a697d673",
+            "value": null
+          }
+        ]
+      },
+      {
+        "entityType": "68961628-52cd-40f9-b0e4-cdcba6c31edb",
+        "id": "324704240209629184",
+        "lastModified": 0,
+        "state": "NON_MODIFIED",
+        "attributes": {
+          "note": "ao1",
+          "allocateType": "add",
+          "makedate": "1663088592650",
+          "status": "commited",
+          "statusdate": "1663088592650",
+          "allocateCode": "allocate1"
+        },
+        "references": [
+          {
+            "referenceType": "reference",
+            "name": "user",
+            "oppositeName": "allocateOrder",
+            "fetched": true,
+            "entityType": "c9aa482a-c65a-4924-96ec-3bc2e68fcad6",
+            "value": "324704240473870336"
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "transferOrder",
+            "oppositeName": "allocateOrder",
+            "fetched": false,
+            "entityType": "04784e19-7354-43b1-bff1-a0113a13189c",
+            "value": null
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "stockOrder_allocateOrder",
+            "oppositeName": "allocateOrder",
+            "fetched": false,
+            "entityType": "03bbb19c-7d08-4717-915c-5a43a697d673",
+            "value": null
+          }
+        ]
+      },
+      {
+        "entityType": "c9aa482a-c65a-4924-96ec-3bc2e68fcad6",
+        "id": "324704240473870336",
+        "lastModified": 0,
+        "state": "NON_MODIFIED",
+        "attributes": {
+          "userName": "user1",
+          "userid": "111"
+        },
+        "references": [
+          {
+            "referenceType": "reference",
+            "name": "storeStorage",
+            "oppositeName": "user",
+            "fetched": true,
+            "entityType": "97259cf1-c99d-40d8-bfc0-55b27fa8e464",
+            "value": "324704239941193728"
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "allocateOrder",
+            "oppositeName": "user",
+            "fetched": false,
+            "entityType": "68961628-52cd-40f9-b0e4-cdcba6c31edb",
+            "value": null
+          }
+        ]
+      },
+      {
+        "entityType": "c9aa482a-c65a-4924-96ec-3bc2e68fcad6",
+        "id": "324704240490647552",
+        "lastModified": 0,
+        "state": "NON_MODIFIED",
+        "attributes": {
+          "userName": "user2",
+          "userid": "222"
+        },
+        "references": [
+          {
+            "referenceType": "reference",
+            "name": "storeStorage",
+            "oppositeName": "user",
+            "fetched": true,
+            "entityType": "97259cf1-c99d-40d8-bfc0-55b27fa8e464",
+            "value": "324704240142520320"
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "allocateOrder",
+            "oppositeName": "user",
+            "fetched": false,
+            "entityType": "68961628-52cd-40f9-b0e4-cdcba6c31edb",
+            "value": null
+          }
+        ]
+      },
+      {
+        "entityType": "97259cf1-c99d-40d8-bfc0-55b27fa8e464",
+        "id": "324704239941193728",
+        "lastModified": 0,
+        "state": "NON_MODIFIED",
+        "attributes": {
+          "name": "sss1",
+          "type": "shop",
+          "placeCode": "10001"
+        },
+        "references": [
+          {
+            "referenceType": "reference",
+            "name": "user",
+            "oppositeName": "storeStorage",
+            "fetched": true,
+            "entityType": "c9aa482a-c65a-4924-96ec-3bc2e68fcad6",
+            "value": "324704240473870336"
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "storeStorage_transferOrder",
+            "oppositeName": "startLocation",
+            "fetched": false,
+            "entityType": "04784e19-7354-43b1-bff1-a0113a13189c",
+            "value": null
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "storeStorage_transferOrder2",
+            "oppositeName": "endLocation",
+            "fetched": false,
+            "entityType": "04784e19-7354-43b1-bff1-a0113a13189c",
+            "value": null
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "stockOrder_storeStorage2",
+            "oppositeName": "endLocation",
+            "fetched": false,
+            "entityType": "03bbb19c-7d08-4717-915c-5a43a697d673",
+            "value": null
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "stockOrder_storeStorage",
+            "oppositeName": "startLocation",
+            "fetched": false,
+            "entityType": "03bbb19c-7d08-4717-915c-5a43a697d673",
+            "value": null
+          }
+        ]
+      },
+      {
+        "entityType": "97259cf1-c99d-40d8-bfc0-55b27fa8e464",
+        "id": "324704240142520320",
+        "lastModified": 0,
+        "state": "NON_MODIFIED",
+        "attributes": {
+          "name": "sss2",
+          "type": "shop",
+          "placeCode": "10002"
+        },
+        "references": [
+          {
+            "referenceType": "reference",
+            "name": "user",
+            "oppositeName": "storeStorage",
+            "fetched": true,
+            "entityType": "c9aa482a-c65a-4924-96ec-3bc2e68fcad6",
+            "value": "324704240490647552"
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "storeStorage_transferOrder",
+            "oppositeName": "startLocation",
+            "fetched": false,
+            "entityType": "04784e19-7354-43b1-bff1-a0113a13189c",
+            "value": null
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "storeStorage_transferOrder2",
+            "oppositeName": "endLocation",
+            "fetched": false,
+            "entityType": "04784e19-7354-43b1-bff1-a0113a13189c",
+            "value": null
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "stockOrder_storeStorage2",
+            "oppositeName": "endLocation",
+            "fetched": false,
+            "entityType": "03bbb19c-7d08-4717-915c-5a43a697d673",
+            "value": null
+          },
+          {
+            "referenceType": "referenceSet",
+            "name": "stockOrder_storeStorage",
+            "oppositeName": "startLocation",
+            "fetched": false,
+            "entityType": "03bbb19c-7d08-4717-915c-5a43a697d673",
+            "value": null
+          }
+        ]
+      }
+    ],
+    "meta": {
+      "entityMeta": [
+        {
+          "attributeTypes": {
+            "note": "string",
+            "allocateType": "enumeration|cb559237-f051-4f0b-b6d8-4d2245712dad",
+            "makedate": "datetime",
+            "status": "enumeration|72c6b866-1698-4e2d-abd4-6a41daf903c8",
+            "statusdate": "datetime",
+            "allocateCode": "string"
+          },
+          "entityType": "68961628-52cd-40f9-b0e4-cdcba6c31edb"
+        },
+        {
+          "attributeTypes": {
+            "userName": "string",
+            "userid": "string"
+          },
+          "entityType": "c9aa482a-c65a-4924-96ec-3bc2e68fcad6"
+        },
+        {
+          "attributeTypes": {
+            "name": "string",
+            "type": "enumeration|f8b6e313-2fa9-41db-ae58-57569c5b6926",
+            "placeCode": "integer"
+          },
+          "entityType": "97259cf1-c99d-40d8-bfc0-55b27fa8e464"
+        }
+      ],
+      "enumerationMeta": [
+        {
+          "enumerationType": "cb559237-f051-4f0b-b6d8-4d2245712dad",
+          "items": [
+            "allocation",
+            "add",
+            "returns",
+            "transfer",
+            "move"
+          ]
+        },
+        {
+          "enumerationType": "72c6b866-1698-4e2d-abd4-6a41daf903c8",
+          "items": [
+            "maintain",
+            "commited"
+          ]
+        },
+        {
+          "enumerationType": "f8b6e313-2fa9-41db-ae58-57569c5b6926",
+          "items": [
+            "shop",
+            "storehouse"
+          ]
+        }
+      ],
+      "structureMeta": []
+    },
+    "error": {
+      "error": false,
+      "message": ""
+    }
+  }
+}

@@ -1,0 +1,57 @@
+** propA={null} 
+    React.isValidElement(null) // false
+    React.isValidElement(undefined) //false
+
+**  props属性是否传递判断方法: isUndefined
+    propsA === undefined
+
+**  props展开属性类型
+    json对象
+
+**  受控非受控
+    * 受控组件
+        就形式上来说,受控组件就是为某个form表单组件添加value属性;非受控组件就是没有添加value属性的组件;受控组件的形式如下形式
+        render: function() {
+            return <input type="text" value="Hello!" />;
+        }
+        添加了value属性的表单组件元素其内部是不会维护自己状态state,组件的value值一旦设置某个具体值就始终是这个值,所以需要调用者来控制组件value的改变
+        这种写法带来一个问题
+            渲染后的input组件的用户交互,用户输入的任何值将不起作用,input输入框中的值始终为`Hello!`,这与HTML中input表现不一致 
+        为此,为了控制该组件,就需要能能够控制input组件的值,需要借助其内部的状态state,即组件内部要维护一个状态state以便配合input组件的onChange和setState方法来完成对组件的控制
+    *非受控组件
+        表现形式上,react中没有添加value属性的表单组件元素就是非受控组件,表现形式如下
+            <input type="text" />
+        非受控组件在底层实现时是在其内部维护了自己的状态state;这样表现出用户输入任何值都能反应到元素上
+    *受控元素,一般用在需要动态设置其初始值的情况;例如某些form表单信息编辑时,input表单元素需要初始显示服务器返回的某个值然后进行编辑。
+    *非受控元素, 一般用于无任何动态初始值信息的情况; 例如form表单创建信息时,input表单元素都没有初始值,需要用户输入的情况
+        如果是完全非受控组件,很容易,自己定义state处理好就成
+        如果是完全受控组件,更容易,直接往里传即可。受控组件的特点就是完全交由父亲来控制效果,比如这里的ClearEditor,如果父亲不传value和onChange进来,那么这个ClearEditor将啥也做不了
+        如果是半受控组件,即不传value时就是非受控组件,传value就变成受控组件,同时传也是受控组件,区别就是可以指定受控组件的默认值
+        首先我们需要针对受控设计一个属性,然后同样含义的属性我们还要针对非受控组件设计不同的key
+        我们需要定义个中转状态,基于defaultValue和value的传值情况赋不同的初始值
+        需要基于value受控属性是否发生变化而需要更新tempValue这个中转值
+        调用Editor子组件时就需要使用这个tempValue中转值这个新值
+        onChange触发时,如果是受控状态就不需要更新tempValue,因为如果是受控状态,外部value也是会处理的,会重新再render回来,导致会多走一次
+
+**  React.useImperativeHandle: 子组件利用useImperativeHandle可以让父组件输出任意数据。
+    问题:主要是解决父组件获取子组件的数据或者调用子组件的里声明的函数。
+        *正常情况下 ref 是不能挂在到函数组件上的，因为函数组件没有实例，
+        但是 useImperativeHandle 为我们提供了一个类似实例的东西。
+        它帮助我们通过 useImperativeHandle 的第 2 个参数，
+        所返回的对象的内容挂载到 父组件的 ref.current 上。
+        forwardRef会创建一个React组件 
+        这个组件能够将其接受的 ref 属性转发到其组件树下的另一个组件中。
+    优势:我们都知道父组件可以利用ref可以访问子组件实例或者DOM元素
+        这其实相当于子组件向父组件输出本身实例或者DOM元素。
+        而利用useImperativeHandle子组件可以向父组件输出任意数据。
+
+**  ts: Record 后面的泛型就是对象键和值的类型。
+    比如我需要一个对象，有 ABC 三个属性，属性的值必须是数字，那么就这么写：
+    type keys = 'A' | 'B' | 'C'
+    const result: Record<keys, number> = {
+    A: 1,
+    B: 2,
+    C: 3
+    }
+            
+

@@ -1,0 +1,1045 @@
+{
+  "ds2": {
+    "result": {
+      "dataset": {
+        "dataType": "list|entity|19852694-2994-4d52-8a09-fa9563b8d691",
+        "data": [
+          "327164931294236672",
+          "327164931344568320",
+          "327164931357151232",
+          "327164931369734144",
+          "327165345326567424",
+          "327165345385287680",
+          "327165345393676288",
+          "327165345410453504",
+          "327210235477495808",
+          "327212233706835968",
+          "327219069675769856",
+          "327244431302463488",
+          "327245908796379136"
+        ]
+      }
+    },
+    "objects": [
+      {
+        "entityType": "19852694-2994-4d52-8a09-fa9563b8d691",
+        "id": "327164931294236672",
+        "lastModified": 0,
+        "state": "NON_MODIFIED",
+        "attributes": {
+          "level": "A",
+          "isactive": "true",
+          "validtime": "1663646467044",
+          "alphabet": "Q",
+          "problemName": "前叉限位角度大",
+          "type": "物料",
+          "createdon": "1663646467044",
+          "isdeleted": "false",
+          "problemCode": "WT0601",
+          "modifiedon": "1663646467044",
+          "component": "附件",
+          "createdby": "hoky",
+          "orgCode": "10001",
+          "modifiedby": "hoky",
+          "invalidtime": "1663646467044",
+          "department": "车架厂",
+          "remarks": "备注"
+        },
+        "references": [
+          {
+            "referenceType": "reference",
+            "name": "factory",
+            "oppositeName": "problemInfo",
+            "fetched": false,
+            "entityType": "2e763401-ab2c-429f-9bce-18e931d4a1dd",
+            "value": null
+          },
+          {
+            "referenceType": "reference",
+            "name": "vehicleCheck",
+            "oppositeName": "problemInfo",
+            "fetched": false,
+            "entityType": "21bdea3e-eae2-49dd-9aa3-917e7c76dd41",
+            "value": null
+          }
+        ]
+      },
+      {
+        "entityType": "19852694-2994-4d52-8a09-fa9563b8d691",
+        "id": "327164931344568320",
+        "lastModified": 0,
+        "state": "NON_MODIFIED",
+        "attributes": {
+          "level": "A",
+          "isactive": "true",
+          "validtime": "1663646467053",
+          "alphabet": "Q",
+          "problemName": "曲柄打偏撑x",
+          "type": "物料",
+          "createdon": "1663646467053",
+          "isdeleted": "false",
+          "problemCode": "WT0602",
+          "modifiedon": "1663646467053",
+          "component": "附件",
+          "createdby": "hoky",
+          "orgCode": "10002",
+          "modifiedby": "hoky",
+          "invalidtime": "1663646467053",
+          "department": "质量",
+          "remarks": "备注"
+        },
+        "references": [
+          {
+            "referenceType": "reference",
+            "name": "factory",
+            "oppositeName": "problemInfo",
+            "fetched": true,
+            "entityType": "2e763401-ab2c-429f-9bce-18e931d4a1dd",
+            "value": null
+          },
+          {
+            "referenceType": "reference",
+            "name": "vehicleCheck",
+            "oppositeName": "problemInfo",
+            "fetched": true,
+            "entityType": "21bdea3e-eae2-49dd-9aa3-917e7c76dd41",
+            "value": null
+          }
+        ]
+      },
+      {
+        "entityType": "19852694-2994-4d52-8a09-fa9563b8d691",
+        "id": "327164931357151232",
+        "lastModified": 0,
+        "state": "NON_MODIFIED",
+        "attributes": {
+          "level": "C",
+          "isactive": "true",
+          "validtime": "1663646467058",
+          "alphabet": "S",
+          "problemName": "刹线保护环未卡好",
+          "type": "任务",
+          "createdon": "1663646467058",
+          "isdeleted": "true",
+          "problemCode": "WT0603",
+          "modifiedon": "1663646467058",
+          "component": "附件",
+          "createdby": "hoky",
+          "orgCode": "10001",
+          "modifiedby": "hoky",
+          "invalidtime": "1663646467058",
+          "department": "生产",
+          "remarks": "备注"
+        },
+        "references": [
+          {
+            "referenceType": "reference",
+            "name": "factory",
+            "oppositeName": "problemInfo",
+            "fetched": false,
+            "entityType": "2e763401-ab2c-429f-9bce-18e931d4a1dd",
+            "value": null
+          },
+          {
+            "referenceType": "reference",
+            "name": "vehicleCheck",
+            "oppositeName": "problemInfo",
+            "fetched": true,
+            "entityType": "21bdea3e-eae2-49dd-9aa3-917e7c76dd41",
+            "value": null
+          }
+        ]
+      },
+      {
+        "entityType": "19852694-2994-4d52-8a09-fa9563b8d691",
+        "id": "327164931369734144",
+        "lastModified": 0,
+        "state": "NON_MODIFIED",
+        "attributes": {
+          "level": "A",
+          "isactive": "true",
+          "validtime": "1663646467063",
+          "alphabet": "S",
+          "problemName": "电轴套装反",
+          "type": "物料",
+          "createdon": "1663646467063",
+          "isdeleted": "false",
+          "problemCode": "WT0604",
+          "modifiedon": "1663646467063",
+          "component": "附件",
+          "createdby": "hoky",
+          "orgCode": "10002",
+          "modifiedby": "hoky",
+          "invalidtime": "1663646467063",
+          "department": "生产",
+          "remarks": "备注"
+        },
+        "references": [
+          {
+            "referenceType": "reference",
+            "name": "factory",
+            "oppositeName": "problemInfo",
+            "fetched": true,
+            "entityType": "2e763401-ab2c-429f-9bce-18e931d4a1dd",
+            "value": null
+          },
+          {
+            "referenceType": "reference",
+            "name": "vehicleCheck",
+            "oppositeName": "problemInfo",
+            "fetched": true,
+            "entityType": "21bdea3e-eae2-49dd-9aa3-917e7c76dd41",
+            "value": null
+          }
+        ]
+      },
+      {
+        "entityType": "19852694-2994-4d52-8a09-fa9563b8d691",
+        "id": "327165345326567424",
+        "lastModified": 0,
+        "state": "NON_MODIFIED",
+        "attributes": {
+          "level": "A",
+          "isactive": "true",
+          "validtime": "1663646565771",
+          "alphabet": "Q",
+          "problemName": "前叉限位角度大",
+          "type": "物料",
+          "createdon": "1663646565771",
+          "isdeleted": "true",
+          "problemCode": "WT0601",
+          "modifiedon": "1663646565771",
+          "component": "附件",
+          "createdby": "hoky",
+          "orgCode": "10001",
+          "modifiedby": "hoky",
+          "invalidtime": "1663646565771",
+          "department": "车架厂",
+          "remarks": "备注"
+        },
+        "references": [
+          {
+            "referenceType": "reference",
+            "name": "factory",
+            "oppositeName": "problemInfo",
+            "fetched": false,
+            "entityType": "2e763401-ab2c-429f-9bce-18e931d4a1dd",
+            "value": null
+          },
+          {
+            "referenceType": "reference",
+            "name": "vehicleCheck",
+            "oppositeName": "problemInfo",
+            "fetched": true,
+            "entityType": "21bdea3e-eae2-49dd-9aa3-917e7c76dd41",
+            "value": null
+          }
+        ]
+      },
+      {
+        "entityType": "19852694-2994-4d52-8a09-fa9563b8d691",
+        "id": "327165345385287680",
+        "lastModified": 0,
+        "state": "NON_MODIFIED",
+        "attributes": {
+          "level": "A",
+          "isactive": "true",
+          "validtime": "1663646565778",
+          "alphabet": "Q",
+          "problemName": "曲柄打偏撑a",
+          "type": "物料",
+          "createdon": "1663646565778",
+          "isdeleted": "false",
+          "problemCode": "WT0602",
+          "modifiedon": "1663646565778",
+          "component": "附件",
+          "createdby": "hoky",
+          "orgCode": "10002",
+          "modifiedby": "hoky",
+          "invalidtime": "1663646565778",
+          "department": "质量",
+          "remarks": "备注"
+        },
+        "references": [
+          {
+            "referenceType": "reference",
+            "name": "factory",
+            "oppositeName": "problemInfo",
+            "fetched": true,
+            "entityType": "2e763401-ab2c-429f-9bce-18e931d4a1dd",
+            "value": null
+          },
+          {
+            "referenceType": "reference",
+            "name": "vehicleCheck",
+            "oppositeName": "problemInfo",
+            "fetched": true,
+            "entityType": "21bdea3e-eae2-49dd-9aa3-917e7c76dd41",
+            "value": null
+          }
+        ]
+      },
+      {
+        "entityType": "19852694-2994-4d52-8a09-fa9563b8d691",
+        "id": "327165345393676288",
+        "lastModified": 0,
+        "state": "NON_MODIFIED",
+        "attributes": {
+          "level": "A",
+          "isactive": "true",
+          "validtime": "1663646565784",
+          "alphabet": "S",
+          "problemName": "刹线保护环未卡好k",
+          "type": "任务",
+          "createdon": "1663646565783",
+          "isdeleted": "false",
+          "problemCode": "WT0603",
+          "modifiedon": "1663646565784",
+          "component": "附件",
+          "createdby": "hoky",
+          "orgCode": "10001",
+          "modifiedby": "hoky",
+          "invalidtime": "1663646565784",
+          "department": "生产",
+          "remarks": "备注"
+        },
+        "references": [
+          {
+            "referenceType": "reference",
+            "name": "factory",
+            "oppositeName": "problemInfo",
+            "fetched": true,
+            "entityType": "2e763401-ab2c-429f-9bce-18e931d4a1dd",
+            "value": null
+          },
+          {
+            "referenceType": "reference",
+            "name": "vehicleCheck",
+            "oppositeName": "problemInfo",
+            "fetched": true,
+            "entityType": "21bdea3e-eae2-49dd-9aa3-917e7c76dd41",
+            "value": null
+          }
+        ]
+      },
+      {
+        "entityType": "19852694-2994-4d52-8a09-fa9563b8d691",
+        "id": "327165345410453504",
+        "lastModified": 0,
+        "state": "NON_MODIFIED",
+        "attributes": {
+          "level": "A",
+          "isactive": "true",
+          "validtime": "1663646565789",
+          "alphabet": "S",
+          "problemName": "少机电轴套1",
+          "type": "物料",
+          "createdon": "1663646565789",
+          "isdeleted": "false",
+          "problemCode": "WT0604",
+          "modifiedon": "1663646565789",
+          "component": "附件",
+          "createdby": "hoky",
+          "orgCode": "10002",
+          "modifiedby": "hoky",
+          "invalidtime": "1663646565789",
+          "department": "生产",
+          "remarks": "备注"
+        },
+        "references": [
+          {
+            "referenceType": "reference",
+            "name": "factory",
+            "oppositeName": "problemInfo",
+            "fetched": true,
+            "entityType": "2e763401-ab2c-429f-9bce-18e931d4a1dd",
+            "value": null
+          },
+          {
+            "referenceType": "reference",
+            "name": "vehicleCheck",
+            "oppositeName": "problemInfo",
+            "fetched": true,
+            "entityType": "21bdea3e-eae2-49dd-9aa3-917e7c76dd41",
+            "value": null
+          }
+        ]
+      },
+      {
+        "entityType": "19852694-2994-4d52-8a09-fa9563b8d691",
+        "id": "327210235477495808",
+        "lastModified": 0,
+        "state": "NON_MODIFIED",
+        "attributes": {
+          "level": "A",
+          "isactive": "true",
+          "validtime": "1663657296764",
+          "alphabet": "M",
+          "problemName": "测试",
+          "type": "物料",
+          "createdon": "1663657296764",
+          "isdeleted": "false",
+          "problemCode": "MK01",
+          "modifiedon": "1663657296764",
+          "component": "附件",
+          "createdby": "hoky",
+          "orgCode": "0",
+          "modifiedby": "hoky",
+          "invalidtime": "1663657296764",
+          "department": "车架厂",
+          "remarks": "xx"
+        },
+        "references": [
+          {
+            "referenceType": "reference",
+            "name": "factory",
+            "oppositeName": "problemInfo",
+            "fetched": true,
+            "entityType": "2e763401-ab2c-429f-9bce-18e931d4a1dd",
+            "value": null
+          },
+          {
+            "referenceType": "reference",
+            "name": "vehicleCheck",
+            "oppositeName": "problemInfo",
+            "fetched": true,
+            "entityType": "21bdea3e-eae2-49dd-9aa3-917e7c76dd41",
+            "value": null
+          }
+        ]
+      },
+      {
+        "entityType": "19852694-2994-4d52-8a09-fa9563b8d691",
+        "id": "327212233706835968",
+        "lastModified": 0,
+        "state": "NON_MODIFIED",
+        "attributes": {
+          "level": "A",
+          "isactive": "true",
+          "validtime": "1663657784234",
+          "alphabet": "M",
+          "problemName": "test",
+          "type": "物料",
+          "createdon": "1663657784234",
+          "isdeleted": "false",
+          "problemCode": "MKK",
+          "modifiedon": "1663657784234",
+          "component": "附件",
+          "createdby": "hoky",
+          "orgCode": "10001",
+          "modifiedby": "hoky",
+          "invalidtime": "1663657784234",
+          "department": "车架厂",
+          "remarks": "xxx"
+        },
+        "references": [
+          {
+            "referenceType": "reference",
+            "name": "factory",
+            "oppositeName": "problemInfo",
+            "fetched": true,
+            "entityType": "2e763401-ab2c-429f-9bce-18e931d4a1dd",
+            "value": null
+          },
+          {
+            "referenceType": "reference",
+            "name": "vehicleCheck",
+            "oppositeName": "problemInfo",
+            "fetched": true,
+            "entityType": "21bdea3e-eae2-49dd-9aa3-917e7c76dd41",
+            "value": null
+          }
+        ]
+      },
+      {
+        "entityType": "19852694-2994-4d52-8a09-fa9563b8d691",
+        "id": "327219069675769856",
+        "lastModified": 0,
+        "state": "NON_MODIFIED",
+        "attributes": {
+          "level": "A",
+          "isactive": "true",
+          "validtime": "1663659405521",
+          "alphabet": "M",
+          "problemName": "test2",
+          "type": "物料",
+          "createdon": "1663659405521",
+          "isdeleted": "false",
+          "problemCode": "MMM",
+          "modifiedon": "1663659405521",
+          "component": "附件",
+          "createdby": "hoky",
+          "orgCode": "10002",
+          "modifiedby": "hoky",
+          "invalidtime": "1663659405521",
+          "department": "质量",
+          "remarks": "xx"
+        },
+        "references": [
+          {
+            "referenceType": "reference",
+            "name": "factory",
+            "oppositeName": "problemInfo",
+            "fetched": true,
+            "entityType": "2e763401-ab2c-429f-9bce-18e931d4a1dd",
+            "value": null
+          },
+          {
+            "referenceType": "reference",
+            "name": "vehicleCheck",
+            "oppositeName": "problemInfo",
+            "fetched": true,
+            "entityType": "21bdea3e-eae2-49dd-9aa3-917e7c76dd41",
+            "value": null
+          }
+        ]
+      },
+      {
+        "entityType": "19852694-2994-4d52-8a09-fa9563b8d691",
+        "id": "327244431302463488",
+        "lastModified": 0,
+        "state": "NON_MODIFIED",
+        "attributes": {
+          "level": null,
+          "isactive": "true",
+          "validtime": "1663665422157",
+          "alphabet": null,
+          "problemName": null,
+          "type": null,
+          "createdon": "1663665422157",
+          "isdeleted": "false",
+          "problemCode": null,
+          "modifiedon": "1663665422157",
+          "component": null,
+          "createdby": "hoky",
+          "orgCode": "0",
+          "modifiedby": "hoky",
+          "invalidtime": "1663665422157",
+          "department": null,
+          "remarks": null
+        },
+        "references": [
+          {
+            "referenceType": "reference",
+            "name": "factory",
+            "oppositeName": "problemInfo",
+            "fetched": true,
+            "entityType": "2e763401-ab2c-429f-9bce-18e931d4a1dd",
+            "value": null
+          },
+          {
+            "referenceType": "reference",
+            "name": "vehicleCheck",
+            "oppositeName": "problemInfo",
+            "fetched": true,
+            "entityType": "21bdea3e-eae2-49dd-9aa3-917e7c76dd41",
+            "value": null
+          }
+        ]
+      },
+      {
+        "entityType": "19852694-2994-4d52-8a09-fa9563b8d691",
+        "id": "327245908796379136",
+        "lastModified": 0,
+        "state": "NON_MODIFIED",
+        "attributes": {
+          "level": null,
+          "isactive": "true",
+          "validtime": "1663665781978",
+          "alphabet": null,
+          "problemName": null,
+          "type": null,
+          "createdon": "1663665781978",
+          "isdeleted": "false",
+          "problemCode": null,
+          "modifiedon": "1663665781978",
+          "component": null,
+          "createdby": "hoky",
+          "orgCode": "10001",
+          "modifiedby": "hoky",
+          "invalidtime": "1663665781978",
+          "department": null,
+          "remarks": null
+        },
+        "references": [
+          {
+            "referenceType": "reference",
+            "name": "factory",
+            "oppositeName": "problemInfo",
+            "fetched": true,
+            "entityType": "2e763401-ab2c-429f-9bce-18e931d4a1dd",
+            "value": null
+          },
+          {
+            "referenceType": "reference",
+            "name": "vehicleCheck",
+            "oppositeName": "problemInfo",
+            "fetched": true,
+            "entityType": "21bdea3e-eae2-49dd-9aa3-917e7c76dd41",
+            "value": null
+          }
+        ]
+      }
+    ],
+    "meta": {
+      "entityMeta": [
+        {
+          "attributeTypes": {
+            "level": "string",
+            "isactive": "boolean",
+            "validtime": "datetime",
+            "alphabet": "string",
+            "problemName": "string",
+            "type": "string",
+            "createdon": "datetime",
+            "isdeleted": "boolean",
+            "problemCode": "string",
+            "modifiedon": "datetime",
+            "component": "string",
+            "createdby": "string",
+            "orgCode": "long",
+            "modifiedby": "string",
+            "invalidtime": "datetime",
+            "department": "string",
+            "remarks": "string"
+          },
+          "entityType": "19852694-2994-4d52-8a09-fa9563b8d691"
+        }
+      ],
+      "enumerationMeta": [],
+      "structureMeta": []
+    },
+    "error": {
+      "error": false,
+      "message": ""
+    }
+  },
+  "ds1": {
+    "result": {
+      "dataset": {
+        "dataType": "list|entity|21bdea3e-eae2-49dd-9aa3-917e7c76dd41",
+        "data": [
+          "327164930501513216",
+          "327164930740588544",
+          "327165344525455360",
+          "327165344730976256"
+        ]
+      }
+    },
+    "objects": [
+      {
+        "entityType": "21bdea3e-eae2-49dd-9aa3-917e7c76dd41",
+        "id": "327164930501513216",
+        "lastModified": 0,
+        "state": "NON_MODIFIED",
+        "attributes": {
+          "modifiedon": "1663646467000",
+          "isOnePass": "false",
+          "createdby": "xinri",
+          "orgCode": "10001",
+          "vehicleCode": "80001",
+          "modifiedby": "xinri",
+          "isqualified": "false",
+          "alphabet": "Q",
+          "problemName": "前叉限位角度大",
+          "qualificationCode": "qualificationCode1",
+          "createdon": "1663646467000",
+          "isdeleted": "false"
+        },
+        "references": [
+          {
+            "referenceType": "referenceSet",
+            "name": "problemInfo",
+            "oppositeName": "vehicleCheck",
+            "fetched": false,
+            "entityType": "19852694-2994-4d52-8a09-fa9563b8d691",
+            "value": null
+          }
+        ]
+      },
+      {
+        "entityType": "21bdea3e-eae2-49dd-9aa3-917e7c76dd41",
+        "id": "327164930740588544",
+        "lastModified": 0,
+        "state": "NON_MODIFIED",
+        "attributes": {
+          "modifiedon": "1663646467029",
+          "isOnePass": "false",
+          "createdby": "xinri",
+          "orgCode": "10002",
+          "vehicleCode": "80002",
+          "modifiedby": "xinri",
+          "isqualified": "false",
+          "alphabet": "S",
+          "problemName": "刹线保护环未卡好",
+          "qualificationCode": "qualificationCode2",
+          "createdon": "1663646467029",
+          "isdeleted": "false"
+        },
+        "references": [
+          {
+            "referenceType": "referenceSet",
+            "name": "problemInfo",
+            "oppositeName": "vehicleCheck",
+            "fetched": false,
+            "entityType": "19852694-2994-4d52-8a09-fa9563b8d691",
+            "value": null
+          }
+        ]
+      },
+      {
+        "entityType": "21bdea3e-eae2-49dd-9aa3-917e7c76dd41",
+        "id": "327165344525455360",
+        "lastModified": 0,
+        "state": "NON_MODIFIED",
+        "attributes": {
+          "modifiedon": "1663646565724",
+          "isOnePass": "false",
+          "createdby": "xinri",
+          "orgCode": "10001",
+          "vehicleCode": "80001",
+          "modifiedby": "xinri",
+          "isqualified": "false",
+          "alphabet": "Q",
+          "problemName": "前叉限位角度大",
+          "qualificationCode": "qualificationCode1",
+          "createdon": "1663646565724",
+          "isdeleted": "false"
+        },
+        "references": [
+          {
+            "referenceType": "referenceSet",
+            "name": "problemInfo",
+            "oppositeName": "vehicleCheck",
+            "fetched": false,
+            "entityType": "19852694-2994-4d52-8a09-fa9563b8d691",
+            "value": null
+          }
+        ]
+      },
+      {
+        "entityType": "21bdea3e-eae2-49dd-9aa3-917e7c76dd41",
+        "id": "327165344730976256",
+        "lastModified": 0,
+        "state": "NON_MODIFIED",
+        "attributes": {
+          "modifiedon": "1663646565750",
+          "isOnePass": "false",
+          "createdby": "xinri",
+          "orgCode": "10002",
+          "vehicleCode": "80002",
+          "modifiedby": "xinri",
+          "isqualified": "false",
+          "alphabet": "S",
+          "problemName": "刹线保护环未卡好",
+          "qualificationCode": "qualificationCode2",
+          "createdon": "1663646565750",
+          "isdeleted": "false"
+        },
+        "references": [
+          {
+            "referenceType": "referenceSet",
+            "name": "problemInfo",
+            "oppositeName": "vehicleCheck",
+            "fetched": false,
+            "entityType": "19852694-2994-4d52-8a09-fa9563b8d691",
+            "value": null
+          }
+        ]
+      }
+    ],
+    "meta": {
+      "entityMeta": [
+        {
+          "attributeTypes": {
+            "modifiedon": "datetime",
+            "isOnePass": "boolean",
+            "createdby": "string",
+            "orgCode": "long",
+            "vehicleCode": "long",
+            "modifiedby": "string",
+            "isqualified": "boolean",
+            "alphabet": "string",
+            "problemName": "string",
+            "qualificationCode": "string",
+            "createdon": "datetime",
+            "isdeleted": "boolean"
+          },
+          "entityType": "21bdea3e-eae2-49dd-9aa3-917e7c76dd41"
+        }
+      ],
+      "enumerationMeta": [],
+      "structureMeta": []
+    },
+    "error": {
+      "error": false,
+      "message": ""
+    }
+  },
+  "ds3": {
+    "result": {
+      "dataset": {
+        "dataType": "list|entity|19852694-2994-4d52-8a09-fa9563b8d691",
+        "data": [
+          "327164931294236672",
+          "327164931344568320",
+          "327165345326567424",
+          "327165345385287680"
+        ]
+      }
+    },
+    "objects": [
+      {
+        "entityType": "19852694-2994-4d52-8a09-fa9563b8d691",
+        "id": "327164931294236672",
+        "lastModified": 0,
+        "state": "NON_MODIFIED",
+        "attributes": {
+          "level": "A",
+          "isactive": "true",
+          "validtime": "1663646467044",
+          "alphabet": "Q",
+          "problemName": "前叉限位角度大",
+          "type": "物料",
+          "createdon": "1663646467044",
+          "isdeleted": "false",
+          "problemCode": "WT0601",
+          "modifiedon": "1663646467044",
+          "component": "附件",
+          "createdby": "hoky",
+          "orgCode": "10001",
+          "modifiedby": "hoky",
+          "invalidtime": "1663646467044",
+          "department": "车架厂",
+          "remarks": "备注"
+        },
+        "references": [
+          {
+            "referenceType": "reference",
+            "name": "factory",
+            "oppositeName": "problemInfo",
+            "fetched": false,
+            "entityType": "2e763401-ab2c-429f-9bce-18e931d4a1dd",
+            "value": null
+          },
+          {
+            "referenceType": "reference",
+            "name": "vehicleCheck",
+            "oppositeName": "problemInfo",
+            "fetched": true,
+            "entityType": "21bdea3e-eae2-49dd-9aa3-917e7c76dd41",
+            "value": "327164930501513216"
+          }
+        ]
+      },
+      {
+        "entityType": "19852694-2994-4d52-8a09-fa9563b8d691",
+        "id": "327164931344568320",
+        "lastModified": 0,
+        "state": "NON_MODIFIED",
+        "attributes": {
+          "level": "A",
+          "isactive": "true",
+          "validtime": "1663646467053",
+          "alphabet": "Q",
+          "problemName": "曲柄打偏撑x",
+          "type": "物料",
+          "createdon": "1663646467053",
+          "isdeleted": "false",
+          "problemCode": "WT0602",
+          "modifiedon": "1663646467053",
+          "component": "附件",
+          "createdby": "hoky",
+          "orgCode": "10002",
+          "modifiedby": "hoky",
+          "invalidtime": "1663646467053",
+          "department": "质量",
+          "remarks": "备注"
+        },
+        "references": [
+          {
+            "referenceType": "reference",
+            "name": "factory",
+            "oppositeName": "problemInfo",
+            "fetched": true,
+            "entityType": "2e763401-ab2c-429f-9bce-18e931d4a1dd",
+            "value": null
+          },
+          {
+            "referenceType": "reference",
+            "name": "vehicleCheck",
+            "oppositeName": "problemInfo",
+            "fetched": true,
+            "entityType": "21bdea3e-eae2-49dd-9aa3-917e7c76dd41",
+            "value": null
+          }
+        ]
+      },
+      {
+        "entityType": "19852694-2994-4d52-8a09-fa9563b8d691",
+        "id": "327165345326567424",
+        "lastModified": 0,
+        "state": "NON_MODIFIED",
+        "attributes": {
+          "level": "A",
+          "isactive": "true",
+          "validtime": "1663646565771",
+          "alphabet": "Q",
+          "problemName": "前叉限位角度大",
+          "type": "物料",
+          "createdon": "1663646565771",
+          "isdeleted": "true",
+          "problemCode": "WT0601",
+          "modifiedon": "1663646565771",
+          "component": "附件",
+          "createdby": "hoky",
+          "orgCode": "10001",
+          "modifiedby": "hoky",
+          "invalidtime": "1663646565771",
+          "department": "车架厂",
+          "remarks": "备注"
+        },
+        "references": [
+          {
+            "referenceType": "reference",
+            "name": "factory",
+            "oppositeName": "problemInfo",
+            "fetched": false,
+            "entityType": "2e763401-ab2c-429f-9bce-18e931d4a1dd",
+            "value": null
+          },
+          {
+            "referenceType": "reference",
+            "name": "vehicleCheck",
+            "oppositeName": "problemInfo",
+            "fetched": true,
+            "entityType": "21bdea3e-eae2-49dd-9aa3-917e7c76dd41",
+            "value": null
+          }
+        ]
+      },
+      {
+        "entityType": "19852694-2994-4d52-8a09-fa9563b8d691",
+        "id": "327165345385287680",
+        "lastModified": 0,
+        "state": "NON_MODIFIED",
+        "attributes": {
+          "level": "A",
+          "isactive": "true",
+          "validtime": "1663646565778",
+          "alphabet": "Q",
+          "problemName": "曲柄打偏撑a",
+          "type": "物料",
+          "createdon": "1663646565778",
+          "isdeleted": "false",
+          "problemCode": "WT0602",
+          "modifiedon": "1663646565778",
+          "component": "附件",
+          "createdby": "hoky",
+          "orgCode": "10002",
+          "modifiedby": "hoky",
+          "invalidtime": "1663646565778",
+          "department": "质量",
+          "remarks": "备注"
+        },
+        "references": [
+          {
+            "referenceType": "reference",
+            "name": "factory",
+            "oppositeName": "problemInfo",
+            "fetched": true,
+            "entityType": "2e763401-ab2c-429f-9bce-18e931d4a1dd",
+            "value": null
+          },
+          {
+            "referenceType": "reference",
+            "name": "vehicleCheck",
+            "oppositeName": "problemInfo",
+            "fetched": true,
+            "entityType": "21bdea3e-eae2-49dd-9aa3-917e7c76dd41",
+            "value": null
+          }
+        ]
+      },
+      {
+        "entityType": "21bdea3e-eae2-49dd-9aa3-917e7c76dd41",
+        "id": "327164930501513216",
+        "lastModified": 0,
+        "state": "NON_MODIFIED",
+        "attributes": {
+          "modifiedon": "1663646467000",
+          "isOnePass": "false",
+          "createdby": "xinri",
+          "orgCode": "10001",
+          "vehicleCode": "80001",
+          "modifiedby": "xinri",
+          "isqualified": "false",
+          "alphabet": "Q",
+          "problemName": "前叉限位角度大",
+          "qualificationCode": "qualificationCode1",
+          "createdon": "1663646467000",
+          "isdeleted": "false"
+        },
+        "references": [
+          {
+            "referenceType": "referenceSet",
+            "name": "problemInfo",
+            "oppositeName": "vehicleCheck",
+            "fetched": false,
+            "entityType": "19852694-2994-4d52-8a09-fa9563b8d691",
+            "value": null
+          }
+        ]
+      }
+    ],
+    "meta": {
+      "entityMeta": [
+        {
+          "attributeTypes": {
+            "level": "string",
+            "isactive": "boolean",
+            "validtime": "datetime",
+            "alphabet": "string",
+            "problemName": "string",
+            "type": "string",
+            "createdon": "datetime",
+            "isdeleted": "boolean",
+            "problemCode": "string",
+            "modifiedon": "datetime",
+            "component": "string",
+            "createdby": "string",
+            "orgCode": "long",
+            "modifiedby": "string",
+            "invalidtime": "datetime",
+            "department": "string",
+            "remarks": "string"
+          },
+          "entityType": "19852694-2994-4d52-8a09-fa9563b8d691"
+        },
+        {
+          "attributeTypes": {
+            "modifiedon": "datetime",
+            "isOnePass": "boolean",
+            "createdby": "string",
+            "orgCode": "long",
+            "vehicleCode": "long",
+            "modifiedby": "string",
+            "isqualified": "boolean",
+            "alphabet": "string",
+            "problemName": "string",
+            "qualificationCode": "string",
+            "createdon": "datetime",
+            "isdeleted": "boolean"
+          },
+          "entityType": "21bdea3e-eae2-49dd-9aa3-917e7c76dd41"
+        }
+      ],
+      "enumerationMeta": [],
+      "structureMeta": []
+    },
+    "error": {
+      "error": false,
+      "message": ""
+    }
+  }
+}
