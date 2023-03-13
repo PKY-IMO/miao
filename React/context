@@ -57,9 +57,25 @@
 
 // 方式三：函数组件
 *useContext：
-  class组件要么使用contextType静态属性+this.context
-      要么AgeContext.consumer 标签包裹 书写复杂
-  读取到传来的Context值
-  var age = useContext(AgeContext)
+  class组件
+    外部：
+      AgeContext = React.createContext()
+      组件 <AgeContext.Provider value={8}>
+    内部：
+      方法1 contextType静态属性 + this.context **只能用在类组件上**
+      方法2 <AgeContext.Consumer> 标签包裹 书写复杂 
+      方法3 useContext(AgeContext) **只能用在函数组件上**
 
   
+
+context 太大了
+https://juejin.cn/post/6924933173801549837
+方法1 拆分无关联性的 context
+方法2 React.memo 包裹组件
+方法3 React.useMemo 根据值返回组件
+  {useMemo(
+    () => (
+      <UserPage user={user} />
+    ),
+    [user]
+  )}

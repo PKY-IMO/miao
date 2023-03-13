@@ -157,7 +157,7 @@ HTTPS握手
   低版本的浏览器，还是会先发送请求，根据服务器是否支持来决定请求状态。
 
 4.http proxy  --webpack-dev-server
-  target: 'http://127.0.0.1:3001' //自动加上请求目标
+  target: 'http://127.0.0.1:3001' // 自动加上请求目标
   changeOrigin: true //走代理走跨域，node中间件代理
 
 5.nginx反向代理 proxy服务器  服务器请求服务器不存在跨域

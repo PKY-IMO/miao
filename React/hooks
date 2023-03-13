@@ -28,6 +28,7 @@ React遇到函数组件，会为其创建保存状态信息的对象
   第二个参数是更新后的回调
 
 *useContext：
+  跨层级组件通信
   class组件要么使用contextType静态属性+this.context
       要么AgeContext.consumer 标签包裹 书写复杂
   读取到传来的Context值
@@ -81,8 +82,17 @@ React遇到函数组件，会为其创建保存状态信息的对象
 
     return <div></div>
   }
+  空数组: 只有组件初次渲染之后才会执行
+  场景: ajax
+
+*useLayoutEffect：
+  函数签名与 useEffect 一样, 在dom变更之后同步调用effect
+    useEffect 有延迟： 组件先更新再订阅, forceUpdate 漏掉
+  场景: Form 表单，订阅， react redux
+  
 
 *useCallback: 必须依赖于数组
+  缓存函数
   解决函数组件更新时，绑定的函数反复创建的问题（class组件一般不会有这个问题）
   * useCallback可以返回上次创建的函数
     注意：不传数组，则每次创建新的函数，useCallback无意义
@@ -107,8 +117,11 @@ React遇到函数组件，会为其创建保存状态信息的对象
       <button onClick={inc}></button> // 反复创建函数
     )
   }
+  场景：父组件更新不触发子组件，add场景，子组件接受addClick参数
   
-*useMemo：依赖数组，节约性能的复杂运算
+*useMemo：
+  缓存变量
+  依赖数组，节约性能的复杂运算
    a,b,c 
    d=a*c 运算复杂，当其他d不需要依赖的值更新，d也需要重新运算，消耗性能
   var d = useMemo(() => a * c, [a, c]) 比较数组的值是否改变，不变放回上一次的值
@@ -125,4 +138,11 @@ React遇到函数组件，会为其创建保存状态信息的对象
         这其实相当于子组件向父组件输出本身实例或者DOM元素。
         而利用useImperativeHandle子组件可以向父组件输出任意数据。
 
-  
+React.memo&useMemo的异同点
+相同点：
+它们都可以用来缓存数据，避免子组件的无效重复渲染。
+不同点：
+React.memo是一个高阶组件，useMemo是一个hook。
+联系：
+当我们的父子组件之间不需要传值通信时，可以选择用React.memo来避免子组件的无效重复渲染。
+但我们的父子组件之间需要进行传值通信时，React.memo和useMemo都可以使用。

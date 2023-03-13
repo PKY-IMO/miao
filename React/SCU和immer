@@ -14,7 +14,9 @@ Diff算法，组件相同，即使属性不变，也会调用render()更新
 
 *React提供的简单的SCU
   React,PureComponent 实现了SCU对props和state浅层次的对比
-  React.memo(Comp, areEqual)---函数式组件
+  React.memo(Component, areEqual)---函数式组件
+  再回归到React.memo(), 这个高阶组件接收一个组件A作为参数并返回一个组件B，如果组件B的props没有改变，则组件B会阻止组件A重新渲染。
+                    A和B本质上是同一个组件，但A是否进行重新渲染，需要由Props是否发生改变来决定。
 
 *immer
   immer.produce(f)(obj) 等价于 immer.produce(obj, f)

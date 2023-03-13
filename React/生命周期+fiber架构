@@ -1,0 +1,69 @@
+fiber: window.requestIdleCallback() 
+  把渲染更新过程拆分为多个子任务，其中优先级高的先执行，并且每次只做其中的一小部分，
+  做在完成一部分任务之后，将控制权交回给浏览器，让浏览器有时间进行页面的渲染。
+  等浏览器忙完之后有剩余时间，再继续之前 React 未完成的任务，是一种合作式调度。
+
+上述实现的方式是window.requestIdleCallback() 方法，该方法在浏览器空闲时段内调用排队的函数
+会导致多次调用某些生命周期钩子
+
+react把更新分为两个阶段 reconciliation
+
+这个阶段的更新是可以被打断的，主要涉及的生命周期：
+  componentWillMount
+  componentWillReceiveProps
+  shouldComponentUpdate
+  componentWillUpdate
+  commit
+
+这个阶段的更新是不能被打断的
+  componentDidUpdate
+  componentDidMount
+  componentWillUnmount
+
+生命周期
+  废弃 
+    UNSAFE_componentWillMount
+    UNSAFE_componentWillReceiveProps
+    UNSAFE_componentWillUpdate
+  不建议新老混用 warning
+  废弃原因
+    Will 一定会 生命周期不能插队
+    无法实现紧急更新和非紧急更新
+
+getDerivedSteteFromError: 后代组件抛出错误后调用，抛出错误作为参数，返回一个值以更新 state
+样例：
+  <ErrorBoundaryPage fallback={<h1>出错啦！</h1>}>
+    ...
+  </ErrorBoundaryPage>
+  ErrorBoundaryPage内部 
+  const ErrorBoundaryPage extends React.Component {
+    state = {
+      hasError: false,
+      error: null
+    }
+
+    static getDerivedSteteFromError(error) {
+      return {
+        hasError: true,
+        error
+      }
+    }
+
+    render() {
+      if (this.state.hasError) {
+        return this.props.fallback;
+      }
+      return this.props.children;
+    }
+  }
+
+类组件 生命周期：
+  挂载 constructor getDerivedSteteFromProps render componentDidMount
+  更新 getDerivedSteteFromProps shouldComponentUpdate render getSnapshotBeforeUpdate componentDidUpdate
+  销毁 componentWillUnmount
+  发起请求在哪个生命周期： componentDidMount
+  原则上修改 state 一定要调用 this.setState, 不可以直接修改
+    原因: this.state = 1 不会触发组件更新
+    特殊场景: 就是需要修改这个值，组件不更新
+  this.forceUpdate 强制更新
+    场景: 第三方状态管理库
