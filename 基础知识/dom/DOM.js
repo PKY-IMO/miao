@@ -294,7 +294,7 @@ matches() 元素是否匹配选择器
 ```
 dom尺寸位置相关属性：div.clientWidth
 滚动：
-srollTop scrollLeft 元素【滚动条】到顶部的距离//goTop
+scrollTop scrollLeft 元素【滚动条】到顶部的距离//goTop
 偏移量：
 offsetLeft offsetTop  左上角相对于定位元素的父元素左上角的偏移量。 相当于定位元素的 left top 属性。
 边框：

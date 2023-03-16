@@ -16,7 +16,7 @@ UDP：面向报文、不可靠，点对点+广播等通信方式
     B收到后返回ACK报文，进入CLOSE-WAIT状态，A进入FIN-WAIT-2阶段
     B发送完剩余数据后，返回FIN+ACK报文，进入LAST-ACK状态。
     A发送ACK报文，进入TIME-WAIT状态，在2MSL段时间后断开连接。
-    B收到ACK后进入CLOSED状态
+    B收到ACK后进入 CLOSED 状态
   是四不是三：
     1.B可能需要继续传数据，不会立刻关闭SOCKET，所以先回复ACK，确认关闭时发FIN+ACK
   2MSL：

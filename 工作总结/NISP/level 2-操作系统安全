@@ -1,0 +1,12 @@
+windows 用户标识符sid
+    查看操作系统sid： WMIC useraccount get name sid
+    范例：S-1-5-21-xxxxxx-xxxxx-xxxxx-1000
+     S-1-5-21 NTFS 文件操作系统
+          其他windows文件系统：FAT 文件操作系统 
+                                *不支持 ACL
+                                *寻址空间 4G
+
+linux uid
+    0-65525
+    ugo管理机制：读写执行
+    权限表示方式：模式位 rwx 7-5-5

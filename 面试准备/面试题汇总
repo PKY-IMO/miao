@@ -1,0 +1,28 @@
+1.CSS3 新增伪类
+    交互、链接、位置、empty not
+2.CSS3 新增伪元素
+    querySelector 不能选中
+    ::before ::after 必须有content 初始为行内元素
+    ::first-letter ::first-line ::selection
+2. undefined
+var b=10;
+(function b(){
+    b = 20;
+    console.log(b);
+})();
+3. proxy+fetch 实现 axios 
+4. 迭代实现flatten
+5. 尾调用
+6. 数组扁平化，去重，升序不重复
+7. LRU
+8. IE与firefox事件机制
+    IE是事件冒泡、firefox同时支持两种事件模型，也就是：捕获型事件和冒泡型事件。
+    IE9以下的IE浏览器不支持 addEventListener()和removeEventListener()，
+    使用 attachEvent()与detachEvent() 代替，
+    因为IE9以下是不支持事件捕获的，所以也没有第三个参数，第一个事件名称前要加on。
+    e.target 事件触发的元素，发生者
+    e.currentTarget 事件绑定的元素，监听者
+9. 如何阻止冒泡
+10. react hooks 中的 useState 和 useEffect
+11. 粘包
+12. V8垃圾回收
