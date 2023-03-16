@@ -16,4 +16,4 @@
 5.composition API
   函数式风格的入口 setup()取代data()
 6.支持teleport 类似于React Portal，用于将组件的内容分布在不同地方
-7.新增suspense组件用于渲染异步组件加载过程时的内容
+7.新增 suspense 组件用于渲染异步组件加载过程时的内容

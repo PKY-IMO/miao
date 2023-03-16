@@ -9,11 +9,11 @@
 <body>
   <div id=content>
     <ul id=test>
-    <li>内容1</li>
-    <li>内容2</li>
-    <li>内容3</li>
-    <li>内容4</li>
-    <li>内容5</li>
+      <li>内容1</li>
+      <li>内容2</li>
+      <li>内容3</li>
+      <li>内容4</li>
+      <li>内容5</li>
     </ul>
   </div>
     <button onclick = "change()">反转li</button>
@@ -21,11 +21,11 @@
   <script>
     
   change = function(){
-	var obj = document.getElementById("test");
-	var lis = obj.getElementsByTagName("li");
-	for(var i = lis.length-1; i > -1; i--){
-		obj.appendChild(lis[i]);
-	}
+    var obj = document.getElementById("test");
+    var lis = obj.getElementsByTagName("li");
+    for(var i = lis.length-1; i > -1; i--){
+      obj.appendChild(lis[i]);
+    }
   }
   </script>
 </body>

@@ -83,6 +83,7 @@ React遇到函数组件，会为其创建保存状态信息的对象
     return <div></div>
   }
   空数组: 只有组件初次渲染之后才会执行
+  不传数组: 每次都执行
   场景: ajax
 
 *useLayoutEffect：

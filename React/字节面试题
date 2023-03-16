@@ -1,0 +1,37 @@
+链接：https://juejin.cn/post/7103831309767671816
+
+import * as React from "react";
+import { useState, useEffect } from "react";
+import { createRoot } from "react-dom/client";
+
+function SetStatePage(props) {
+  const [ count, setCount ] = useState(-1);
+
+  useEffect(() => {
+    setCount(0)
+  });
+
+  console.log("x"); //sy-log
+
+  return (
+    <div>
+      <h3>SetStatePage</h3>
+    </div>
+  );
+}
+
+const root = createRoot(document.getElementById("root"));
+
+root.render(<SetStatePage />);
+
+console.log("React", React.version); //sy-log
+
+
+
+在react18生产环境是3次: (严格模式开发环境6次)
+第一次是组件挂载完毕，执行一次。
+第二次是执行副作用，setstate，导致组件重新渲染。
+第三次再次执行副作用，进入了第三次函数执行，但是这次发现state没有改变，所以组件没有重新渲染，所以只执行了log，没有执行副作用
+
+第三次渲染是双缓存树状态不一致，所以又render了一次，同步了状态。
+第三次命中 bailout,导致跳过了整个子树的调和.因此effectList 上就没有 副作用了，所以进不到 commit 阶段 的layout子阶段. 因此就不会执行后续的 setCount 了

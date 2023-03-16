@@ -1,0 +1,26 @@
+requestIdleCallback 和 requestAnimationFrame 的区别
+    requestAnimationFrame 的回调会在每一帧确认执行, 属于高优先级任务. 60hz 16.66ms
+    而 requestIdleCallback 的回调不一定, 属于低优先级任务. 最多50ms
+    我们看到的页面是浏览器一帧一帧绘制出来的, 通常 FPS 在 60 的时候是比较流畅的, 而 FPS 比较低的时候就会感觉到卡顿. 
+
+RequestIdleCallback 实验案例
+    不修改dom,可以执行数据的分析和上报，
+    利用不执行-》检测是否有卡顿
+    结论：
+    requestIdleCallback 是利用帧之间空闲时间来执行JS
+    requestIdleCallback 是在 layout 和 paint 之后, 意味着requestIdleCallback 是可以js计算并改变DOM的，也就是说会 触发重新 layout 和 paint
+    requestAnimationFrame 是在 layout 和 paint 之前，因此更适合变更DOM操作。
+    因此React内部对调度策略的实现也是基于requestAnimationFrame的
+
+RequestIdleCallback 
+    定位为处理不重要且不紧急的事物。因为React渲染内容，并非是不重要且不紧急。不仅该api兼容一般，帧渲染能力一般，也不太符合渲染诉求，故React 团队自行实现
+
+
+React源码中的requestHostCallback
+    SchedulerHostConfig.js
+    执行宏任务(回调任务)
+        是否有富裕时间, 有则执行。
+        执行该回调任务后，是否还有下一个回调任务, 即判断 hasMoreWork。
+        有则继续执行 port.postMessage(null);
+        requestHostCallback: 触发一个宏任务 performWorkUntilDeadline。
+        performWorkUntilDeadline: 宏任务处理。

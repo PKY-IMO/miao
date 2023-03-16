@@ -1,0 +1,22 @@
+代数效应：能够将函数的副作用从函数逻辑中抽离出来，使得函数的关注点保持纯粹
+    避免 async await 的传染性
+    如果把控制流看做是球，这个模型提供了「调用栈顶部和底部来回打乒乓球」的机会。
+    useEffect -> perform effect
+              -> useEffect -> 怎么知道是哪个组件在调用它
+
+schedule调度 优先级队列 小顶堆
+render 深度优先遍历  dfs update 单向链表
+lane 模式 调度更新优先级 二进制掩码
+fiber 
+requestIdleCallback
+
+react 原子 hooks 电子
+hooks 是 react 底层 暴露出来的 api
+
+
+view         ->   视图
+class        ->   生命周期
+hooks        ->   操作系统
+react底层     ->   硬件
+
+state --纯函数--> view
