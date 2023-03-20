@@ -147,3 +147,36 @@ React.memo是一个高阶组件，useMemo是一个hook。
 联系：
 当我们的父子组件之间不需要传值通信时，可以选择用React.memo来避免子组件的无效重复渲染。
 但我们的父子组件之间需要进行传值通信时，React.memo和useMemo都可以使用。
+
+memo使用总结：
+父组件中state改变，不受memo保护的子组件也会重新渲染
+memo会检测props到改变来决定组件是否需要进行重新渲染，换言之就是，被memo函数包起来的组件只有本身的props被改变之后才会重新渲染
+memo只能进行浅拷贝来校验决定是否触发重新渲染。所以改变数组（对象）的props时候记得返回一个全新的数组（对象）
+memo不是项目中所有的组件都需要包一下。包的太多反而会起反效果，我们需要选择那些经常被重新渲染的组件有选择性的去缓存。
+
+
+react性能优化： 
+保持组件尽可能的不去发生变化 -》 props、useState、context -》react 如何比较？默认全等，使用性能优化时候浅比较
+每次执行组件，生成新的内存空间
+把不变的组件和变的组件抽离过来
+const B = (props) => {
+  const [number, setNumber] = useState(0);
+  return (
+    <>
+      <div>{number}</div>
+      <button onClick={() => {setNumber(old => old+1)}}>
+        改变number的值
+      </button>
+      {props.children} //!!!!!!!!!!!关键， A组件不会重复渲染
+    </>
+  )
+}
+function APP() { ////因为APP组件没有重新的执行，还是指向老的fiber节点
+  return (
+    <>
+      <B>
+        <A></A>
+      </B>
+    </>
+  )
+}
