@@ -1,0 +1,64 @@
+帆软软件有限公司   2022.04-2023.04
+荣誉：2022帆软黑客马拉松二等奖 - 规则引擎小组前端开发
+项目经验：
+1. FineUI for React 组件库   部门：职能支撑-大前端小组    2022.04-2022.08
+项目架构: React17 + dumi + umi-test
+项目描述: 在保留公司自研框架 FineUI 设计风格的基础上，实现基于 React 版本的组件库，最后在产品线上验证使用，实现 AntD 的无损替换。
+链接: https://fanruan.design/react-ui/index.html#/
+· 新增 Divider、AutoComplete、Upload、Typography 等组件。
+· 利用 umi-test 书写组建单测用例，完成所有组件的单测覆盖率达 100%。
+· 在公司 FVS、FineBuild 产品上进行 AntD 的无差别替换和组件库的试用。
+· 升级迭代公司内部框架 FineUI 和 Material 至 es6，分析性能并优化打包，实现按需引入。
+· 升级网络请求为装饰器模式，在 BI 产品线上推广使用，并利用 typedoc 生成请求文档。
+
+2. FineBuild 低代码产品    部门：光锥实验室-好搭产品小组      2022.09-2023.04
+项目架构: React18 + MobX
+项目描述: 仿竞品 Mendix，自研低代码设计器。主要通过对数据模型、基于画布的页面布局与组件、逻辑、流程、接口/集成、规则进行自定义，形成约定好的 json 数据，进行前后台的通信。
+· 从 0 到 1 实现低代码设计器，单独负责设计器数据流的配置模块，包括元数据、输入参数、本地变量等。
+· 实现设计器的事件配置逻辑、封装实现弹窗的数据回流功能。
+· 实现设计器二进制上传组件、组件树预览、数据菜单等模块，优化菜单组件的移动端响应式布局。
+· 负责新日系统、永琪成车系统、罗斯系统派工模块的前端实现，不断验证和迭代低代码设计器页面功能，使得前后台联动基本实现。
+· 上线项目并不断与客户沟通需求，迭代低代码产品增加功能，使其可以实现上传打印、自动扫码等复杂业务，同时保证系统在 pda 等多端运行流畅。
+
+dumi vs storybook
+1. storybook支持 vue angular react等多种框架
+    dumi 只支持 react
+2. umi基于 TypeScript 类型定义，可以自动生成组件 API，storybook不可以
+3. storybook推出的比较早，支持除了组件库文档的其他类型文档的编写，dumi 则不支持
+
+防抖问题
+pda实现自动扫码：
+    pda 扫码相当于是把用户手动输入的过程，替换为扫条形码描输入。
+    需要实现：输入框扫码失焦后，自动向后台发送请求、自动切换到下面一个输入框等逻辑。
+    change event 内部实行自动转移焦点，向后台发送action等逻辑。
+问题：扫码输入，pda按钮一直按会重复输入事件。
+    扫码触发change，内部自动失焦focus，（手没有松）再输入再失焦，会多次执行相同的逻辑，比如同一条形码的车辆反复入库。
+解决：将enter和focus抽离开来，对enter进行节流。
+失焦时updateValue。所以在onPressEnter时进行防抖，
+ const handlePressEnter = React.useMemo(
+    () =>
+      debounce(() => {
+        render?.ref.current?.blur();
+      }, 200),
+    [render]
+  );
+
+严格模式开发环境下react会刷新两次：严格模式检查仅在开发模式下运行；它们不会影响生产构建。
+bug场景：时invalid在开发情况下会主动触发更新，在生产环境时第一次失效
+校验判断是否有问题，打断点尝试 -> 校验没问题
+监听没生效 -> 对的
+排查哪些属性会引起刷新 render = instance.getRender(ctx.id);
+    map 没有添加observer
+猜测: 是因为mobx收集依赖的时候，如果第一次触发了就能主动收集到，prod环境没有这一次刷新，所以依赖没收集，后面就监听不到了
+
+
+jQuery $原理
+1.jQuery借助了沙箱模式，其实整个jQuery包中的代码就是一个自执行函数，并且把window对象作为参数传递了过去。w.jQuery = w.$ = jQuery;
+2.jQuery函数只是一个工厂，真正的构造函数时jQuery.fn.init( )
+3.把init的原型对象替换为jQuery.fn，其实也就是替换为了jQuery这个函数自己的原型对象，也就是jQuery.prototype，这么做的目的是为了实现插件机制，让外界可以通过jQuery方便的进行扩展。
+$()的实现原理
+当我们使用jquery选择器的时候，$(s).回默认去执行jquery内部封装好的一个init的构造函数每次申明一个jQuery对象的时候，返回的是jQuery.prototype.init对象。这个init不是jquery.fn上的方法，而是内部源码的一个函数。
+这个函数是干什么用的呢？
+当我们使用选择器的时候$(selector,content)，就会执行init(selectot,content)，
+$('#id')相当于执行getElementById，如果是别的css选择器就去执行init函数，然后到全局全文里，全部的dom对象一个个查找遍历。
+if ( typeof selector == "string" ) 
