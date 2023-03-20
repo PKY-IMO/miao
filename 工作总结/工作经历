@@ -62,3 +62,8 @@ $()的实现原理
 当我们使用选择器的时候$(selector,content)，就会执行init(selectot,content)，
 $('#id')相当于执行getElementById，如果是别的css选择器就去执行init函数，然后到全局全文里，全部的dom对象一个个查找遍历。
 if ( typeof selector == "string" ) 
+
+移动端检测
+检测是否是移动端： 
+    1.使用媒体查询的hooks useMediaPredicate("(min-width: 400px)"); 
+    2.navigator.userAgent.match
