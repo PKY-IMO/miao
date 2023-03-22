@@ -6,3 +6,85 @@
 （3）display:flex; 设置.wrap为弹性布局
     justify-content:center;定义项目在主轴(水平方向)上居中对齐
     align-items:center;定义项目在交叉轴(垂直方向)上居中对齐
+
+给出至少 5 种水平垂直居中的方案。
+    定位
+    行内
+    
+    ```css
+      <div class="outer">
+        <div class="inner"></div>
+      </div>
+    
+      .outer {
+      width: 200px;
+      height: 200px;
+      }
+      .inner {
+        width: 100px;
+        height: 100px;
+      }
+    ```
+    
+    ```css
+    /* absolute + margin */
+    .outer {
+      position: relative;
+    }
+    .inner {
+      position: absolute;
+      margin: auto;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+    }
+    
+    /* absolute +tranform */
+    .outer {
+      position: relative;
+    }
+    .inner {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+    
+    /* flex + auto */
+    .outer {
+      display: flex;
+    }
+    .inner {
+      margin: auto;
+    }
+    
+    /* flex */
+    .outer {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    /* 行内块 */
+    .outer {
+      line-height: 200px;
+      text-align: center;
+    }
+    .inner {
+      display: inline-block;
+      vertical-align: middle;
+    } 
+    
+    /* table */
+    .outer {
+      width: 200px;
+      height: 200px;
+      display: table-cell;
+      vertical-align: middle;
+      text-align: center;
+    }
+    .inner {
+      width: 50%;
+    }
+    ```

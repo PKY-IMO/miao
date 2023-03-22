@@ -116,3 +116,4 @@
 
 17. [] == ![]  true   0->false 
     {} == !{}  false  `[object Object]`-> true
+    [] == false true

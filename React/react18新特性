@@ -1,0 +1,47 @@
+1.render -> renderRoot
+    不允许在render中使用回调函数
+// React 17
+const root = document.getElementById('root')!;
+ReactDOM.render(<App />, root, () => {
+  console.log('渲染完成');
+});
+
+// React 18
+const AppWithCallback: React.FC = () => {
+  useEffect(() => {
+    console.log('渲染完成');
+  }, []);
+  return <App />;
+};
+const root = document.getElementById('root')!;
+ReactDOM.createRoot(root).render(<AppWithCallback />); // 开启并发模式->开启自动批处理 不一定开启了并发更新！（是否使用并发特性startTransition useDeferredValue）
+
+2.ts需要显示的声明组件 props.children
+
+3.setState 自动批处理
+// 在 React 18 之前：
+在React 18 之前，我们只在 React 事件处理函数 中进行批处理更新。默认情况下，在promise、setTimeout、原生事件处理函数中、或任何其它事件内的更新都不会进行批处理：
+// React 18
+    所有的更新都将自动批处理。
+    flushSync 退出批处理
+
+4.接受undefined
+在 React 17 中，如果你需要返回一个空组件，React只允许返回null。如果你显式的返回了 undefined，控制台则会在运行时抛出一个错误。
+在 React 18 中，不再检查因返回 undefined 而导致崩溃。既能返回 null，也能返回 undefined（但是 React 18 的dts文件还是会检查，只允许返回 null，你可以忽略这个类型错误）。
+
+5.concurrent mode
+React 17 同步不可中断
+React 18 异步可中断更新
+
+6.fiber Reconciler
+// react 17
+stack 递归更新，无法中断，节点数据保存在递归的调用栈中
+// react 18
+在新的架构中，Reconciler（协调器）是基于fiber实现的，节点数据保存在fiber中，所以被称为 fiber Reconciler。
+
+https://juejin.cn/post/7094037148088664078
+
+关于fiber，有三层具体含义：
+1.作为架构来说，在旧的架构中，Reconciler（协调器）采用递归的方式执行，无法中断，节点数据保存在递归的调用栈中，被称为 Stack Reconciler，stack 就是调用栈；在新的架构中，Reconciler（协调器）是基于fiber实现的，节点数据保存在fiber中，所以被称为 fiber Reconciler。
+2.作为静态数据结构来说，每个fiber对应一个组件，保存了这个组件的类型对应的dom节点信息，这个时候，fiber节点就是我们所说的虚拟DOM。
+3.作为动态工作单元来说，fiber节点保存了该节点需要更新的状态，以及需要执行的副作用。
