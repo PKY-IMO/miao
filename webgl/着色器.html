@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="./initShader.js"></script>
+</head>
+<body>
+    <canvas id="canvas" width="400" height="400">
+      此浏览器不支持 canvas
+    </canvas>
+</body>
+</html>
+<script>
+  const ctx = document.getElementById('canvas')
+  const gl = ctx.getContext('webgl')
+
+  // 着色器
+  // 创建着色器 必须要有分号
+  // vec4(0.0,0.0,0.0,1.0) x,y,z,w   w齐次坐标
+  const VERTEX_SHADER_SORUCE = `
+    // 必须要有void main
+    // attribute 变量 有默认精度
+    attribute vec4 aPosition; // 初始值 vec4(0.0,0.0,0.0,1.0)
+    void main(){
+      gl_Position = aPosition;
+      gl_PointSize = 10.0;
+    }
+  `;
+
+  // 片元着色器
+  // vec4(1.0,0.0,0.0,1.0); r,g,b,a
+  const FRAGEMNT_SHADER_SOURCE = `
+    precision mediump float;
+    // uniform vec4 uColor;
+    uniform vec2 uColor;
+    void main(){
+        // gl_FragColor = vec4(1.0,0.0,0.0,1.0);
+        // gl_FragColor = uColor;
+        gl_FragColor = vec4(uColor.r, uColor.g, 0.0, 1.0); // vec4
+    }
+  `; 
+
+  // // 创建着色器
+  const vertexShader = gl.createShader(gl.VERTEX_SHADER)
+  const fragmentShader = gl.createShader(gl.FRAGMENT_SHADER)
+
+  gl.shaderSource(vertexShader,VERTEX_SHADER_SORUCE)
+  gl.shaderSource(fragmentShader,FRAGEMNT_SHADER_SOURCE)
+
+  // 编译着色器
+  gl.compileShader(vertexShader)
+  gl.compileShader(fragmentShader)
+
+  // 创建一个程序对象
+  const program = gl.createProgram();
+  
+  gl.attachShader(program,vertexShader)
+  gl.attachShader(program,fragmentShader)
+  
+  gl.linkProgram(program)
+  gl.useProgram(program)
+
+  const aPosition = gl.getAttribLocation(program, 'aPosition');
+  console.log(aPosition); // 0
+  // 修改attribute
+  gl.vertexAttrib4f(aPosition, 0.5, 0.5, 0.0, 1.0);
+
+  const uColor = gl.getUniformLocation(program, 'uColor');
+  // gl.uniform4f(uColor, 1.0, 0.0, 0.0, 1.0);
+  gl.uniform2f(uColor, 1.0, 0.0);
+
+  
+  // 执行绘制
+  // 要绘制图形是什么，从哪里开始, 使用几个顶点
+  // gl.LIENS 直线 gl.LIEN_STRIP 折线 gl.LINE_LOOP 闭合线
+  // gl.TRIANGLES 三角形
+  gl.drawArrays(gl.POINTS, 0, 1)
+
+</script>

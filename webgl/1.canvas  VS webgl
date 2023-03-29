@@ -1,0 +1,13 @@
+canvas 
+    二维
+    canvas.getContext('2d')
+    canvasRenderingContext2D
+    坐标系 左上角(0,0) X右 Y下
+
+webGL
+    三维
+    WebGLRenderingContext
+    canvas.getContext('webgl')
+    WebGL2RenderingContext
+    canvas.getContext('webgl2')
+    右手坐标系 中心(0.0,0.0,0.0) X右 Y上 Z外  -1.0,-1.0

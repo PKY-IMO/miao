@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="./initShader.js"></script>
+</head>
+<body>
+    <canvas id="canvas" width="400" height="400">
+      此浏览器不支持 canvas
+    </canvas>
+</body>
+</html>
+<script>
+  const ctx = document.getElementById('canvas')
+  const gl = ctx.getContext('webgl')
+
+  // 着色器
+  // 创建着色器 必须要有分号
+  // vec4(0.0,0.0,0.0,1.0) x,y,z,w   w齐次坐标
+  const VERTEX_SHADER_SORUCE = `
+    // 必须要有void main
+    // attribute 变量 有默认精度
+    attribute vec4 aPosition; // 初始值 vec4(0.0,0.0,0.0,1.0)
+    attribute float aPointSize;
+    void main(){
+      gl_Position = aPosition;
+      gl_PointSize = aPointSize; // 绘制点生效，图形不生效
+    }
+  `;
+
+  // 片元着色器
+  // vec4(1.0,0.0,0.0,1.0); r,g,b,a
+  const FRAGEMNT_SHADER_SOURCE = `
+    void main(){
+        gl_FragColor = vec4(1.0,0.0,0.0,1.0);
+    }
+  `; 
+
+  const program = initShader(gl, VERTEX_SHADER_SORUCE, FRAGEMNT_SHADER_SOURCE);
+
+  const aPosition = gl.getAttribLocation(program, 'aPosition');
+  const aPointSize = gl.getAttribLocation(program, 'aPointSize');
+  gl.vertexAttrib4f(aPosition, 0.5, 0.5, 0.0, 1.0);
+
+
+  // 创建顶点数据 x y 大小
+  const points = new Float32Array([
+    0.5, 0.5, 10.0,
+    -0.5, -0.5, 20.0,
+    0.0, 0.5, 30.0
+  ])
+
+  // 创建缓冲区对象
+  const buffer = gl.createBuffer();
+  // 绑定缓冲区对象
+  gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+  // 将数据写入缓冲区对象
+  gl.bufferData(gl.ARRAY_BUFFER, points, gl.STATIC_DRAW);
+
+  const BYTES = points.BYTES_PER_ELEMENT;
+
+  // 将缓冲区对象分配给一个 attribute 变量 false是否normalize为1  多少个， 偏移量
+  gl.vertexAttribPointer(aPosition, 2, gl.FLOAT, false, BYTES * 3, 0);
+  // 开启 attribute 变量
+  gl.enableVertexAttribArray(aPosition);
+
+  // 将缓冲区对象分配给一个 attribute 变量
+  gl.vertexAttribPointer(aPointSize, 1, gl.FLOAT, false, BYTES * 3, BYTES * 2);
+  gl.enableVertexAttribArray(aPointSize); 
+
+  
+  // 执行绘制
+  gl.drawArrays(gl.POINTS, 0, 3)
+
+</script>

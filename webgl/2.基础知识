@@ -1,0 +1,13 @@
+// 背景颜色
+gl.clear(gl.COLOR_BUFFER_BIT)  gl.clearColor(0.0,0.0,0.0,1.0)
+gl.clear(gl.DEPTH_BUFFER_BIT)  gl.clearDepth(1.0)
+gl.clear(gl.STENCIL_BUFFER_BIT) gl.clearStencil(0)
+
+// 着色器 开发者编写一段程序，代替固定渲染管线，处理图像的渲染
+顶点着色器 -顶点 坐标 attribute变量（only） + uniform变量
+片元着色器 -片元 像素 uniform变量（不能传递顶点数据）
+着色器字符串形式存储在js内
+
+注意：
+1.vec1 错误 -> float
+2.uniform 不能传递顶点数据 uniform 针对所有顶点都生效，顶点数据每一个都不一样
