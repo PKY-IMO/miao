@@ -15,6 +15,7 @@ tree Diff(层级)、component Diff、elementDiff
       如果老集合中没有找到节点，说明节点是新增的，则会创建新节点插入到 nextIndex 的位置
     当完成新集合中所有节点 diff 时，最后还需要对老集合进行遍历，判断是否存在新集合中没有但老集合中仍存在的节点，发现存在这样的节点 D，因此删除节点 D，到此 diff 全部完成。
 
+
 *componentWillMount的弊端： 
   *fiber架构 发生在React更新DOM和refs过程
   开发人员在此生命周期设置定时器等，此时组件由于用户交互还未渲染完成就卸载了

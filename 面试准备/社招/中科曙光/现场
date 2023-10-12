@@ -1,0 +1,20 @@
+vue路由状态
+水平垂直居中
+ 子绝对父盒相对 margin: auto 
+position
+display\visible
+选择器优先级
+块级元素的区别
+call、apply、bind
+promise
+this
+箭头函数
+基本类型
+原型
+组件传值proxy、$emit、eventbus、scope
+link
+v-show、v-if
+map, forEach
+遍历方法
+New
+

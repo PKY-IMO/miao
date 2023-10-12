@@ -100,16 +100,16 @@ promise2()
 
 //async await
 async function async1 () {
-  console.log('async1 start');//2
+  console.log('async1 start');// 2
   await new Promise(resolve => {
-    console.log('promise1');//3  await 后面是pending状态的Promise 会阻塞 后面不执行
+    console.log('promise1');// 3  await 后面是pending状态的Promise 会阻塞 后面不执行
   })
   console.log('async1 success');
   return 'async1 end';
 }
-console.log('srcipt start');//1
+console.log('srcipt start');// 1
 async1().then(res => console.log(res));
-console.log('srcipt end');//4
+console.log('srcipt end');// 4
 
 
 

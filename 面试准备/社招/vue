@@ -1,0 +1,33 @@
+修饰符
+    事件：  stop prevent once
+    v-model： lazy number trim
+
+透传
+    即属性继承  
+    一个组件以单个元素作为根元素渲染时，透传的attribute会自动的添加到根元素上
+    禁止属性继承：
+    export default {
+        inheritAttrs: false
+    }
+
+跨级透传 provide inject
+
+slot 
+    传递模板字段,父传子时的内部元素。
+    插槽内容可以访问到父组件的数据作用域，插槽内容本身就是在父组件模板中定义的
+    默认插槽：<slot>
+    具名插槽：<template v-slot:插槽名称>
+    子传父：子 <slot :msg="内部元素"> 父<插槽名称 v-slot="slotProps"> 
+            父-使用 slotProps.msg
+
+动态组件的切换
+    :is 切换组件的名称
+
+keep-alive
+    组件保活，在组件切换后不卸载，数据已经维持切换之前的状态
+
+异步组件
+    defineAsyncComponet
+    const ComponetB = defineAsyncComponet(() => {
+        import("./components/ComponentB.vue")
+    })

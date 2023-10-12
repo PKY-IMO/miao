@@ -1,0 +1,19 @@
+1. 状态码
+    401 未授权
+    403 禁止访问
+    404 客户端错误
+
+2. 浏览器事件循环
+
+3. vue2为什么只有一个元素
+   vue3可以多个
+
+4. 单点登录-token在多个域共享
+    父域cookie - 不支持跨域
+    认证中心 cas 专门负责处理登陆请求的独立web服务认证中心存储cookie,
+                登陆跳转具体应用系统信息token携带在url后，随后服务器向cas验证是否合法
+                合法后，将token写入cookie然后给本次访问放行，当前应用系统的cookie
+    localStorage-写入其他域 iframe+postmessage
+    
+            
+            

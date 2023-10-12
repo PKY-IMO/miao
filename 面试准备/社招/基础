@@ -1,3 +1,33 @@
+js
+事件循环
+    浏览器有很多进程，包括网络，渲染，io之类的，js排除webworker的情况下是单线程的语言，
+    浏览器通过宏任务、微任务队列协调多线程的运行。
+    1.从任务队列中取出一个宏任务并执行（同步代。。。）。
+    2.检查微任务队列，执行并清空微任务队列，
+    如果在微任务的执行中又加入了新的微任务，也会在这一步一起执行。
+    3.进入更新渲染阶段，判断是否需要更新渲染（渲染间隔决定），需要的话在渲染之前执行resize，scroll，raf等，如果有空余时间就执行rIc。
+    微任务：precess.nextTick promise  object.observe mutationObserver
+
+    浏览器的Event loop是在 HTML5 中定义的规范，而 node 中则由libuv库实现。
+    node端：
+    六个阶段，每个阶段执行完清空nexttick queue，微任务 queue，再执行下一阶段
+    timers：setTimeout setInterval
+    io 
+    idle 
+    poll （等待没有完成的io）
+    check： setImmediate
+    close callbacks
+    
+闭包
+  当函数可以记住并访问定义时的作用域时就产生了闭包，即使函数是在当前词法作用域之外执行。
+  实现：作用域链+垃圾回收
+  函数嵌套函数，内部函数引用外部函数变量，且存在全局变量是内部函数的引用，当外部函数一执行就产生闭包。
+    1）能够阻止词法作用域的回收
+    2）私有化变量
+    3）模块化
+
+原型链
+
 // js实现对象的方式就是原型链，原型链是一种链式关系，包含了对象的继承关系。
 // 在判断对象A是否是B的实例对象时，可以沿着对象A的原型链（__proto__）进行查找，能查找到B.prototype则是，原理与instanceof一致。
 // 函数有一个prototype属性，即显式原型，指向构造函数的原型对象。Foo -----prototype--->  Foo.prototype​
@@ -135,3 +165,16 @@ Object.__proto__ === Function.prototype  // true
 
 Function.__proto__ === Function.prototype // true Function类作为最顶层的类，原型属性指向的是自己的原型对象
 Function.prototype.__proto__ === Object.prototype
+
+ES6
+
+chrome版本
+hooks的包
+vue生命周期
+useEffect和useLayoutEffect
+vue2和vue3 v-model 区别  
+  vue2 :value    @Input  单个
+  vue3 :modelValue @update 多个
+data在create前还是后 之前
+跨域js脚本能解析吗
+js脚本异步

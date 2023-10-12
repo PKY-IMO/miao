@@ -73,7 +73,7 @@ function flattendepth(arr, depth) {
 /**
  *  累计数组的和
  */
- var sum = [0, 1, 2, 3].reduce((p, i) => p + i,0)
+ var sum = [0, 1, 2, 3].reduce((p, i) => p + i, 0)
 
  /**
   * 按属性对object分类

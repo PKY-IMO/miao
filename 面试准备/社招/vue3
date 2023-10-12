@@ -1,0 +1,50 @@
+reactive 包裹应用对象 -》 toRefs 响应式单值变成ref对象,这样就可以展开运算
+ref 包裹基本对象
+
+元素引用
+    <p ref="desc">
+    const desc = ref(null)
+    p元素: desc.value
+
+teleport 传送
+        弹窗元素需要挂在在body上
+    <teleport to="body"> to 选择器
+        <div v-if="modalOpen"></div>
+    </teleport>
+
+Fragments
+    不用单根
+
+emits选项
+    组件的自定义事件定义在emits中
+    不写的话：原生事件同名会触发两次
+
+全局api改为实例的调用
+    vue.config app.config  component directive mixin 
+    createApp 返回app的实例
+
+可做树摇优化
+
+移除.sync 统一为v-model
+
+全剧对象挂载
+    app.config.globalProperties.$api = api;
+
+路由跳转的方式
+    自带的 router-link
+    传统的跳转 钩子 this.$router.push('/welcome')
+    composition api 
+        router = useRouter()
+        router.push('/welcome')
+
+<script setup>
+    import { defineProps } from 'vue'
+    defineProps({
+        msg: String
+    })
+</script>
+
+自定义指令
+    vue.directive('xxx',(el,binding,vnode))
+    五个生命周期: bind, inserted, update, componentUpdate, unbind
+    update和componentUpdate 还有一个oldVnode的参数

@@ -35,7 +35,7 @@ React 18 异步可中断更新
 
 6.fiber Reconciler
 // react 17
-stack 递归更新，无法中断，节点数据保存在递归的调用栈中
+stack 递归更新，无法中断，节点数据保存在递归的调用栈中.
 // react 18
 在新的架构中，Reconciler（协调器）是基于fiber实现的，节点数据保存在fiber中，所以被称为 fiber Reconciler。
 
